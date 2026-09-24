@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>General Studies — నోట్స్ సూచిక</title>
+<style>
+  :root {
+    --primary: #1a6b3c; --primary-light: #e8f5ee;
+    --accent: #f0a500; --accent-light: #fff8e6;
+    --text: #1c1c2e; --muted: #5a5a72;
+    --bg: #f7f8fc; --card: #ffffff; --border: #dde3ef;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Segoe UI', 'Noto Sans Telugu', Arial, sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.6; }
+  header { background: var(--primary); color: #fff; padding: 28px 16px; text-align: center; }
+  header h1 { margin: 0 0 4px; font-size: 1.7rem; }
+  header p { margin: 0; opacity: .85; }
+  main { max-width: 960px; margin: 0 auto; padding: 20px 16px 48px; }
+  #search { width: 100%; padding: 10px 14px; font-size: 1rem; border: 1px solid var(--border);
+            border-radius: 8px; margin-bottom: 20px; background: var(--card); }
+  .subject { margin-bottom: 28px; }
+  .subject > h2 { font-size: 1.3rem; margin: 0 0 12px; padding-bottom: 6px;
+                  border-bottom: 3px solid var(--accent); }
+  .group { margin: 0 0 16px; }
+  .group > h3 { font-size: 1rem; color: var(--primary); margin: 0 0 8px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  a.card { display: block; background: var(--card); border: 1px solid var(--border);
+           border-left: 4px solid var(--primary); border-radius: 8px; padding: 12px 14px;
+           text-decoration: none; color: inherit; transition: box-shadow .15s, transform .15s; }
+  a.card:hover { box-shadow: 0 4px 14px rgba(0,0,0,.08); transform: translateY(-2px); }
+  a.card .t { font-weight: 600; }
+  a.card .d { font-size: .88rem; color: var(--muted); margin-top: 2px; }
+  a.card .tag { display: inline-block; font-size: .72rem; background: var(--accent-light);
+                color: #8a5d00; border-radius: 4px; padding: 1px 6px; margin-top: 6px; }
+  .empty { color: var(--muted); font-style: italic; }
+  footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>📚 General Studies</h1>
+  <p>నోట్స్ సూచిక · UPSC / PSC</p>
+</header>
+<main>
+  <input id="search" type="search" placeholder="వెతకండి / Search…">
+  <div id="catalog"></div>
+</main>
+<footer>కొత్త ఫైల్ జోడించడానికి: క్రింద ఉన్న <code>DOCS</code> జాబితాలో ఒక లైన్ చేర్చండి.</footer>
+
+<script>
+/* ============================================================
+   ADD NEW FILES HERE — one line per file.
+   subject : top-level heading (e.g. History, Polity, Geography)
+   group   : sub-heading within the subject (e.g. Ancient India)
+   Order of subjects/groups follows first appearance in this list.
+   ============================================================ */
+const DOCS = [
+  { subject: "🏛️ భారత చరిత్ర (Indian History)", group: "సిలబస్ & రోడ్‌మ్యాప్ (Syllabus & Roadmap)",
+    file: "indian_history_syllabus.html", title: "భారత చరిత్ర సిలబస్ & రోడ్‌మ్యాప్",
+    desc: "Indian History syllabus and study roadmap", tag: "Syllabus" },
+
+  { subject: "🏛️ భారత చరిత్ర (Indian History)", group: "ప్రాచీన భారతదేశం (Ancient India)",
+    file: "indus_valley_civilization.html", title: "సింధు లోయ నాగరికత",
+    desc: "Indus Valley Civilization — revision notes", tag: "Revision Notes" },
+
+  // Examples for later:
+  // { subject: "⚖️ రాజ్యాంగం (Polity)", group: "Basics", file: "preamble.html", title: "ప్రవేశిక", desc: "Preamble", tag: "Notes" },
+  // { subject: "🌍 భూగోళశాస్త్రం (Geography)", group: "Physical", file: "rivers.html", title: "నదులు", desc: "Rivers of India", tag: "Notes" },
+];
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function render(q = "") {
+  q = q.trim().toLowerCase();
+  const tree = new Map();
+  for (const d of DOCS) {
+    const hay = [d.subject, d.group, d.title, d.desc, d.tag, d.file].join(" ").toLowerCase();
+    if (q && !hay.includes(q)) continue;
+    if (!tree.has(d.subject)) tree.set(d.subject, new Map());
+    const g = tree.get(d.subject);
+    if (!g.has(d.group)) g.set(d.group, []);
+    g.get(d.group).push(d);
+  }
+  const el = document.getElementById("catalog");
+  if (!tree.size) { el.innerHTML = '<p class="empty">ఏమీ దొరకలేదు / No matches.</p>'; return; }
+  let html = "";
+  for (const [subject, groups] of tree) {
+    html += `<section class="subject"><h2>${esc(subject)}</h2>`;
+    for (const [group, items] of groups) {
+      html += `<div class="group"><h3>${esc(group)}</h3><div class="cards">`;
+      for (const d of items) {
+        html += `<a class="card" href="${esc(d.file)}"><div class="t">${esc(d.title)}</div>` +
+                (d.desc ? `<div class="d">${esc(d.desc)}</div>` : "") +
+                (d.tag ? `<span class="tag">${esc(d.tag)}</span>` : "") + `</a>`;
+      }
+      html += `</div></div>`;
+    }
+    html += `</section>`;
+  }
+  el.innerHTML = html;
+}
+document.getElementById("search").addEventListener("input", e => render(e.target.value));
+render();
+</script>
+</body>
+</html>

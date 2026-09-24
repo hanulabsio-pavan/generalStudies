@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>సింధు లోయ నాగరికత — UPSC/PSC పునరీక్షణ నోట్స్</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface2: #273449;
+      --border: #334155;
+      --accent: #f59e0b;
+      --accent2: #38bdf8;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --green: #4ade80;
+      --red: #f87171;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', 'Noto Sans Telugu', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+      border-bottom: 2px solid var(--accent);
+      padding: 2rem 1.5rem 1.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 { font-size: 1.8rem; color: var(--accent); margin-bottom: 0.25rem; }
+    header p  { color: var(--muted); font-size: 0.9rem; }
+
+    /* ── SEARCH ── */
+    #search-bar {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    #search-bar input {
+      width: min(420px, 90%);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+    }
+    #search-bar input:focus { border-color: var(--accent); }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.1s;
+      z-index: 200;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* ── SECTION CARDS ── */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid transparent;
+      transition: background 0.2s;
+    }
+    .section-header:hover { background: var(--surface2); }
+    .section-header.open { border-bottom-color: var(--border); }
+
+    .section-header h2 {
+      font-size: 1.05rem;
+      color: var(--accent2);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-header h2 .num {
+      background: var(--accent);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 700;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .chevron { transition: transform 0.3s; color: var(--muted); }
+    .chevron.open { transform: rotate(180deg); }
+
+    .section-body {
+      display: none;
+      padding: 1.25rem;
+    }
+    .section-body.open { display: block; }
+
+    /* ── TYPOGRAPHY ── */
+    h3 {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin: 1.25rem 0 0.5rem;
+      border-left: 3px solid var(--accent);
+      padding-left: 0.6rem;
+    }
+
+    ul { padding-left: 1.4rem; margin-bottom: 0.75rem; }
+    ul li { margin-bottom: 0.35rem; }
+    ul li::marker { color: var(--accent2); }
+
+    strong { color: var(--accent); }
+
+    /* ── TABLE ── */
+    .table-wrap { overflow-x: auto; margin: 1rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th {
+      background: var(--accent);
+      color: #000;
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      font-weight: 700;
+    }
+    td {
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: var(--surface2); }
+    tr:hover td { background: #2d3f55; }
+
+    /* ── HIGHLIGHT (search) ── */
+    mark {
+      background: #f59e0b44;
+      color: var(--accent);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    /* ── PHASE BADGES ── */
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.4rem;
+    }
+    .badge-early  { background: #166534; color: #bbf7d0; }
+    .badge-mature { background: #1d4ed8; color: #bfdbfe; }
+    .badge-late   { background: #7f1d1d; color: #fecaca; }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 1.6rem; margin: 1rem 0; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -1.3rem; top: 0.45rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+    .tl-date { color: var(--accent); font-weight: 700; font-size: 0.85rem; }
+    .tl-desc { color: var(--text); font-size: 0.9rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 3rem;
+    }
+
+    /* ── BACK TO TOP ── */
+    #btt {
+      position: fixed;
+      bottom: 1.5rem; right: 1.5rem;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      width: 40px; height: 40px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px #0008;
+      z-index: 150;
+    }
+    #btt.visible { display: flex; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.3rem; }
+      table { font-size: 0.78rem; }
+    }
+
+    .hidden-by-search { display: none !important; }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<header>
+  <h1>📜 సింధు లోయ నాగరికత</h1>
+  <p>UPSC / State PSC · సమగ్ర పునరీక్షణ నోట్స్ · అధ్యాయం 1</p>
+  <div id="search-bar">
+    <input type="text" id="search" placeholder="🔍 నోట్స్‌లో వెతకండి..." autocomplete="off" />
+  </div>
+</header>
+
+<div class="container" id="main-content">
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 1 — INTRODUCTION & TIMELINE
+  ══════════════════════════════════════════════ -->
+  <div class="section" data-section="1">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <h2><span class="num">1</span> పరిచయం &amp; కాలక్రమం (Introduction &amp; Timeline)</h2>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+
+      <h3>పరిచయం</h3>
+      <ul>
+        <li><strong>సింధు లోయ నాగరికత</strong> — ప్రపంచంలోని అత్యంత ప్రాచీన నాగరికతలలో ఒకటి</li>
+        <li><strong>హరప్పా నాగరికత</strong> అని కూడా పిలుస్తారు — <strong>1921లో</strong> హరప్పా తవ్వకాల తర్వాత</li>
+        <li>విస్తీర్ణం: <strong>12,99,600 చ.కి.మీ.</strong> — మెసొపొటేమియా + ఈజిప్టు నాగరికతల కంటే పెద్దది</li>
+        <li>భౌగోళిక వ్యాప్తి: పాకిస్తాన్, వాయువ్య భారతదేశం, గుజరాత్, రాజస్థాన్</li>
+        <li><strong>హరప్పాను మొదటగా గుర్తించినది</strong>: <strong>చార్లెస్ మాసన్ (1826)</strong>; తొలి తవ్వకాలు: <strong>జాన్ మార్షల్</strong> నేతృత్వంలో</li>
+        <li>నాగరికత <strong>రాతి శాసనాలు లేదా చారిత్రక రికార్డులు లేవు</strong> — పురావస్తు ఆధారాలపై మాత్రమే ఆధారపడతాం</li>
+      </ul>
+
+      <h3>కాల దశలు</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">క్రీ.పూ. 7000 – 3500 <span class="badge badge-early">తొలి సంకేతాలు</span></div>
+          <div class="tl-desc">మెహర్‌గఢ్ నాగరికత — వ్యవసాయం ప్రారంభం, జంతుపోషణ</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">క్రీ.పూ. 3500 – 2600 <span class="badge badge-early">తొలి దశ</span></div>
+          <div class="tl-desc">గ్రామ స్థాయి సమాజాలు, ప్రారంభ వ్యవసాయం, మట్టి పాత్రలు</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">క్రీ.పూ. 2600 – 1900 <span class="badge badge-mature">పరిపక్వ దశ</span></div>
+          <div class="tl-desc">పట్టణ నాగరికత శిఖరం — మొహెంజో-దారో, హరప్పా ఉచ్ఛదశ; అంతర్జాతీయ వ్యాపారం</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">క్రీ.పూ. 1900 – 1300 <span class="badge badge-late">పతన దశ</span></div>
+          <div class="tl-desc">నాగరికత క్షీణత, వలసలు, గ్రామీణీకరణ</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 2 — KEY SITES TABLE
+  ══════════════════════════════════════════════ -->
+  <div class="section" data-section="2">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <h2><span class="num">2</span> ముఖ్యమైన నగరాలు (Key Sites)</h2>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>నగరము</th>
+              <th>నది</th>
+              <th>కనుగొన్నవారు</th>
+              <th>ముఖ్యమైన ఆధారాలు</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>హరప్పా</strong></td>
+              <td>రావి</td>
+              <td><strong>దయారాం సాహ్ని (1921)</strong></td>
+              <td>ధాన్యాగారాలు, శ్రామికుల నివాసాలు, R-37 శ్మశానవాటిక, ఇసుక రాయి విగ్రహాలు</td>
+            </tr>
+            <tr>
+              <td><strong>మొహెంజో-దారో</strong></td>
+              <td>సింధు</td>
+              <td><strong>ఆర్.డి. బెనర్జీ (1922)</strong></td>
+              <td>మహా స్నానఘట్టం, ధాన్యాగారం, పూజారి-రాజు విగ్రహం, నృత్యగత్తె కంచు విగ్రహం</td>
+            </tr>
+            <tr>
+              <td><strong>లోతల్</strong></td>
+              <td>భోగావో</td>
+              <td><strong>ఎస్.ఆర్. రావు (1954)</strong></td>
+              <td>తొలి డాక్‌యార్డ్, వరి అవశేషాలు, రెట్టింపు సమాధులు, అగ్ని బలి ఆధారాలు</td>
+            </tr>
+            <tr>
+              <td><strong>ధోలావీర</strong></td>
+              <td>లూని (ఘగ్గర్)</td>
+              <td><strong>ఆర్.ఎస్. బిస్ట్ (1990)</strong></td>
+              <td>నీటి సంరక్షణ వ్యవస్థ, 10 సంకేతాల ఫలకం, 3 అంచెల నగర విభజన, స్టేడియం</td>
+            </tr>
+            <tr>
+              <td><strong>కాళీబంగన్</strong></td>
+              <td>ఘగ్గర్ (సరస్వతి)</td>
+              <td><strong>బి.బి. లాల్ (1960)</strong></td>
+              <td>అగ్నికుండాలు, చురకత్తితో దున్నిన పొలం, మొదటి భూకంప ఆధారాలు, మట్టి ఇటుకలు</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ఇతర ముఖ్యమైన స్థలాలు</h3>
+      <ul>
+        <li><strong>చన్హుదారో</strong> (సింధ్) — పూసల తయారీ కేంద్రం, గాజు కర్మాగారం; కోట లేని ఏకైక నగరం</li>
+        <li><strong>సుర్కొటడా</strong> (గుజరాత్) — గుర్రపు అస్థిపంజర అవశేషాలు (మొదటిసారి)</li>
+        <li><strong>బనవలి</strong> (హరియాణా) — అత్యుత్తమ నాణ్యత బార్లీ, ఎద్దు మట్టి బొమ్మ</li>
+        <li><strong>రోపర్</strong> (పంజాబ్) — స్వాతంత్ర్యం తర్వాత భారతదేశంలో తొలి తవ్వకం</li>
+        <li><strong>అలందిపూర్</strong> (హరియాణా) — అతి పెద్ద హరప్పా స్థలం (భారతదేశంలో)</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 3 — TOWN PLANNING
+  ══════════════════════════════════════════════ -->
+  <div class="section" data-section="3">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <h2><span class="num">3</span> పట్టణ ప్రణాళిక (Town Planning)</h2>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+
+      <h3>గ్రిడ్ వ్యవస్థ (Grid System)</h3>
+      <ul>
+        <li>రోడ్లు <strong>తూర్పు-పశ్చిమ</strong> మరియు <strong>ఉత్తర-దక్షిణ</strong> దిశలలో సమాంతరంగా నిర్మించబడ్డాయి</li>
+        <li>నగరాలు రెండు ప్రధాన భాగాలుగా విభజించబడ్డాయి:
+          <ul>
+            <li><strong>దుర్గ (Citadel)</strong> — పశ్చిమ వైపున, ఎత్తైన వేదికపై, పాలక వర్గం, ప్రభుత్వ నిర్మాణాలు</li>
+            <li><strong>దిగువ నగరం (Lower Town)</strong> — తూర్పు వైపున, సాధారణ ప్రజల నివాసాలు</li>
+          </ul>
+        </li>
+        <li>ఇళ్ళు <strong>వీధికి వెనుక వైపు</strong> ఉన్నాయి — గోప్యత, భద్రత కోసం</li>
+        <li>పెద్ద ఇళ్ళలో అంతర్గత ఆవరణాలు (<strong>Courtyard</strong>) ఉన్నాయి</li>
+      </ul>
+
+      <h3>మురుగు నీటి వ్యవస్థ (Drainage System)</h3>
+      <ul>
+        <li><strong>ప్రపంచంలోనే తొలి అభివృద్ధి చెందిన మురుగు వ్యవస్థ</strong></li>
+        <li>ఇళ్ళలోని నాళాలు → వీధి నాళాలు → మెయిన్ నాళాలు (క్రమంగా పెద్దవి)</li>
+        <li><strong>మూసివేసిన నాళాలు (Covered Drains)</strong> — పరిశుభ్రత స్పృహకు నిదర్శనం</li>
+        <li><strong>మురుగు నీటి గుంతలు (Cess Pits)</strong> — నగరానికి వెలుపల, వ్యర్థ జలాల నిర్వహణ</li>
+        <li>ఈ వ్యవస్థ నేటి ఆధునిక నగర ప్రణాళికకు సమానం</li>
+      </ul>
+
+      <h3>మహా స్నానఘట్టం (Great Bath) — మొహెంజో-దారో</h3>
+      <ul>
+        <li>పొడవు: <strong>11.88 మీ.</strong>, వెడల్పు: <strong>7.01 మీ.</strong>, లోతు: <strong>2.43 మీ.</strong></li>
+        <li><strong>బిటుమెన్ (Bitumen)</strong> పూత — నీరు లీక్ కాకుండా నిరోధించడానికి</li>
+        <li>చుట్టూ గదులు, స్తంభాలు — బహుశా పూజారుల నివాసాలు</li>
+        <li><strong>మత లేదా ఆచారపర ప్రాముఖ్యత</strong> ఉందని నిపుణుల అభిప్రాయం</li>
+        <li><strong>జాన్ మార్షల్</strong>: "The most remarkable ancient monument in the world"</li>
+      </ul>
+
+      <h3>కాల్చిన ఇటుకలు (Baked Bricks)</h3>
+      <ul>
+        <li><strong>ప్రామాణిక నిష్పత్తి: 1 : 2 : 4</strong> (మందం : వెడల్పు : పొడవు)</li>
+        <li>ఇతర నాగరికతలతో పోలిస్తే అత్యంత ప్రామాణికత — అన్ని నగరాల్లో ఒకే పరిమాణం</li>
+        <li><strong>ముడి ఇటుకలు</strong> — చిన్న నిర్మాణాలు; <strong>కాల్చిన ఇటుకలు</strong> — ముఖ్య నిర్మాణాలు</li>
+        <li>ఈజిప్టు & మెసొపొటేమియాలో ఎండలో ఆరబెట్టిన ఇటుకలు వాడేవారు — ఇక్కడ కాల్చిన ఇటుకలు వాడటం విశేషం</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 4 — ECONOMY & AGRICULTURE
+  ══════════════════════════════════════════════ -->
+  <div class="section" data-section="4">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <h2><span class="num">4</span> ఆర్థిక వ్యవస్థ &amp; వ్యవసాయం (Economy &amp; Agriculture)</h2>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+
+      <h3>వ్యవసాయం</h3>
+      <ul>
+        <li><strong>ముఖ్య పంటలు</strong>: గోధుమ, బార్లీ (ప్రధాన ఆహారం); బఠానీలు, నువ్వులు, ఆవాలు, ఆముదం</li>
+        <li><strong>వరి</strong>: <strong>లోతల్</strong> మరియు <strong>రంగ్‌పూర్</strong>‌లో మాత్రమే ఆధారాలు</li>
+        <li><strong>పత్తి</strong>: సింధు లోయ ప్రజలే <strong>మొదటిసారి పత్తి పండించారు</strong> — గ్రీకులు దీన్ని <em>"Sindon"</em> అని పిలిచారు</li>
+        <li><strong>కాళీబంగన్</strong>లో చురకత్తి దున్నిన పొలం ఆధారాలు కనుగొనబడ్డాయి</li>
+        <li>వర్షాకాలపు వ్యవసాయం (<strong>Rabi crops</strong>); కాలువ నీటిపారుదల ఆధారాలు స్పష్టంగా లేవు</li>
+      </ul>
+
+      <h3>మెసొపొటేమియాతో వ్యాపారం</h3>
+      <ul>
+        <li>మెసొపొటేమియా శాసనాల్లో "<strong>మెలుహ్హా (Meluhha)</strong>" — సింధు ప్రాంతానికి పేరు</li>
+        <li>వ్యాపార వస్తువులు: పత్తి, నువ్వులు, తామ్రం, అర్ధ-విలువైన రాళ్ళు → బదులుగా బంగారం, వెండి, ఉన్ని</li>
+        <li><strong>లోతల్ డాక్‌యార్డ్</strong> — సముద్ర వ్యాపారానికి ప్రధాన కేంద్రం</li>
+        <li><strong>మధ్యవర్తి వ్యాపారం</strong>: <strong>దిల్‌మున్ (బహ్రెయిన్)</strong> ద్వారా</li>
+      </ul>
+
+      <h3>ముద్రలు &amp; సీళ్ళు (Seals)</h3>
+      <ul>
+        <li>దాదాపు <strong>2,000+ ముద్రలు</strong> కనుగొనబడ్డాయి — ముఖ్యంగా <strong>స్టెటైట్ (Steatite)</strong> రాయితో తయారు</li>
+        <li>ముద్రలపై జంతు చిత్రాలు (ఎద్దు, ఏనుగు, గేండా), సంకేత లిపి</li>
+        <li>వ్యాపారంలో గుర్తింపు మరియు యాజమాన్య ప్రయోజనాలకు ఉపయోగించేవారు</li>
+        <li><strong>పశుపతి ముద్ర (Pashupati Seal)</strong> — మొహెంజో-దారో నుండి; మూడు తలల దేవతను చుట్టూ జంతువులు</li>
+      </ul>
+
+      <h3>బరువులు &amp; కొలతలు</h3>
+      <ul>
+        <li><strong>చెస్ నట్ రాళ్ళతో (Chert weights)</strong> తయారైన బరువులు</li>
+        <li>నిష్పత్తి: <strong>1, 2, 4, 8, 16, 32, 64...</strong> (ద్విగుణ శ్రేణి)</li>
+        <li>అన్ని నగరాల్లో ఒకే ప్రామాణిక కొలతలు — కేంద్రీకృత ఆర్థిక నిర్వహణకు సూచన</li>
+        <li><strong>లోతల్</strong>లో అంగుళంతో కూడిన <strong>ఐవరీ స్కేల్ (Ivory Scale)</strong> కనుగొనబడింది</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 5 — SOCIETY, RELIGION & ARTS
+  ══════════════════════════════════════════════ -->
+  <div class="section" data-section="5">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <h2><span class="num">5</span> సమాజం, మతం &amp; కళలు (Society, Religion &amp; Arts)</h2>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+
+      <h3>సమాజం</h3>
+      <ul>
+        <li><strong>శాంతియుత సమాజం</strong> — యుద్ధ ఆయుధాల ఆధారాలు తక్కువ</li>
+        <li>సమాజం వర్గాలు: <strong>పాలకులు, వ్యాపారులు, శిల్పులు, వ్యవసాయదారులు</strong></li>
+        <li><strong>మాతృ ప్రధాన సమాజం</strong> అని కొందరి అభిప్రాయం — మాతృ దేవత ఆధారంగా</li>
+        <li>రాజరికానికి స్పష్టమైన ఆధారాలు లేవు; <strong>పూజారి-రాజు పరిపాలన</strong> అని ఊహ</li>
+        <li>మహిళలు — ఆభరణాలు ధరించేవారు; సమాన హోదా ఉందని భావన</li>
+      </ul>
+
+      <h3>మతం</h3>
+      <ul>
+        <li><strong>మాతృ దేవత (Mother Goddess)</strong> — మట్టి విగ్రహాలు పెద్ద సంఖ్యలో కనుగొనబడ్డాయి; సంతానం, సమృద్ధికి ప్రతీక</li>
+        <li><strong>పశుపతి ముద్ర</strong> — యోగి భంగిమలో కూర్చున్న దేవత, చుట్టూ ఏనుగు, పులి, ఎద్దు, గేండా; <strong>ఆది శివుని</strong> రూపంగా భావిస్తారు</li>
+        <li><strong>లింగ &amp; యోని</strong> ఆరాధన ఆధారాలు — శివ ఆరాధనకు తొలి ఆధారాలు</li>
+        <li><strong>అగ్ని ఆరాధన</strong> — కాళీబంగన్‌లో అగ్నికుండాలు (Fire Altars)</li>
+        <li>పవిత్ర వృక్షాలు: <strong>రావి చెట్టు (Pipal Tree)</strong> పవిత్రంగా భావించేవారు</li>
+        <li>జంతువులు: <strong>ఏకశృంగ (Unicorn)</strong> ముద్రలపై అత్యధికంగా కనిపిస్తుంది; <strong>ఎద్దు</strong> కూడా ముఖ్యమైనది</li>
+      </ul>
+
+      <h3>లిపి (Script)</h3>
+      <ul>
+        <li><strong>హరప్పా లిపి (Harappan Script)</strong> — ఇంకా అర్థం కాలేదు!</li>
+        <li>దాదాపు <strong>400–600 సంకేతాలు</strong> గుర్తించబడ్డాయి</li>
+        <li><strong>బౌస్ట్రోఫెడాన్ (Boustrophedon)</strong> శైలి — ఒక వరుస ఎడమ నుండి కుడికి, తర్వాతి కుడి నుండి ఎడమకు</li>
+        <li>లిపి <strong>చిత్ర-సంకేత (Pictographic)</strong> రూపంలో ఉంది</li>
+        <li>ముఖ్యంగా ముద్రలపై, మట్టి పాత్రలపై కనిపిస్తుంది</li>
+      </ul>
+
+      <h3>కళలు &amp; చేతివృత్తులు</h3>
+      <ul>
+        <li><strong>నృత్యగత్తె (Dancing Girl)</strong> — మొహెంజో-దారో; <strong>కంచు</strong>తో తయారైన విగ్రహం; <em>lost-wax (cire perdue)</em> పద్ధతి</li>
+        <li><strong>మట్టి బొమ్మలు (Terracotta Toys)</strong> — గాడిదలు, ఎద్దులు, ఆట బండ్లు, రైళ్ళు వంటివి; పిల్లల కోసం</li>
+        <li><strong>మట్టి పాత్రలు</strong> — ఎరుపు రంగు, నల్లటి డిజైన్లు; అన్నీ చక్రంపై తయారు</li>
+        <li><strong>పూసలు (Beads)</strong> — కెంపు రాయి (Carnelian), లాపిస్ లాజులి, క్రిస్టల్; చన్హుదారో ప్రధాన కేంద్రం</li>
+        <li><strong>పూజారి-రాజు విగ్రహం</strong> — మొహెంజో-దారో; స్టెటైట్ రాయితో తయారు; సాల్ ముద్రిత దుస్తులు</li>
+        <li>రాగి, కంచు పని — ఆయుధాలు, పనిముట్లు, అలంకరణ వస్తువులు</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 6 — DECLINE
+  ══════════════════════════════════════════════ -->
+  <div class="section" data-section="6">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <h2><span class="num">6</span> పతనం (Decline)</h2>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="section-body open">
+
+      <h3>పతన సిద్ధాంతాలు</h3>
+
+      <ul>
+        <li>
+          <strong>1. ఆర్య దాడి సిద్ధాంతం (Aryan Invasion Theory)</strong>
+          — <strong>మార్టిమర్ వీలర్</strong> ప్రతిపాదించారు
+          <ul>
+            <li>మొహెంజో-దారోలో కనుగొన్న అస్థిపంజరాలు హింసకు సాక్ష్యమని వాదించారు</li>
+            <li>నేటి చాలా మంది పండితులు ఈ సిద్ధాంతాన్ని <strong>తిరస్కరిస్తున్నారు</strong></li>
+          </ul>
+        </li>
+        <li>
+          <strong>2. పర్యావరణ మార్పులు / వాతావరణ మార్పులు</strong>
+          — <strong>ఫెయిర్‌సర్వీస్, గుప్తా</strong>
+          <ul>
+            <li>వర్షపాతం తగ్గింపు, వ్యవసాయం కష్టమైంది</li>
+            <li><strong>సరస్వతి నది ఎండిపోవడం</strong> — <strong>ఘగ్గర్-హక్రా</strong> వ్యవస్థ పతనం</li>
+          </ul>
+        </li>
+        <li>
+          <strong>3. వరదలు / నదీ మార్పులు</strong>
+          — <strong>మార్షల్, మాకే</strong>
+          <ul>
+            <li>సింధు నది మార్గం మారి వరదలు వచ్చి నగరాలు నాశనమయ్యాయి</li>
+            <li>మొహెంజో-దారోలో వరద అవశేషాల ఆధారాలు</li>
+          </ul>
+        </li>
+        <li>
+          <strong>4. భూకంపాలు</strong>
+          — <strong>రాకేష్ తివారీ</strong>
+          <ul>
+            <li>కాళీబంగన్‌లో భూకంపానికి సంబంధించిన మొదటి ఆధారాలు</li>
+          </ul>
+        </li>
+        <li>
+          <strong>5. అతిగా అటవీ నిర్మూలన</strong>
+          — <strong>లాంబ్రిక్</strong>
+          <ul>
+            <li>ఇటుకలు కాల్చడానికి అడవులు నరికి పర్యావరణ విధ్వంసం</li>
+          </ul>
+        </li>
+        <li>
+          <strong>6. అంతర్గత తిరుగుబాట్లు / వలసలు</strong>
+          <ul>
+            <li>ఆర్థిక అసమానత వల్ల అంతర్గత కల్లోలం</li>
+            <li>ప్రజలు తూర్పుకు వలసవెళ్ళారు — గంగా మైదానాలకు</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>ముఖ్యమైన గమనిక</h3>
+      <ul>
+        <li>నేటి నిపుణుల అభిప్రాయం: పతనం <strong>ఒకే కారణానికి కాదు — అనేక కారణాల సమ్మేళనం</strong></li>
+        <li>నాగరికత అకస్మాత్తుగా అంతరించలేదు; <strong>క్రమంగా క్షీణించింది</strong></li>
+        <li>కొన్ని సాంస్కృతిక అంశాలు తర్వాతి వైదిక నాగరికతలో కొనసాగాయి</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       QUICK REVISION BOX
+  ══════════════════════════════════════════════ -->
+  <div class="section" data-section="7">
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2><span class="num">★</span> త్వరిత పునరీక్షణ (Quick Revision)</h2>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>అంశం</th><th>వివరాలు</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>కనుగొన్న సంవత్సరం</td><td><strong>1921</strong> (హరప్పా), <strong>1922</strong> (మొహెంజో-దారో)</td></tr>
+            <tr><td>మొదటి తవ్వకం నేతృత్వం</td><td><strong>జాన్ మార్షల్</strong> (ASI డైరెక్టర్ జనరల్)</td></tr>
+            <tr><td>పరిపక్వ దశ కాలం</td><td><strong>క్రీ.పూ. 2600 – 1900</strong></td></tr>
+            <tr><td>ముఖ్య నది వ్యవస్థ</td><td><strong>సింధు నది వ్యవస్థ</strong> (+ ఘగ్గర్-హక్రా)</td></tr>
+            <tr><td>ఇటుక నిష్పత్తి</td><td><strong>1 : 2 : 4</strong></td></tr>
+            <tr><td>మొదటి పత్తి పండించిన నాగరికత</td><td><strong>హరప్పా నాగరికత</strong></td></tr>
+            <tr><td>లిపి శైలి</td><td><strong>బౌస్ట్రోఫెడాన్</strong> (ఇంకా అర్థం కాలేదు)</td></tr>
+            <tr><td>మెసొపొటేమియాలో సింధు పేరు</td><td><strong>మెలుహ్హా (Meluhha)</strong></td></tr>
+            <tr><td>తొలి డాక్‌యార్డ్</td><td><strong>లోతల్</strong></td></tr>
+            <tr><td>మహా స్నానఘట్టం స్థలం</td><td><strong>మొహెంజో-దారో</strong></td></tr>
+            <tr><td>మొదటి భూకంప ఆధారాలు</td><td><strong>కాళీబంగన్</strong></td></tr>
+            <tr><td>అత్యంత పెద్ద స్థలం (భారత్)</td><td><strong>రాఖీగఢీ / అలందిపూర్</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<button id="btt" title="పైకి వెళ్ళు" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>UPSC / State PSC · సమగ్ర పునరీక్షణ నోట్స్ · అధ్యాయం 1: సింధు లోయ నాగరికత</p>
+  <p style="margin-top:0.3rem">© 2026 · Claude Code ద్వారా రూపొందించబడింది</p>
+</footer>
+
+<script>
+  /* ── COLLAPSE / EXPAND ── */
+  function toggleSection(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.chevron');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    header.classList.toggle('open', !isOpen);
+    chevron.classList.toggle('open', !isOpen);
+  }
+
+  /* ── PROGRESS BAR ── */
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = pct + '%';
+    document.getElementById('btt').classList.toggle('visible', h.scrollTop > 300);
+  });
+
+  /* ── SEARCH ── */
+  const searchInput = document.getElementById('search');
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    clearHighlights();
+    if (!q) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('hidden-by-search'));
+      return;
+    }
+    document.querySelectorAll('.section').forEach(section => {
+      const text = section.textContent.toLowerCase();
+      const match = text.includes(q);
+      section.classList.toggle('hidden-by-search', !match);
+      if (match) {
+        // open the section
+        const body = section.querySelector('.section-body');
+        const header = section.querySelector('.section-header');
+        const chevron = header.querySelector('.chevron');
+        body.classList.add('open');
+        header.classList.add('open');
+        chevron.classList.add('open');
+        highlightText(section, q);
+      }
+    });
+  });
+
+  function clearHighlights() {
+    document.querySelectorAll('mark').forEach(m => {
+      const parent = m.parentNode;
+      parent.replaceChild(document.createTextNode(m.textContent), m);
+      parent.normalize();
+    });
+  }
+
+  function highlightText(node, q) {
+    if (node.nodeType === 3) {
+      const idx = node.textContent.toLowerCase().indexOf(q);
+      if (idx === -1) return;
+      const mark = document.createElement('mark');
+      const before = document.createTextNode(node.textContent.slice(0, idx));
+      mark.textContent = node.textContent.slice(idx, idx + q.length);
+      const after = document.createTextNode(node.textContent.slice(idx + q.length));
+      const frag = document.createDocumentFragment();
+      frag.append(before, mark, after);
+      node.parentNode.replaceChild(frag, node);
+    } else if (node.nodeType === 1 && !['SCRIPT','STYLE','INPUT'].includes(node.tagName)) {
+      [...node.childNodes].forEach(child => highlightText(child, q));
+    }
+  }
+</script>
+</body>
+</html>

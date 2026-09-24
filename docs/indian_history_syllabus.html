@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>భారత చరిత్ర సిలబస్ & రోడ్‌మ్యాప్</title>
+  <style>
+    :root {
+      --primary: #1a6b3c;
+      --primary-light: #e8f5ee;
+      --accent: #f0a500;
+      --accent-light: #fff8e6;
+      --text: #1c1c2e;
+      --text-muted: #5a5a72;
+      --bg: #f7f8fc;
+      --card: #ffffff;
+      --border: #dde3ef;
+      --shadow: 0 2px 12px rgba(0,0,0,0.07);
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', 'Noto Sans Telugu', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #1a6b3c 0%, #0e4228 100%);
+      color: #fff;
+      padding: 36px 20px 28px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.18);
+    }
+    header h1 {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #3a2000;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 10px;
+      letter-spacing: 0.6px;
+    }
+
+    /* ── Nav Tabs ── */
+    .tab-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px 16px 0;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 10px 22px;
+      border: 2px solid var(--primary);
+      background: var(--card);
+      color: var(--primary);
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: all 0.22s ease;
+    }
+    .tab-btn:hover,
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* ── Main Container ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Section card ── */
+    .section-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    /* ── Accordion ── */
+    .acc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+      background: var(--card);
+      transition: background 0.18s;
+      gap: 12px;
+    }
+    .acc-header:hover { background: var(--primary-light); }
+    .acc-header.open { background: var(--primary-light); border-bottom: 2px solid var(--primary); }
+
+    .acc-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+    .acc-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .acc-icon.ancient  { background: #fff3e0; }
+    .acc-icon.medieval { background: #e8eaf6; }
+    .acc-icon.modern   { background: #e3f2fd; }
+    .acc-icon.road     { background: #e8f5e9; }
+
+    .acc-title-text h3 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .acc-title-text span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .chevron {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+    .acc-header.open .chevron { transform: rotate(180deg); }
+
+    .acc-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.38s ease;
+    }
+    .acc-body-inner { padding: 18px 20px 22px; }
+
+    /* ── Content styles ── */
+    .topic-list {
+      list-style: none;
+      padding: 0;
+    }
+    .topic-list li {
+      padding: 8px 0 8px 14px;
+      border-bottom: 1px dashed var(--border);
+      position: relative;
+      font-size: 0.97rem;
+    }
+    .topic-list li:last-child { border-bottom: none; }
+    .topic-list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-size: 0.8rem;
+      top: 10px;
+    }
+    .topic-list li strong { color: var(--primary); }
+
+    .subtopic {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      padding-left: 2px;
+    }
+
+    .highlight-box {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 12px 0;
+      font-size: 0.9rem;
+    }
+    .highlight-box strong { color: #8a5000; }
+
+    /* ── Roadmap steps ── */
+    .steps { display: flex; flex-direction: column; gap: 14px; }
+    .step-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--primary-light);
+      border-radius: 10px;
+      padding: 14px 16px;
+      border: 1px solid #b8dfc9;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .step-content h4 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .step-content p, .step-content ul {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .step-content ul { padding-left: 18px; margin-top: 4px; }
+    .step-content ul li { margin-bottom: 3px; }
+
+    /* ── Tips box ── */
+    .tip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .tip-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+    }
+    .tip-card .tip-icon { font-size: 1.4rem; margin-bottom: 6px; }
+    .tip-card h5 { font-size: 0.9rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+    .tip-card p { font-size: 0.82rem; color: var(--text-muted); }
+
+    /* ── Progress bar decoration ── */
+    .progress-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+      margin: 8px 0 16px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 500px) {
+      .tab-btn { padding: 8px 14px; font-size: 0.84rem; }
+      .acc-header { padding: 13px 14px; }
+      .acc-body-inner { padding: 14px; }
+      .step-card { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🇮🇳 భారత చరిత్ర సిలబస్ & రోడ్‌మ్యాప్</h1>
+  <p>UPSC / State PSC పరీక్షల సంపూర్ణ మార్గదర్శి</p>
+  <div class="badge">తెలుగు మాధ్యమం</div>
+</header>
+
+<!-- Tab Navigation -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('syllabus', this)">📚 సిలబస్</button>
+  <button class="tab-btn" onclick="switchTab('roadmap', this)">🗺️ రోడ్‌మ్యాప్</button>
+  <button class="tab-btn" onclick="switchTab('tips', this)">💡 చిట్కాలు</button>
+</div>
+
+<div class="container">
+
+  <!-- ═══════════════════════════ SYLLABUS TAB ═══════════════════════════ -->
+  <div id="tab-syllabus" class="tab-panel active">
+
+    <div class="progress-bar"></div>
+
+    <!-- Ancient History -->
+    <div class="section-card">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-title">
+          <div class="acc-icon ancient">🏺</div>
+          <div class="acc-title-text">
+            <h3>ప్రాచీన భారతదేశ చరిత్ర</h3>
+            <span>Ancient Indian History — క్రీపూ 3000 నుండి క్రీ.శ. 700 వరకు</span>
+          </div>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="highlight-box">
+            <strong>⚠️ పరీక్ష ప్రాముఖ్యత:</strong> UPSC Prelims & Mains రెండింటిలోనూ 8–12 ప్రశ్నలు ఈ విభాగం నుండి వస్తాయి.
+          </div>
+          <ul class="topic-list">
+            <li>
+              <strong>సింధు నాగరికత (Indus Valley Civilization)</strong>
+              <span class="subtopic">హరప్పా, మొహంజొదారో, లోథాల్ — నగర ప్రణాళిక, వ్యాపారం, లిపి, పతనానికి కారణాలు</span>
+            </li>
+            <li>
+              <strong>వేద కాలం (Vedic Age)</strong>
+              <span class="subtopic">ఋగ్వేద కాలం vs తరువాత వేద కాలం; వర్ణ వ్యవస్థ, జనపద రాజ్యాలు, 16 మహాజనపదాలు</span>
+            </li>
+            <li>
+              <strong>బౌద్ధమతం & జైనమతం</strong>
+              <span class="subtopic">గౌతమ బుద్ధుని జీవితం, చతుర్ ఆర్య సత్యాలు, అష్టాంగ మార్గం; మహావీరుడు, పంచ మహావ్రతాలు</span>
+            </li>
+            <li>
+              <strong>మగధ సామ్రాజ్యం & అలెగ్జాండర్ దండయాత్ర</strong>
+              <span class="subtopic">నంద వంశం, ఇరాన్ సంబంధాలు, హెలెనిస్టిక్ ప్రభావం</span>
+            </li>
+            <li>
+              <strong>మౌర్య సామ్రాజ్యం</strong>
+              <span class="subtopic">చంద్రగుప్త మౌర్య, అర్థశాస్త్రం (కౌటిల్య), అశోక చక్రవర్తి — శాసనాలు, ధమ్మం, బౌద్ధమత వ్యాప్తి; పతనం</span>
+            </li>
+            <li>
+              <strong>మౌర్యుల అనంతర కాలం</strong>
+              <span class="subtopic">శుంగ, కణ్వ వంశాలు; సాతవాహనులు (ఆంధ్రులు); కుషాణులు — కనిష్కుడు, గాంధార కళ</span>
+            </li>
+            <li>
+              <strong>గుప్త సామ్రాజ్యం (స్వర్ణ యుగం)</strong>
+              <span class="subtopic">చంద్రగుప్త I & II, సముద్రగుప్త, స్కందగుప్త; కళలు, సాహిత్యం (కాళిదాసు), గణితం (ఆర్యభట్ట), అజంతా-ఎల్లోరా; హూణుల దాడి</span>
+            </li>
+            <li>
+              <strong>దక్షిణ భారత రాజ్యాలు</strong>
+              <span class="subtopic">చోళులు, చేరులు, పాండ్యులు (సంఘం కాలం); పల్లవులు, చాళుక్యులు — మహాబలిపురం, ఐహోళె శిల్పకళ</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medieval History -->
+    <div class="section-card">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-title">
+          <div class="acc-icon medieval">🕌</div>
+          <div class="acc-title-text">
+            <h3>మధ్యయుగ భారతదేశ చరిత్ర</h3>
+            <span>Medieval Indian History — క్రీ.శ. 700 నుండి 1757 వరకు</span>
+          </div>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="highlight-box">
+            <strong>⚠️ పరీక్ష ప్రాముఖ్యత:</strong> Delhi Sultanate, Mughals, Bhakti/Sufi ఉద్యమాలు తరచుగా అడిగే విషయాలు.
+          </div>
+          <ul class="topic-list">
+            <li>
+              <strong>అరేబియా దాడులు & ఇస్లాం ప్రవేశం</strong>
+              <span class="subtopic">మొహమ్మద్ బిన్ కాసిం, మహమూద్ ఘజ్నవి దాడులు; మొహమ్మద్ ఘోరీ</span>
+            </li>
+            <li>
+              <strong>ఢిల్లీ సుల్తానేట్ (1206–1526)</strong>
+              <span class="subtopic">గులాం వంశం (కుతుబుద్దీన్, ఇల్తుత్మిష్, రజియా, బల్బన్); ఖిల్జీ వంశం (అలాఉద్దీన్ — బాజారు సంస్కరణలు); తుఘ్లక్ వంశం (మొహమ్మద్ తుఘ్లక్ — రాజధాని మార్పు); లోది వంశం</span>
+            </li>
+            <li>
+              <strong>విజయనగర సామ్రాజ్యం</strong>
+              <span class="subtopic">హరిహర-బుక్క, కృష్ణదేవరాయలు — అమరుక్తమాల్యద; తళ్ళికోట యుద్ధం (1565)</span>
+            </li>
+            <li>
+              <strong>బహమనీ సుల్తానేట్ & దక్కన్ సుల్తానేట్లు</strong>
+              <span class="subtopic">బిజాపూర్, గోల్కొండ, అహ్మద్‌నగర్; మహ్మూద్ గావాన్</span>
+            </li>
+            <li>
+              <strong>భక్తి ఉద్యమం</strong>
+              <span class="subtopic">రామానుజాచార్య, కబీర్, మీరాభాయి, తుకారాం, చైతన్య మహాప్రభు; ఆళ్వారులు, నయనార్లు; హిందూ-ముస్లిం ఐక్యత సందేశం</span>
+            </li>
+            <li>
+              <strong>సూఫీ ఉద్యమం</strong>
+              <span class="subtopic">చిస్తి, సుహ్రావర్దీ, నక్షబందీ, కాదిరీ తరీఖాలు; నిజాముద్దీన్ ఔలియా; ప్రేమ-సమత్వం సందేశం</span>
+            </li>
+            <li>
+              <strong>మొఘల్ సామ్రాజ్యం (1526–1707)</strong>
+              <span class="subtopic">బాబర్ (పానిపత్ 1526), హుమాయూన్, అక్బర్ (దీన్-ఎ-ఇలాహీ, మన్సబ్దారీ, నవరత్నాలు), జహంగీర్, షాజహాన్ (తాజ్‌మహల్), ఔరంగజేబ్ (జిజియా పునరుద్ధరణ); పతనానికి కారణాలు</span>
+            </li>
+            <li>
+              <strong>మరాఠా సామ్రాజ్యం</strong>
+              <span class="subtopic">శివాజీ — రాయగఢ్, అష్టప్రధాన్; పేష్వాల కాలం; పానిపత్ మూడవ యుద్ధం (1761)</span>
+            </li>
+            <li>
+              <strong>శిఖ్ ధర్మం ఉద్భవం</strong>
+              <span class="subtopic">గురు నానక్ నుండి గురు గోవింద్ సింగ్ వరకు; ఖాల్సా పంథ్</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modern History -->
+    <div class="section-card">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-title">
+          <div class="acc-icon modern">🏛️</div>
+          <div class="acc-title-text">
+            <h3>ఆధునిక భారతదేశ చరిత్ర</h3>
+            <span>Modern Indian History — 1757 నుండి 1947 వరకు</span>
+          </div>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="highlight-box">
+            <strong>⚠️ పరీక్ష ప్రాముఖ్యత:</strong> స్వాతంత్ర్య ఉద్యమం, జాతీయ నాయకులు UPSC లో అత్యధికంగా అడిగే అంశాలు.
+          </div>
+          <ul class="topic-list">
+            <li>
+              <strong>యూరోపియన్ల రాక (Advent of Europeans)</strong>
+              <span class="subtopic">పోర్చుగీసు (వాస్కో-డ-గామా 1498), డచ్, ఫ్రెంచ్, బ్రిటిష్ — EIC స్థాపన (1600); ప్లాసీ యుద్ధం (1757), బక్సర్ యుద్ధం (1764)</span>
+            </li>
+            <li>
+              <strong>బ్రిటిష్ పరిపాలన & సంస్కరణలు</strong>
+              <span class="subtopic">శాశ్వత జమాబందీ, రైత్వారీ, మహల్వారీ విధానాలు; 1813 & 1833 చార్టర్ చట్టాలు; వుడ్స్ డిస్పాచ్ 1854</span>
+            </li>
+            <li>
+              <strong>1857 తిరుగుబాటు (మొదటి స్వాతంత్ర్య సంగ్రామం)</strong>
+              <span class="subtopic">కారణాలు (రాజకీయ, ఆర్థిక, సైనిక, మతపరం), మంగళ్ పాండే, బహదూర్ షా జఫర్, రానీ లక్ష్మీబాయి, నానా సాహెబ్; ఫలితాలు — క్రౌన్ పాలన మొదలు</span>
+            </li>
+            <li>
+              <strong>సాంఘిక-మత సంస్కరణ ఉద్యమాలు</strong>
+              <span class="subtopic">బ్రహ్మ సమాజ్ (రాజా రామ్మోహన్ రాయ్); ఆర్య సమాజ్ (దయానంద సరస్వతి); రామకృష్ణ-వివేకానంద; జ్యోతిరావ్ ఫూలే; సయ్యద్ అహ్మద్ ఖాన్</span>
+            </li>
+            <li>
+              <strong>భారత జాతీయ కాంగ్రెస్ స్థాపన (1885)</strong>
+              <span class="subtopic">A.O. హ్యూమ్; ఉదారవాద దశ — గోపాల కృష్ణ గోఖలే, దాదాభాయి నౌరోజీ; అతివాద దశ — బాలగంగాధర్ తిలక్, "స్వరాజ్ నా జన్మహక్కు"; 1905 బంగాళా వంగ విభజన</span>
+            </li>
+            <li>
+              <strong>గాంధీ యుగం & స్వాతంత్ర్య ఉద్యమం</strong>
+              <span class="subtopic">
+                చంపారణ్ సత్యాగ్రహం (1917); రౌలత్ సత్యాగ్రహం; జలియన్‌వాలాబాగ్ (1919);
+                అసహాయోద్యమం (1920–22); సైమన్ కమిషన్ వ్యతిరేకత;
+                సివిల్ నిరాకరణ (1930) — దండి మార్చ్;
+                క్విట్ ఇండియా (1942) — "చేయండి లేదా చావండి"
+              </span>
+            </li>
+            <li>
+              <strong>ముఖ్యమైన జాతీయ నాయకులు</strong>
+              <span class="subtopic">మహాత్మా గాంధీ, జవహర్‌లాల్ నెహ్రూ, సుభాష్ చంద్రబోస్ (INA), భగత్ సింగ్, B.R. అంబేద్కర్, సర్దార్ వల్లభభాయి పటేల్, మదన్ మోహన్ మాలవ్య</span>
+            </li>
+            <li>
+              <strong>రాజ్యాంగ పరిణామం & విభజన</strong>
+              <span class="subtopic">కేబినెట్ మిషన్ (1946); మౌంట్‌బాటెన్ ప్లాన్; 1947 భారత స్వాతంత్ర్యం; దేశ విభజన — రాడ్‌క్లిఫ్ రేఖ</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-syllabus -->
+
+  <!-- ═══════════════════════════ ROADMAP TAB ═══════════════════════════ -->
+  <div id="tab-roadmap" class="tab-panel">
+
+    <div class="progress-bar"></div>
+
+    <div class="section-card">
+      <div class="acc-header open" onclick="toggleAcc(this)">
+        <div class="acc-title">
+          <div class="acc-icon road">🗺️</div>
+          <div class="acc-title-text">
+            <h3>ప్రిపరేషన్ రోడ్‌మ్యాప్</h3>
+            <span>నాలుగు దశల సమగ్ర ప్రణాళిక</span>
+          </div>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="acc-body" style="max-height:2000px;">
+        <div class="acc-body-inner">
+          <div class="steps">
+
+            <div class="step-card">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>దశ 1 — మూలాధార పఠనం (Foundation Reading)</h4>
+                <p>మొదటి 2–3 నెలలు బేసిక్ పుస్తకాల ద్వారా సంపూర్ణ అవగాహన పెంచుకోండి.</p>
+                <ul>
+                  <li>NCERT Class 6–8 (Our Pasts I, II, III) — తేలికగా అర్థమయ్యే బేస్</li>
+                  <li>NCERT Class 11–12 Themes in Indian History (Part I, II, III)</li>
+                  <li>తెలంగాణ / ఆంధ్రప్రదేశ్ State Board History Books (10వ తరగతి)</li>
+                  <li>Old NCERT (R.S. Sharma — Ancient India; Satish Chandra — Medieval India)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>దశ 2 — సాంప్రదాయిక రెఫరెన్స్ పుస్తకాలు (Standard Books)</h4>
+                <p>NCERT తర్వాత లోతైన అవగాహన కోసం:</p>
+                <ul>
+                  <li><strong>ప్రాచీన చరిత్ర:</strong> R.S. Sharma — "Ancient India" (NCERT Old)</li>
+                  <li><strong>మధ్యయుగ చరిత్ర:</strong> Satish Chandra — "Medieval India" (2 vols)</li>
+                  <li><strong>ఆధునిక చరిత్ర:</strong> Bipin Chandra — "India's Struggle for Independence"; "Modern India" (SPECTRUM)</li>
+                  <li><strong>కళ & సంస్కృతి:</strong> Nitin Singhania — "Indian Art & Culture"</li>
+                  <li><strong>పత్రికలు:</strong> The Hindu, Vision IAS History Notes</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>దశ 3 — నోట్స్ రాయడం (Git/Markdown Strategy)</h4>
+                <p>మీ అర్థం అయిన విషయాలను <strong>Markdown (.md)</strong> ఫైల్స్ లో రాయండి — Git రిపోజిటరీలో నిల్వ చేయండి.</p>
+                <ul>
+                  <li>ప్రతి అధ్యాయానికి ఒక <code>.md</code> ఫైల్ సృష్టించండి (e.g., <code>ancient/indus_valley.md</code>)</li>
+                  <li>Headers: ## కాలం | ### విషయం | #### పరీక్ష పాయింట్</li>
+                  <li>Timeline, Maps, Flowcharts ని ASCII లేదా links గా చేర్చండి</li>
+                  <li>Git commit తో మీ progress track అవుతుంది — ప్రతిరోజు commit చేయండి</li>
+                  <li>Obsidian లేదా Notion లో [[backlinks]] పెట్టండి — concepts connect అవుతాయి</li>
+                  <li>ఒక <code>README.md</code> లో పూర్తైన topics చెక్‌బాక్సులతో maintain చేయండి</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <h4>దశ 4 — రివిజన్ & PYQ విశ్లేషణ (Revision + Previous Year Questions)</h4>
+                <ul>
+                  <li><strong>PYQ Analysis:</strong> గత 10 సంవత్సరాల UPSC Prelims & Mains ప్రశ్నలు చదవండి</li>
+                  <li>ఏ topicలు తరచుగా వస్తున్నాయో గుర్తించి priority ఇవ్వండి</li>
+                  <li><strong>Spaced Repetition:</strong> మొదటి వారం, తర్వాత 2 వారాలు, తర్వాత నెల తర్వాత revise చేయండి</li>
+                  <li>Mocks: UPSC CSE Prelims Mock Tests (Insights on India, ForumIAS)</li>
+                  <li>మీ తప్పులు analyze చేయండి — error log Markdown లో note చేయండి</li>
+                  <li>State PSC కోసం: AP/Telangana PSC specific questions & regional history add చేయండి</li>
+                </ul>
+              </div>
+            </div>
+
+          </div><!-- /steps -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="section-card">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-title">
+          <div class="acc-icon road">📅</div>
+          <div class="acc-title-text">
+            <h3>నెలవారీ అధ్యయన ప్రణాళిక</h3>
+            <span>6-నెలల దశలవారీ కాలపట్టిక</span>
+          </div>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <ul class="topic-list">
+            <li><strong>నెల 1–2:</strong> NCERT 6–8 పూర్తి చేయడం + ప్రాచీన చరిత్ర నోట్స్
+              <span class="subtopic">రోజుకు 2 గంటలు; Indus Valley → Gupta Empire వరకు</span>
+            </li>
+            <li><strong>నెల 3:</strong> మధ్యయుగ చరిత్ర — NCERT 11 + Satish Chandra
+              <span class="subtopic">Delhi Sultanate, Mughals, Bhakti/Sufi ఉద్యమాలు</span>
+            </li>
+            <li><strong>నెల 4:</strong> ఆధునిక చరిత్ర — Spectrum Modern India + Bipin Chandra
+              <span class="subtopic">1857 నుండి 1947 వరకు; జాతీయ ఉద్యమం emphasis</span>
+            </li>
+            <li><strong>నెల 5:</strong> PYQ విశ్లేషణ + Mock Tests
+              <span class="subtopic">Topic-wise PYQ solve చేయండి; weakness areas identify చేయండి</span>
+            </li>
+            <li><strong>నెల 6:</strong> మొత్తం Revision + Mains Answer Writing Practice
+              <span class="subtopic">Short notes revise; 200-word answers practice; error log review</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-roadmap -->
+
+  <!-- ═══════════════════════════ TIPS TAB ═══════════════════════════ -->
+  <div id="tab-tips" class="tab-panel">
+
+    <div class="progress-bar"></div>
+
+    <div class="section-card">
+      <div class="acc-header open" onclick="toggleAcc(this)">
+        <div class="acc-title">
+          <div class="acc-icon road">💡</div>
+          <div class="acc-title-text">
+            <h3>సమర్థ అధ్యయన చిట్కాలు</h3>
+            <span>UPSC toppers అనుసరించే strategies</span>
+          </div>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="acc-body" style="max-height:2000px;">
+        <div class="acc-body-inner">
+          <div class="tip-grid">
+            <div class="tip-card">
+              <div class="tip-icon">🗂️</div>
+              <h5>Mind Maps చేయండి</h5>
+              <p>ప్రతి రాజవంశాన్ని tree diagram గా చేయండి — పాలకులు, రాజధాని, ముఖ్య సంఘటనలు</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">📆</div>
+              <h5>Timeline Method</h5>
+              <p>కాలక్రమంలో events రాయండి — ముందు/తర్వాత సంబంధాలు అర్థమవుతాయి</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">❓</div>
+              <h5>PYQ First</h5>
+              <p>ఒక topic మొదలు పెట్టే ముందు దానిపై గత ప్రశ్నలు చూడండి — priority అర్థమవుతుంది</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">📝</div>
+              <h5>Output Practice</h5>
+              <p>చదివాక book మూసి points రాయండి — retrieval practice memory బలపరుస్తుంది</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">🔗</div>
+              <h5>Links Connect చేయండి</h5>
+              <p>ఆర్థిక నేపథ్యం → రాజకీయ మార్పు → సాంస్కృతిక ప్రభావం — interconnections చూడండి</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">🌍</div>
+              <h5>Maps తో నేర్చుకోండి</h5>
+              <p>రాజ్యాల విస్తరణ, యుద్ధ ప్రాంతాలు, వ్యాపార మార్గాలు మ్యాప్‌లో గుర్తించండి</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">🔄</div>
+              <h5>Revision Cycles</h5>
+              <p>1 రోజు → 1 వారం → 1 నెల — spaced repetition లో revise చేయండి</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">👥</div>
+              <h5>Study Group</h5>
+              <p>తోటి పరీక్షార్థులతో discuss చేయండి — వివరణ ఇవ్వడం ద్వారా మీ అవగాహన పెరుగుతుంది</p>
+            </div>
+          </div>
+
+          <div class="highlight-box" style="margin-top:20px;">
+            <strong>🎯 UPSC Mains కు ప్రత్యేక సూచన:</strong><br/>
+            ఆధునిక చరిత్ర ప్రశ్నలకు సమాధానాలు రాసేటప్పుడు — కారణాలు, పరిణామాలు, భిన్న దృక్కోణాలు తప్పక చేర్చండి. "Critically analyze" ప్రశ్నలకు లాభాలు & నష్టాలు రెండూ రాయండి.
+          </div>
+
+          <div style="margin-top:18px;">
+            <h4 style="color:var(--primary);font-size:0.98rem;margin-bottom:10px;">📚 ఉచిత Online Resources</h4>
+            <ul class="topic-list">
+              <li><strong>Unacademy / BYJU's Telugu channels</strong> — తెలుగులో video lectures
+                <span class="subtopic">YouTube లో "UPSC History Telugu" search చేయండి</span>
+              </li>
+              <li><strong>NCERT PDF</strong> — ncert.nic.in లో అన్ని పుస్తకాలు ఉచితంగా లభిస్తాయి</li>
+              <li><strong>Insights on India</strong> — insightsonindia.com — daily current affairs + history notes</li>
+              <li><strong>UPSC Official Site</strong> — upsc.gov.in — previous papers download చేయండి</li>
+              <li><strong>Wikipedia Telugu</strong> — te.wikipedia.org — తెలుగులో సంక్షిప్త సమాచారం</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-tips -->
+
+</div><!-- /container -->
+
+<footer>
+  <p>🏛️ భారత చరిత్ర సిలబస్ & రోడ్‌మ్యాప్ &nbsp;|&nbsp; UPSC / State PSC మార్గదర్శి</p>
+  <p style="margin-top:4px;">Prepared for Telugu Medium aspirants &nbsp;·&nbsp; 2025–26</p>
+</footer>
+
+<script>
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggleAcc(header) {
+    const body = header.nextElementSibling;
+    const isOpen = header.classList.contains('open');
+    if (isOpen) {
+      header.classList.remove('open');
+      body.style.maxHeight = '0';
+    } else {
+      header.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 200 + 'px';
+    }
+  }
+
+  // Open first accordion in each tab on tab switch
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const activePanel = document.querySelector('.tab-panel.active');
+      const firstAcc = activePanel.querySelector('.acc-header');
+      if (firstAcc && !firstAcc.classList.contains('open')) {
+        toggleAcc(firstAcc);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

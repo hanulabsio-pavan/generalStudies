@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>పాఠం: వేద కాలం (Vedic Age)</title>
+<style>
+:root{
+  --primary:#0066cc; --primary-dark:#004f9e; --primary-light:#e8f1fb;
+  --secondary:#00b359; --secondary-light:#f0f9f4;
+  --accent:#ff6b35; --accent-light:#fff3ee;
+  --bg:#ffffff; --sidebar:#f8f8f8; --text:#1a1a1a; --muted:#555; --border:#ddd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Nirmala UI','Noto Sans Telugu','Gautami',sans-serif;
+  font-size:16px;line-height:1.75;letter-spacing:.3px}
+.container{display:flex;min-height:100vh}
+/* Sidebar */
+.sidebar{width:280px;flex-shrink:0;background:var(--sidebar);border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 16px}
+.sidebar h2{margin:0 0 4px;font-size:18px;color:var(--primary)}
+.sidebar .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.progress-bar{height:8px;background:#e4e4e4;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--secondary);transition:width .4s ease}
+.chapter-count{font-size:13px;color:var(--muted);margin:6px 0 16px}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{display:block;padding:8px 10px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14.5px;line-height:1.4;
+  border-left:3px solid transparent;transition:background .3s,border-color .3s}
+.toc a:hover{background:var(--accent-light);border-left-color:var(--accent)}
+.toc a.active{background:var(--primary-light);border-left-color:var(--primary);color:var(--primary);font-weight:600}
+.toc a.done::after{content:" ✓";color:var(--secondary);font-weight:700}
+.back-link{display:inline-block;margin-top:18px;font-size:13px;color:var(--primary)}
+.menu-btn{display:none}
+/* Content */
+.content{flex:1;min-width:0;padding:32px 24px 64px}
+.chapter{max-width:900px;margin:0 auto;display:none;animation:fade .5s ease-in}
+.chapter.visible{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:28px;color:var(--primary);margin:0 0 8px;line-height:1.35}
+h2{font-size:22px;color:var(--primary);margin:2rem 0 .6rem;line-height:1.4}
+h3{font-size:18px;color:#333;margin:1.4rem 0 .5rem}
+.meta{color:var(--muted);font-size:14px;margin-bottom:1.5rem}
+p{margin:.6rem 0}
+.hl{background:var(--accent-light);padding:0 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--primary-light);color:var(--primary-dark)}
+tr:nth-child(even) td{background:#fafafa}
+.table-wrap{overflow-x:auto}
+.callout{border-left:4px solid var(--accent);background:var(--accent-light);padding:10px 14px;border-radius:0 6px 6px 0;margin:1rem 0}
+.callout b{color:#c4471a}
+/* Intro */
+.intro-page .subtitle{font-size:18px;color:var(--muted);margin-top:0}
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:1.2rem 0}
+.intro-card{border:1px solid var(--border);border-top:4px solid var(--primary);border-radius:8px;padding:12px 14px;cursor:pointer;transition:box-shadow .3s,transform .3s}
+.intro-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-2px)}
+.intro-card .n{font-size:13px;color:var(--accent);font-weight:700}
+.start-btn,.nav-buttons button,.sm-controls button,.reveal-btn{font:inherit;cursor:pointer;border-radius:6px;transition:background .3s,color .3s,border-color .3s}
+.start-btn{background:var(--primary);color:#fff;border:0;padding:12px 22px;font-size:16px;font-weight:600;margin-top:10px}
+.start-btn:hover{background:var(--primary-dark)}
+/* Diagrams */
+figure.diagram{margin:1.5rem 0;border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff}
+figure.diagram svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);text-align:center;margin-top:8px}
+.chapter.visible svg .anim{opacity:0;animation:fade .7s ease-in forwards}
+.chapter.visible svg .d1{animation-delay:.15s}.chapter.visible svg .d2{animation-delay:.35s}
+.chapter.visible svg .d3{animation-delay:.55s}.chapter.visible svg .d4{animation-delay:.75s}
+.chapter.visible svg .d5{animation-delay:.95s}.chapter.visible svg .d6{animation-delay:1.15s}
+svg .box{transition:stroke .3s,fill .3s}
+svg g.hov:hover .box{stroke:#003d7a;stroke-width:3}
+svg text{font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif;fill:#1a1a1a}
+.pulse{animation:pulse 1s ease-in-out 2}
+@keyframes pulse{50%{filter:drop-shadow(0 0 6px var(--accent))}}
+/* Revision (code-style) block */
+.code-block{position:relative;margin:1.2rem 0;border:1px solid #f3c2ad;border-radius:8px;background:var(--accent-light);overflow:hidden}
+.code-block .cb-head{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:#ffe3d6;font-size:13px;font-weight:600;color:#a33c12}
+.copy-btn{font:inherit;font-size:12px;border:1px solid var(--accent);background:#fff;color:#a33c12;border-radius:4px;padding:2px 10px;cursor:pointer}
+.copy-btn:hover{background:var(--accent);color:#fff}
+.code-block pre{margin:0;padding:10px 0;overflow-x:auto;font-family:'Monaco','Consolas','Courier New','Nirmala UI',monospace;font-size:13.5px;line-height:1.7}
+.code-block .ln{display:block;padding:0 14px 0 0;white-space:pre}
+.code-block .ln::before{content:attr(data-n);display:inline-block;width:2.6em;text-align:right;padding-right:12px;margin-right:10px;color:#b98a78;border-right:1px solid #f3c2ad;user-select:none}
+.tok-num{color:var(--accent);font-weight:600}.tok-com{color:#666;font-style:italic}.tok-key{color:var(--primary);font-weight:600}
+/* Collapsible */
+details.collapsible{border:1px solid var(--border);border-radius:8px;margin:1rem 0;background:#fcfcfc}
+details.collapsible summary{cursor:pointer;padding:10px 14px;font-weight:600;color:var(--primary)}
+details.collapsible[open] summary{border-bottom:1px solid var(--border)}
+details.collapsible .inner{padding:4px 16px 12px}
+/* Quiz */
+.quiz{border:2px solid var(--primary-light);border-radius:10px;padding:6px 18px 14px;margin:2rem 0}
+.quiz h3{color:var(--primary)}
+.quiz-question{margin:1rem 0;padding-bottom:12px;border-bottom:1px dashed var(--border)}
+.quiz-question:last-child{border-bottom:0}
+.quiz-question ol{margin:.3rem 0 .5rem;padding-left:1.6rem}
+.reveal-btn{background:#fff;border:1px solid var(--accent);color:#c4471a;padding:5px 14px;font-size:14px}
+.reveal-btn:hover{background:var(--accent);color:#fff}
+.answer{display:none;margin-top:10px;background:var(--secondary-light);border-left:4px solid var(--secondary);padding:8px 12px;border-radius:0 6px 6px 0;animation:fade .4s ease-in}
+.answer.show{display:block}
+/* Takeaways */
+.key-takeaways{background:var(--secondary-light);border:1px solid #bfe8d1;border-left:5px solid var(--secondary);border-radius:8px;padding:6px 18px 10px;margin:2rem 0}
+.key-takeaways h3{color:#007a3d}
+.key-takeaways li{margin:4px 0}
+/* Nav */
+.nav-buttons{display:flex;justify-content:space-between;gap:10px;margin-top:2rem}
+.nav-buttons button{background:#fff;border:2px solid var(--primary);color:var(--primary);padding:9px 18px;font-weight:600}
+.nav-buttons button:hover:not(:disabled){background:var(--primary);color:#fff}
+.nav-buttons button:disabled{opacity:.35;cursor:default}
+/* State machine */
+.sm-status{text-align:center;font-weight:600;margin:6px 0;font-size:15px}
+.sm-status span{color:var(--primary)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.sm-controls button{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:6px 12px;font-size:14px}
+.sm-controls button:hover:not(:disabled){background:var(--primary);color:#fff}
+.sm-controls button:disabled{opacity:.35;cursor:default}
+.sm-controls .auto{border-color:var(--accent);color:#c4471a}
+.sm-controls .auto:hover{background:var(--accent)!important;color:#fff!important}
+.sm-state .box{transition:stroke-width .4s,filter .4s}
+.sm-state.active .box{stroke-width:4;filter:drop-shadow(0 0 7px rgba(0,102,204,.65))}
+.sm-edge{fill:none;stroke:#9bb8d6;stroke-width:2}
+.sm-edge.run{stroke:var(--accent);stroke-width:3.5;stroke-dasharray:400;stroke-dashoffset:400;animation:draw .8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* Responsive */
+@media (max-width:768px){
+  .container{display:block}
+  .sidebar{position:fixed;left:0;top:0;z-index:20;transform:translateX(-100%);transition:transform .3s;box-shadow:2px 0 12px rgba(0,0,0,.15)}
+  .sidebar.open{transform:none}
+  .menu-btn{display:block;position:fixed;top:10px;left:10px;z-index:30;background:var(--primary);color:#fff;border:0;border-radius:6px;padding:8px 12px;font-size:18px;cursor:pointer}
+  .content{padding:56px 16px 48px}
+  h1{font-size:24px}
+}
+</style>
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="విషయ సూచిక తెరవండి">☰</button>
+<div class="container">
+<aside class="sidebar" id="sidebar" aria-label="విషయ సూచిక">
+  <h2>📿 వేద కాలం</h2>
+  <div class="sub">Vedic Age · UPSC / APPSC / TSPSC</div>
+  <div class="progress-bar" role="progressbar" aria-label="పురోగతి"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="chapter-count" id="chapterCount">0/4 అధ్యాయాలు</div>
+  <nav class="toc">
+    <ul>
+      <li><a href="#intro" data-ch="0">పరిచయం</a></li>
+      <li><a href="#chapter-1" data-ch="1">1. కాలక్రమం, ఆర్యులు & భౌగోళికం</a></li>
+      <li><a href="#chapter-2" data-ch="2">2. వేద సాహిత్యం</a></li>
+      <li><a href="#chapter-3" data-ch="3">3. రాజకీయ వ్యవస్థ & సమాజం</a></li>
+      <li><a href="#chapter-4" data-ch="4">4. ఆర్థిక వ్యవస్థ & మతం</a></li>
+    </ul>
+  </nav>
+  <a class="back-link" href="index.html">← సూచికకు తిరిగి (Index)</a>
+</aside>
+
+<main class="content" id="content">
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="chapter intro-page" data-ch="0">
+  <h1>📿 వేద కాలం (Vedic Age)</h1>
+  <p class="subtitle">క్రీ.పూ. 1500 – 600 · ప్రాచీన భారత చరిత్ర · పరీక్షా దృష్టితో లోతైన పాఠం</p>
+  <p>సింధు నాగరికత క్షీణించిన తర్వాత భారత చరిత్రలో తదుపరి ముఖ్యమైన దశ <b>వేద కాలం</b>. సింధు నాగరికత గురించి మనకు తెలిసినదంతా పురావస్తు ఆధారాల నుండే — కానీ వేద కాలం గురించి ప్రధానంగా <b>సాహిత్య ఆధారాల</b> (వేదాలు) నుండి తెలుసుకుంటాం. ఈ పాఠం 4 అధ్యాయాలుగా ఉంది; ఒక్కొక్కటి సుమారు 15–20 నిమిషాలు.</p>
+  <p><b>మొత్తం సమయం:</b> ~70–80 నిమిషాలు</p>
+  <div class="intro-grid">
+    <div class="intro-card" data-go="1"><div class="n">అధ్యాయం 1</div>కాలక్రమం, ఆర్యుల మూలం, సప్తసింధు భౌగోళికం</div>
+    <div class="intro-card" data-go="2"><div class="n">అధ్యాయం 2</div>నాలుగు వేదాలు, బ్రాహ్మణాలు, ఆరణ్యకాలు, ఉపనిషత్తులు, వేదాంగాలు</div>
+    <div class="intro-card" data-go="3"><div class="n">అధ్యాయం 3</div>సభ–సమితి, రాజు, దశరాజ్ఞ యుద్ధం, వర్ణ–ఆశ్రమ వ్యవస్థ, స్త్రీల స్థితి</div>
+    <div class="intro-card" data-go="4"><div class="n">అధ్యాయం 4</div>పశుపోషణ → వ్యవసాయం, ఇనుము, వేద దేవతలు, తొలి vs మలి వేద పోలిక</div>
+  </div>
+  <p>ప్రతి అధ్యాయంలో: రేఖాచిత్రం, త్వరిత పునరీక్షణ నోట్స్ (కాపీ చేసుకోవచ్చు), లోతైన అంశాల కోసం మడతపెట్టే విభాగాలు, స్వీయ పరీక్ష, ముఖ్యాంశాలు.</p>
+  <p style="font-size:14px;color:var(--muted)">⌨️ కీబోర్డ్: ← / → బాణం కీలతో అధ్యాయాల మధ్య కదలండి.</p>
+  <button class="start-btn" data-go="1">నేర్చుకోవడం ప్రారంభించండి →</button>
+</section>
+
+<!-- ============ CHAPTER 1 ============ -->
+<section id="chapter-1" class="chapter" data-ch="1">
+  <h1>అధ్యాయం 1: కాలక్రమం, ఆర్యులు & భౌగోళికం</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>1.1 వేద కాలం అంటే ఏమిటి?</h2>
+  <p>వేదాలు రచించబడిన కాలాన్ని <b>వేద కాలం</b> అంటారు. ఈ వేదాలను రచించిన ప్రజలు తమను తాము <b>"ఆర్యులు"</b> (శ్రేష్ఠులు/గౌరవనీయులు) అని పిలుచుకున్నారు. ఆర్య అనేది ఒక <span class="hl">భాషా-సాంస్కృతిక సమూహం</span>, జాతి కాదు — వారి భాష <b>సంస్కృతం</b> (ఇండో-యూరోపియన్ భాషా కుటుంబం).</p>
+  <p>వేద కాలాన్ని రెండు దశలుగా విభజిస్తారు:</p>
+  <div class="table-wrap"><table>
+    <tr><th>దశ</th><th>కాలం (సుమారు)</th><th>ప్రధాన ఆధారం</th><th>ప్రాంతం</th></tr>
+    <tr><td><b>తొలి వేద / ఋగ్వేద కాలం</b></td><td>క్రీ.పూ. 1500 – 1000</td><td>ఋగ్వేదం</td><td>సప్తసింధు (పంజాబ్, ఆఫ్ఘనిస్తాన్ భాగాలు)</td></tr>
+    <tr><td><b>మలి వేద కాలం</b></td><td>క్రీ.పూ. 1000 – 600</td><td>సామ, యజుర్, అథర్వ వేదాలు, బ్రాహ్మణాలు, ఉపనిషత్తులు</td><td>గంగా–యమునా అంతర్వేది (Doab), తూర్పు వైపు విదేహ వరకు</td></tr>
+  </table></div>
+  <div class="callout"><b>పరీక్ష చిట్కా:</b> సింధు నాగరికత <b>పట్టణ</b> (urban), <b>కంచు</b> యుగ నాగరికత; తొలి వేద సంస్కృతి <b>గ్రామీణ</b> (rural), <b>పశుపోషణ</b> ఆధారిత. సింధు ప్రజలకు గుర్రం పెద్దగా తెలియదు; వేద ఆర్యులకు గుర్రం అత్యంత ముఖ్యమైనది.</div>
+
+  <h2>1.2 ఆర్యుల మూలస్థానం — సిద్ధాంతాలు</h2>
+  <p>ఆర్యులు ఎక్కడి నుండి వచ్చారనే దానిపై చరిత్రకారుల మధ్య భిన్నాభిప్రాయాలు ఉన్నాయి. పరీక్షల్లో తరచుగా "సిద్ధాంతం — ప్రతిపాదకుడు" జతలు అడుగుతారు:</p>
+  <div class="table-wrap"><table>
+    <tr><th>మూలస్థానం</th><th>ప్రతిపాదకుడు</th><th>గమనిక</th></tr>
+    <tr><td>మధ్య ఆసియా</td><td>మాక్స్ ముల్లర్ (Max Müller)</td><td>అత్యంత ఆమోదం పొందిన సిద్ధాంతం</td></tr>
+    <tr><td>ఆర్కిటిక్ (ఉత్తర ధ్రువ ప్రాంతం)</td><td>బాల గంగాధర తిలక్</td><td>గ్రంథం: <i>The Arctic Home in the Vedas</i></td></tr>
+    <tr><td>టిబెట్</td><td>స్వామి దయానంద సరస్వతి</td><td>గ్రంథం: <i>సత్యార్థ ప్రకాశ్</i></td></tr>
+    <tr><td>సప్తసింధు (భారతదేశమే)</td><td>ఎ.సి. దాస్, సంపూర్ణానంద్ మొదలైనవారు</td><td>"స్వదేశీ ఆర్య" (Indigenous) వాదం</td></tr>
+    <tr><td>మధ్య ఐరోపా / జర్మనీ</td><td>పెంకా (Penka) మొదలైనవారు</td><td>—</td></tr>
+  </table></div>
+  <p>ఆర్యుల ఉనికికి ముఖ్యమైన బయటి ఆధారం: <b>బోఘజ్‌కోయ్ శాసనం</b> (టర్కీ, క్రీ.పూ. ~1400). ఇందులో హిట్టైట్–మిట్టానీ రాజుల ఒప్పందంలో <b>ఇంద్ర, మిత్ర, వరుణ, నాసత్యులు</b> అనే వేద దేవతల పేర్లు సాక్షులుగా ఉన్నాయి.</p>
+
+  <h2>1.3 సప్తసింధు — ఋగ్వేద భౌగోళికం</h2>
+  <p>తొలి ఆర్యులు స్థిరపడిన ప్రాంతాన్ని <b>"సప్తసింధు"</b> (ఏడు నదుల ప్రాంతం) అంటారు. ఋగ్వేదంలో నదులకు ఉన్న పాత పేర్లు, నేటి పేర్లు పరీక్షలకు చాలా ముఖ్యం. కింది చిత్రంలో నదిపై మౌస్ ఉంచండి.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 360" role="img" aria-label="సప్తసింధు నదులు మరియు తూర్పు వైపు విస్తరణ రేఖాచిత్రం">
+      <defs>
+        <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#ff6b35"/></marker>
+      </defs>
+      <rect x="10" y="10" width="420" height="330" rx="12" fill="#e8f1fb" stroke="#0066cc" stroke-width="2" class="anim"/>
+      <text x="220" y="34" text-anchor="middle" font-size="15" font-weight="700" fill="#0066cc" class="anim">సప్తసింధు (తొలి వేద కాలం)</text>
+      <rect x="450" y="10" width="300" height="330" rx="12" fill="#f0f9f4" stroke="#00b359" stroke-width="2" class="anim d3"/>
+      <text x="600" y="34" text-anchor="middle" font-size="15" font-weight="700" fill="#007a3d" class="anim d3">మలి వేద విస్తరణ</text>
+      <!-- Indus -->
+      <g class="hov anim d1"><title>సింధు (Indus) — ఋగ్వేదంలో అత్యధికంగా ప్రస్తావించబడిన నది</title>
+        <path class="box" d="M60,60 C70,140 80,220 90,320" stroke="#0066cc" stroke-width="6" fill="none"/>
+        <text x="30" y="200" font-size="13" transform="rotate(-80 30 200)">సింధు (Indus)</text></g>
+      <!-- tributaries -->
+      <g class="hov anim d2"><title>వితస్త = జీలం (Jhelum)</title>
+        <path class="box" d="M140,60 C130,150 110,230 88,290" stroke="#3d8fe0" stroke-width="3.5" fill="none"/>
+        <text x="122" y="80" font-size="12">వితస్త</text><text x="122" y="95" font-size="11" fill="#555">Jhelum</text></g>
+      <g class="hov anim d2"><title>అసిక్ని = చీనాబ్ (Chenab)</title>
+        <path class="box" d="M190,60 C175,160 140,240 89,295" stroke="#3d8fe0" stroke-width="3.5" fill="none"/>
+        <text x="172" y="115" font-size="12">అసిక్ని</text><text x="172" y="130" font-size="11" fill="#555">Chenab</text></g>
+      <g class="hov anim d3"><title>పరుష్ణి = రావి (Ravi) — దశరాజ్ఞ యుద్ధం ఈ నది ఒడ్డున జరిగింది</title>
+        <path class="box" d="M245,60 C230,170 170,250 90,300" stroke="#ff6b35" stroke-width="3.5" fill="none"/>
+        <text x="232" y="150" font-size="12" font-weight="700" fill="#c4471a">పరుష్ణి ⚔</text><text x="232" y="165" font-size="11" fill="#555">Ravi</text></g>
+      <g class="hov anim d3"><title>విపాశ = బియాస్ (Beas)</title>
+        <path class="box" d="M300,60 C290,180 200,265 90,305" stroke="#3d8fe0" stroke-width="3.5" fill="none"/>
+        <text x="290" y="190" font-size="12">విపాశ</text><text x="290" y="205" font-size="11" fill="#555">Beas</text></g>
+      <g class="hov anim d4"><title>శుతుద్రి = సట్లెజ్ (Sutlej)</title>
+        <path class="box" d="M355,60 C350,200 240,285 90,312" stroke="#3d8fe0" stroke-width="3.5" fill="none"/>
+        <text x="346" y="230" font-size="12">శుతుద్రి</text><text x="346" y="245" font-size="11" fill="#555">Sutlej</text></g>
+      <g class="hov anim d4"><title>సరస్వతి — ఋగ్వేదంలో అత్యంత పవిత్రమైన నది ("నదీతమ"); నేటి ఘగ్గర్–హక్రాగా గుర్తిస్తారు</title>
+        <path class="box" d="M405,60 C400,160 395,240 380,320" stroke="#7a5cc8" stroke-width="4" stroke-dasharray="7 4" fill="none"/>
+        <text x="330" y="330" font-size="12" font-weight="700" fill="#5a3fa8">సరస్వతి (నదీతమ)</text></g>
+      <!-- expansion -->
+      <path d="M430,175 L470,175" stroke="#ff6b35" stroke-width="3" marker-end="url(#arr1)" class="anim d5"/>
+      <g class="hov anim d5"><title>యమునా — మలి వేద కాలంలో గంగా-యమునా అంతర్వేది కేంద్రం</title>
+        <path class="box" d="M500,60 C510,160 540,240 600,300" stroke="#00b359" stroke-width="4" fill="none"/>
+        <text x="492" y="130" font-size="12">యమునా</text></g>
+      <g class="hov anim d5"><title>గంగా — ఋగ్వేదంలో ఒక్కసారి మాత్రమే (నదీ సూక్తంలో) ప్రస్తావించబడింది</title>
+        <path class="box" d="M590,60 C600,160 620,240 600,300 C650,310 700,300 740,290" stroke="#00b359" stroke-width="5" fill="none"/>
+        <text x="600" y="115" font-size="12">గంగా</text></g>
+      <g class="anim d6"><text x="540" y="258" font-size="12" fill="#007a3d" font-weight="600">కురు–పాంచాల</text>
+        <text x="680" y="278" font-size="12" fill="#007a3d" font-weight="600">విదేహ</text>
+        <text x="600" y="330" text-anchor="middle" font-size="11" fill="#555">(స్కీమాటిక్ — స్కేలుకు కాదు)</text></g>
+    </svg>
+    <figcaption>చిత్రం 1.1 — సప్తసింధు నదులు (ఎడమ) & మలి వేద కాలంలో తూర్పు వైపు విస్తరణ (కుడి). నదిపై మౌస్ ఉంచితే వివరాలు.</figcaption>
+  </figure>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — నదుల పేర్లు">
+<pre># ఋగ్వేద పేరు   →  నేటి పేరు
+సింధు          →  Indus        # అత్యధిక ప్రస్తావన
+వితస్త          →  జీలం (Jhelum)
+అసిక్ని         →  చీనాబ్ (Chenab)
+పరుష్ణి         →  రావి (Ravi)      # దశరాజ్ఞ యుద్ధం
+విపాశ          →  బియాస్ (Beas)
+శుతుద్రి        →  సట్లెజ్ (Sutlej)
+సరస్వతి        →  ఘగ్గర్–హక్రా     # అత్యంత పవిత్రం: "నదీతమ"
+కుభా           →  కాబూల్ (Kabul)
+గోమతి         →  గోమల్ (Gomal)
+క్రుము          →  కుర్రం (Kurram)
+సువాస్తు        →  స్వాత్ (Swat)
+దృషద్వతి       →  చౌతంగ్ (Chautang)</pre>
+  </div>
+
+  <details class="collapsible" id="c1-adv">
+    <summary>🔍 లోతుగా: ఆర్యుల వలస సిద్ధాంతం vs స్వదేశీ వాదం — ఆధారాలు</summary>
+    <div class="inner">
+      <p><b>వలస వాదానికి ఆధారాలు:</b> (1) ఇండో-యూరోపియన్ భాషల మధ్య సారూప్యతలు (సంస్కృతం "పితృ" – లాటిన్ "pater" – ఆంగ్లం "father"); (2) ఇరానియన్ గ్రంథం <i>జెండ్ అవెస్తా</i> మరియు ఋగ్వేదం మధ్య భాష, దేవతల సారూప్యత (అహుర ↔ అసుర, హోమ ↔ సోమ); (3) గుర్రం, రథచక్రం (spoked wheel) సింధు నాగరికతలో దాదాపు లేకపోవడం; (4) ఇటీవలి జన్యు అధ్యయనాలు (రాఖీగఢీ DNA వంటివి) — స్టెప్పీ వంశ ప్రవాహం క్రీ.పూ. 2000 తర్వాత కనిపిస్తుంది.</p>
+      <p><b>స్వదేశీ వాదుల వాదనలు:</b> ఋగ్వేదంలో ఎక్కడా బయటి నుండి వచ్చిన జ్ఞాపకం స్పష్టంగా లేదు; సరస్వతి నదికి ఇచ్చిన ప్రాముఖ్యత; సింధు–వేద సంస్కృతుల మధ్య కొనసాగింపు.</p>
+      <p><b>పరీక్ష దృష్టి:</b> ఈ చర్చ ఇంకా కొనసాగుతోంది. UPSC మెయిన్స్‌లో రెండు వైపుల ఆధారాలను సమతుల్యంగా రాయాలి; ప్రిలిమ్స్‌లో "సిద్ధాంతం–ప్రతిపాదకుడు" జతలు చాలు.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q1-1">
+      <p><strong>Q1:</strong> ఋగ్వేదంలో "పరుష్ణి" అని పిలువబడిన నది నేటి ఏ నది?</p>
+      <ol type="a"><li>జీలం</li><li>చీనాబ్</li><li>రావి</li><li>బియాస్</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) రావి.</b> దశరాజ్ఞ యుద్ధం (Battle of Ten Kings) ఈ నది ఒడ్డునే జరిగింది.</p>
+    </div>
+    <div class="quiz-question" id="q1-2">
+      <p><strong>Q2:</strong> "The Arctic Home in the Vedas" గ్రంథ రచయిత ఎవరు, అందులో ప్రతిపాదించిన సిద్ధాంతం ఏమిటి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>బాల గంగాధర తిలక్</b> — ఆర్యుల మూలస్థానం ఉత్తర ధ్రువ (ఆర్కిటిక్) ప్రాంతం అని ప్రతిపాదించారు.</p>
+    </div>
+    <div class="quiz-question" id="q1-3">
+      <p><strong>Q3:</strong> ఆర్యుల ఉనికికి భారతదేశం బయట లభించిన ఆధారమైన బోఘజ్‌కోయ్ శాసనం ఏ దేశంలో ఉంది? అందులో ఏ దేవతల పేర్లు ఉన్నాయి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>టర్కీ</b> (ఆసియా మైనర్). ఇంద్ర, మిత్ర, వరుణ, నాసత్యులు (అశ్వినీ దేవతలు).</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>వేద కాలం: క్రీ.పూ. 1500–600; తొలి (1500–1000) & మలి (1000–600) దశలు.</li>
+      <li>ఆర్య అనేది భాషా-సాంస్కృతిక గుర్తింపు; మధ్య ఆసియా సిద్ధాంతం (మాక్స్ ముల్లర్) అత్యంత ఆమోదం పొందినది.</li>
+      <li>తొలి ఆర్యుల ప్రాంతం సప్తసింధు; సింధు ఎక్కువగా ప్రస్తావించబడిన నది, సరస్వతి అత్యంత పవిత్రమైనది.</li>
+      <li>మలి వేద కాలంలో కేంద్రం గంగా–యమునా అంతర్వేదికి (కురు–పాంచాల) మారింది.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 2 ============ -->
+<section id="chapter-2" class="chapter" data-ch="2">
+  <h1>అధ్యాయం 2: వేద సాహిత్యం</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>2.1 శ్రుతి & స్మృతి</h2>
+  <p>"వేదం" అనే పదం "విద్" (తెలుసుకోవడం) అనే ధాతువు నుండి వచ్చింది — అర్థం <b>జ్ఞానం</b>. వేదాలను <b>అపౌరుషేయాలు</b> (మానవులు రచించనివి) అని, <b>శ్రుతి</b> (విన్నది) అని భావిస్తారు; ఇవి తరతరాలుగా మౌఖికంగా అందించబడ్డాయి. తర్వాత మానవులు రచించినట్లు భావించే గ్రంథాలు <b>స్మృతి</b> (జ్ఞాపకం ఉంచుకున్నది).</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 330" role="img" aria-label="వేద సాహిత్య వర్గీకరణ వృక్షం">
+      <g class="anim"><rect class="box" x="300" y="12" width="160" height="40" rx="8" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="380" y="38" text-anchor="middle" font-size="15" font-weight="700">వేద సాహిత్యం</text></g>
+      <path d="M380,52 L380,70 L190,70 L190,88 M380,70 L570,70 L570,88" stroke="#0066cc" stroke-width="2" fill="none" class="anim d1"/>
+      <g class="hov anim d1"><title>శ్రుతి — దైవికంగా "విన్న" జ్ఞానం; అపౌరుషేయం</title><rect class="box" x="110" y="88" width="160" height="40" rx="8" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="190" y="113" text-anchor="middle" font-size="14" font-weight="700">శ్రుతి (Shruti)</text></g>
+      <g class="hov anim d1"><title>స్మృతి — మానవ రచన; జ్ఞాపకం ఆధారంగా</title><rect class="box" x="490" y="88" width="160" height="40" rx="8" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+        <text x="570" y="113" text-anchor="middle" font-size="14" font-weight="700">స్మృతి (Smriti)</text></g>
+      <path d="M190,128 L190,148 M60,148 L330,148 M60,148 L60,165 M150,148 L150,165 M240,148 L240,165 M330,148 L330,165" stroke="#0066cc" stroke-width="2" fill="none" class="anim d2"/>
+      <g class="anim d3">
+        <g class="hov"><title>సంహితలు — మంత్రాల సంకలనం (4 వేదాలు)</title><rect class="box" x="18" y="165" width="84" height="54" rx="7" fill="#fff" stroke="#0066cc" stroke-width="2"/><text x="60" y="188" text-anchor="middle" font-size="13" font-weight="600">సంహితలు</text><text x="60" y="206" text-anchor="middle" font-size="11" fill="#555">మంత్రాలు</text></g>
+        <g class="hov"><title>బ్రాహ్మణాలు — యజ్ఞ విధానాల వివరణ (గద్యం)</title><rect class="box" x="108" y="165" width="84" height="54" rx="7" fill="#fff" stroke="#0066cc" stroke-width="2"/><text x="150" y="188" text-anchor="middle" font-size="13" font-weight="600">బ్రాహ్మణాలు</text><text x="150" y="206" text-anchor="middle" font-size="11" fill="#555">యజ్ఞ వివరణ</text></g>
+        <g class="hov"><title>ఆరణ్యకాలు — అడవిలో అధ్యయనం చేసే "అటవీ గ్రంథాలు"; కర్మ నుండి జ్ఞానానికి వారధి</title><rect class="box" x="198" y="165" width="84" height="54" rx="7" fill="#fff" stroke="#0066cc" stroke-width="2"/><text x="240" y="188" text-anchor="middle" font-size="13" font-weight="600">ఆరణ్యకాలు</text><text x="240" y="206" text-anchor="middle" font-size="11" fill="#555">అటవీ గ్రంథాలు</text></g>
+        <g class="hov"><title>ఉపనిషత్తులు — తత్వశాస్త్రం; "వేదాంతం" (వేదాల చివరి భాగం)</title><rect class="box" x="288" y="165" width="84" height="54" rx="7" fill="#fff" stroke="#0066cc" stroke-width="2"/><text x="330" y="188" text-anchor="middle" font-size="13" font-weight="600">ఉపనిషత్తులు</text><text x="330" y="206" text-anchor="middle" font-size="11" fill="#555">వేదాంతం</text></g>
+      </g>
+      <path d="M570,128 L570,148 M420,148 L720,148 M420,148 L420,165 M520,148 L520,165 M620,148 L620,165 M720,148 L720,165" stroke="#ff6b35" stroke-width="2" fill="none" class="anim d4"/>
+      <g class="anim d5">
+        <g class="hov"><title>వేదాంగాలు — 6 (శిక్ష, కల్ప, వ్యాకరణ, నిరుక్త, ఛందస్సు, జ్యోతిష)</title><rect class="box" x="378" y="165" width="84" height="54" rx="7" fill="#fff" stroke="#ff6b35" stroke-width="2"/><text x="420" y="188" text-anchor="middle" font-size="13" font-weight="600">వేదాంగాలు</text><text x="420" y="206" text-anchor="middle" font-size="11" fill="#555">6</text></g>
+        <g class="hov"><title>సూత్రాలు — శ్రౌత, గృహ్య, ధర్మ, శుల్బ సూత్రాలు</title><rect class="box" x="478" y="165" width="84" height="54" rx="7" fill="#fff" stroke="#ff6b35" stroke-width="2"/><text x="520" y="188" text-anchor="middle" font-size="13" font-weight="600">సూత్రాలు</text><text x="520" y="206" text-anchor="middle" font-size="11" fill="#555">కల్పంలో భాగం</text></g>
+        <g class="hov"><title>ధర్మశాస్త్రాలు / స్మృతులు — మను స్మృతి, యాజ్ఞవల్క్య స్మృతి...</title><rect class="box" x="578" y="165" width="84" height="54" rx="7" fill="#fff" stroke="#ff6b35" stroke-width="2"/><text x="620" y="188" text-anchor="middle" font-size="13" font-weight="600">ధర్మశాస్త్రాలు</text><text x="620" y="206" text-anchor="middle" font-size="11" fill="#555">మను స్మృతి…</text></g>
+        <g class="hov"><title>ఇతిహాసాలు (రామాయణ, మహాభారత) & 18 పురాణాలు</title><rect class="box" x="678" y="165" width="78" height="54" rx="7" fill="#fff" stroke="#ff6b35" stroke-width="2"/><text x="717" y="188" text-anchor="middle" font-size="12" font-weight="600">ఇతిహాస</text><text x="717" y="206" text-anchor="middle" font-size="11" fill="#555">& పురాణాలు</text></g>
+      </g>
+      <g class="anim d6">
+        <path d="M30,245 L360,245" stroke="#00b359" stroke-width="3" marker-end="url(#arr2)"/>
+        <defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#00b359"/></marker></defs>
+        <text x="30" y="268" font-size="12" fill="#007a3d" font-weight="600">కర్మకాండ (యజ్ఞాలు)</text>
+        <text x="360" y="268" font-size="12" fill="#007a3d" font-weight="600" text-anchor="end">జ్ఞానకాండ (తత్వం)</text>
+        <text x="195" y="300" font-size="12" text-anchor="middle" fill="#555">ప్రతి వేదానికి తనవైన బ్రాహ్మణ, ఆరణ్యక, ఉపనిషత్తులు ఉంటాయి</text>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 2.1 — వేద సాహిత్య వర్గీకరణ. ప్రతి పెట్టెపై మౌస్ ఉంచితే వివరణ.</figcaption>
+  </figure>
+
+  <h2>2.2 నాలుగు వేదాలు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>వేదం</th><th>విషయం</th><th>పురోహితుడు</th><th>బ్రాహ్మణం</th><th>ఉపవేదం</th></tr>
+    <tr><td><b>ఋగ్వేదం</b></td><td>దేవతా స్తోత్రాలు; అత్యంత ప్రాచీనం</td><td>హోతృ</td><td>ఐతరేయ, కౌషీతకి</td><td>ఆయుర్వేదం</td></tr>
+    <tr><td><b>యజుర్వేదం</b></td><td>యజ్ఞ విధానాలు; గద్యం + పద్యం</td><td>అధ్వర్యు</td><td>శతపథ (శుక్ల), తైత్తిరీయ (కృష్ణ)</td><td>ధనుర్వేదం</td></tr>
+    <tr><td><b>సామవేదం</b></td><td>గానం; భారతీయ సంగీతానికి మూలం</td><td>ఉద్గాతృ</td><td>పంచవింశ (తాండ్య), జైమినీయ</td><td>గాంధర్వవేదం</td></tr>
+    <tr><td><b>అథర్వవేదం</b></td><td>మంత్ర-తంత్రాలు, వైద్యం, దైనందిన జీవితం</td><td>బ్రహ్మ</td><td>గోపథ</td><td>శిల్పవేదం</td></tr>
+  </table></div>
+
+  <h3>ఋగ్వేదం — పరీక్షల్లో అత్యధికంగా అడిగే వాస్తవాలు</h3>
+  <ul>
+    <li><b>10 మండలాలు, 1028 సూక్తాలు</b> (1017 + 11 వాలఖిల్య), సుమారు 10,600 మంత్రాలు.</li>
+    <li>మండలాలు <b>2 నుండి 7</b> అత్యంత ప్రాచీనమైనవి — "<b>కుటుంబ మండలాలు</b>" (Family Books); ఒక్కొక్కటి ఒక ఋషి కుటుంబానికి చెందినవి (గృత్సమద, విశ్వామిత్ర, వామదేవ, అత్రి, భరద్వాజ, వసిష్ఠ).</li>
+    <li>మండలాలు <b>1 మరియు 10</b> తర్వాత కాలంలో చేర్చబడినవి.</li>
+    <li><b>3వ మండలం</b> — <span class="hl">గాయత్రీ మంత్రం</span> (విశ్వామిత్రుడు, సవిత్ర/సూర్య దేవునికి).</li>
+    <li><b>9వ మండలం</b> — పూర్తిగా <b>సోమ</b> దేవునికి అంకితం.</li>
+    <li><b>10వ మండలం</b> — <span class="hl">పురుష సూక్తం</span> (నాలుగు వర్ణాల మొదటి ప్రస్తావన), <b>నాసదీయ సూక్తం</b> (సృష్టి గీతం), నదీ సూక్తం.</li>
+  </ul>
+
+  <h3>ఇతర వేదాలు</h3>
+  <ul>
+    <li><b>యజుర్వేదం</b>: రెండు శాఖలు — <b>శుక్ల</b> (తెలుపు; వాజసనేయి సంహిత, కేవలం మంత్రాలు) & <b>కృష్ణ</b> (నలుపు; తైత్తిరీయ సంహిత, మంత్రాలు + వ్యాఖ్యానం). రాజసూయ, అశ్వమేధ, వాజపేయ యజ్ఞాల వివరణ ఉంది.</li>
+    <li><b>సామవేదం</b>: సుమారు 1875 మంత్రాలు; వీటిలో 75 మినహా మిగతావన్నీ ఋగ్వేదం నుండి తీసుకోబడినవి.</li>
+    <li><b>అథర్వవేదం</b>: ఆర్యేతర (జానపద) విశ్వాసాల ప్రభావం; రోగాలకు మంత్రాలు, మంత్ర-తంత్రాలు. <b>సభ, సమితిలను "ప్రజాపతి ఇద్దరు కుమార్తెలు"</b> అని వర్ణిస్తుంది. చాలాకాలం "త్రయీ" (మొదటి మూడు వేదాలు)లో చేర్చలేదు.</li>
+  </ul>
+
+  <h2>2.3 ఉపనిషత్తులు — వేదాంతం</h2>
+  <p>ఉపనిషత్ = "గురువు దగ్గర కూర్చోవడం". మొత్తం <b>108</b> (ముఖ్యమైనవి ~13). ఇవి యజ్ఞకర్మలను విమర్శించి <b>ఆత్మ, బ్రహ్మ, కర్మ, పునర్జన్మ, మోక్షం</b> వంటి తాత్విక అంశాలను చర్చిస్తాయి.</p>
+  <div class="table-wrap"><table>
+    <tr><th>ఉపనిషత్తు</th><th>ముఖ్యాంశం</th></tr>
+    <tr><td><b>ముండక</b></td><td>"<b>సత్యమేవ జయతే</b>" — భారత జాతీయ చిహ్నంపై నినాదం</td></tr>
+    <tr><td><b>బృహదారణ్యక</b></td><td>అత్యంత ప్రాచీన ఉపనిషత్తు; యాజ్ఞవల్క్య–గార్గి సంవాదం; పునర్జన్మ సిద్ధాంతం; "అసతో మా సద్గమయ"</td></tr>
+    <tr><td><b>ఛాందోగ్య</b></td><td>మొదటి మూడు ఆశ్రమాల ప్రస్తావన; "తత్ త్వమ్ అసి"; దేవకీపుత్ర కృష్ణుని ప్రస్తావన</td></tr>
+    <tr><td><b>కఠ</b></td><td>నచికేతుడు–యముడు సంవాదం (మరణం, ఆత్మ)</td></tr>
+    <tr><td><b>జాబాల</b></td><td>నాలుగు ఆశ్రమాల మొదటి ప్రస్తావన</td></tr>
+    <tr><td><b>ఈశ</b></td><td>అతి చిన్న ఉపనిషత్తులలో ఒకటి; శుక్ల యజుర్వేదంలో భాగం</td></tr>
+  </table></div>
+
+  <h2>2.4 ఆరు వేదాంగాలు</h2>
+  <p>వేదాలను సరిగ్గా ఉచ్చరించడానికి, అర్థం చేసుకోవడానికి, యజ్ఞాలను సరైన సమయంలో చేయడానికి రూపొందించిన సహాయక శాస్త్రాలు:</p>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — వేదాంగాలు & కీలక సంఖ్యలు">
+<pre># వేదాంగం    →  విషయం
+శిక్ష         →  ఉచ్చారణ (Phonetics)     # "వేదాల ముక్కు"
+కల్ప          →  యజ్ఞ విధులు (Rituals)   # శ్రౌత, గృహ్య, ధర్మ, శుల్బ సూత్రాలు
+వ్యాకరణ       →  వ్యాకరణం (Grammar)      # పాణిని — అష్టాధ్యాయి
+నిరుక్త        →  వ్యుత్పత్తి (Etymology)  # యాస్కుడు
+ఛందస్సు      →  ఛందస్సు (Metre)         # పింగళుడు
+జ్యోతిష       →  ఖగోళం (Astronomy)       # లగధుడు — వేదాంగ జ్యోతిష
+
+# కీలక సంఖ్యలు
+ఋగ్వేద మండలాలు     = 10
+ఋగ్వేద సూక్తాలు      = 1028
+ఉపనిషత్తులు         = 108
+వేదాంగాలు           = 6
+పురాణాలు            = 18
+శుల్బ సూత్రాలు  → భారత జ్యామితికి మూలం (యజ్ఞ వేదికల కొలతలు)</pre>
+  </div>
+
+  <details class="collapsible" id="c2-adv">
+    <summary>🔍 లోతుగా: బ్రాహ్మణ గ్రంథాల చారిత్రక విలువ</summary>
+    <div class="inner">
+      <p><b>శతపథ బ్రాహ్మణం</b> (శుక్ల యజుర్వేదం) — అతిపెద్ద బ్రాహ్మణ గ్రంథం. ఇందులో <b>విదేఘ మాధవుడు</b> తన పురోహితుడు గౌతమ రాహూగణునితో కలిసి అగ్నిని ముందుంచుకొని సరస్వతి నుండి తూర్పుగా <b>సదానీర</b> (గండక్) నది దాటి <b>విదేహ</b> రాజ్యాన్ని స్థాపించిన కథ ఉంది. చరిత్రకారులు దీనిని ఆర్యుల తూర్పు విస్తరణకు, అడవులను కాల్చి వ్యవసాయ భూమిగా మార్చడానికి సంకేతంగా భావిస్తారు.</p>
+      <p><b>ఐతరేయ బ్రాహ్మణం</b> (ఋగ్వేదం) — రాజు పట్టాభిషేకం, రాజ్యాధికార సిద్ధాంతం గురించి వివరాలు; "రాజు యుద్ధంలో నాయకత్వం కోసం ఎన్నుకోబడ్డాడు" అనే భావన.</p>
+      <p>ఈ గ్రంథాలు ప్రధానంగా మత గ్రంథాలు అయినా, మలి వేద కాలపు రాజకీయ, సామాజిక, భౌగోళిక మార్పులను అర్థం చేసుకోవడానికి ముఖ్యమైన ఆధారాలు.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q2-1">
+      <p><strong>Q1:</strong> "సత్యమేవ జయతే" ఏ ఉపనిషత్తు నుండి తీసుకోబడింది?</p>
+      <ol type="a"><li>కఠ</li><li>ముండక</li><li>ఛాందోగ్య</li><li>బృహదారణ్యక</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) ముండక ఉపనిషత్తు.</b></p>
+    </div>
+    <div class="quiz-question" id="q2-2">
+      <p><strong>Q2:</strong> నాలుగు వర్ణాల గురించి మొదటిసారి ఎక్కడ ప్రస్తావించబడింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">ఋగ్వేదం <b>10వ మండలంలోని పురుష సూక్తం</b> — విరాట్ పురుషుని ముఖం నుండి బ్రాహ్మణులు, బాహువుల నుండి క్షత్రియులు, తొడల నుండి వైశ్యులు, పాదాల నుండి శూద్రులు పుట్టారని వర్ణన.</p>
+    </div>
+    <div class="quiz-question" id="q2-3">
+      <p><strong>Q3:</strong> సరైన జతను గుర్తించండి: (1) సామవేదం – అధ్వర్యు (2) అథర్వవేదం – బ్రహ్మ (3) ఋగ్వేదం – ఉద్గాతృ</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(2) మాత్రమే సరైనది.</b> సరైన జతలు: ఋగ్వేదం–హోతృ, యజుర్వేదం–అధ్వర్యు, సామవేదం–ఉద్గాతృ, అథర్వవేదం–బ్రహ్మ.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>శ్రుతి = సంహితలు + బ్రాహ్మణాలు + ఆరణ్యకాలు + ఉపనిషత్తులు; స్మృతి = వేదాంగాలు, సూత్రాలు, ధర్మశాస్త్రాలు, ఇతిహాస-పురాణాలు.</li>
+      <li>ఋగ్వేదం: 10 మండలాలు; 2–7 ప్రాచీనం; గాయత్రి (3వ), సోమ (9వ), పురుష & నాసదీయ సూక్తాలు (10వ).</li>
+      <li>పురోహితులు: హోతృ–ఋగ్, అధ్వర్యు–యజుర్, ఉద్గాతృ–సామ, బ్రహ్మ–అథర్వ.</li>
+      <li>ఉపనిషత్తులు కర్మకాండ నుండి జ్ఞానకాండ వైపు మార్పు; తర్వాతి బౌద్ధ, జైన ఆలోచనలకు నేపథ్యం.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 3 ============ -->
+<section id="chapter-3" class="chapter" data-ch="3">
+  <h1>అధ్యాయం 3: రాజకీయ వ్యవస్థ & సమాజం</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>3.1 తొలి వేద రాజకీయ వ్యవస్థ — తెగల రాజ్యం</h2>
+  <p>తొలి వేద కాలపు రాజకీయ వ్యవస్థ <b>తెగ (Tribal)</b> ఆధారితం — భూభాగం కాదు, ప్రజలే (జన) రాజ్యానికి ప్రాతిపదిక. రాజును "<b>గోపతి</b>" / "<b>గోప</b>" (పశువుల రక్షకుడు) అని కూడా పిలిచేవారు — ఆనాటి సంపద పశువులే కాబట్టి. కింది చిత్రంలో చిన్న యూనిట్ నుండి పెద్దదానికి క్రమం చూడండి:</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 300" role="img" aria-label="వేద రాజకీయ యూనిట్ల అంచెల క్రమం">
+      <g class="hov anim"><title>జన — తెగ; అధిపతి: రాజన్</title><rect class="box" x="20" y="20" width="440" height="260" rx="14" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="40" y="46" font-size="15" font-weight="700" fill="#0066cc">జన (తెగ) — రాజన్</text></g>
+      <g class="hov anim d1"><title>విశ్ — గ్రామాల సమూహం (వంశం); అధిపతి: విశ్‌పతి</title><rect class="box" x="45" y="60" width="390" height="205" rx="12" fill="#d7e8fa" stroke="#0066cc" stroke-width="2"/>
+        <text x="65" y="84" font-size="14" font-weight="700">విశ్ (Clan) — విశ్‌పతి</text></g>
+      <g class="hov anim d2"><title>గ్రామ — కుటుంబాల సమూహం; అధిపతి: గ్రామణి</title><rect class="box" x="70" y="98" width="340" height="152" rx="10" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+        <text x="90" y="122" font-size="14" font-weight="700">గ్రామ (Village) — గ్రామణి</text></g>
+      <g class="hov anim d3"><title>కుల — కుటుంబం (ఉమ్మడి, పితృస్వామ్య); అధిపతి: కులప / గృహపతి</title><rect class="box" x="95" y="138" width="290" height="97" rx="9" fill="#f0f9f4" stroke="#00b359" stroke-width="2"/>
+        <text x="240" y="178" text-anchor="middle" font-size="14" font-weight="700">కుల (Family)</text>
+        <text x="240" y="200" text-anchor="middle" font-size="13">కులప / గృహపతి</text></g>
+      <g class="anim d4">
+        <text x="490" y="46" font-size="15" font-weight="700" fill="#0066cc">రాజుకు సహాయకులు</text>
+        <text x="490" y="76" font-size="13">• <tspan font-weight="700">పురోహితుడు</tspan> — ప్రధాన సలహాదారు</text>
+        <text x="490" y="100" font-size="13">• <tspan font-weight="700">సేనాని</tspan> — సైన్యాధిపతి</text>
+        <text x="490" y="124" font-size="13">• <tspan font-weight="700">గ్రామణి</tspan> — గ్రామ పెద్ద</text>
+        <text x="490" y="148" font-size="13">• <tspan font-weight="700">స్పశ</tspan> — గూఢచారులు</text>
+        <text x="490" y="190" font-size="15" font-weight="700" fill="#ff6b35">సభలు</text>
+        <text x="490" y="218" font-size="13">• <tspan font-weight="700">సభ</tspan> — పెద్దల మండలి</text>
+        <text x="490" y="242" font-size="13">• <tspan font-weight="700">సమితి</tspan> — ప్రజా సభ (రాజు ఎన్నిక)</text>
+        <text x="490" y="266" font-size="13">• <tspan font-weight="700">విదథ</tspan> — అత్యంత ప్రాచీన సభ</text>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 3.1 — కుల ⊂ గ్రామ ⊂ విశ్ ⊂ జన. మలి వేద కాలంలో "జన" స్థానంలో భూభాగ ఆధారిత "జనపద / రాష్ట్ర" వచ్చింది.</figcaption>
+  </figure>
+
+  <ul>
+    <li><b>బలి</b>: తొలి కాలంలో ప్రజలు రాజుకు <b>స్వచ్ఛందంగా</b> ఇచ్చే కానుక. క్రమబద్ధమైన పన్ను వ్యవస్థ, స్థిర సైన్యం లేవు.</li>
+    <li><b>సభ, సమితి</b> రాజు అధికారాన్ని నియంత్రించేవి. తొలి కాలంలో స్త్రీలు సభ, విదథలలో పాల్గొనేవారు.</li>
+    <li>రాజు వంశపారంపర్యం అయినప్పటికీ సంపూర్ణ అధికారి కాదు.</li>
+  </ul>
+
+  <h3>దశరాజ్ఞ యుద్ధం (పది రాజుల యుద్ధం)</h3>
+  <p>ఋగ్వేదం <b>7వ మండలంలో</b> వర్ణించబడిన ప్రసిద్ధ యుద్ధం. <b>పరుష్ణి (రావి)</b> నది ఒడ్డున జరిగింది.</p>
+  <ul>
+    <li>విజేత: <b>భరత తెగ</b> (త్రిత్సు వంశం) రాజు <b>సుదాసుడు</b>; పురోహితుడు <b>వసిష్ఠుడు</b>.</li>
+    <li>ప్రత్యర్థులు: పది తెగల కూటమి (పురు, యదు, తుర్వస, అను, ద్రుహ్యు తదితర ఐదు ఆర్య + ఐదు ఆర్యేతర తెగలు); వారి వైపు పురోహితుడు <b>విశ్వామిత్రుడు</b>.</li>
+    <li>ఫలితం: భరతుల ఆధిపత్యం — దేశానికి "<b>భారతవర్షం</b>" అనే పేరు ఈ తెగ నుండే వచ్చిందని భావిస్తారు. తర్వాత భరతులు, పురువులు కలిసి <b>కురు</b> తెగగా ఏర్పడ్డారు.</li>
+  </ul>
+
+  <h2>3.2 మలి వేద రాజకీయ వ్యవస్థ — ప్రాదేశిక రాజ్యాలు</h2>
+  <ul>
+    <li>తెగలు కలిసి పెద్ద <b>జనపదాలు</b> ఏర్పడ్డాయి (కురు, పాంచాల, కోసల, కాశీ, విదేహ). "<b>రాష్ట్ర</b>" (భూభాగం) అనే పదం మొదటిసారి కనిపిస్తుంది.</li>
+    <li>రాజు అధికారం పెరిగింది — <b>రాజసూయ</b> (పట్టాభిషేకం), <b>అశ్వమేధ</b> (సామ్రాజ్య విస్తరణ), <b>వాజపేయ</b> (రథ పోటీ) యజ్ఞాల ద్వారా దైవిక అధికారాన్ని ప్రదర్శించాడు. సామ్రాట్, ఏకరాట్ వంటి బిరుదులు.</li>
+    <li><b>సభ, సమితి ప్రాముఖ్యం తగ్గింది</b>; <b>విదథ అంతరించింది</b>; స్త్రీలను సభల నుండి మినహాయించారు.</li>
+    <li><b>రత్నినులు</b> — రాజుకు సహాయపడే 12 మంది అధికారులు. ఉదా: <b>భాగదుఘ</b> (పన్ను వసూలు), <b>సంగ్రహీతృ</b> (కోశాధికారి), <b>సూత</b> (రథసారథి), <b>అక్షవాప</b> (జూదం/లెక్కలు), <b>పాలాగల</b> (దూత).</li>
+    <li><b>బలి, భాగ, శుల్క</b> — తప్పనిసరి పన్నులుగా మారాయి. వైశ్యులే ప్రధాన పన్ను చెల్లింపుదారులు.</li>
+  </ul>
+
+  <h2>3.3 సమాజం — వర్ణ వ్యవస్థ & స్త్రీల స్థితి</h2>
+  <div class="table-wrap"><table>
+    <tr><th>అంశం</th><th>తొలి వేద కాలం</th><th>మలి వేద కాలం</th></tr>
+    <tr><td>వర్ణం</td><td>వృత్తి ఆధారితం, సరళమైనది; పురుష సూక్తం (10వ మండలం — తర్వాతి చేర్పు) మినహా స్పష్టమైన కుల విభజన లేదు</td><td>జన్మ ఆధారితం, కఠినమైనది; బ్రాహ్మణ, క్షత్రియుల ఆధిపత్యం; శూద్రులకు హక్కులు తగ్గాయి</td></tr>
+    <tr><td>స్త్రీల స్థితి</td><td>సాపేక్షంగా మెరుగు — విద్య, ఉపనయనం, సభలలో పాల్గొనడం; <b>ఘోష, అపాల, లోపాముద్ర, విశ్వవార</b> వంటి స్త్రీలు మంత్రాలు రచించారు</td><td>క్షీణించింది — సభల నుండి మినహాయింపు; ఐతరేయ బ్రాహ్మణంలో కుమార్తెను "దుఃఖ కారణం"గా వర్ణన. అయినా <b>గార్గి, మైత్రేయి</b> వంటి పండితులు ఉన్నారు</td></tr>
+    <tr><td>వివాహం</td><td>బాల్య వివాహాలు లేవు; <b>విధవా పునర్వివాహం</b>, <b>నియోగం</b> ఉన్నాయి</td><td>గోత్ర వ్యవస్థ ఏర్పడింది — <b>సగోత్ర వివాహ నిషేధం</b></td></tr>
+    <tr><td>కుటుంబం</td><td>పితృస్వామ్య ఉమ్మడి కుటుంబం</td><td>పితృస్వామ్యం బలపడింది</td></tr>
+    <tr><td>ఆశ్రమాలు</td><td>లేవు</td><td>ఏర్పడ్డాయి (మొదట మూడు — ఛాందోగ్య; నాలుగు — జాబాల ఉపనిషత్తు)</td></tr>
+  </table></div>
+
+  <h2>3.4 ఆశ్రమ వ్యవస్థ — ఇంటరాక్టివ్ చిత్రం</h2>
+  <p>మలి వేద కాలంలో మనిషి జీవితాన్ని (సుమారు 100 సంవత్సరాలు) నాలుగు దశలుగా విభజించారు. కింది బటన్లతో ఒక దశ నుండి తర్వాతి దశకు వెళ్లండి, లేదా "ఆటో డెమో" నొక్కండి. <i>(ఈ వ్యవస్థ ప్రధానంగా మొదటి మూడు వర్ణాల పురుషులకు ఉద్దేశించబడింది.)</i></p>
+
+  <figure class="diagram">
+    <svg id="smSvg" viewBox="0 0 760 250" role="img" aria-label="ఆశ్రమ వ్యవస్థ స్టేట్ మెషీన్">
+      <defs><marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#9bb8d6"/></marker></defs>
+      <path id="e-start" class="sm-edge" d="M110,110 L140,110" marker-end="url(#arr3)"/>
+      <path id="e-b" class="sm-edge" d="M270,110 L300,110" marker-end="url(#arr3)"/>
+      <path id="e-g" class="sm-edge" d="M430,110 L460,110" marker-end="url(#arr3)"/>
+      <path id="e-v" class="sm-edge" d="M590,110 L620,110" marker-end="url(#arr3)"/>
+      <path id="e-reset" class="sm-edge" d="M690,150 C690,230 60,230 60,150" stroke-dasharray="5 5" marker-end="url(#arr3)"/>
+      <text x="375" y="238" text-anchor="middle" font-size="12" fill="#555">పునర్జన్మ చక్రం (సంసారం) — మోక్షం లక్ష్యం</text>
+
+      <g class="sm-state" data-state="start"><rect class="box" x="10" y="75" width="100" height="70" rx="35" fill="#f4f4f4" stroke="#888" stroke-width="2"/>
+        <text x="60" y="108" text-anchor="middle" font-size="14" font-weight="700">బాల్యం</text><text x="60" y="126" text-anchor="middle" font-size="11" fill="#555">జననం</text></g>
+      <g class="sm-state" data-state="B"><rect class="box" x="140" y="70" width="130" height="80" rx="12" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="205" y="100" text-anchor="middle" font-size="14" font-weight="700">బ్రహ్మచర్యం</text><text x="205" y="118" text-anchor="middle" font-size="11">విద్యార్థి దశ</text><text x="205" y="136" text-anchor="middle" font-size="11" fill="#555">~0–25 సం.</text></g>
+      <g class="sm-state" data-state="G"><rect class="box" x="300" y="70" width="130" height="80" rx="12" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+        <text x="365" y="100" text-anchor="middle" font-size="14" font-weight="700">గృహస్థం</text><text x="365" y="118" text-anchor="middle" font-size="11">కుటుంబ జీవితం</text><text x="365" y="136" text-anchor="middle" font-size="11" fill="#555">~25–50 సం.</text></g>
+      <g class="sm-state" data-state="V"><rect class="box" x="460" y="70" width="130" height="80" rx="12" fill="#f0f9f4" stroke="#00b359" stroke-width="2"/>
+        <text x="525" y="100" text-anchor="middle" font-size="14" font-weight="700">వానప్రస్థం</text><text x="525" y="118" text-anchor="middle" font-size="11">బాధ్యతల విరమణ</text><text x="525" y="136" text-anchor="middle" font-size="11" fill="#555">~50–75 సం.</text></g>
+      <g class="sm-state" data-state="S"><rect class="box" x="620" y="70" width="130" height="80" rx="12" fill="#f1ecfb" stroke="#7a5cc8" stroke-width="2"/>
+        <text x="685" y="100" text-anchor="middle" font-size="14" font-weight="700">సన్యాసం</text><text x="685" y="118" text-anchor="middle" font-size="11">సర్వసంగ పరిత్యాగం</text><text x="685" y="136" text-anchor="middle" font-size="11" fill="#555">~75–100 సం.</text></g>
+      <text x="205" y="60" text-anchor="middle" font-size="11" fill="#0066cc">ధర్మం</text>
+      <text x="365" y="60" text-anchor="middle" font-size="11" fill="#c4471a">అర్థం + కామం</text>
+      <text x="525" y="60" text-anchor="middle" font-size="11" fill="#007a3d">ధర్మం</text>
+      <text x="685" y="60" text-anchor="middle" font-size="11" fill="#5a3fa8">మోక్షం</text>
+      <text x="380" y="25" text-anchor="middle" font-size="13" font-weight="700" fill="#0066cc">పురుషార్థాలు (జీవిత లక్ష్యాలు) ↓</text>
+    </svg>
+    <div class="sm-status" aria-live="polite">ప్రస్తుత దశ: <span id="smLabel">బాల్యం (ప్రారంభం)</span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#555" id="smDesc">ఉపనయన సంస్కారంతో విద్యార్థి దశ ప్రారంభమవుతుంది.</div>
+    <div class="sm-controls">
+      <button data-ev="upanayana">① ఉపనయనం</button>
+      <button data-ev="vivaha">② వివాహం</button>
+      <button data-ev="vana">③ అడవికి వెళ్లడం</button>
+      <button data-ev="sannyasa">④ సన్యాస స్వీకారం</button>
+      <button data-ev="reset">↺ రీసెట్</button>
+      <button class="auto" id="smAuto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 3.2 — ఆశ్రమ వ్యవస్థ: చెల్లుబాటు అయ్యే మార్పు బటన్ మాత్రమే పనిచేస్తుంది.</figcaption>
+  </figure>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — రాజకీయ పదజాలం">
+<pre># తొలి వేద కాలం
+రాజన్ / గోపతి  →  తెగ అధిపతి (సంపూర్ణ అధికారి కాదు)
+సభ           →  పెద్దల మండలి
+సమితి         →  ప్రజా సభ; రాజును ఎన్నుకునేది
+విదథ          →  అత్యంత ప్రాచీన సభ (ఋగ్వేదంలో అత్యధిక ప్రస్తావన)
+బలి           →  స్వచ్ఛంద కానుక
+గవిష్టి         →  "గోవుల కోసం అన్వేషణ" = యుద్ధం
+దశరాజ్ఞ        →  సుదాసుడు (భరత) vs 10 రాజులు; పరుష్ణి; 7వ మండలం
+
+# మలి వేద కాలం
+రత్నినులు      →  12 మంది అధికారులు
+భాగదుఘ        →  పన్ను వసూలుదారు
+సంగ్రహీతృ      →  కోశాధికారి
+రాజసూయ       →  పట్టాభిషేకం
+అశ్వమేధ       →  సామ్రాజ్య విస్తరణ
+వాజపేయ       →  రథ పోటీ</pre>
+  </div>
+
+  <details class="collapsible" id="c3-adv">
+    <summary>🔍 లోతుగా: 16 సంస్కారాలు & 8 రకాల వివాహాలు</summary>
+    <div class="inner">
+      <p><b>సంస్కారాలు</b> (గృహ్య సూత్రాల్లో వివరణ): గర్భాధానం నుండి అంత్యేష్టి వరకు 16. పరీక్షకు ముఖ్యమైనవి — <b>ఉపనయనం</b> (విద్యారంభం; "ద్విజ" = రెండుసార్లు పుట్టినవారు — మొదటి మూడు వర్ణాలు), <b>వివాహం</b>, <b>అంత్యేష్టి</b>.</p>
+      <p><b>8 రకాల వివాహాలు</b> (ధర్మశాస్త్రాల ప్రకారం):</p>
+      <ul>
+        <li>ఆమోదయోగ్యమైనవి: <b>బ్రహ్మ</b> (సంప్రదాయ కన్యాదానం), <b>దైవ</b> (పురోహితునికి), <b>ఆర్ష</b> (వరుడు గోవులు ఇచ్చి), <b>ప్రాజాపత్య</b></li>
+        <li>ఆమోదం లేనివి: <b>గాంధర్వ</b> (ప్రేమ వివాహం), <b>అసుర</b> (కన్యను కొనడం), <b>రాక్షస</b> (అపహరణ), <b>పైశాచ</b> (అత్యంత నీచమైనది)</li>
+      </ul>
+      <p><b>అనులోమ</b> వివాహం (ఉన్నత వర్ణ పురుషుడు – తక్కువ వర్ణ స్త్రీ) సహించబడింది; <b>ప్రతిలోమ</b> (వ్యతిరేకం) నిషేధించబడింది.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q3-1">
+      <p><strong>Q1:</strong> దశరాజ్ఞ యుద్ధంలో విజేత ఎవరు, అతని పురోహితుడు ఎవరు?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">భరత తెగ రాజు <b>సుదాసుడు</b>; పురోహితుడు <b>వసిష్ఠుడు</b>. (ప్రత్యర్థుల పురోహితుడు విశ్వామిత్రుడు.)</p>
+    </div>
+    <div class="quiz-question" id="q3-2">
+      <p><strong>Q2:</strong> మలి వేద కాలంలో అంతరించిపోయిన సభ ఏది?</p>
+      <ol type="a"><li>సభ</li><li>సమితి</li><li>విదథ</li><li>గణ</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) విదథ</b> — తొలి వేద కాలపు అత్యంత ప్రాచీన సభ; మలి వేద కాలంలో కనుమరుగైంది.</p>
+    </div>
+    <div class="quiz-question" id="q3-3">
+      <p><strong>Q3:</strong> నాలుగు ఆశ్రమాలను మొదటిసారి ప్రస్తావించిన ఉపనిషత్తు ఏది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>జాబాల ఉపనిషత్తు.</b> (ఛాందోగ్య ఉపనిషత్తు మొదటి మూడింటిని మాత్రమే ప్రస్తావిస్తుంది.)</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>తొలి వేద రాజ్యం తెగ ఆధారితం (కుల → గ్రామ → విశ్ → జన); మలి వేదంలో ప్రాదేశిక రాజ్యాలు (జనపద, రాష్ట్ర).</li>
+      <li>సభ, సమితి, విదథ రాజును నియంత్రించేవి; మలి వేదంలో రాజు అధికారం పెరిగి సభల ప్రాముఖ్యం తగ్గింది.</li>
+      <li>బలి స్వచ్ఛందం నుండి తప్పనిసరి పన్నుగా మారింది; రత్నినులు పరిపాలనలో సహాయపడ్డారు.</li>
+      <li>వర్ణం వృత్తి నుండి జన్మ ఆధారితంగా; స్త్రీల స్థితి క్షీణించింది; గోత్ర, ఆశ్రమ వ్యవస్థలు ఏర్పడ్డాయి.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 4 ============ -->
+<section id="chapter-4" class="chapter" data-ch="4">
+  <h1>అధ్యాయం 4: ఆర్థిక వ్యవస్థ & మతం</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>4.1 ఆర్థిక వ్యవస్థ — పశువుల నుండి నాగలి వరకు</h2>
+  <h3>తొలి వేద కాలం: పశుపోషణ ప్రధానం</h3>
+  <ul>
+    <li><b>గోవు = సంపద.</b> యుద్ధానికి పదం "<b>గవిష్టి</b>" (గోవుల అన్వేషణ); ధనవంతుడు "<b>గోమత్</b>"; అతిథిని "<b>గోఘ్న</b>" అని పిలవడం; కూతురు "<b>దుహితృ</b>" (పాలు పితికేది); కాల కొలత "<b>గోధూళి</b>" (సాయంత్రం).</li>
+    <li>వ్యవసాయం రెండో స్థానంలో — ప్రధాన పంట <b>యవ (బార్లీ)</b>. ఋగ్వేదంలో "ధాన్య" అనే సాధారణ పదం మాత్రమే.</li>
+    <li>లోహం: <b>అయస్</b> (రాగి/కంచు). ఇనుము తెలియదు.</li>
+    <li>వ్యాపారం వస్తు మార్పిడి ద్వారా; <b>నిష్క</b> (బంగారు ఆభరణం) విలువ కొలమానంగా; నాణేలు లేవు. వడ్డీ వ్యాపారి "<b>వేకనాట</b>"; వర్తకులు "<b>పణి</b>".</li>
+    <li>వృత్తులు: వడ్రంగి (<b>తక్షన్</b>), రథకారుడు, కమ్మరి, కుమ్మరి, నేత.</li>
+  </ul>
+
+  <h3>మలి వేద కాలం: స్థిర వ్యవసాయం</h3>
+  <ul>
+    <li><b>వ్యవసాయం ప్రధాన వృత్తిగా</b> మారింది; శతపథ బ్రాహ్మణంలో దున్నడం, విత్తడం, కోయడం, నూర్చడం వర్ణన. 6, 8, 12, 24 ఎద్దులతో దున్నే నాగళ్ల ప్రస్తావన.</li>
+    <li>కొత్త పంటలు: <b>వ్రీహి (వరి)</b>, <b>గోధుమ</b>, పప్పు ధాన్యాలు, నువ్వులు.</li>
+    <li><b>ఇనుము</b> — "<b>శ్యామ అయస్</b>" / "<b>కృష్ణ అయస్</b>" (నల్ల లోహం). అడవులను నరికి గంగా మైదానంలో వ్యవసాయ విస్తరణకు సహాయపడింది. (అత్రంజిఖేర, ఉత్తర ప్రదేశ్ — ఇనుము తొలి ఆధారాలు.)</li>
+    <li>కుమ్మరి పనిలో <b>చిత్రిత బూడిద రంగు పాత్రలు</b> (Painted Grey Ware — PGW) మలి వేద సంస్కృతికి చిహ్నం. తొలి వేద కాలంతో ముడిపెట్టేవి: ఓచర్ రంగు పాత్రలు (OCP).</li>
+    <li>వర్తక సంఘాలు "<b>గణ</b>", "<b>శ్రేణి</b>" ప్రారంభం; "<b>శతమాన</b>", "<b>కృష్ణల</b>" విలువ కొలమానాలు.</li>
+  </ul>
+
+  <h2>4.2 మతం — ప్రకృతి ఆరాధన నుండి తత్వం వరకు</h2>
+  <p>తొలి వేద ఆర్యులు ప్రకృతి శక్తులను దేవతలుగా ఆరాధించారు. <b>దేవాలయాలు, విగ్రహారాధన లేవు</b>. ఆరాధన స్తోత్రాలు, యజ్ఞాల (పాలు, నెయ్యి, ధాన్యం, సోమ రసం సమర్పణ) ద్వారా — లక్ష్యం <b>ప్రజ (సంతానం), పశు (పశువులు), ధన</b> — మోక్షం కాదు.</p>
+  <div class="table-wrap"><table>
+    <tr><th>దేవత</th><th>పాత్ర</th><th>పరీక్ష వాస్తవం</th></tr>
+    <tr><td><b>ఇంద్రుడు</b></td><td>యుద్ధ దేవుడు, వర్షం; "<b>పురందర</b>" (కోటలను ధ్వంసం చేసేవాడు)</td><td>అత్యంత ముఖ్యమైన దేవుడు — ~250 సూక్తాలు; వృత్రుని సంహరించాడు</td></tr>
+    <tr><td><b>అగ్ని</b></td><td>మానవులకు, దేవతలకు మధ్య <b>మధ్యవర్తి</b></td><td>రెండవ స్థానం — ~200 సూక్తాలు; ఋగ్వేదం మొదటి సూక్తం అగ్నికే</td></tr>
+    <tr><td><b>వరుణుడు</b></td><td>జలాలు; విశ్వ నియమం "<b>ఋత</b>" రక్షకుడు</td><td>నైతిక క్రమానికి ప్రతీక</td></tr>
+    <tr><td><b>సోముడు</b></td><td>మొక్కలు; సోమ పానీయం</td><td>9వ మండలం మొత్తం సోమునికి</td></tr>
+    <tr><td><b>సవిత్ర / సూర్యుడు</b></td><td>సూర్యుడు</td><td>గాయత్రీ మంత్రం సవిత్రునికి</td></tr>
+    <tr><td><b>ఉషస్, అదితి</b></td><td>ఉదయం, దేవతల తల్లి</td><td>ముఖ్యమైన స్త్రీ దేవతలు</td></tr>
+    <tr><td><b>మరుత్తులు, రుద్రుడు, అశ్వినులు</b></td><td>తుఫాను; వైద్యులు (అశ్వినులు)</td><td>—</td></tr>
+  </table></div>
+  <p><b>మలి వేద కాలంలో మార్పులు:</b> ఇంద్ర, అగ్నుల ప్రాముఖ్యం తగ్గి <b>ప్రజాపతి</b> (సృష్టికర్త) అగ్రస్థానం పొందాడు; <b>విష్ణువు</b> (రక్షకుడు), <b>రుద్రుడు</b> (పశువుల దేవుడు, తర్వాత శివుడు) ప్రాముఖ్యం పెరిగింది. <b>పూషన్</b> శూద్రుల దేవుడుగా మారాడు. యజ్ఞాలు సంక్లిష్టంగా, ఖర్చుతో కూడినవిగా మారి బ్రాహ్మణుల ఆధిపత్యం పెరిగింది. దీనికి ప్రతిచర్యగా <b>ఉపనిషత్ తత్వం</b> (ఆత్మ = బ్రహ్మ, కర్మ, మోక్షం) వచ్చింది — తర్వాత బౌద్ధ, జైన మతాలకు నేపథ్యమైంది.</p>
+
+  <h2>4.3 తొలి vs మలి వేద కాలం — ఒక చూపులో</h2>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 380" role="img" aria-label="తొలి మరియు మలి వేద కాలాల పోలిక కాలరేఖ">
+      <g class="anim">
+        <rect x="20" y="20" width="360" height="44" rx="8" fill="#0066cc"/><text x="200" y="48" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" style="fill:#fff">తొలి వేద · క్రీ.పూ. 1500–1000</text>
+        <rect x="380" y="20" width="360" height="44" rx="8" fill="#00b359"/><text x="560" y="48" text-anchor="middle" font-size="15" font-weight="700" style="fill:#fff">మలి వేద · క్రీ.పూ. 1000–600</text>
+      </g>
+      <g font-size="13">
+        <g class="anim d1"><text x="380" y="98" text-anchor="middle" font-weight="700" fill="#ff6b35" style="fill:#c4471a">ప్రాంతం</text>
+          <text x="200" y="98" text-anchor="middle">సప్తసింధు (పంజాబ్)</text><text x="560" y="98" text-anchor="middle">గంగా–యమునా అంతర్వేది</text></g>
+        <g class="anim d2"><text x="380" y="140" text-anchor="middle" font-weight="700" style="fill:#c4471a">ఆర్థికం</text>
+          <text x="200" y="140" text-anchor="middle">పశుపోషణ · యవ</text><text x="560" y="140" text-anchor="middle">వ్యవసాయం · వరి, గోధుమ</text></g>
+        <g class="anim d3"><text x="380" y="182" text-anchor="middle" font-weight="700" style="fill:#c4471a">లోహం</text>
+          <text x="200" y="182" text-anchor="middle">అయస్ (రాగి/కంచు)</text><text x="560" y="182" text-anchor="middle">శ్యామ/కృష్ణ అయస్ (ఇనుము)</text></g>
+        <g class="anim d4"><text x="380" y="224" text-anchor="middle" font-weight="700" style="fill:#c4471a">రాజకీయం</text>
+          <text x="200" y="224" text-anchor="middle">జన · సభ/సమితి బలమైనవి</text><text x="560" y="224" text-anchor="middle">జనపద · రాజు బలమైనవాడు</text></g>
+        <g class="anim d5"><text x="380" y="266" text-anchor="middle" font-weight="700" style="fill:#c4471a">సమాజం</text>
+          <text x="200" y="266" text-anchor="middle">వృత్తి ఆధారిత వర్ణం</text><text x="560" y="266" text-anchor="middle">జన్మ ఆధారిత వర్ణం · గోత్రం</text></g>
+        <g class="anim d6"><text x="380" y="308" text-anchor="middle" font-weight="700" style="fill:#c4471a">దేవతలు</text>
+          <text x="200" y="308" text-anchor="middle">ఇంద్ర, అగ్ని, వరుణ</text><text x="560" y="308" text-anchor="middle">ప్రజాపతి, విష్ణు, రుద్ర</text></g>
+        <g class="anim d6"><text x="380" y="350" text-anchor="middle" font-weight="700" style="fill:#c4471a">కుమ్మరి</text>
+          <text x="200" y="350" text-anchor="middle">OCP (ఓచర్ రంగు)</text><text x="560" y="350" text-anchor="middle">PGW (చిత్రిత బూడిద రంగు)</text></g>
+      </g>
+      <path d="M380,72 L380,362" stroke="#ddd" stroke-width="2" stroke-dasharray="4 4"/>
+    </svg>
+    <figcaption>చిత్రం 4.1 — తొలి vs మలి వేద కాలం: ఏడు కోణాల్లో మార్పు.</figcaption>
+  </figure>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — ఆర్థిక & మత పదజాలం">
+<pre># ఆర్థిక పదాలు
+గవిష్టి      →  యుద్ధం ("గోవుల అన్వేషణ")
+గోమత్       →  ధనవంతుడు
+యవ         →  బార్లీ          # తొలి వేద ప్రధాన పంట
+వ్రీహి        →  వరి           # మలి వేదం
+అయస్        →  రాగి/కంచు
+శ్యామ అయస్  →  ఇనుము          # మలి వేదం
+నిష్క        →  బంగారు ఆభరణం / విలువ కొలమానం
+పణి         →  వర్తకులు
+వేకనాట      →  వడ్డీ వ్యాపారి
+
+# మతం
+ఇంద్రుడు     →  ~250 సూక్తాలు; పురందర
+అగ్ని        →  ~200 సూక్తాలు; మధ్యవర్తి
+వరుణుడు     →  ఋత (విశ్వ నియమం)
+ప్రజాపతి     →  మలి వేదంలో అగ్రస్థానం
+పూషన్       →  మలి వేదంలో శూద్రుల దేవుడు</pre>
+  </div>
+
+  <details class="collapsible" id="c4-adv">
+    <summary>🔍 లోతుగా: "ఋత" భావన & కర్మ సిద్ధాంతం పరిణామం</summary>
+    <div class="inner">
+      <p><b>ఋత</b> — ఋగ్వేదంలో విశ్వంలో సూర్యచంద్రుల గమనం, ఋతువుల మార్పు, నైతిక ప్రవర్తన అన్నింటినీ నియంత్రించే సార్వత్రిక క్రమం. వరుణుడు దీని రక్షకుడు. ఋత నుండే తర్వాత "<b>ధర్మ</b>" భావన అభివృద్ధి చెందింది.</p>
+      <p><b>పరిణామ క్రమం:</b> ఋగ్వేదంలో మరణానంతరం పితృలోకానికి వెళ్లడం అనే సరళ భావన → బ్రాహ్మణాల్లో యజ్ఞ ఫలితాలపై దృష్టి → ఉపనిషత్తుల్లో (బృహదారణ్యక) <b>కర్మ ఆధారిత పునర్జన్మ (సంసారం)</b>, దాని నుండి విముక్తి — <b>మోక్షం</b>. ఆత్మ, బ్రహ్మ ఒకటే అనే "<b>అద్వైత</b>" బీజాలు ఇక్కడే ఉన్నాయి.</p>
+      <p><b>మెయిన్స్ కోణం:</b> యజ్ఞాల ఖర్చు, బ్రాహ్మణ ఆధిపత్యం, జన్మ ఆధారిత వర్ణ కఠినత్వం — క్రీ.పూ. 6వ శతాబ్దంలో బౌద్ధ, జైన సహా అనేక "శ్రమణ" ఉద్యమాలకు కారణాలు. వ్యవసాయానికి పశువులు అవసరం కావడం వల్ల పశుబలిని వ్యతిరేకించే అహింసా భావనకు ఆర్థిక నేపథ్యం కూడా ఉంది.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q4-1">
+      <p><strong>Q1:</strong> ఋగ్వేదంలో అత్యధిక సూక్తాలు ఏ దేవునికి అంకితం చేయబడ్డాయి?</p>
+      <ol type="a"><li>అగ్ని</li><li>వరుణుడు</li><li>ఇంద్రుడు</li><li>సోముడు</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) ఇంద్రుడు</b> (~250 సూక్తాలు). అగ్ని రెండవ స్థానం (~200).</p>
+    </div>
+    <div class="quiz-question" id="q4-2">
+      <p><strong>Q2:</strong> మలి వేద కాలంతో ముడిపడిన కుమ్మరి సంస్కృతి ఏది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>చిత్రిత బూడిద రంగు పాత్రలు (Painted Grey Ware — PGW).</b></p>
+    </div>
+    <div class="quiz-question" id="q4-3">
+      <p><strong>Q3:</strong> ఋగ్వేదంలో "గవిష్టి" అనే పదానికి అర్థం ఏమిటి? దాని నుండి ఆనాటి ఆర్థిక వ్యవస్థ గురించి ఏమి తెలుస్తుంది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>గవిష్టి = "గోవుల అన్వేషణ" = యుద్ధం.</b> యుద్ధాలు ప్రధానంగా పశువుల కోసం జరిగాయి — అంటే తొలి వేద ఆర్థిక వ్యవస్థ పశుపోషణ ఆధారితం, పశువులే ప్రధాన సంపద.</p>
+    </div>
+    <div class="quiz-question" id="q4-4">
+      <p><strong>Q4 (మెయిన్స్ శైలి):</strong> "తొలి వేద కాలం నుండి మలి వేద కాలానికి జరిగిన మార్పులు తెగ సమాజం నుండి రాజ్య వ్యవస్థకు మార్పును సూచిస్తాయి." చర్చించండి. (150 పదాలు)</p>
+      <button class="reveal-btn">సమాధాన రూపురేఖ చూపించు</button>
+      <p class="answer"><b>రూపురేఖ:</b> (1) పరిచయం — కాలాలు, ఆధారాలు. (2) ఆర్థికం: పశుపోషణ → ఇనుముతో వ్యవసాయం → మిగులు ఉత్పత్తి. (3) రాజకీయం: జన → జనపద/రాష్ట్ర; స్వచ్ఛంద బలి → తప్పనిసరి పన్నులు; రత్నినులు; సభ/సమితి బలహీనత; రాజసూయ, అశ్వమేధ. (4) సమాజం: వర్ణ కఠినత్వం, శ్రామిక/పాలక వర్గ విభజన. (5) ముగింపు — ఈ మార్పులు క్రీ.పూ. 6వ శతాబ్దపు మహాజనపదాలకు, రెండో పట్టణీకరణకు పునాది వేశాయి.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>తొలి వేదం: పశుపోషణ, యవ, అయస్ (రాగి/కంచు); మలి వేదం: వ్యవసాయం, వరి/గోధుమ, ఇనుము, PGW.</li>
+      <li>తొలి వేద మతం ప్రకృతి ఆరాధన — ఇంద్ర, అగ్ని, వరుణ; దేవాలయాలు, విగ్రహాలు లేవు.</li>
+      <li>మలి వేదంలో ప్రజాపతి, విష్ణు, రుద్ర ప్రాముఖ్యం; యజ్ఞాలు సంక్లిష్టం; ఉపనిషత్ తత్వం ప్రతిచర్యగా వచ్చింది.</li>
+      <li>ఈ మార్పులన్నీ మహాజనపదాలు, బౌద్ధ-జైన మతాల ఆవిర్భావానికి నేపథ్యం — తదుపరి అధ్యాయం అక్కడే మొదలవుతుంది.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">సూచికకు తిరిగి ✓</button></div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  const TOTAL = 4;
+  const store = {
+    get(k){ try{ return JSON.parse(sessionStorage.getItem(k)); }catch(e){ return null; } },
+    set(k,v){ try{ sessionStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  };
+  const sections = [...document.querySelectorAll('.chapter')];
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  let visited = new Set(store.get('vedic-visited') || []);
+  let current = 0;
+
+  function show(n, push){
+    n = Math.max(0, Math.min(TOTAL, n));
+    current = n;
+    sections.forEach(s => s.classList.toggle('visible', +s.dataset.ch === n));
+    tocLinks.forEach(a => a.classList.toggle('active', +a.dataset.ch === n));
+    if (n > 0) { visited.add(n); store.set('vedic-visited', [...visited]); }
+    tocLinks.forEach(a => a.classList.toggle('done', visited.has(+a.dataset.ch)));
+    document.getElementById('progressFill').style.width = (visited.size / TOTAL * 100) + '%';
+    document.getElementById('chapterCount').textContent = visited.size + '/' + TOTAL + ' అధ్యాయాలు';
+    const sec = sections[n];
+    const prev = sec.querySelector('.prev-btn'); if (prev) prev.disabled = n <= 1 && false;
+    if (push !== false) history.replaceState(null, '', '#' + sec.id);
+    window.scrollTo({top:0, behavior:'smooth'});
+    document.getElementById('sidebar').classList.remove('open');
+  }
+  window.goToChapter = n => show(n);
+  window.nextChapter = () => current < TOTAL ? show(current + 1) : (location.href = 'index.html');
+  window.previousChapter = () => show(current - 1);
+
+  document.querySelectorAll('.next-btn').forEach(b => b.addEventListener('click', nextChapter));
+  document.querySelectorAll('.prev-btn').forEach(b => b.addEventListener('click', previousChapter));
+  document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', () => show(+el.dataset.go)));
+  tocLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(+a.dataset.ch); }));
+  document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' && current < TOTAL) show(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+  });
+
+  // Quiz reveal (persisted in session)
+  const revealed = new Set(store.get('vedic-quiz') || []);
+  document.querySelectorAll('.quiz-question').forEach(q => {
+    const btn = q.querySelector('.reveal-btn'), ans = q.querySelector('.answer');
+    const label = btn.textContent;
+    const set = on => { ans.classList.toggle('show', on); btn.textContent = on ? 'సమాధానం దాచు' : label; btn.setAttribute('aria-expanded', on); };
+    set(revealed.has(q.id));
+    btn.addEventListener('click', () => {
+      const on = !ans.classList.contains('show'); set(on);
+      on ? revealed.add(q.id) : revealed.delete(q.id); store.set('vedic-quiz', [...revealed]);
+    });
+  });
+
+  // Collapsibles (persisted)
+  const openSet = new Set(store.get('vedic-open') || []);
+  document.querySelectorAll('details.collapsible').forEach(d => {
+    if (openSet.has(d.id)) d.open = true;
+    d.addEventListener('toggle', () => { d.open ? openSet.add(d.id) : openSet.delete(d.id); store.set('vedic-open', [...openSet]); });
+  });
+
+  // Revision blocks: line numbers, light highlighting, copy
+  const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  document.querySelectorAll('.code-block').forEach(cb => {
+    const pre = cb.querySelector('pre');
+    const raw = pre.textContent.replace(/^\n+|\s+$/g, '');
+    pre.innerHTML = raw.split('\n').map((line, i) => {
+      let h = esc(line), com = '';
+      const k = h.indexOf('#');
+      if (k >= 0) { com = '<span class="tok-com">' + h.slice(k) + '</span>'; h = h.slice(0, k); }
+      h = h.replace(/(→|=)/g, '<span class="tok-key">$1</span>').replace(/(\d+)/g, '<span class="tok-num">$1</span>');
+      return '<span class="ln" data-n="' + (i + 1) + '">' + h + com + '</span>';
+    }).join('');
+    const head = document.createElement('div'); head.className = 'cb-head';
+    head.innerHTML = '<span>' + esc(cb.dataset.title || 'నోట్స్') + '</span>';
+    const btn = document.createElement('button'); btn.className = 'copy-btn'; btn.textContent = 'కాపీ'; btn.setAttribute('aria-label', 'నోట్స్ కాపీ చేయండి');
+    btn.addEventListener('click', () => {
+      const done = () => { btn.textContent = '✓ కాపీ అయింది'; setTimeout(() => btn.textContent = 'కాపీ', 1500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(raw).then(done, () => {});
+      else { const t = document.createElement('textarea'); t.value = raw; document.body.appendChild(t); t.select(); try{ document.execCommand('copy'); done(); }catch(e){} t.remove(); }
+    });
+    head.appendChild(btn); cb.insertBefore(head, pre);
+  });
+
+  // Ashrama state machine
+  const SM = {
+    start:{label:'బాల్యం (ప్రారంభం)', desc:'ఉపనయన సంస్కారంతో విద్యార్థి దశ ప్రారంభమవుతుంది.'},
+    B:{label:'బ్రహ్మచర్యం — విద్యార్థి', desc:'గురుకులంలో గురువు వద్ద వేదాధ్యయనం, బ్రహ్మచర్య వ్రతం. లక్ష్యం: ధర్మం.'},
+    G:{label:'గృహస్థం — కుటుంబ జీవితం', desc:'వివాహం, సంతానం, సంపాదన, పంచ మహాయజ్ఞాలు. అన్ని ఆశ్రమాలకు ఆధారం. లక్ష్యం: అర్థం, కామం.'},
+    V:{label:'వానప్రస్థం — విరమణ', desc:'బాధ్యతలను కుమారులకు అప్పగించి అడవిలో ఆధ్యాత్మిక జీవితం.'},
+    S:{label:'సన్యాసం — పరిత్యాగం', desc:'అన్ని బంధాలు వదిలి సంచార జీవితం. లక్ష్యం: మోక్షం.'}
+  };
+  const T = { upanayana:['start','B','e-start'], vivaha:['B','G','e-b'], vana:['G','V','e-g'], sannyasa:['V','S','e-v'], reset:[null,'start','e-reset'] };
+  const order = ['upanayana','vivaha','vana','sannyasa','reset'];
+  let st = 'start', timer = null, step = 0;
+  const btns = [...document.querySelectorAll('.sm-controls [data-ev]')];
+  function render(edge){
+    document.querySelectorAll('.sm-state').forEach(g => g.classList.toggle('active', g.dataset.state === st));
+    document.getElementById('smLabel').textContent = SM[st].label;
+    document.getElementById('smDesc').textContent = SM[st].desc;
+    btns.forEach(b => { const t = T[b.dataset.ev]; b.disabled = t[0] !== null && t[0] !== st; if (b.dataset.ev === 'reset') b.disabled = st === 'start'; });
+    document.querySelectorAll('.sm-edge').forEach(p => p.classList.remove('run'));
+    if (edge) { const p = document.getElementById(edge); void p.getBoundingClientRect(); p.classList.add('run'); }
+  }
+  function fire(ev){ const t = T[ev]; if (t[0] !== null && t[0] !== st) return; st = t[1]; render(t[2]); }
+  btns.forEach(b => b.addEventListener('click', () => { stopAuto(); fire(b.dataset.ev); }));
+  const autoBtn = document.getElementById('smAuto');
+  function stopAuto(){ if (timer) { clearInterval(timer); timer = null; autoBtn.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+  autoBtn.addEventListener('click', () => {
+    if (timer) return stopAuto();
+    st = 'start'; render(); step = 0;
+    autoBtn.textContent = '⏸️ ఆటో డెమో ఆపు';
+    timer = setInterval(() => { fire(order[step % order.length]); step++; }, 2000);
+  });
+  render();
+
+  // Initial chapter from hash
+  const idx = sections.findIndex(s => '#' + s.id === location.hash);
+  show(idx >= 0 ? +sections[idx].dataset.ch : 0, false);
+})();
+</script>
+</body>
+</html>

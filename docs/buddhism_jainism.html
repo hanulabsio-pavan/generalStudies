@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>పాఠం: బౌద్ధమతం & జైనమతం (Buddhism & Jainism)</title>
+<style>
+:root{
+  --primary:#0066cc; --primary-dark:#004f9e; --primary-light:#e8f1fb;
+  --secondary:#00b359; --secondary-light:#f0f9f4;
+  --accent:#ff6b35; --accent-light:#fff3ee;
+  --bg:#ffffff; --sidebar:#f8f8f8; --text:#1a1a1a; --muted:#555; --border:#ddd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Nirmala UI','Noto Sans Telugu','Gautami',sans-serif;
+  font-size:16px;line-height:1.75;letter-spacing:.3px}
+.container{display:flex;min-height:100vh}
+/* Sidebar */
+.sidebar{width:280px;flex-shrink:0;background:var(--sidebar);border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 16px}
+.sidebar h2{margin:0 0 4px;font-size:18px;color:var(--primary)}
+.sidebar .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.progress-bar{height:8px;background:#e4e4e4;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--secondary);transition:width .4s ease}
+.chapter-count{font-size:13px;color:var(--muted);margin:6px 0 16px}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{display:block;padding:8px 10px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14.5px;line-height:1.4;
+  border-left:3px solid transparent;transition:background .3s,border-color .3s}
+.toc a:hover{background:var(--accent-light);border-left-color:var(--accent)}
+.toc a.active{background:var(--primary-light);border-left-color:var(--primary);color:var(--primary);font-weight:600}
+.toc a.done::after{content:" ✓";color:var(--secondary);font-weight:700}
+.back-link{display:inline-block;margin-top:18px;font-size:13px;color:var(--primary)}
+.menu-btn{display:none}
+/* Content */
+.content{flex:1;min-width:0;padding:32px 24px 64px}
+.chapter{max-width:900px;margin:0 auto;display:none;animation:fade .5s ease-in}
+.chapter.visible{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:28px;color:var(--primary);margin:0 0 8px;line-height:1.35}
+h2{font-size:22px;color:var(--primary);margin:2rem 0 .6rem;line-height:1.4}
+h3{font-size:18px;color:#333;margin:1.4rem 0 .5rem}
+.meta{color:var(--muted);font-size:14px;margin-bottom:1.5rem}
+p{margin:.6rem 0}
+.hl{background:var(--accent-light);padding:0 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--primary-light);color:var(--primary-dark)}
+tr:nth-child(even) td{background:#fafafa}
+.table-wrap{overflow-x:auto}
+.callout{border-left:4px solid var(--accent);background:var(--accent-light);padding:10px 14px;border-radius:0 6px 6px 0;margin:1rem 0}
+.callout b{color:#c4471a}
+/* Intro */
+.intro-page .subtitle{font-size:18px;color:var(--muted);margin-top:0}
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:1.2rem 0}
+.intro-card{border:1px solid var(--border);border-top:4px solid var(--primary);border-radius:8px;padding:12px 14px;cursor:pointer;transition:box-shadow .3s,transform .3s}
+.intro-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-2px)}
+.intro-card .n{font-size:13px;color:var(--accent);font-weight:700}
+.start-btn,.nav-buttons button,.sm-controls button,.reveal-btn{font:inherit;cursor:pointer;border-radius:6px;transition:background .3s,color .3s,border-color .3s}
+.start-btn{background:var(--primary);color:#fff;border:0;padding:12px 22px;font-size:16px;font-weight:600;margin-top:10px}
+.start-btn:hover{background:var(--primary-dark)}
+/* Diagrams */
+figure.diagram{margin:1.5rem 0;border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff}
+figure.diagram svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);text-align:center;margin-top:8px}
+.chapter.visible svg .anim{opacity:0;animation:fade .7s ease-in forwards}
+.chapter.visible svg .d1{animation-delay:.15s}.chapter.visible svg .d2{animation-delay:.35s}
+.chapter.visible svg .d3{animation-delay:.55s}.chapter.visible svg .d4{animation-delay:.75s}
+.chapter.visible svg .d5{animation-delay:.95s}.chapter.visible svg .d6{animation-delay:1.15s}
+svg .box{transition:stroke .3s,fill .3s}
+svg g.hov:hover .box{stroke:#003d7a;stroke-width:3}
+svg text{font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif;fill:#1a1a1a}
+.pulse{animation:pulse 1s ease-in-out 2}
+@keyframes pulse{50%{filter:drop-shadow(0 0 6px var(--accent))}}
+/* Revision (code-style) block */
+.code-block{position:relative;margin:1.2rem 0;border:1px solid #f3c2ad;border-radius:8px;background:var(--accent-light);overflow:hidden}
+.code-block .cb-head{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:#ffe3d6;font-size:13px;font-weight:600;color:#a33c12}
+.copy-btn{font:inherit;font-size:12px;border:1px solid var(--accent);background:#fff;color:#a33c12;border-radius:4px;padding:2px 10px;cursor:pointer}
+.copy-btn:hover{background:var(--accent);color:#fff}
+.code-block pre{margin:0;padding:10px 0;overflow-x:auto;font-family:'Monaco','Consolas','Courier New','Nirmala UI',monospace;font-size:13.5px;line-height:1.7}
+.code-block .ln{display:block;padding:0 14px 0 0;white-space:pre}
+.code-block .ln::before{content:attr(data-n);display:inline-block;width:2.6em;text-align:right;padding-right:12px;margin-right:10px;color:#b98a78;border-right:1px solid #f3c2ad;user-select:none}
+.tok-num{color:var(--accent);font-weight:600}.tok-com{color:#666;font-style:italic}.tok-key{color:var(--primary);font-weight:600}
+/* Collapsible */
+details.collapsible{border:1px solid var(--border);border-radius:8px;margin:1rem 0;background:#fcfcfc}
+details.collapsible summary{cursor:pointer;padding:10px 14px;font-weight:600;color:var(--primary)}
+details.collapsible[open] summary{border-bottom:1px solid var(--border)}
+details.collapsible .inner{padding:4px 16px 12px}
+/* Quiz */
+.quiz{border:2px solid var(--primary-light);border-radius:10px;padding:6px 18px 14px;margin:2rem 0}
+.quiz h3{color:var(--primary)}
+.quiz-question{margin:1rem 0;padding-bottom:12px;border-bottom:1px dashed var(--border)}
+.quiz-question:last-child{border-bottom:0}
+.quiz-question ol{margin:.3rem 0 .5rem;padding-left:1.6rem}
+.reveal-btn{background:#fff;border:1px solid var(--accent);color:#c4471a;padding:5px 14px;font-size:14px}
+.reveal-btn:hover{background:var(--accent);color:#fff}
+.answer{display:none;margin-top:10px;background:var(--secondary-light);border-left:4px solid var(--secondary);padding:8px 12px;border-radius:0 6px 6px 0;animation:fade .4s ease-in}
+.answer.show{display:block}
+/* Takeaways */
+.key-takeaways{background:var(--secondary-light);border:1px solid #bfe8d1;border-left:5px solid var(--secondary);border-radius:8px;padding:6px 18px 10px;margin:2rem 0}
+.key-takeaways h3{color:#007a3d}
+.key-takeaways li{margin:4px 0}
+/* Nav */
+.nav-buttons{display:flex;justify-content:space-between;gap:10px;margin-top:2rem}
+.nav-buttons button{background:#fff;border:2px solid var(--primary);color:var(--primary);padding:9px 18px;font-weight:600}
+.nav-buttons button:hover:not(:disabled){background:var(--primary);color:#fff}
+.nav-buttons button:disabled{opacity:.35;cursor:default}
+/* State machine */
+.sm-status{text-align:center;font-weight:600;margin:6px 0;font-size:15px}
+.sm-status span{color:var(--primary)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.sm-controls button{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:6px 12px;font-size:14px}
+.sm-controls button:hover:not(:disabled){background:var(--primary);color:#fff}
+.sm-controls button:disabled{opacity:.35;cursor:default}
+.sm-controls .auto{border-color:var(--accent);color:#c4471a}
+.sm-controls .auto:hover{background:var(--accent)!important;color:#fff!important}
+.sm-state .box{transition:stroke-width .4s,filter .4s}
+.sm-state.active .box{stroke-width:4;filter:drop-shadow(0 0 7px rgba(0,102,204,.65))}
+.sm-edge{fill:none;stroke:#9bb8d6;stroke-width:2}
+.sm-edge.run{stroke:var(--accent);stroke-width:3.5;stroke-dasharray:400;stroke-dashoffset:400;animation:draw .8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* Responsive */
+@media (max-width:768px){
+  .container{display:block}
+  .sidebar{position:fixed;left:0;top:0;z-index:20;transform:translateX(-100%);transition:transform .3s;box-shadow:2px 0 12px rgba(0,0,0,.15)}
+  .sidebar.open{transform:none}
+  .menu-btn{display:block;position:fixed;top:10px;left:10px;z-index:30;background:var(--primary);color:#fff;border:0;border-radius:6px;padding:8px 12px;font-size:18px;cursor:pointer}
+  .content{padding:56px 16px 48px}
+  h1{font-size:24px}
+}
+</style>
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="విషయ సూచిక తెరవండి">☰</button>
+<div class="container">
+<aside class="sidebar" id="sidebar" aria-label="విషయ సూచిక">
+  <h2>☸️ బౌద్ధం & జైనం</h2>
+  <div class="sub">Buddhism & Jainism · UPSC / APPSC / TSPSC</div>
+  <div class="progress-bar" role="progressbar" aria-label="పురోగతి"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="chapter-count" id="chapterCount">0/4 అధ్యాయాలు</div>
+  <nav class="toc">
+    <ul>
+      <li><a href="#intro" data-ch="0">పరిచయం</a></li>
+      <li><a href="#chapter-1" data-ch="1">1. నేపథ్యం & గౌతమ బుద్ధుని జీవితం</a></li>
+      <li><a href="#chapter-2" data-ch="2">2. బౌద్ధ సిద్ధాంతాలు: ఆర్య సత్యాలు & అష్టాంగ మార్గం</a></li>
+      <li><a href="#chapter-3" data-ch="3">3. సంఘం, సంగీతులు, సాహిత్యం & శాఖలు</a></li>
+      <li><a href="#chapter-4" data-ch="4">4. జైనమతం: మహావీరుడు & పంచ మహావ్రతాలు</a></li>
+    </ul>
+  </nav>
+  <a class="back-link" href="index.html">← సూచికకు తిరిగి (Index)</a>
+</aside>
+
+<main class="content" id="content">
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="chapter intro-page" data-ch="0">
+  <h1>☸️ బౌద్ధమతం & జైనమతం</h1>
+  <p class="subtitle">క్రీ.పూ. 6వ శతాబ్దం · మత సంస్కరణ ఉద్యమాలు · పరీక్షా దృష్టితో లోతైన పాఠం</p>
+  <p>మలి వేద కాలం చివరికి యజ్ఞాలు ఖరీదైనవిగా, వర్ణ వ్యవస్థ కఠినంగా మారాయి. క్రీ.పూ. 6వ శతాబ్దంలో గంగా మైదానంలో వేదాల అధికారాన్ని ప్రశ్నించిన అనేక <b>శ్రమణ</b> (సన్యాస) ఉద్యమాలు పుట్టాయి — వాటిలో శాశ్వత ప్రభావం చూపినవి <b>బౌద్ధం</b>, <b>జైనం</b>. ఈ పాఠం 4 అధ్యాయాలుగా ఉంది; ఒక్కొక్కటి సుమారు 15–20 నిమిషాలు.</p>
+  <p><b>మొత్తం సమయం:</b> ~75–80 నిమిషాలు</p>
+  <div class="intro-grid">
+    <div class="intro-card" data-go="1"><div class="n">అధ్యాయం 1</div>కొత్త మతాల ఆవిర్భావానికి కారణాలు, బుద్ధుని జీవితం, పంచ మహా సంఘటనలు</div>
+    <div class="intro-card" data-go="2"><div class="n">అధ్యాయం 2</div>చతుర్ ఆర్య సత్యాలు, అష్టాంగ మార్గం, మధ్యమ మార్గం, అనాత్మ, ప్రతీత్యసముత్పాదం</div>
+    <div class="intro-card" data-go="3"><div class="n">అధ్యాయం 3</div>నాలుగు బౌద్ధ సంగీతులు, త్రిపిటకాలు, హీనయాన–మహాయాన, ఆంధ్రలో బౌద్ధం</div>
+    <div class="intro-card" data-go="4"><div class="n">అధ్యాయం 4</div>24 తీర్థంకరులు, మహావీరుడు, పంచ మహావ్రతాలు, త్రిరత్నాలు, స్యాద్వాదం, బౌద్ధం vs జైనం</div>
+  </div>
+  <p>ప్రతి అధ్యాయంలో: రేఖాచిత్రం, త్వరిత పునరీక్షణ నోట్స్ (కాపీ చేసుకోవచ్చు), లోతైన అంశాల కోసం మడతపెట్టే విభాగాలు, స్వీయ పరీక్ష, ముఖ్యాంశాలు.</p>
+  <p style="font-size:14px;color:var(--muted)">⌨️ కీబోర్డ్: ← / → బాణం కీలతో అధ్యాయాల మధ్య కదలండి.</p>
+  <button class="start-btn" data-go="1">నేర్చుకోవడం ప్రారంభించండి →</button>
+</section>
+
+<!-- ============ CHAPTER 1 ============ -->
+<section id="chapter-1" class="chapter" data-ch="1">
+  <h1>అధ్యాయం 1: నేపథ్యం & గౌతమ బుద్ధుని జీవితం</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>1.1 క్రీ.పూ. 6వ శతాబ్దం — కొత్త మతాలు ఎందుకు పుట్టాయి?</h2>
+  <p>బౌద్ధ గ్రంథాల ప్రకారం ఆ కాలంలో <b>62</b>, జైన గ్రంథాల ప్రకారం <b>363</b> మత శాఖలు ఉన్నాయి. వీటి ఆవిర్భావానికి కారణాలను నాలుగు కోణాల్లో గుర్తుంచుకోండి:</p>
+  <div class="table-wrap"><table>
+    <tr><th>కోణం</th><th>కారణం</th></tr>
+    <tr><td><b>మతపరమైన</b></td><td>యజ్ఞాలు సంక్లిష్టం, ఖరీదైనవి; బ్రాహ్మణ పురోహితుల ఆధిపత్యం; వేదాలు సంస్కృతంలో — సామాన్యులకు అర్థం కాని భాష</td></tr>
+    <tr><td><b>సామాజిక</b></td><td>జన్మ ఆధారిత కఠిన వర్ణ వ్యవస్థ; <b>క్షత్రియులు</b> బ్రాహ్మణ ఆధిపత్యాన్ని వ్యతిరేకించారు — బుద్ధుడు, మహావీరుడు ఇద్దరూ క్షత్రియులే</td></tr>
+    <tr><td><b>ఆర్థిక</b></td><td>ఇనుప నాగలితో వ్యవసాయ విస్తరణ — పశువులు అవసరం, కానీ యజ్ఞాల్లో పశుబలి; కొత్త పట్టణాలు, వ్యాపారం, నాణేలు (పంచ్ మార్క్డ్) → సంపన్న <b>వైశ్యులు</b> సామాజిక గౌరవం కోరారు; వడ్డీ వ్యాపారాన్ని ధర్మశాస్త్రాలు నిందించాయి</td></tr>
+    <tr><td><b>రాజకీయ</b></td><td>మహాజనపదాల ఆవిర్భావం (మగధ, కోసల, వజ్జి…); కొత్త రాజులు కొత్త మతాలను ఆదరించారు; గణ రాజ్యాల (శాక్య, లిచ్ఛవి) స్వతంత్ర ఆలోచనా వాతావరణం</td></tr>
+  </table></div>
+  <div class="callout"><b>పరీక్ష చిట్కా:</b> బుద్ధుడు <b>శాక్య</b> గణం, మహావీరుడు <b>జ్ఞాతృక</b> గణం (వజ్జి సమాఖ్య) — ఇద్దరూ రాచరికం కాని <b>గణ రాజ్యాల</b> నుండి వచ్చారు. ఇద్దరూ ప్రజల భాష <b>ప్రాకృతం</b>లో బోధించారు (బుద్ధుడు – పాళీ, మహావీరుడు – అర్ధమాగధి).</div>
+
+  <h2>1.2 గౌతమ బుద్ధుని జీవితం</h2>
+  <div class="table-wrap"><table>
+    <tr><th>అంశం</th><th>వివరం</th></tr>
+    <tr><td>అసలు పేరు</td><td><b>సిద్ధార్థుడు</b>; గోత్రం గౌతమ; "శాక్యముని", "తథాగతుడు" అని కూడా పిలుస్తారు</td></tr>
+    <tr><td>జననం</td><td>క్రీ.పూ. <b>563</b> (సాంప్రదాయిక తేదీ), <b>లుంబిని</b> వనం (కపిలవస్తు సమీపం, నేటి నేపాల్) — అశోకుని <b>రుమ్మిందేయి స్తంభ శాసనం</b> దీనిని ధృవీకరిస్తుంది</td></tr>
+    <tr><td>తల్లిదండ్రులు</td><td>తండ్రి <b>శుద్ధోదనుడు</b> (శాక్య గణ అధిపతి); తల్లి <b>మహామాయ</b> (కోలియ వంశం) — జన్మించిన 7వ రోజు మరణించారు; పెంచినది పిన్ని <b>మహాప్రజాపతి గౌతమి</b></td></tr>
+    <tr><td>భార్య, కుమారుడు</td><td><b>యశోధర</b>; కుమారుడు <b>రాహులుడు</b></td></tr>
+    <tr><td>నాలుగు దృశ్యాలు</td><td>వృద్ధుడు, రోగి, శవం, సన్యాసి — వీటిని చూసి వైరాగ్యం</td></tr>
+    <tr><td>గృహత్యాగం</td><td><b>29</b> ఏళ్ల వయసులో — "<b>మహాభినిష్క్రమణం</b>"; గుర్రం <b>కంథక</b>, సారథి <b>ఛన్న</b></td></tr>
+    <tr><td>గురువులు</td><td><b>ఆలార కాలాముడు</b>, <b>ఉద్రక రామపుత్రుడు</b> — తర్వాత 6 ఏళ్ల కఠోర తపస్సు, అది వ్యర్థమని గ్రహించి మధ్యమ మార్గం</td></tr>
+    <tr><td>జ్ఞానోదయం</td><td><b>35</b> ఏళ్లకు, <b>బోధ్ గయ</b> (ఉరువేల), <b>నిరంజన</b> (ఫల్గు) నది ఒడ్డున రావి (బోధి) చెట్టు కింద, వైశాఖ పౌర్ణమి — "<b>సంబోధి</b>"; సుజాత ఇచ్చిన పాయసంతో ఉపవాసం విరమణ</td></tr>
+    <tr><td>మొదటి ప్రవచనం</td><td><b>సారనాథ్</b> (ఋషిపట్టణం / మృగదావనం, వారణాసి సమీపం) — "<b>ధర్మచక్ర ప్రవర్తనం</b>"; ఐదుగురు బ్రాహ్మణ శిష్యులకు</td></tr>
+    <tr><td>బోధనా కేంద్రం</td><td>ఎక్కువ ప్రవచనాలు <b>శ్రావస్తి</b> (కోసల)లో; జేతవన విహారం — వ్యాపారి <b>అనాథపిండకుడు</b> దానం</td></tr>
+    <tr><td>మరణం</td><td>క్రీ.పూ. <b>483</b>, <b>80</b> ఏళ్లకు, <b>కుశినగర్</b> (మల్ల గణ రాజ్యం) — "<b>మహాపరినిర్వాణం</b>"; చివరి భోజనం కమ్మరి చుందుడు ఇచ్చినది</td></tr>
+    <tr><td>ఆదరించిన రాజులు</td><td>మగధ – <b>బింబిసారుడు</b>, <b>అజాతశత్రువు</b>; కోసల – <b>ప్రసేనజిత్తు</b>; వత్స – ఉదయనుడు</td></tr>
+    <tr><td>ప్రధాన శిష్యులు</td><td><b>ఆనందుడు</b> (ప్రియ శిష్యుడు), <b>ఉపాలి</b>, <b>సారిపుత్ర</b>, <b>మొగ్గలాన</b>, మహాకస్సప; వేశ్య <b>ఆమ్రపాలి</b> (వైశాలి) కూడా శిష్యురాలు</td></tr>
+  </table></div>
+
+  <h2>1.3 పంచ మహా సంఘటనలు — ఇంటరాక్టివ్ చిత్రం</h2>
+  <p>బుద్ధుని జీవితంలోని ఐదు ముఖ్య సంఘటనలు, వాటి <b>చిహ్నాలు</b>, <b>స్థలాలు</b> పరీక్షల్లో తరచుగా అడుగుతారు. బటన్లతో ఒక్కొక్క దశకు వెళ్లండి, లేదా "ఆటో డెమో" నొక్కండి.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 260" role="img" aria-label="బుద్ధుని జీవితంలోని ఐదు మహా సంఘటనలు — స్టేట్ మెషీన్">
+      <defs><marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#9bb8d6"/></marker></defs>
+      <path id="e-1" class="sm-edge" d="M140,115 L158,115" marker-end="url(#arrA)"/>
+      <path id="e-2" class="sm-edge" d="M290,115 L308,115" marker-end="url(#arrA)"/>
+      <path id="e-3" class="sm-edge" d="M440,115 L458,115" marker-end="url(#arrA)"/>
+      <path id="e-4" class="sm-edge" d="M590,115 L608,115" marker-end="url(#arrA)"/>
+      <path id="e-r" class="sm-edge" d="M675,160 C675,245 75,245 75,160" stroke-dasharray="5 5" marker-end="url(#arrA)"/>
+      <text x="380" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#0066cc">స్థలం ↓ · చిహ్నం ↑</text>
+      <g class="sm-state" data-state="birth"><rect class="box" x="10" y="70" width="130" height="90" rx="12" fill="#fff8e1" stroke="#d4a017" stroke-width="2"/>
+        <text x="75" y="98" text-anchor="middle" font-size="14" font-weight="700">జననం</text>
+        <text x="75" y="118" text-anchor="middle" font-size="12">లుంబిని</text>
+        <text x="75" y="136" text-anchor="middle" font-size="11" fill="#555">క్రీ.పూ. 563</text>
+        <text x="75" y="60" text-anchor="middle" font-size="12" fill="#8a6300">🪷 కమలం / వృషభం</text></g>
+      <g class="sm-state" data-state="renounce"><rect class="box" x="160" y="70" width="130" height="90" rx="12" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+        <text x="225" y="98" text-anchor="middle" font-size="13" font-weight="700">మహాభినిష్క్రమణం</text>
+        <text x="225" y="118" text-anchor="middle" font-size="12">కపిలవస్తు</text>
+        <text x="225" y="136" text-anchor="middle" font-size="11" fill="#555">29 ఏళ్లు</text>
+        <text x="225" y="60" text-anchor="middle" font-size="12" fill="#c4471a">🐎 గుర్రం</text></g>
+      <g class="sm-state" data-state="enlight"><rect class="box" x="310" y="70" width="130" height="90" rx="12" fill="#f0f9f4" stroke="#00b359" stroke-width="2"/>
+        <text x="375" y="98" text-anchor="middle" font-size="14" font-weight="700">సంబోధి</text>
+        <text x="375" y="118" text-anchor="middle" font-size="12">బోధ్ గయ</text>
+        <text x="375" y="136" text-anchor="middle" font-size="11" fill="#555">35 ఏళ్లు</text>
+        <text x="375" y="60" text-anchor="middle" font-size="12" fill="#007a3d">🌳 బోధి వృక్షం</text></g>
+      <g class="sm-state" data-state="sermon"><rect class="box" x="460" y="70" width="130" height="90" rx="12" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="525" y="98" text-anchor="middle" font-size="13" font-weight="700">ధర్మచక్ర ప్రవర్తనం</text>
+        <text x="525" y="118" text-anchor="middle" font-size="12">సారనాథ్</text>
+        <text x="525" y="136" text-anchor="middle" font-size="11" fill="#555">మొదటి ప్రవచనం</text>
+        <text x="525" y="60" text-anchor="middle" font-size="12" fill="#0066cc">☸️ చక్రం</text></g>
+      <g class="sm-state" data-state="death"><rect class="box" x="610" y="70" width="130" height="90" rx="12" fill="#f1ecfb" stroke="#7a5cc8" stroke-width="2"/>
+        <text x="675" y="98" text-anchor="middle" font-size="14" font-weight="700">మహాపరినిర్వాణం</text>
+        <text x="675" y="118" text-anchor="middle" font-size="12">కుశినగర్</text>
+        <text x="675" y="136" text-anchor="middle" font-size="11" fill="#555">క్రీ.పూ. 483 · 80 ఏళ్లు</text>
+        <text x="675" y="60" text-anchor="middle" font-size="12" fill="#5a3fa8">🛕 స్తూపం</text></g>
+      <text x="375" y="252" text-anchor="middle" font-size="12" fill="#555">రీసెట్ — జీవిత చక్రాన్ని మళ్లీ ప్రారంభించండి</text>
+    </svg>
+    <div class="sm-status" aria-live="polite">ప్రస్తుత దశ: <span id="smLabel"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#555" id="smDesc"></div>
+    <div class="sm-controls" id="smControls">
+      <button data-ev="e1">① నాలుగు దృశ్యాలు</button>
+      <button data-ev="e2">② 6 ఏళ్ల తపస్సు → మధ్యమ మార్గం</button>
+      <button data-ev="e3">③ సారనాథ్‌కు ప్రయాణం</button>
+      <button data-ev="e4">④ 45 ఏళ్ల బోధన</button>
+      <button data-ev="reset">↺ రీసెట్</button>
+      <button class="auto" id="smAuto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 1.1 — పంచ మహా సంఘటనలు. చెల్లుబాటు అయ్యే తదుపరి సంఘటన బటన్ మాత్రమే పనిచేస్తుంది.</figcaption>
+  </figure>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — బుద్ధుని జీవితం">
+<pre># సంఘటన          →  స్థలం           # చిహ్నం
+జననం            →  లుంబిని          # కమలం, వృషభం
+గృహత్యాగం        →  కపిలవస్తు        # గుర్రం (కంథక)
+జ్ఞానోదయం        →  బోధ్ గయ          # బోధి వృక్షం
+మొదటి ప్రవచనం    →  సారనాథ్          # ధర్మచక్రం
+మహాపరినిర్వాణం    →  కుశినగర్          # స్తూపం
+
+# వయసులు
+గృహత్యాగం  = 29
+జ్ఞానోదయం  = 35
+మరణం      = 80   # క్రీ.పూ. 483
+బోధన కాలం = 45 సంవత్సరాలు</pre>
+  </div>
+
+  <details class="collapsible" id="c1-adv">
+    <summary>🔍 లోతుగా: ఆ కాలపు ఇతర శ్రమణ ఆచార్యులు</summary>
+    <div class="inner">
+      <p>బౌద్ధ గ్రంథం <i>సామఞ్ఞఫల సుత్తం</i> (దీఘ నికాయం)లో బుద్ధుని సమకాలీనులైన ఆరుగురు ఆచార్యుల ప్రస్తావన ఉంది:</p>
+      <ul>
+        <li><b>మక్ఖలి గోశాలుడు</b> — <b>ఆజీవిక</b> శాఖ స్థాపకుడు; <b>నియతివాదం</b> (అంతా ముందే నిర్ణయమైంది — విధి). మహావీరునితో కొంతకాలం ఉన్నాడు. అశోకుడు, దశరథుడు ఆజీవికులకు <b>బరాబర్ గుహలు</b> దానం చేశారు.</li>
+        <li><b>అజిత కేశకంబలి</b> — <b>భౌతికవాదం</b> (ఉచ్ఛేదవాదం) — చార్వాక/లోకాయత భావనలకు పూర్వరూపం.</li>
+        <li><b>పూరణ కస్సప</b> — అక్రియావాదం (కర్మకు ఫలితం లేదు).</li>
+        <li><b>పకుధ కచ్చాయన</b> — ఏడు శాశ్వత మూలకాల సిద్ధాంతం.</li>
+        <li><b>సంజయ బెల్లట్ఠిపుత్త</b> — సందేహవాదం (అజ్ఞేయవాదం).</li>
+        <li><b>నిగంఠ నాతపుత్త</b> — అంటే <b>మహావీరుడే</b>!</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q1-1">
+      <p><strong>Q1:</strong> బుద్ధుడు మొదటి ప్రవచనం ఇచ్చిన సంఘటనను ఏమంటారు, అది ఎక్కడ జరిగింది?</p>
+      <ol type="a"><li>మహాభినిష్క్రమణం – కపిలవస్తు</li><li>ధర్మచక్ర ప్రవర్తనం – సారనాథ్</li><li>సంబోధి – బోధ్ గయ</li><li>మహాపరినిర్వాణం – కుశినగర్</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) ధర్మచక్ర ప్రవర్తనం – సారనాథ్.</b> చిహ్నం: చక్రం. (భారత జాతీయ చిహ్నం సారనాథ్ అశోక స్తంభ శీర్షం నుండే వచ్చింది.)</p>
+    </div>
+    <div class="quiz-question" id="q1-2">
+      <p><strong>Q2:</strong> బుద్ధుని జన్మస్థలం లుంబిని అని ధృవీకరించే శాసనం ఏది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">అశోకుని <b>రుమ్మిందేయి (లుంబిని) స్తంభ శాసనం</b> — "ఇక్కడ శాక్యముని బుద్ధుడు జన్మించాడు" అని పేర్కొని, ఆ గ్రామానికి పన్ను తగ్గించినట్లు చెబుతుంది.</p>
+    </div>
+    <div class="quiz-question" id="q1-3">
+      <p><strong>Q3:</strong> క్రీ.పూ. 6వ శతాబ్దంలో కొత్త మతాల ఆవిర్భావానికి ఒక <u>ఆర్థిక</u> కారణం చెప్పండి.</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">ఇనుప నాగలితో విస్తరించిన వ్యవసాయానికి ఎద్దులు అవసరం — కానీ వైదిక యజ్ఞాల్లో పశుబలి జరిగేది. అహింసను బోధించిన బౌద్ధ, జైన మతాలు కొత్త వ్యవసాయ ఆర్థిక వ్యవస్థకు అనుకూలంగా ఉన్నాయి. (అలాగే: సంపన్న వైశ్యులకు సామాజిక గౌరవం, వడ్డీ వ్యాపారంపై వైదిక నిషేధం.)</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>మత, సామాజిక, ఆర్థిక, రాజకీయ కారణాలు కలిసి క్రీ.పూ. 6వ శతాబ్దంలో శ్రమణ ఉద్యమాలకు దారితీశాయి.</li>
+      <li>బుద్ధుడు: లుంబిని (563) → గృహత్యాగం 29 → బోధ్ గయ 35 → సారనాథ్ → కుశినగర్ 80 (483).</li>
+      <li>పంచ చిహ్నాలు: కమలం/వృషభం, గుర్రం, బోధి వృక్షం, చక్రం, స్తూపం.</li>
+      <li>మగధ (బింబిసార, అజాతశత్రు), కోసల (ప్రసేనజిత్తు) రాజులు, వ్యాపారులు ప్రధాన పోషకులు.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 2 ============ -->
+<section id="chapter-2" class="chapter" data-ch="2">
+  <h1>అధ్యాయం 2: బౌద్ధ సిద్ధాంతాలు — ఆర్య సత్యాలు & అష్టాంగ మార్గం</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>2.1 మధ్యమ మార్గం (మధ్యమ ప్రతిపద)</h2>
+  <p>రాజభోగాల విలాస జీవితం, ఆరేళ్ల కఠోర శరీర హింస — రెండూ ముక్తికి దారి తీయవని బుద్ధుడు స్వయంగా అనుభవించాడు. అందుకే ఈ రెండు <b>అతివాదాల మధ్య మార్గం</b> బోధించాడు. వీణ తీగ ఉపమానం: మరీ బిగిస్తే తెగుతుంది, మరీ వదులైతే శ్రుతి పలకదు.</p>
+
+  <h2>2.2 చతుర్ ఆర్య సత్యాలు (Four Noble Truths)</h2>
+  <p>సారనాథ్‌లో మొదటి ప్రవచనంలోనే బోధించినవి. ఒక వైద్యుని పద్ధతిలా ఆలోచించండి — <b>రోగం → కారణం → నివారణ సాధ్యం → మందు</b>:</p>
+  <div class="table-wrap"><table>
+    <tr><th>#</th><th>సత్యం (పాళీ)</th><th>అర్థం</th><th>వైద్య ఉపమానం</th></tr>
+    <tr><td>1</td><td><b>దుఃఖ</b> (దుక్ఖ)</td><td>ప్రపంచం దుఃఖమయం — జననం, వృద్ధాప్యం, రోగం, మరణం, ప్రియమైనవారి వియోగం అన్నీ దుఃఖమే</td><td>రోగ నిర్ధారణ</td></tr>
+    <tr><td>2</td><td><b>దుఃఖ సముదయ</b></td><td>దుఃఖానికి కారణం <b>తృష్ణ</b> (కోరిక / తణ్హా)</td><td>రోగ కారణం</td></tr>
+    <tr><td>3</td><td><b>దుఃఖ నిరోధ</b></td><td>తృష్ణను నిర్మూలిస్తే దుఃఖం అంతమవుతుంది — అదే <b>నిర్వాణం</b></td><td>నయం చేయవచ్చు</td></tr>
+    <tr><td>4</td><td><b>దుఃఖ నిరోధ గామినీ ప్రతిపద</b> (మగ్గ)</td><td>దుఃఖ నివారణకు మార్గం — <b>అష్టాంగ మార్గం</b></td><td>చికిత్స / మందు</td></tr>
+  </table></div>
+
+  <h2>2.3 అష్టాంగ మార్గం — ఇంటరాక్టివ్ ధర్మచక్రం</h2>
+  <p>ఎనిమిది అంగాలు మూడు స్కంధాలుగా విభజించబడ్డాయి — <b>ప్రజ్ఞ</b> (జ్ఞానం), <b>శీల</b> (నైతిక ప్రవర్తన), <b>సమాధి</b> (మానసిక క్రమశిక్షణ). చక్రంలోని ఏ ఆరుపైనైనా (spoke) క్లిక్ చేయండి.</p>
+
+  <figure class="diagram">
+    <svg id="wheel" viewBox="0 0 760 420" role="img" aria-label="అష్టాంగ మార్గ ధర్మచక్రం">
+      <g class="anim">
+        <circle cx="260" cy="210" r="185" fill="none" stroke="#0066cc" stroke-width="6"/>
+        <circle cx="260" cy="210" r="48" fill="#e8f1fb" stroke="#0066cc" stroke-width="3"/>
+        <text x="260" y="206" text-anchor="middle" font-size="13" font-weight="700">మధ్యమ</text>
+        <text x="260" y="224" text-anchor="middle" font-size="13" font-weight="700">మార్గం</text>
+      </g>
+      <g id="spokes" class="anim d2"></g>
+      <g class="anim d3">
+        <rect x="490" y="30" width="250" height="360" rx="12" fill="#fafafa" stroke="#ddd"/>
+        <rect x="506" y="48" width="16" height="16" rx="3" fill="#dbeafe" stroke="#0066cc"/><text x="530" y="61" font-size="13" font-weight="700">ప్రజ్ఞ (జ్ఞానం): 1–2</text>
+        <rect x="506" y="76" width="16" height="16" rx="3" fill="#ffe3d6" stroke="#ff6b35"/><text x="530" y="89" font-size="13" font-weight="700">శీల (నీతి): 3–5</text>
+        <rect x="506" y="104" width="16" height="16" rx="3" fill="#d6f5e3" stroke="#00b359"/><text x="530" y="117" font-size="13" font-weight="700">సమాధి (ధ్యానం): 6–8</text>
+        <line x1="506" y1="134" x2="724" y2="134" stroke="#ddd"/>
+        <text id="wheelTitle" x="506" y="160" font-size="15" font-weight="700" fill="#0066cc">ఒక ఆరుపై క్లిక్ చేయండి</text>
+        <foreignObject x="500" y="170" width="236" height="210"><div xmlns="http://www.w3.org/1999/xhtml" id="wheelDesc" style="font-size:13.5px;line-height:1.6;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">ప్రతి అంగం పేరు ముందు "<b>సమ్యక్</b>" (సరైన) అనే పదం ఉంటుంది.</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 2.1 — ఎనిమిది ఆరుల ధర్మచక్రం; ఒక్కో ఆరు అష్టాంగ మార్గంలోని ఒక అంగం. రంగు = స్కంధం.</figcaption>
+  </figure>
+
+  <h2>2.4 ఇతర ముఖ్య బౌద్ధ సిద్ధాంతాలు</h2>
+  <ul>
+    <li><b>త్రిలక్షణాలు</b>: <b>అనిత్య</b> (అంతా తాత్కాలికం), <b>దుఃఖ</b>, <b>అనాత్మ</b> (శాశ్వత ఆత్మ లేదు) — ఉపనిషత్తుల "ఆత్మ" భావనకు విరుద్ధం.</li>
+    <li><b>ప్రతీత్యసముత్పాదం</b> (Dependent Origination) — ప్రతిదీ ఒక కారణంపై ఆధారపడి పుడుతుంది; 12 లింకుల గొలుసు (<b>భవచక్రం</b>). దీని మూలం <b>అవిద్య</b>.</li>
+    <li><b>కర్మ, పునర్జన్మ</b> — అంగీకరించాడు (ఆత్మ లేకున్నా కర్మ ఫలం కొనసాగుతుంది). వేదాల ప్రామాణికతను, యజ్ఞాలను, వర్ణ వ్యవస్థను తిరస్కరించాడు.</li>
+    <li><b>దేవుని గురించి మౌనం</b> — ఈశ్వరుని ఉనికిపై మాట్లాడలేదు; అందుకే బౌద్ధాన్ని <b>అజ్ఞేయవాద</b> (agnostic) మతం అంటారు.</li>
+    <li><b>నిర్వాణం</b> — "ఆరిపోవడం": తృష్ణ అనే దీపం ఆరిపోవడం; జనన-మరణ చక్రం నుండి విముక్తి. ఈ జీవితంలోనే సాధ్యం.</li>
+    <li><b>త్రిరత్నాలు</b> (శరణత్రయం): <b>బుద్ధం శరణం గచ్ఛామి, ధర్మం శరణం గచ్ఛామి, సంఘం శరణం గచ్ఛామి</b>.</li>
+    <li><b>పంచశీల</b> (సామాన్య ఉపాసకులకు): హింస చేయకూడదు, దొంగిలించకూడదు, వ్యభిచారం చేయకూడదు, అబద్ధం ఆడకూడదు, మత్తుపదార్థాలు సేవించకూడదు. <i>(గమనిక: నెహ్రూ విదేశాంగ విధానంలోని "పంచశీల" వేరు — 1954 భారత-చైనా ఒప్పందం.)</i></li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — ఆర్య సత్యాలు & అష్టాంగ మార్గం">
+<pre># చతుర్ ఆర్య సత్యాలు
+1 దుఃఖ           →  ప్రపంచం దుఃఖమయం
+2 సముదయ         →  కారణం = తృష్ణ (కోరిక)
+3 నిరోధ          →  తృష్ణ నిర్మూలనే నిర్వాణం
+4 మార్గ          →  అష్టాంగ మార్గం
+
+# అష్టాంగ మార్గం (సమ్యక్ = సరైన)
+1 సమ్యక్ దృష్టి      →  సరైన అవగాహన    # ప్రజ్ఞ
+2 సమ్యక్ సంకల్పం    →  సరైన ఉద్దేశం     # ప్రజ్ఞ
+3 సమ్యక్ వాక్కు      →  సరైన మాట       # శీల
+4 సమ్యక్ కర్మాంతం   →  సరైన చర్య       # శీల
+5 సమ్యక్ ఆజీవం     →  సరైన జీవనోపాధి   # శీల
+6 సమ్యక్ వ్యాయామం  →  సరైన ప్రయత్నం    # సమాధి
+7 సమ్యక్ స్మృతి      →  సరైన జాగరూకత    # సమాధి
+8 సమ్యక్ సమాధి     →  సరైన ఏకాగ్రత     # సమాధి</pre>
+  </div>
+
+  <details class="collapsible" id="c2-adv">
+    <summary>🔍 లోతుగా: ప్రతీత్యసముత్పాదంలోని 12 నిదానాలు</summary>
+    <div class="inner">
+      <p>"ఇది ఉంటే అది ఉంటుంది; ఇది పుడితే అది పుడుతుంది" — ఇదే సూత్రం. 12 లింకులు (నిదానాలు) వరుసగా:</p>
+      <p><b>1. అవిద్య</b> → 2. సంస్కారాలు → 3. విజ్ఞానం → 4. నామరూపం → 5. షడాయతనం (ఆరు ఇంద్రియాలు) → 6. స్పర్శ → 7. వేదన → <b>8. తృష్ణ</b> → 9. ఉపాదానం (అంటిపెట్టుకోవడం) → 10. భవం → 11. జాతి (జననం) → <b>12. జరామరణం</b> (వృద్ధాప్యం, మరణం = దుఃఖం)</p>
+      <p>గొలుసులో ఏ లింకును తెంచినా దుఃఖం ఆగిపోతుంది — ముఖ్యంగా <b>అవిద్య</b>ను జ్ఞానంతో, <b>తృష్ణ</b>ను అష్టాంగ మార్గంతో. రెండో ఆర్య సత్యానికి (సముదయ) ఇదే తాత్విక వివరణ. మెయిన్స్ సమాధానాల్లో బౌద్ధం "కార్య-కారణ" ఆధారిత హేతువాద మతం అని చెప్పడానికి దీనిని ఉపయోగించండి.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q2-1">
+      <p><strong>Q1:</strong> బౌద్ధం ప్రకారం దుఃఖానికి మూల కారణం ఏమిటి?</p>
+      <ol type="a"><li>కర్మ</li><li>తృష్ణ</li><li>మాయ</li><li>అహంకారం</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) తృష్ణ</b> (కోరిక) — రెండో ఆర్య సత్యం (సముదయ).</p>
+    </div>
+    <div class="quiz-question" id="q2-2">
+      <p><strong>Q2:</strong> అష్టాంగ మార్గంలో "శీల" కిందకు వచ్చే మూడు అంగాలు ఏవి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">సమ్యక్ <b>వాక్కు</b>, సమ్యక్ <b>కర్మాంతం</b>, సమ్యక్ <b>ఆజీవం</b> (3, 4, 5).</p>
+    </div>
+    <div class="quiz-question" id="q2-3">
+      <p><strong>Q3:</strong> కింది వాటిలో బుద్ధుడు <u>అంగీకరించినది</u> ఏది? (1) వేదాల ప్రామాణికత (2) కర్మ సిద్ధాంతం (3) శాశ్వత ఆత్మ (4) యజ్ఞాలు</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(2) కర్మ సిద్ధాంతం మాత్రమే.</b> వేదాలు, యజ్ఞాలను తిరస్కరించాడు; శాశ్వత ఆత్మకు బదులు "అనాత్మ" బోధించాడు.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>మధ్యమ మార్గం: భోగం, కఠోర తపస్సు — రెండు అతివాదాలకు దూరం.</li>
+      <li>ఆర్య సత్యాలు: దుఃఖ → సముదయ (తృష్ణ) → నిరోధ (నిర్వాణం) → మార్గ (అష్టాంగ).</li>
+      <li>అష్టాంగ మార్గం = ప్రజ్ఞ (1–2) + శీల (3–5) + సమాధి (6–8).</li>
+      <li>అనిత్య, దుఃఖ, అనాత్మ; ప్రతీత్యసముత్పాదం; కర్మ అంగీకారం; దేవునిపై మౌనం; త్రిరత్నాలు — బుద్ధ, ధర్మ, సంఘ.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 3 ============ -->
+<section id="chapter-3" class="chapter" data-ch="3">
+  <h1>అధ్యాయం 3: సంఘం, సంగీతులు, సాహిత్యం & శాఖలు</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>3.1 బౌద్ధ సంఘం</h2>
+  <ul>
+    <li>కుల, వర్ణ భేదం లేకుండా అందరికీ ప్రవేశం. సభ్యులు <b>భిక్షువులు</b> / <b>భిక్షుణులు</b>; సామాన్య అనుచరులు <b>ఉపాసకులు</b>.</li>
+    <li>అప్పులున్నవారు, సైనికులు, బానిసలు, రోగులు, తల్లిదండ్రుల అనుమతి లేని మైనర్లకు ప్రవేశం లేదు.</li>
+    <li><b>ఆనందుని</b> అభ్యర్థనతో స్త్రీలకు ప్రవేశం — మొదటి భిక్షుణి <b>మహాప్రజాపతి గౌతమి</b>.</li>
+    <li>సంఘం ప్రజాస్వామిక పద్ధతిలో నడిచేది — గణ రాజ్యాల సభల విధానం. వర్షాకాలంలో భిక్షువులు ఒకచోట ఉండేవారు — <b>వర్షావాసం</b>. ప్రతి పక్షానికి ఒకసారి <b>ఉపోసథ</b> సమావేశం.</li>
+  </ul>
+
+  <h2>3.2 నాలుగు బౌద్ధ సంగీతులు (Councils) & శాఖల విభజన</h2>
+  <p>ప్రతి సంగీతి = <b>సంవత్సరం · స్థలం · పోషకుడు · అధ్యక్షుడు · ఫలితం</b>. ఈ ఐదు వివరాలు పరీక్షల్లో తప్పనిసరి.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 390" role="img" aria-label="నాలుగు బౌద్ధ సంగీతుల కాలరేఖ మరియు శాఖల విభజన">
+      <defs><marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#0066cc"/></marker></defs>
+      <line x1="30" y1="60" x2="735" y2="60" stroke="#0066cc" stroke-width="3" marker-end="url(#arrB)" class="anim"/>
+      <g class="anim d1 hov"><title>మొదటి సంగీతి: బుద్ధుని మరణం తర్వాత వెంటనే; సప్తపర్ణి గుహ</title>
+        <circle cx="100" cy="60" r="9" fill="#0066cc"/><rect class="box" x="20" y="80" width="160" height="120" rx="10" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="100" y="40" text-anchor="middle" font-size="13" font-weight="700">క్రీ.పూ. 483</text>
+        <text x="100" y="102" text-anchor="middle" font-size="14" font-weight="700">1వ · రాజగృహం</text>
+        <text x="100" y="124" text-anchor="middle" font-size="12">అజాతశత్రువు</text>
+        <text x="100" y="143" text-anchor="middle" font-size="12">అధ్య: మహాకస్సప</text>
+        <text x="100" y="165" text-anchor="middle" font-size="11.5" fill="#0066cc">సుత్త (ఆనంద) +</text>
+        <text x="100" y="182" text-anchor="middle" font-size="11.5" fill="#0066cc">వినయ (ఉపాలి) పిటకాలు</text></g>
+      <g class="anim d2 hov"><title>రెండో సంగీతి: వినయ నియమాల సడలింపుపై వివాదం (10 అంశాలు)</title>
+        <circle cx="280" cy="60" r="9" fill="#ff6b35"/><rect class="box" x="200" y="80" width="160" height="120" rx="10" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+        <text x="280" y="40" text-anchor="middle" font-size="13" font-weight="700">క్రీ.పూ. 383</text>
+        <text x="280" y="102" text-anchor="middle" font-size="14" font-weight="700">2వ · వైశాలి</text>
+        <text x="280" y="124" text-anchor="middle" font-size="12">కాలాశోకుడు</text>
+        <text x="280" y="143" text-anchor="middle" font-size="12">అధ్య: సబకామి</text>
+        <text x="280" y="165" text-anchor="middle" font-size="11.5" fill="#c4471a">మొదటి చీలిక:</text>
+        <text x="280" y="182" text-anchor="middle" font-size="11.5" fill="#c4471a">స్థవిరవాదులు | మహాసాంఘికులు</text></g>
+      <g class="anim d3 hov"><title>మూడో సంగీతి: అశోకుని కాలం; తర్వాత విదేశాలకు ధర్మ ప్రచారకులు</title>
+        <circle cx="460" cy="60" r="9" fill="#00b359"/><rect class="box" x="380" y="80" width="160" height="120" rx="10" fill="#f0f9f4" stroke="#00b359" stroke-width="2"/>
+        <text x="460" y="40" text-anchor="middle" font-size="13" font-weight="700">క్రీ.పూ. 250</text>
+        <text x="460" y="102" text-anchor="middle" font-size="14" font-weight="700">3వ · పాటలీపుత్రం</text>
+        <text x="460" y="124" text-anchor="middle" font-size="12">అశోకుడు</text>
+        <text x="460" y="143" text-anchor="middle" font-size="12">అధ్య: మొగ్గలిపుత్త తిస్స</text>
+        <text x="460" y="165" text-anchor="middle" font-size="11.5" fill="#007a3d">అభిధమ్మ పిటకం;</text>
+        <text x="460" y="182" text-anchor="middle" font-size="11.5" fill="#007a3d">విదేశీ ధర్మ ప్రచారం</text></g>
+      <g class="anim d4 hov"><title>నాలుగో సంగీతి: కుషాణ రాజు కనిష్కుడు; సంస్కృతంలో చర్చలు</title>
+        <circle cx="640" cy="60" r="9" fill="#7a5cc8"/><rect class="box" x="560" y="80" width="175" height="120" rx="10" fill="#f1ecfb" stroke="#7a5cc8" stroke-width="2"/>
+        <text x="640" y="40" text-anchor="middle" font-size="13" font-weight="700">క్రీ.శ. 1వ శతాబ్దం</text>
+        <text x="647" y="102" text-anchor="middle" font-size="14" font-weight="700">4వ · కుండలవనం (కశ్మీర్)</text>
+        <text x="647" y="124" text-anchor="middle" font-size="12">కనిష్కుడు</text>
+        <text x="647" y="143" text-anchor="middle" font-size="12">అధ్య: వసుమిత్ర (ఉప: అశ్వఘోష)</text>
+        <text x="647" y="165" text-anchor="middle" font-size="11.5" fill="#5a3fa8">మహాయాన | హీనయాన</text>
+        <text x="647" y="182" text-anchor="middle" font-size="11.5" fill="#5a3fa8">చీలిక; మహావిభాష</text></g>
+      <!-- sect tree -->
+      <g class="anim d5">
+        <rect x="290" y="232" width="180" height="36" rx="8" fill="#fff" stroke="#0066cc" stroke-width="2"/><text x="380" y="256" text-anchor="middle" font-size="14" font-weight="700">బౌద్ధం</text>
+        <path d="M380,268 L380,285 L150,285 L150,300 M380,285 L610,285 L610,300" stroke="#0066cc" stroke-width="2" fill="none"/>
+        <rect x="40" y="300" width="220" height="78" rx="8" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="150" y="322" text-anchor="middle" font-size="14" font-weight="700">హీనయాన (థేరవాద)</text>
+        <text x="150" y="342" text-anchor="middle" font-size="12">పాళీ · బుద్ధుడు గురువు · విగ్రహం లేదు</text>
+        <text x="150" y="362" text-anchor="middle" font-size="12" fill="#555">శ్రీలంక, మయన్మార్, థాయ్‌లాండ్</text>
+        <rect x="480" y="300" width="260" height="78" rx="8" fill="#f1ecfb" stroke="#7a5cc8" stroke-width="2"/>
+        <text x="610" y="322" text-anchor="middle" font-size="14" font-weight="700">మహాయాన → వజ్రయాన</text>
+        <text x="610" y="342" text-anchor="middle" font-size="12">సంస్కృతం · బోధిసత్వ · విగ్రహారాధన</text>
+        <text x="610" y="362" text-anchor="middle" font-size="12" fill="#555">చైనా, జపాన్, కొరియా, టిబెట్</text>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 3.1 — నాలుగు సంగీతులు (పై కాలరేఖ) & ప్రధాన శాఖల విభజన (కింద). పెట్టెలపై మౌస్ ఉంచండి.</figcaption>
+  </figure>
+
+  <h2>3.3 బౌద్ధ సాహిత్యం</h2>
+  <div class="table-wrap"><table>
+    <tr><th>గ్రంథం</th><th>వివరం</th></tr>
+    <tr><td><b>త్రిపిటకాలు</b> (పాళీ; "మూడు బుట్టలు")</td><td><b>వినయ పిటకం</b> — సంఘ నియమాలు; <b>సుత్త పిటకం</b> — బుద్ధుని ప్రవచనాలు (5 నికాయాలు); <b>అభిధమ్మ పిటకం</b> — తత్వశాస్త్రం</td></tr>
+    <tr><td><b>జాతక కథలు</b></td><td>బుద్ధుని పూర్వ జన్మల కథలు (~550); సుత్త పిటకంలోని ఖుద్దక నికాయంలో భాగం; భర్హుత్, సాంచి శిల్పాల్లో చిత్రణ</td></tr>
+    <tr><td><b>మిళిందపన్హో</b></td><td>ఇండో-గ్రీకు రాజు <b>మెనాండర్</b> (మిళిందుడు), బౌద్ధ భిక్షువు <b>నాగసేనుని</b> మధ్య సంవాదం</td></tr>
+    <tr><td><b>దీపవంశం, మహావంశం</b></td><td>శ్రీలంక పాళీ చరిత్రలు — అశోకుడు, మహేంద్ర-సంఘమిత్రల గురించి</td></tr>
+    <tr><td><b>బుద్ధచరితం</b></td><td><b>అశ్వఘోషుడు</b> (కనిష్కుని ఆస్థానం) — సంస్కృతంలో బుద్ధుని జీవిత చరిత్ర కావ్యం</td></tr>
+    <tr><td><b>విశుద్ధిమగ్గ</b></td><td><b>బుద్ధఘోషుడు</b> (క్రీ.శ. 5వ శతాబ్దం) — థేరవాద సిద్ధాంతాల సంగ్రహం</td></tr>
+    <tr><td><b>దివ్యావదానం, లలితవిస్తరం</b></td><td>సంస్కృత మహాయాన గ్రంథాలు</td></tr>
+  </table></div>
+
+  <h2>3.4 ఆంధ్ర ప్రదేశ్ & తెలంగాణలో బౌద్ధం (APPSC / TSPSC కు ప్రత్యేకం)</h2>
+  <ul>
+    <li><b>ఆచార్య నాగార్జునుడు</b> — మహాయాన <b>మాధ్యమిక</b> (శూన్యవాద) శాఖ స్థాపకుడు; గ్రంథం <i>మూలమాధ్యమక కారిక</i>; <b>నాగార్జునకొండ</b> (శ్రీపర్వతం / విజయపురి) ఆయన పేరుతో. శాతవాహన రాజు (యజ్ఞశ్రీ శాతకర్ణి)కి <i>సుహృల్లేఖ</i> రాశాడని సంప్రదాయం.</li>
+    <li><b>అమరావతి</b> (ధాన్యకటకం) — మహాస్తూపం; అమరావతి శిల్ప శైలి (తెల్ల పాలరాయి వంటి సున్నపురాయి).</li>
+    <li><b>భట్టిప్రోలు</b> — స్తూపం; <b>భట్టిప్రోలు లిపి</b> (దక్షిణ బ్రాహ్మి రూపం — తెలుగు లిపికి ప్రాచీన పూర్వరూపం).</li>
+    <li>ఇతర ప్రదేశాలు: <b>ఘంటసాల, శాలిహుండం, బావికొండ, తొట్లకొండ, గుంటుపల్లి</b> (ఏపీ); <b>ఫణిగిరి, నేలకొండపల్లి, ధూళికట్ట, కొండాపూర్</b> (తెలంగాణ).</li>
+    <li><b>దిఙ్నాగుడు</b> — బౌద్ధ తర్కశాస్త్ర పితామహుడు, ఆంధ్ర ప్రాంతం వాడు అని సంప్రదాయం.</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — సంగీతులు & శాఖలు">
+<pre># సంగీతి   సంవత్సరం      స్థలం          పోషకుడు     అధ్యక్షుడు
+1       క్రీ.పూ. 483   రాజగృహం       అజాతశత్రు    మహాకస్సప     # సుత్త + వినయ
+2       క్రీ.పూ. 383   వైశాలి         కాలాశోక      సబకామి       # తొలి చీలిక
+3       క్రీ.పూ. 250   పాటలీపుత్రం    అశోకుడు      మొగ్గలిపుత్త తిస్స  # అభిధమ్మ
+4       క్రీ.శ. 1వ శ.  కుండలవనం     కనిష్కుడు     వసుమిత్ర      # మహాయాన/హీనయాన
+
+# శాఖలు
+హీనయాన  →  థేరవాద · పాళీ · అర్హత్ ఆదర్శం
+మహాయాన  →  సంస్కృతం · బోధిసత్వ ఆదర్శం · విగ్రహారాధన
+వజ్రయాన  →  తాంత్రిక · బెంగాల్, బిహార్, టిబెట్
+మాధ్యమిక  →  నాగార్జునుడు (శూన్యవాదం)
+యోగాచార  →  అసంగుడు, వసుబంధు (విజ్ఞానవాదం)</pre>
+  </div>
+
+  <details class="collapsible" id="c3-adv">
+    <summary>🔍 లోతుగా: భారతదేశంలో బౌద్ధం క్షీణతకు కారణాలు</summary>
+    <div class="inner">
+      <ul>
+        <li><b>అంతర్గత మార్పులు</b>: సంఘాల్లో సంపద పెరగడం, విహారాల్లో విలాసం; సామాన్యుల భాష పాళీని వదిలి పండితుల భాష సంస్కృతాన్ని స్వీకరించడం; వజ్రయానంలో తాంత్రిక ఆచారాలు.</li>
+        <li><b>బ్రాహ్మణ మత పునరుజ్జీవనం</b>: భక్తి ఉద్యమం; బుద్ధుడిని విష్ణువు అవతారంగా స్వీకరించడం; శంకరాచార్యుని అద్వైత వేదాంతం.</li>
+        <li><b>రాజాదరణ కోల్పోవడం</b>: శుంగ వంశ పుష్యమిత్రుడు, హూణ రాజు మిహిరకులుడు, గౌడ రాజు శశాంకుడు (బోధి వృక్షం నరికివేత) వంటి వారి వ్యతిరేకత.</li>
+        <li><b>తుర్కిష్ దండయాత్రలు</b>: క్రీ.శ. 12వ శతాబ్దం చివర్లో భక్తియార్ ఖిల్జీ నలందా, విక్రమశిల విహారాలను ధ్వంసం చేయడం — చివరి దెబ్బ.</li>
+      </ul>
+      <p><b>బౌద్ధ విశ్వవిద్యాలయాలు</b>: <b>నలంద</b> (కుమారగుప్తుడు స్థాపన; హ్యూయన్ త్సాంగ్ ఇక్కడ చదివాడు), <b>విక్రమశిల</b> (పాల రాజు ధర్మపాలుడు), <b>ఒదంతపురి</b>, <b>వల్లభి</b> (గుజరాత్).</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q3-1">
+      <p><strong>Q1:</strong> బౌద్ధం హీనయాన, మహాయాన శాఖలుగా విడిపోయిన సంగీతి ఏది?</p>
+      <ol type="a"><li>మొదటి – రాజగృహం</li><li>రెండో – వైశాలి</li><li>మూడో – పాటలీపుత్రం</li><li>నాలుగో – కుండలవనం</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(d) నాలుగో సంగీతి – కశ్మీర్‌లోని కుండలవనం</b>, కనిష్కుని కాలం, అధ్యక్షుడు వసుమిత్ర. (రెండో సంగీతిలో జరిగినది స్థవిరవాదులు–మహాసాంఘికులు అనే తొలి చీలిక.)</p>
+    </div>
+    <div class="quiz-question" id="q3-2">
+      <p><strong>Q2:</strong> "మిళిందపన్హో" ఎవరి మధ్య సంవాదం?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">ఇండో-గ్రీకు రాజు <b>మెనాండర్ (మిళిందుడు)</b>, బౌద్ధ భిక్షువు <b>నాగసేనుడు</b>.</p>
+    </div>
+    <div class="quiz-question" id="q3-3">
+      <p><strong>Q3:</strong> మాధ్యమిక (శూన్యవాద) శాఖ స్థాపకుడు ఎవరు, ఆయనతో ముడిపడిన ఆంధ్ర ప్రదేశ్ స్థలం ఏది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>ఆచార్య నాగార్జునుడు</b> — <b>నాగార్జునకొండ</b> (శ్రీపర్వతం, పల్నాడు ప్రాంతం, కృష్ణా నది ఒడ్డు).</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>సంఘం అందరికీ తెరిచి ఉంది; ఆనందుని అభ్యర్థనతో స్త్రీలకు ప్రవేశం — మహాప్రజాపతి మొదటి భిక్షుణి.</li>
+      <li>సంగీతులు: రాజగృహం (483) → వైశాలి (383) → పాటలీపుత్రం (250) → కుండలవనం (1వ శ. CE).</li>
+      <li>త్రిపిటకాలు: వినయ, సుత్త, అభిధమ్మ; జాతకాలు, మిళిందపన్హో, బుద్ధచరితం ముఖ్య గ్రంథాలు.</li>
+      <li>హీనయాన (పాళీ, అర్హత్) vs మహాయాన (సంస్కృతం, బోధిసత్వ, విగ్రహం); నాగార్జునుడు, అమరావతి — ఆంధ్ర వారసత్వం.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 4 ============ -->
+<section id="chapter-4" class="chapter" data-ch="4">
+  <h1>అధ్యాయం 4: జైనమతం — మహావీరుడు & పంచ మహావ్రతాలు</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>4.1 తీర్థంకరులు</h2>
+  <p>"జైన" అనే పదం "<b>జిన</b>" (ఇంద్రియాలను జయించినవాడు) నుండి వచ్చింది. జైన సంప్రదాయం ప్రకారం <b>24 తీర్థంకరులు</b> (సంసార సాగరాన్ని దాటడానికి "రేవు" నిర్మించినవారు) ఉన్నారు. మహావీరుడు జైనమత స్థాపకుడు కాదు — <b>చివరి తీర్థంకరుడు</b>.</p>
+  <div class="table-wrap"><table>
+    <tr><th>తీర్థంకరుడు</th><th>చిహ్నం</th><th>ప్రత్యేకత</th></tr>
+    <tr><td>1వ — <b>ఋషభనాథుడు</b> (ఆదినాథుడు)</td><td>వృషభం</td><td>జైనమత స్థాపకునిగా భావిస్తారు; ఋగ్వేదం, విష్ణు/భాగవత పురాణాల్లో ప్రస్తావన</td></tr>
+    <tr><td>22వ — <b>నేమినాథుడు</b> (అరిష్టనేమి)</td><td>శంఖం</td><td>కృష్ణుని సమకాలీనుడు అని సంప్రదాయం</td></tr>
+    <tr><td>23వ — <b>పార్శ్వనాథుడు</b></td><td>సర్పం</td><td>కాశీ రాజు అశ్వసేనుని కుమారుడు; <b>చారిత్రక వ్యక్తి</b> (క్రీ.పూ. ~8వ శతాబ్దం); <b>నాలుగు వ్రతాలు</b> బోధించాడు</td></tr>
+    <tr><td>24వ — <b>వర్ధమాన మహావీరుడు</b></td><td>సింహం</td><td>ఐదో వ్రతం (బ్రహ్మచర్యం) చేర్చాడు; జైనమతాన్ని వ్యవస్థీకరించాడు</td></tr>
+  </table></div>
+
+  <h2>4.2 వర్ధమాన మహావీరుని జీవితం</h2>
+  <div class="table-wrap"><table>
+    <tr><th>అంశం</th><th>వివరం</th></tr>
+    <tr><td>జననం</td><td>క్రీ.పూ. <b>540</b> (సాంప్రదాయిక; కొందరు 599 అంటారు), <b>కుండగ్రామం</b> (వైశాలి సమీపం, బిహార్)</td></tr>
+    <tr><td>తల్లిదండ్రులు</td><td>తండ్రి <b>సిద్ధార్థుడు</b> (జ్ఞాతృక గణ అధిపతి); తల్లి <b>త్రిశల</b> — లిచ్ఛవి అధిపతి <b>చేటకుని</b> సోదరి (చేటకుని కుమార్తె చెల్లన బింబిసారుని భార్య → మహావీరుడు మగధ రాజవంశానికి బంధువు)</td></tr>
+    <tr><td>కుటుంబం</td><td>భార్య <b>యశోద</b>; కుమార్తె <b>అనోజ్జ / ప్రియదర్శన</b>; అల్లుడు <b>జమాలి</b> — మొదటి శిష్యుడు, తర్వాత మొదటి భిన్నాభిప్రాయి</td></tr>
+    <tr><td>గృహత్యాగం</td><td><b>30</b> ఏళ్లకు (తల్లిదండ్రుల మరణం తర్వాత); <b>12</b> ఏళ్ల కఠోర తపస్సు; 13వ నెల నుండి దిగంబరుడు; ఆజీవిక గోశాలుడు కొంతకాలం సహచరుడు</td></tr>
+    <tr><td>కైవల్యం</td><td><b>42</b> ఏళ్లకు, <b>జృంభికగ్రామం</b>, <b>ఋజుపాలిక</b> నది ఒడ్డున <b>సాల వృక్షం</b> కింద — సర్వజ్ఞత్వం (కైవల్య జ్ఞానం)</td></tr>
+    <tr><td>బిరుదులు</td><td><b>జినుడు</b> (జయించినవాడు), <b>మహావీరుడు</b>, <b>కేవలి</b>, <b>నిర్గ్రంథుడు</b> (బంధాలు లేనివాడు), <b>అర్హత్</b></td></tr>
+    <tr><td>మొదటి ప్రవచనం</td><td>రాజగృహం సమీపంలో <b>విపులాచల</b> కొండపై; 11 మంది ప్రధాన శిష్యులు — <b>గణధరులు</b> (మొదటివాడు ఇంద్రభూతి గౌతముడు)</td></tr>
+    <tr><td>మరణం</td><td>క్రీ.పూ. <b>468</b>, <b>72</b> ఏళ్లకు, <b>పావాపురి</b> (రాజగృహం సమీపం) — "<b>నిర్వాణం</b>"; దీపావళి నాడు జైనులు స్మరిస్తారు</td></tr>
+    <tr><td>పోషకులు</td><td>బింబిసారుడు, అజాతశత్రువు, లిచ్ఛవి చేటకుడు; తర్వాత <b>చంద్రగుప్త మౌర్యుడు</b>, కళింగ <b>ఖారవేలుడు</b> (హాథీగుంఫా శాసనం), రాష్ట్రకూట <b>అమోఘవర్షుడు</b>, చాళుక్య <b>కుమారపాలుడు</b> (హేమచంద్రుడు)</td></tr>
+  </table></div>
+
+  <h2>4.3 పంచ మహావ్రతాలు — ఇంటరాక్టివ్ చిత్రం</h2>
+  <p>జైన సన్యాసులు కఠినంగా పాటించేవి <b>మహావ్రతాలు</b>; గృహస్థులు సడలించిన రూపంలో పాటించేవి <b>అణువ్రతాలు</b>. మొదటి నాలుగు పార్శ్వనాథుడివి; ఐదోది (బ్రహ్మచర్యం) మహావీరుడు చేర్చాడు. ఏ వ్రతంపైనైనా క్లిక్ చేయండి.</p>
+
+  <figure class="diagram">
+    <svg id="vrataSvg" viewBox="0 0 760 425" role="img" aria-label="పంచ మహావ్రతాలు — పంచభుజి రేఖాచిత్రం">
+      <g class="anim">
+        <polygon points="250,40 425,167 358,372 142,372 75,167" fill="#fafcff" stroke="#0066cc" stroke-width="2" stroke-dasharray="6 5"/>
+        <circle cx="250" cy="220" r="62" fill="#fff8e1" stroke="#d4a017" stroke-width="2"/>
+        <text x="250" y="210" text-anchor="middle" font-size="13" font-weight="700">లక్ష్యం:</text>
+        <text x="250" y="230" text-anchor="middle" font-size="13" font-weight="700">కైవల్యం /</text>
+        <text x="250" y="250" text-anchor="middle" font-size="13" font-weight="700">మోక్షం</text>
+      </g>
+      <g id="vratas" class="anim d2"></g>
+      <g class="anim d3">
+        <rect x="490" y="30" width="250" height="360" rx="12" fill="#fafafa" stroke="#ddd"/>
+        <rect x="506" y="48" width="16" height="16" rx="3" fill="#e8f1fb" stroke="#0066cc"/><text x="530" y="61" font-size="13" font-weight="700">పార్శ్వనాథుని 4 వ్రతాలు</text>
+        <rect x="506" y="76" width="16" height="16" rx="3" fill="#ffe3d6" stroke="#ff6b35"/><text x="530" y="89" font-size="13" font-weight="700">మహావీరుడు చేర్చినది</text>
+        <line x1="506" y1="106" x2="724" y2="106" stroke="#ddd"/>
+        <text id="vrataTitle" x="506" y="134" font-size="15" font-weight="700" fill="#0066cc">ఒక వ్రతంపై క్లిక్ చేయండి</text>
+        <foreignObject x="500" y="144" width="236" height="236"><div xmlns="http://www.w3.org/1999/xhtml" id="vrataDesc" style="font-size:13.5px;line-height:1.6;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">సన్యాసులకు "మహా"వ్రతాలు; గృహస్థులకు "అణు"వ్రతాలు.</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 4.1 — పంచ మహావ్రతాలు. నారింజ రంగు = మహావీరుడు చేర్చిన ఐదో వ్రతం.</figcaption>
+  </figure>
+
+  <h2>4.4 జైన సిద్ధాంతాలు</h2>
+  <ul>
+    <li><b>త్రిరత్నాలు</b> (మోక్ష మార్గం): <b>సమ్యక్ దర్శనం</b> (సరైన విశ్వాసం), <b>సమ్యక్ జ్ఞానం</b>, <b>సమ్యక్ చారిత్రం</b> (సరైన ప్రవర్తన). <i>(బౌద్ధ త్రిరత్నాలు బుద్ధ-ధర్మ-సంఘ — వేరు! పరీక్షల్లో తరచుగా కలిపి అడుగుతారు.)</i></li>
+    <li><b>జీవ – అజీవ</b>: విశ్వం రెండు శాశ్వత తత్వాలతో — జీవం (ఆత్మ) & అజీవం (పదార్థం). రాళ్లు, నీరు, మొక్కలు సహా <b>ప్రతిదానిలో జీవం</b> ఉంది — అందుకే తీవ్రమైన అహింస.</li>
+    <li><b>కర్మ బంధం</b>: కర్మ ఒక సూక్ష్మ పదార్థం, ఆత్మకు అంటుకుంటుంది (ఆస్రవం). తపస్సు, వ్రతాలతో కొత్త కర్మ ఆపడం (సంవరం), పాత కర్మ తొలగించడం (నిర్జర) → <b>కైవల్యం</b>.</li>
+    <li><b>అనేకాంతవాదం</b>: సత్యానికి అనేక కోణాలు ఉన్నాయి (ఏనుగు–ఆరుగురు అంధుల కథ). దీని తార్కిక రూపం <b>స్యాద్వాదం</b> — "బహుశా (స్యాత్)" అనే ఏడు రకాల వాక్యాలు (<b>సప్తభంగి నయం</b>).</li>
+    <li><b>దేవుడు</b>: దేవుళ్ల ఉనికిని అంగీకరించారు, కానీ వారిని జినుని కంటే తక్కువ స్థానంలో ఉంచారు; సృష్టికర్త అయిన ఈశ్వరుని తిరస్కరించారు. వేదాలు, యజ్ఞాలను తిరస్కరించారు. <b>వర్ణ వ్యవస్థను పూర్తిగా ఖండించలేదు</b> (పూర్వ జన్మ కర్మ ఫలంగా భావించారు).</li>
+    <li><b>సల్లేఖన</b>: జీవిత చివరలో ఆహారం క్రమంగా తగ్గించి ప్రాణత్యాగం చేసే మతాచారం — <b>చంద్రగుప్త మౌర్యుడు</b> శ్రావణబెళగొళలో ఈ విధంగా మరణించాడని సంప్రదాయం.</li>
+  </ul>
+
+  <h2>4.5 జైన సంగీతులు, శాఖలు, సాహిత్యం</h2>
+  <div class="table-wrap"><table>
+    <tr><th>సంగీతి</th><th>కాలం · స్థలం</th><th>అధ్యక్షుడు</th><th>ఫలితం</th></tr>
+    <tr><td>1వ</td><td>క్రీ.పూ. ~300 · <b>పాటలీపుత్రం</b></td><td><b>స్థూలభద్రుడు</b></td><td>12 అంగాల సంకలనం; శ్వేతాంబర–దిగంబర విభజనకు నాంది</td></tr>
+    <tr><td>2వ</td><td>క్రీ.శ. 512 · <b>వల్లభి</b> (గుజరాత్)</td><td><b>దేవర్ధి క్షమాశ్రమణుడు</b></td><td>12 అంగాలు, 12 ఉపాంగాల తుది సంకలనం</td></tr>
+  </table></div>
+  <p><b>శాఖల చీలిక:</b> చంద్రగుప్త మౌర్యుని కాలంలో మగధలో 12 ఏళ్ల కరువు. <b>భద్రబాహు</b> నాయకత్వంలో ఒక బృందం చంద్రగుప్తునితో కలిసి దక్షిణానికి (<b>శ్రావణబెళగొళ</b>, కర్ణాటక) వెళ్లింది — వీరు కఠిన నియమాలు పాటించి, నగ్నంగా ఉన్నారు → <b>దిగంబరులు</b>. <b>స్థూలభద్రుని</b> నాయకత్వంలో మగధలో ఉండిపోయినవారు తెల్ల వస్త్రాలు ధరించారు → <b>శ్వేతాంబరులు</b>.</p>
+  <ul>
+    <li><b>సాహిత్యం</b>: <b>ఆగమాలు</b> (12 అంగాలు, 12 ఉపాంగాలు…) — <b>అర్ధమాగధి ప్రాకృతం</b>లో. <b>కల్పసూత్రం</b> (భద్రబాహు — తీర్థంకరుల జీవిత చరిత్రలు). <b>పరిశిష్టపర్వన్</b> (హేమచంద్రుడు). జైనులు కన్నడ, తమిళ సాహిత్యాభివృద్ధికి పెద్ద ఎత్తున దోహదపడ్డారు.</li>
+    <li><b>జైన కట్టడాలు</b>: <b>దిల్వారా</b> ఆలయాలు (మౌంట్ అబూ, రాజస్థాన్), <b>గోమఠేశ్వర</b> (బాహుబలి) విగ్రహం (శ్రావణబెళగొళ — గంగ మంత్రి చాముండరాయ), <b>పాలిటానా</b> (గుజరాత్), ఉదయగిరి–ఖండగిరి గుహలు (ఒడిశా), <b>కొలనుపాక</b> (తెలంగాణ).</li>
+  </ul>
+
+  <h2>4.6 బౌద్ధం vs జైనం — ఒక చూపులో</h2>
+  <div class="table-wrap"><table>
+    <tr><th>అంశం</th><th>బౌద్ధం</th><th>జైనం</th></tr>
+    <tr><td>పోలికలు</td><td colspan="2">ఇద్దరు స్థాపకులు క్షత్రియులు, గణ రాజ్యాల వారు; వేదాలు, యజ్ఞాలు, బ్రాహ్మణ ఆధిపత్యం తిరస్కారం; అహింస; కర్మ-పునర్జన్మ అంగీకారం; ప్రాకృత భాష; సంఘ వ్యవస్థ; వైశ్యుల ఆదరణ</td></tr>
+    <tr><td>ఆత్మ</td><td><b>అనాత్మ</b> — శాశ్వత ఆత్మ లేదు</td><td>ప్రతిదానిలో <b>జీవం (ఆత్మ)</b> ఉంది</td></tr>
+    <tr><td>మార్గం</td><td><b>మధ్యమ మార్గం</b></td><td><b>కఠోర తపస్సు</b>, శరీర కష్టం</td></tr>
+    <tr><td>అహింస</td><td>మితమైనది</td><td>అత్యంత తీవ్రమైనది (వ్యవసాయం కూడా వదిలి వ్యాపారంలోకి)</td></tr>
+    <tr><td>త్రిరత్నాలు</td><td>బుద్ధ, ధర్మ, సంఘ</td><td>సమ్యక్ దర్శన, జ్ఞాన, చారిత్ర</td></tr>
+    <tr><td>భాష</td><td>పాళీ</td><td>అర్ధమాగధి</td></tr>
+    <tr><td>వ్యాప్తి</td><td>ఆసియా అంతటా (అశోకుని ప్రచారం)</td><td>భారతదేశానికే పరిమితం — కానీ నేటికీ కొనసాగుతోంది</td></tr>
+    <tr><td>ముక్తి పేరు</td><td>నిర్వాణం</td><td>కైవల్యం / మోక్షం</td></tr>
+  </table></div>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — జైనమతం">
+<pre># మహావీరుడు
+జననం       →  కుండగ్రామం (వైశాలి)     # క్రీ.పూ. 540
+గృహత్యాగం   →  30 ఏళ్లు; 12 ఏళ్ల తపస్సు
+కైవల్యం      →  42 ఏళ్లు; జృంభికగ్రామం, ఋజుపాలిక, సాల వృక్షం
+నిర్వాణం     →  పావాపురి                # క్రీ.పూ. 468, 72 ఏళ్లు
+
+# పంచ మహావ్రతాలు
+1 అహింస      →  ఏ జీవినీ హింసించకూడదు
+2 సత్యం       →  అబద్ధం ఆడకూడదు
+3 అస్తేయం     →  దొంగిలించకూడదు
+4 అపరిగ్రహం   →  ఆస్తి కూడబెట్టకూడదు
+5 బ్రహ్మచర్యం  →  ఇంద్రియ నిగ్రహం        # మహావీరుడు చేర్చినది
+
+# శాఖలు
+దిగంబర     →  భద్రబాహు · దక్షిణం · స్త్రీలకు మోక్షం లేదు
+శ్వేతాంబర   →  స్థూలభద్రుడు · ఉత్తరం · స్త్రీలకూ మోక్షం సాధ్యం</pre>
+  </div>
+
+  <details class="collapsible" id="c4-adv">
+    <summary>🔍 లోతుగా: స్యాద్వాదం — సప్తభంగి నయం (7 వాక్య రూపాలు)</summary>
+    <div class="inner">
+      <p>ఏ విషయం గురించైనా సంపూర్ణ సత్యం చెప్పలేం; "<b>స్యాత్</b>" (ఒక కోణం నుండి / బహుశా) అని ముందు చేర్చి ఏడు విధాలుగా చెప్పవచ్చు. ఉదా: "కుండ ఉంది" అనే విషయం గురించి —</p>
+      <ol>
+        <li>స్యాత్ అస్తి — ఒక కోణంలో ఉంది</li>
+        <li>స్యాత్ నాస్తి — ఒక కోణంలో లేదు</li>
+        <li>స్యాత్ అస్తి చ నాస్తి చ — ఉంది, లేదు కూడా</li>
+        <li>స్యాత్ అవక్తవ్యం — వర్ణించలేనిది</li>
+        <li>స్యాత్ అస్తి చ అవక్తవ్యం — ఉంది, వర్ణించలేనిది</li>
+        <li>స్యాత్ నాస్తి చ అవక్తవ్యం — లేదు, వర్ణించలేనిది</li>
+        <li>స్యాత్ అస్తి చ నాస్తి చ అవక్తవ్యం — ఉంది, లేదు, వర్ణించలేనిది</li>
+      </ol>
+      <p><b>మెయిన్స్ కోణం:</b> అనేకాంతవాదం భారతీయ సంస్కృతిలో <b>సహనం, బహుళత్వం</b> అనే విలువలకు తాత్విక ఆధారంగా ప్రస్తావించవచ్చు (Ethics పేపర్‌లో కూడా ఉపయోగపడుతుంది).</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q4-1">
+      <p><strong>Q1:</strong> పంచ మహావ్రతాలలో మహావీరుడు చేర్చిన ఐదో వ్రతం ఏది?</p>
+      <ol type="a"><li>అహింస</li><li>అపరిగ్రహం</li><li>బ్రహ్మచర్యం</li><li>అస్తేయం</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) బ్రహ్మచర్యం.</b> మిగిలిన నాలుగు 23వ తీర్థంకరుడు పార్శ్వనాథుడివి.</p>
+    </div>
+    <div class="quiz-question" id="q4-2">
+      <p><strong>Q2:</strong> మహావీరునికి కైవల్యం ఎక్కడ, ఏ వయసులో లభించింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>42 ఏళ్లకు</b>, <b>జృంభికగ్రామం</b> సమీపంలో <b>ఋజుపాలిక</b> నది ఒడ్డున <b>సాల వృక్షం</b> కింద.</p>
+    </div>
+    <div class="quiz-question" id="q4-3">
+      <p><strong>Q3:</strong> సరైన జతలను గుర్తించండి: (1) సమ్యక్ దర్శనం – బౌద్ధ త్రిరత్నం (2) దిగంబరులు – భద్రబాహు (3) రెండో జైన సంగీతి – వల్లభి (4) మహావీరుని నిర్వాణం – కుశినగర్</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(2) మరియు (3) మాత్రమే సరైనవి.</b> సమ్యక్ దర్శనం <b>జైన</b> త్రిరత్నం; మహావీరుని నిర్వాణం <b>పావాపురి</b>లో (కుశినగర్ బుద్ధునిది).</p>
+    </div>
+    <div class="quiz-question" id="q4-4">
+      <p><strong>Q4 (మెయిన్స్ శైలి):</strong> "బౌద్ధం ఆసియా అంతటా వ్యాపించగా, జైనం భారతదేశానికే పరిమితమైనప్పటికీ నేటికీ మనుగడ సాగిస్తోంది." కారణాలు విశ్లేషించండి. (150 పదాలు)</p>
+      <button class="reveal-btn">సమాధాన రూపురేఖ చూపించు</button>
+      <p class="answer"><b>రూపురేఖ:</b> (1) బౌద్ధ వ్యాప్తి — మధ్యమ మార్గం సులభం; అశోకుని, కనిష్కుని రాజాదరణ, విదేశీ ధర్మ ప్రచారకులు; వాణిజ్య మార్గాలు (సిల్క్ రూట్); మహాయానం స్థానిక సంస్కృతులకు అనుగుణంగా మారడం. (2) జైన పరిమితి — కఠోర తపస్సు, తీవ్ర అహింస సామాన్యులకు కష్టం; వ్యవసాయం కూడా వదిలేయాలి. (3) జైన మనుగడ — బలమైన గృహస్థ (శ్రావక) సమాజం, వ్యాపార వర్గాల ఆర్థిక బలం, హిందూ సమాజంతో సామరస్యం (వర్ణాన్ని పూర్తిగా ఖండించలేదు), సంస్థాగత క్రమశిక్షణ. (4) బౌద్ధ క్షీణత — సంఘ సంపద, సంస్కృతీకరణ, భక్తి ఉద్యమంలో విలీనం, విహారాల ధ్వంసం. ముగింపు.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>24 తీర్థంకరులు: ఋషభనాథ (1వ), పార్శ్వనాథ (23వ — చారిత్రక), మహావీర (24వ).</li>
+      <li>మహావీరుడు: కుండగ్రామం (540) → గృహత్యాగం 30 → కైవల్యం 42 (జృంభికగ్రామం) → పావాపురి 72 (468).</li>
+      <li>పంచ మహావ్రతాలు: అహింస, సత్యం, అస్తేయం, అపరిగ్రహం + బ్రహ్మచర్యం (మహావీరుడు).</li>
+      <li>త్రిరత్నాలు (దర్శన, జ్ఞాన, చారిత్ర); అనేకాంతవాదం/స్యాద్వాదం; దిగంబర (భద్రబాహు) vs శ్వేతాంబర (స్థూలభద్రుడు).</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">సూచికకు తిరిగి ✓</button></div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  const TOTAL = 4, P = 'bj-';
+  const NS = 'http://www.w3.org/2000/svg';
+  const store = {
+    get(k){ try{ return JSON.parse(sessionStorage.getItem(P+k)); }catch(e){ return null; } },
+    set(k,v){ try{ sessionStorage.setItem(P+k, JSON.stringify(v)); }catch(e){} }
+  };
+  const sections = [...document.querySelectorAll('.chapter')];
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  let visited = new Set(store.get('visited') || []);
+  let current = 0;
+
+  function show(n, push){
+    n = Math.max(0, Math.min(TOTAL, n));
+    current = n;
+    sections.forEach(s => s.classList.toggle('visible', +s.dataset.ch === n));
+    if (n > 0) { visited.add(n); store.set('visited', [...visited]); }
+    tocLinks.forEach(a => { a.classList.toggle('active', +a.dataset.ch === n); a.classList.toggle('done', visited.has(+a.dataset.ch)); });
+    document.getElementById('progressFill').style.width = (visited.size / TOTAL * 100) + '%';
+    document.getElementById('chapterCount').textContent = visited.size + '/' + TOTAL + ' అధ్యాయాలు';
+    if (push !== false) history.replaceState(null, '', '#' + sections[n].id);
+    window.scrollTo({top:0, behavior:'smooth'});
+    document.getElementById('sidebar').classList.remove('open');
+  }
+  window.goToChapter = n => show(n);
+  window.nextChapter = () => current < TOTAL ? show(current + 1) : (location.href = 'index.html');
+  window.previousChapter = () => show(current - 1);
+  document.querySelectorAll('.next-btn').forEach(b => b.addEventListener('click', nextChapter));
+  document.querySelectorAll('.prev-btn').forEach(b => b.addEventListener('click', previousChapter));
+  document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', () => show(+el.dataset.go)));
+  tocLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(+a.dataset.ch); }));
+  document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' && current < TOTAL) show(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+  });
+
+  // Quiz reveal
+  const revealed = new Set(store.get('quiz') || []);
+  document.querySelectorAll('.quiz-question').forEach(q => {
+    const btn = q.querySelector('.reveal-btn'), ans = q.querySelector('.answer'), label = btn.textContent;
+    const set = on => { ans.classList.toggle('show', on); btn.textContent = on ? 'సమాధానం దాచు' : label; btn.setAttribute('aria-expanded', on); };
+    set(revealed.has(q.id));
+    btn.addEventListener('click', () => { const on = !ans.classList.contains('show'); set(on); on ? revealed.add(q.id) : revealed.delete(q.id); store.set('quiz', [...revealed]); });
+  });
+
+  // Collapsibles
+  const openSet = new Set(store.get('open') || []);
+  document.querySelectorAll('details.collapsible').forEach(d => {
+    if (openSet.has(d.id)) d.open = true;
+    d.addEventListener('toggle', () => { d.open ? openSet.add(d.id) : openSet.delete(d.id); store.set('open', [...openSet]); });
+  });
+
+  // Revision blocks
+  const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  document.querySelectorAll('.code-block').forEach(cb => {
+    const pre = cb.querySelector('pre');
+    const raw = pre.textContent.replace(/^\n+|\s+$/g, '');
+    pre.innerHTML = raw.split('\n').map((line, i) => {
+      let h = esc(line), com = '';
+      const k = h.indexOf('#');
+      if (k >= 0) { com = '<span class="tok-com">' + h.slice(k) + '</span>'; h = h.slice(0, k); }
+      h = h.replace(/(→|=|\|)/g, '<span class="tok-key">$1</span>').replace(/(\d+)/g, '<span class="tok-num">$1</span>');
+      return '<span class="ln" data-n="' + (i + 1) + '">' + h + com + '</span>';
+    }).join('');
+    const head = document.createElement('div'); head.className = 'cb-head';
+    head.innerHTML = '<span>' + esc(cb.dataset.title || 'నోట్స్') + '</span>';
+    const btn = document.createElement('button'); btn.className = 'copy-btn'; btn.textContent = 'కాపీ'; btn.setAttribute('aria-label', 'నోట్స్ కాపీ చేయండి');
+    btn.addEventListener('click', () => {
+      const done = () => { btn.textContent = '✓ కాపీ అయింది'; setTimeout(() => btn.textContent = 'కాపీ', 1500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(raw).then(done, () => {});
+      else { const t = document.createElement('textarea'); t.value = raw; document.body.appendChild(t); t.select(); try{ document.execCommand('copy'); done(); }catch(e){} t.remove(); }
+    });
+    head.appendChild(btn); cb.insertBefore(head, pre);
+  });
+
+  // Buddha life state machine
+  const SM = {
+    birth:{label:'జననం — లుంబిని', desc:'క్రీ.పూ. 563; శాక్య గణం, తండ్రి శుద్ధోదనుడు, తల్లి మహామాయ. చిహ్నం: కమలం / వృషభం.'},
+    renounce:{label:'మహాభినిష్క్రమణం — గృహత్యాగం', desc:'వృద్ధుడు, రోగి, శవం, సన్యాసిని చూసి 29 ఏళ్లకు గృహత్యాగం; గుర్రం కంథక, సారథి ఛన్న. చిహ్నం: గుర్రం.'},
+    enlight:{label:'సంబోధి — జ్ఞానోదయం', desc:'35 ఏళ్లకు బోధ్ గయలో నిరంజన నది ఒడ్డున బోధి వృక్షం కింద. చిహ్నం: బోధి వృక్షం.'},
+    sermon:{label:'ధర్మచక్ర ప్రవర్తనం — మొదటి ప్రవచనం', desc:'సారనాథ్ మృగదావనంలో ఐదుగురు శిష్యులకు ఆర్య సత్యాలు, అష్టాంగ మార్గం బోధన. చిహ్నం: చక్రం.'},
+    death:{label:'మహాపరినిర్వాణం', desc:'క్రీ.పూ. 483, 80 ఏళ్లకు కుశినగర్‌లో (మల్ల గణ రాజ్యం). చిహ్నం: స్తూపం.'}
+  };
+  const T = { e1:['birth','renounce','e-1'], e2:['renounce','enlight','e-2'], e3:['enlight','sermon','e-3'], e4:['sermon','death','e-4'], reset:[null,'birth','e-r'] };
+  const order = ['e1','e2','e3','e4','reset'];
+  let st = 'birth', timer = null, step = 0;
+  const btns = [...document.querySelectorAll('#smControls [data-ev]')];
+  function render(edge){
+    document.querySelectorAll('.sm-state').forEach(g => g.classList.toggle('active', g.dataset.state === st));
+    document.getElementById('smLabel').textContent = SM[st].label;
+    document.getElementById('smDesc').textContent = SM[st].desc;
+    btns.forEach(b => { const t = T[b.dataset.ev]; b.disabled = b.dataset.ev === 'reset' ? st === 'birth' : t[0] !== st; });
+    document.querySelectorAll('.sm-edge').forEach(p => p.classList.remove('run'));
+    if (edge) { const p = document.getElementById(edge); void p.getBoundingClientRect(); p.classList.add('run'); }
+  }
+  function fire(ev){ const t = T[ev]; if (t[0] !== null && t[0] !== st) return; st = t[1]; render(t[2]); }
+  const autoBtn = document.getElementById('smAuto');
+  function stopAuto(){ if (timer) { clearInterval(timer); timer = null; autoBtn.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+  btns.forEach(b => b.addEventListener('click', () => { stopAuto(); fire(b.dataset.ev); }));
+  autoBtn.addEventListener('click', () => {
+    if (timer) return stopAuto();
+    st = 'birth'; render(); step = 0;
+    autoBtn.textContent = '⏸️ ఆటో డెమో ఆపు';
+    timer = setInterval(() => { fire(order[step % order.length]); step++; }, 2000);
+  });
+  render();
+
+  // Generic clickable SVG nodes
+  function el(tag, attrs, text){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; }
+  function makeNodes(container, items, titleEl, descEl){
+    const groups = [];
+    items.forEach((it, i) => {
+      const g = el('g', {class:'hov', tabindex:'0', role:'button', 'aria-label': it.name, style:'cursor:pointer'});
+      if (it.spoke) g.appendChild(el('line', it.spoke));
+      g.appendChild(el('circle', {class:'box', cx:it.x, cy:it.y, r:it.r, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      g.appendChild(el('text', {x:it.x, y:it.y - 4, 'text-anchor':'middle', 'font-size':11, fill:'#555'}, it.num));
+      g.appendChild(el('text', {x:it.x, y:it.y + 13, 'text-anchor':'middle', 'font-size':it.fs || 11.5, 'font-weight':700}, it.short));
+      const pick = () => {
+        groups.forEach(x => x.querySelector('.box').setAttribute('stroke-width', 2));
+        g.querySelector('.box').setAttribute('stroke-width', 4.5);
+        g.classList.remove('pulse'); void g.getBoundingClientRect(); g.classList.add('pulse');
+        titleEl.textContent = it.name; descEl.innerHTML = it.desc;
+      };
+      g.addEventListener('click', pick);
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      container.appendChild(g); groups.push(g);
+    });
+  }
+
+  // Eightfold path wheel
+  const C = {p:['#dbeafe','#0066cc'], s:['#ffe3d6','#ff6b35'], m:['#d6f5e3','#00b359']};
+  const path = [
+    ['సమ్యక్ దృష్టి','దృష్టి','p','సరైన అవగాహన — చతుర్ ఆర్య సత్యాలను, అనిత్య-అనాత్మలను సరిగ్గా అర్థం చేసుకోవడం. <b>స్కంధం: ప్రజ్ఞ</b>'],
+    ['సమ్యక్ సంకల్పం','సంకల్పం','p','సరైన ఉద్దేశం — త్యాగం, ద్వేషం లేకపోవడం, అహింసా భావన. <b>స్కంధం: ప్రజ్ఞ</b>'],
+    ['సమ్యక్ వాక్కు','వాక్కు','s','సరైన మాట — అబద్ధం, చాడీలు, కఠిన మాటలు, వ్యర్థ ప్రసంగం మానడం. <b>స్కంధం: శీల</b>'],
+    ['సమ్యక్ కర్మాంతం','కర్మాంతం','s','సరైన చర్య — హింస, దొంగతనం, అనైతిక ప్రవర్తన మానడం. <b>స్కంధం: శీల</b>'],
+    ['సమ్యక్ ఆజీవం','ఆజీవం','s','సరైన జీవనోపాధి — ఆయుధాలు, మత్తుపదార్థాలు, విషం, జంతువుల వ్యాపారం వంటి హానికర వృత్తులు మానడం. <b>స్కంధం: శీల</b>'],
+    ['సమ్యక్ వ్యాయామం','వ్యాయామం','m','సరైన ప్రయత్నం — చెడు ఆలోచనలను నివారించి, మంచి ఆలోచనలను పెంపొందించే మానసిక శ్రమ (శారీరక వ్యాయామం కాదు!). <b>స్కంధం: సమాధి</b>'],
+    ['సమ్యక్ స్మృతి','స్మృతి','m','సరైన జాగరూకత (Mindfulness) — శరీరం, భావాలు, మనస్సుపై నిరంతర అవగాహన. <b>స్కంధం: సమాధి</b>'],
+    ['సమ్యక్ సమాధి','సమాధి','m','సరైన ఏకాగ్రత — ధ్యానం (ఝానాలు) ద్వారా మనస్సును ఏకాగ్రం చేయడం. <b>స్కంధం: సమాధి</b>']
+  ];
+  const cx = 260, cy = 210;
+  makeNodes(document.getElementById('spokes'), path.map((p, i) => {
+    const a = -Math.PI/2 + i * Math.PI/4, x = cx + 138*Math.cos(a), y = cy + 138*Math.sin(a);
+    return { name:p[0], short:p[1], num:(i+1)+'', desc:p[3], x:x.toFixed(1), y:y.toFixed(1), r:34, fs:11,
+      fill:C[p[2]][0], stroke:C[p[2]][1],
+      spoke:{x1:(cx+48*Math.cos(a)).toFixed(1), y1:(cy+48*Math.sin(a)).toFixed(1), x2:(cx+185*Math.cos(a)).toFixed(1), y2:(cy+185*Math.sin(a)).toFixed(1), stroke:'#0066cc', 'stroke-width':3} };
+  }), document.getElementById('wheelTitle'), document.getElementById('wheelDesc'));
+
+  // Five great vows
+  const V = [
+    ['అహింస','అహింస',0,'ఏ జీవినీ — మనసా, వాచా, కర్మణా — హింసించకూడదు. జైనులు అత్యంత ముఖ్యంగా భావించే వ్రతం. సన్యాసులు కీటకాలు చావకుండా నోటికి గుడ్డ (ముఖవస్త్రిక), నడిచే దారి ఊడ్చే కుంచె (రజోహరణ) వాడతారు.'],
+    ['సత్యం','సత్యం',0,'ఎల్లప్పుడూ నిజమే మాట్లాడాలి; కోపం, దురాశ, భయం, హాస్యం వల్ల కూడా అబద్ధం ఆడకూడదు.'],
+    ['అస్తేయం','అస్తేయం',0,'ఇవ్వనిది తీసుకోకూడదు — దొంగతనం చేయకూడదు; అనుమతి లేకుండా ఏ వస్తువునూ తీసుకోకూడదు.'],
+    ['అపరిగ్రహం','అపరిగ్రహం',0,'ఆస్తి, వస్తువులు కూడబెట్టకూడదు; దేనిపైనా ఆసక్తి (మమకారం) ఉండకూడదు. దిగంబరులు దీనిని వస్త్రాలకూ వర్తింపజేశారు.'],
+    ['బ్రహ్మచర్యం','బ్రహ్మచర్యం',1,'ఇంద్రియ నిగ్రహం, పూర్తి బ్రహ్మచర్యం. <b>ఈ ఐదో వ్రతాన్ని మహావీరుడు చేర్చాడు</b> — పార్శ్వనాథుని కాలంలో ఇది అపరిగ్రహంలో భాగంగా భావించబడిందని ఒక వ్యాఖ్యానం.']
+  ];
+  const pts = [[250,40],[425,167],[358,372],[142,372],[75,167]];
+  makeNodes(document.getElementById('vratas'), V.map((v, i) => ({
+    name:v[0], short:v[1], num:(i+1)+'', desc:v[3], x:pts[i][0], y:pts[i][1], r:40, fs:12,
+    fill: v[2] ? '#ffe3d6' : '#e8f1fb', stroke: v[2] ? '#ff6b35' : '#0066cc'
+  })), document.getElementById('vrataTitle'), document.getElementById('vrataDesc'));
+
+  const idx = sections.findIndex(s => '#' + s.id === location.hash);
+  show(idx >= 0 ? +sections[idx].dataset.ch : 0, false);
+})();
+</script>
+</body>
+</html>

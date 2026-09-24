@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>భారత రాజకీయ వ్యవస్థ — సిలబస్ & రోడ్‌మ్యాప్ (Indian Polity)</title>
+<style>
+:root{
+  --primary:#0066cc; --primary-dark:#004f9e; --primary-light:#e8f1fb;
+  --secondary:#00b359; --secondary-light:#f0f9f4;
+  --accent:#ff6b35; --accent-light:#fff3ee;
+  --bg:#ffffff; --sidebar:#f8f8f8; --text:#1a1a1a; --muted:#555; --border:#ddd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Nirmala UI','Noto Sans Telugu','Gautami',sans-serif;
+  font-size:16px;line-height:1.75;letter-spacing:.3px}
+.container{display:flex;min-height:100vh}
+/* Sidebar */
+.sidebar{width:280px;flex-shrink:0;background:var(--sidebar);border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 16px}
+.sidebar h2{margin:0 0 4px;font-size:18px;color:var(--primary)}
+.sidebar .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.progress-bar{height:8px;background:#e4e4e4;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--secondary);transition:width .4s ease}
+.chapter-count{font-size:13px;color:var(--muted);margin:6px 0 16px}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{display:block;padding:8px 10px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14.5px;line-height:1.4;
+  border-left:3px solid transparent;transition:background .3s,border-color .3s}
+.toc a:hover{background:var(--accent-light);border-left-color:var(--accent)}
+.toc a.active{background:var(--primary-light);border-left-color:var(--primary);color:var(--primary);font-weight:600}
+.toc a.done::after{content:" ✓";color:var(--secondary);font-weight:700}
+.back-link{display:inline-block;margin-top:18px;font-size:13px;color:var(--primary)}
+.menu-btn{display:none}
+/* Content */
+.content{flex:1;min-width:0;padding:32px 24px 64px}
+.chapter{max-width:900px;margin:0 auto;display:none;animation:fade .5s ease-in}
+.chapter.visible{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:28px;color:var(--primary);margin:0 0 8px;line-height:1.35}
+h2{font-size:22px;color:var(--primary);margin:2rem 0 .6rem;line-height:1.4}
+h3{font-size:18px;color:#333;margin:1.4rem 0 .5rem}
+.meta{color:var(--muted);font-size:14px;margin-bottom:1.5rem}
+p{margin:.6rem 0}
+.hl{background:var(--accent-light);padding:0 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--primary-light);color:var(--primary-dark)}
+tr:nth-child(even) td{background:#fafafa}
+.table-wrap{overflow-x:auto}
+.callout{border-left:4px solid var(--accent);background:var(--accent-light);padding:10px 14px;border-radius:0 6px 6px 0;margin:1rem 0}
+.callout b{color:#c4471a}
+/* Intro */
+.intro-page .subtitle{font-size:18px;color:var(--muted);margin-top:0}
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:1.2rem 0}
+.intro-card{border:1px solid var(--border);border-top:4px solid var(--primary);border-radius:8px;padding:12px 14px;cursor:pointer;transition:box-shadow .3s,transform .3s}
+.intro-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-2px)}
+.intro-card .n{font-size:13px;color:var(--accent);font-weight:700}
+.start-btn,.nav-buttons button,.sm-controls button,.reveal-btn{font:inherit;cursor:pointer;border-radius:6px;transition:background .3s,color .3s,border-color .3s}
+.start-btn{background:var(--primary);color:#fff;border:0;padding:12px 22px;font-size:16px;font-weight:600;margin-top:10px}
+.start-btn:hover{background:var(--primary-dark)}
+/* Diagrams */
+figure.diagram{margin:1.5rem 0;border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff}
+figure.diagram svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);text-align:center;margin-top:8px}
+.chapter.visible svg .anim{opacity:0;animation:fade .7s ease-in forwards}
+.chapter.visible svg .d1{animation-delay:.15s}.chapter.visible svg .d2{animation-delay:.35s}
+.chapter.visible svg .d3{animation-delay:.55s}.chapter.visible svg .d4{animation-delay:.75s}
+.chapter.visible svg .d5{animation-delay:.95s}.chapter.visible svg .d6{animation-delay:1.15s}
+svg .box{transition:stroke .3s,fill .3s}
+svg g.hov:hover .box{stroke:#003d7a;stroke-width:3}
+svg text{font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif;fill:#1a1a1a}
+svg g[tabindex]:focus{outline:none}svg g[tabindex]:focus-visible .box{stroke-dasharray:4 3}
+.pulse{animation:pulse 1s ease-in-out 2}
+@keyframes pulse{50%{filter:drop-shadow(0 0 6px var(--accent))}}
+/* Revision (code-style) block */
+.code-block{position:relative;margin:1.2rem 0;border:1px solid #f3c2ad;border-radius:8px;background:var(--accent-light);overflow:hidden}
+.code-block .cb-head{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:#ffe3d6;font-size:13px;font-weight:600;color:#a33c12}
+.copy-btn{font:inherit;font-size:12px;border:1px solid var(--accent);background:#fff;color:#a33c12;border-radius:4px;padding:2px 10px;cursor:pointer}
+.copy-btn:hover{background:var(--accent);color:#fff}
+.code-block pre{margin:0;padding:10px 0;overflow-x:auto;font-family:'Monaco','Consolas','Courier New','Nirmala UI',monospace;font-size:13.5px;line-height:1.7}
+.code-block .ln{display:block;padding:0 14px 0 0;white-space:pre}
+.code-block .ln::before{content:attr(data-n);display:inline-block;width:2.6em;text-align:right;padding-right:12px;margin-right:10px;color:#b98a78;border-right:1px solid #f3c2ad;user-select:none}
+.tok-num{color:var(--accent);font-weight:600}.tok-com{color:#666;font-style:italic}.tok-key{color:var(--primary);font-weight:600}
+/* Collapsible */
+details.collapsible{border:1px solid var(--border);border-radius:8px;margin:1rem 0;background:#fcfcfc}
+details.collapsible summary{cursor:pointer;padding:10px 14px;font-weight:600;color:var(--primary)}
+details.collapsible[open] summary{border-bottom:1px solid var(--border)}
+details.collapsible .inner{padding:4px 16px 12px}
+/* Quiz */
+.quiz{border:2px solid var(--primary-light);border-radius:10px;padding:6px 18px 14px;margin:2rem 0}
+.quiz h3{color:var(--primary)}
+.quiz-question{margin:1rem 0;padding-bottom:12px;border-bottom:1px dashed var(--border)}
+.quiz-question:last-child{border-bottom:0}
+.quiz-question ol{margin:.3rem 0 .5rem;padding-left:1.6rem}
+.reveal-btn{background:#fff;border:1px solid var(--accent);color:#c4471a;padding:5px 14px;font-size:14px}
+.reveal-btn:hover{background:var(--accent);color:#fff}
+.answer{display:none;margin-top:10px;background:var(--secondary-light);border-left:4px solid var(--secondary);padding:8px 12px;border-radius:0 6px 6px 0;animation:fade .4s ease-in}
+.answer.show{display:block}
+/* Takeaways */
+.key-takeaways{background:var(--secondary-light);border:1px solid #bfe8d1;border-left:5px solid var(--secondary);border-radius:8px;padding:6px 18px 10px;margin:2rem 0}
+.key-takeaways h3{color:#007a3d}
+.key-takeaways li{margin:4px 0}
+/* Nav */
+.nav-buttons{display:flex;justify-content:space-between;gap:10px;margin-top:2rem}
+.nav-buttons button{background:#fff;border:2px solid var(--primary);color:var(--primary);padding:9px 18px;font-weight:600}
+.nav-buttons button:hover:not(:disabled){background:var(--primary);color:#fff}
+.nav-buttons button:disabled{opacity:.35;cursor:default}
+/* State machine */
+.sm-status{text-align:center;font-weight:600;margin:6px 0;font-size:15px}
+.sm-status span{color:var(--primary)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.sm-controls button{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:6px 12px;font-size:14px}
+.sm-controls button:hover:not(:disabled){background:var(--primary);color:#fff}
+.sm-controls button:disabled{opacity:.35;cursor:default}
+.sm-controls .auto{border-color:var(--accent);color:#c4471a}
+.sm-controls .auto:hover{background:var(--accent)!important;color:#fff!important}
+.sm-state .box{transition:stroke-width .4s,filter .4s}
+.sm-state.active .box{stroke-width:4;filter:drop-shadow(0 0 7px rgba(0,102,204,.65))}
+.sm-edge{fill:none;stroke:#9bb8d6;stroke-width:2}
+.sm-edge.run{stroke:var(--accent);stroke-width:3.5;stroke-dasharray:400;stroke-dashoffset:400;animation:draw .8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* Responsive */
+@media (max-width:768px){
+  .container{display:block}
+  .sidebar{position:fixed;left:0;top:0;z-index:20;transform:translateX(-100%);transition:transform .3s;box-shadow:2px 0 12px rgba(0,0,0,.15)}
+  .sidebar.open{transform:none}
+  .menu-btn{display:block;position:fixed;top:10px;left:10px;z-index:30;background:var(--primary);color:#fff;border:0;border-radius:6px;padding:8px 12px;font-size:18px;cursor:pointer}
+  .content{padding:56px 16px 48px}
+  h1{font-size:24px}
+}
+.tracker{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:1rem 0}
+.tracker-sum{font-weight:700;color:#007a3d;margin-bottom:6px}
+.trk{width:18px;height:18px;accent-color:var(--secondary);cursor:pointer}
+code{background:var(--accent-light);padding:1px 5px;border-radius:3px;font-size:14px}
+</style>
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="విషయ సూచిక తెరవండి">☰</button>
+<div class="container">
+<aside class="sidebar" id="sidebar" aria-label="విషయ సూచిక">
+  <h2>⚖️ భారత రాజకీయ వ్యవస్థ</h2>
+  <div class="sub">Indian Polity · సిలబస్ & రోడ్‌మ్యాప్</div>
+  <div class="progress-bar" role="progressbar" aria-label="పురోగతి"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="chapter-count" id="chapterCount">0/4 అధ్యాయాలు</div>
+  <nav class="toc">
+    <ul>
+      <li><a href="#intro" data-ch="0">పరిచయం</a></li>
+      <li><a href="#chapter-1" data-ch="1">1. పునాది: రాజ్యాంగ నిర్మాణం</a></li>
+      <li><a href="#chapter-2" data-ch="2">2. సంపూర్ణ సిలబస్ మ్యాప్</a></li>
+      <li><a href="#chapter-3" data-ch="3">3. అధిక ప్రాధాన్య అంశాలు</a></li>
+      <li><a href="#chapter-4" data-ch="4">4. ప్రిపరేషన్ రోడ్‌మ్యాప్ & ట్రాకర్</a></li>
+    </ul>
+  </nav>
+  <a class="back-link" href="index.html">← సూచికకు తిరిగి (Index)</a>
+</aside>
+
+<main class="content" id="content">
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="chapter intro-page" data-ch="0">
+  <h1>⚖️ భారత రాజకీయ వ్యవస్థ — సిలబస్ & రోడ్‌మ్యాప్</h1>
+  <p class="subtitle">Indian Polity · UPSC / APPSC / TSPSC · తెలుగు మాధ్యమం</p>
+  <p>పోటీ పరీక్షల్లో <b>అత్యంత స్థిరంగా మార్కులు తెచ్చే</b> సబ్జెక్టు పాలిటీ. చరిత్రలా వేల తేదీలు గుర్తుంచుకోనక్కర్లేదు; ఒకే ప్రామాణిక గ్రంథం (రాజ్యాంగం) ఆధారంగా అంతా నడుస్తుంది. కానీ ఆర్టికల్స్, సవరణలు, కోర్టు తీర్పులు, ప్రస్తుత పరిణామాలను కలిపి చదవడం నేర్చుకోవాలి. ఈ పాఠం మొత్తం సిలబస్‌ను ఒక మ్యాప్‌గా చూపించి, దశలవారీ ప్రణాళిక ఇస్తుంది.</p>
+  <div class="table-wrap"><table>
+    <tr><th>పరీక్ష</th><th>పాలిటీ ఎక్కడ?</th><th>ప్రాముఖ్యత (సుమారు)</th></tr>
+    <tr><td><b>UPSC ప్రిలిమ్స్</b></td><td>GS పేపర్ 1</td><td>ప్రతి ఏటా ~12–20 ప్రశ్నలు (100లో)</td></tr>
+    <tr><td><b>UPSC మెయిన్స్</b></td><td>GS పేపర్ 2 (పాలిటీ + గవర్నెన్స్ + సామాజిక న్యాయం + IR)</td><td>250 మార్కుల్లో దాదాపు సగం పాలిటీ-గవర్నెన్స్; ఎస్సే, ఎథిక్స్‌లో కూడా ఉపయోగం</td></tr>
+    <tr><td><b>APPSC / TSPSC గ్రూప్ 1, 2</b></td><td>ప్రత్యేక పేపర్/సెక్షన్ (Indian Polity & Governance)</td><td>రాష్ట్ర-ప్రత్యేక అంశాలు కూడా: ఆంధ్రప్రదేశ్ పునర్విభజన చట్టం 2014, ఆర్టికల్ 371D</td></tr>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">(ప్రశ్నల సంఖ్య ఏటా మారుతుంది — గత 10 ఏళ్ల PYQ సగటు ఆధారంగా అంచనా.)</p>
+  <div class="intro-grid">
+    <div class="intro-card" data-go="1"><div class="n">అధ్యాయం 1</div>బ్రిటిష్ చట్టాల నుండి రాజ్యాంగ సభ వరకు; మూలాలు, ముఖ్య లక్షణాలు, పీఠిక</div>
+    <div class="intro-card" data-go="2"><div class="n">అధ్యాయం 2</div>12 మాడ్యూళ్ల ఇంటరాక్టివ్ సిలబస్ మ్యాప్ — ఆర్టికల్స్, ప్రాధాన్యత, రాష్ట్ర-ప్రత్యేక అంశాలు</div>
+    <div class="intro-card" data-go="3"><div class="n">అధ్యాయం 3</div>ప్రాథమిక హక్కులు, DPSP, సవరణలు, కీలక తీర్పులు, చట్టం తయారయ్యే విధానం (ఇంటరాక్టివ్)</div>
+    <div class="intro-card" data-go="4"><div class="n">అధ్యాయం 4</div>16 వారాల దశలవారీ ప్రణాళిక, పుస్తకాలు, PYQ వ్యూహం, మీ ప్రోగ్రెస్ ట్రాకర్</div>
+  </div>
+  <p><b>మొత్తం సమయం:</b> ~75 నిమిషాలు · ⌨️ ← / → బాణం కీలతో అధ్యాయాల మధ్య కదలండి.</p>
+  <button class="start-btn" data-go="1">ప్రారంభించండి →</button>
+</section>
+
+<!-- ============ CHAPTER 1 ============ -->
+<section id="chapter-1" class="chapter" data-ch="1">
+  <h1>అధ్యాయం 1: పునాది — రాజ్యాంగం ఎలా రూపొందింది?</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>1.1 చారిత్రక నేపథ్యం — బ్రిటిష్ చట్టాల పరిణామం</h2>
+  <p>భారత రాజ్యాంగం ఒక్కసారిగా పుట్టలేదు. 1773 నుండి 1947 వరకు బ్రిటిష్ పార్లమెంట్ చేసిన చట్టాలు క్రమంగా పరిపాలనా వ్యవస్థను నిర్మించాయి — మన రాజ్యాంగంలో దాదాపు <b>250 ఆర్టికల్స్</b> 1935 భారత ప్రభుత్వ చట్టం నుండే తీసుకున్నవి. కింది కాలరేఖలో "తదుపరి చట్టం" నొక్కి ఒక్కో మైలురాయిని చూడండి.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 200" role="img" aria-label="రాజ్యాంగ పరిణామ కాలరేఖ — స్టేట్ మెషీన్">
+      <line x1="50" y1="95" x2="710" y2="95" stroke="#ddd" stroke-width="6" stroke-linecap="round"/>
+      <g id="tlEdges"></g>
+      <g id="tlNodes"></g>
+    </svg>
+    <div class="sm-status" aria-live="polite"><span id="tlLabel"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#333;max-width:760px;margin:0 auto" id="tlDesc"></div>
+    <div class="sm-controls">
+      <button id="tlPrev">◀ మునుపటి చట్టం</button>
+      <button id="tlNext">తదుపరి చట్టం ▶</button>
+      <button id="tlReset">↺ రీసెట్</button>
+      <button class="auto" id="tlAuto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 1.1 — 1773 నుండి 1950 వరకు రాజ్యాంగ పరిణామం. ఒక్కో చట్టం "కొత్తగా ఏమి తెచ్చింది?" అనేదే పరీక్షా ప్రశ్న.</figcaption>
+  </figure>
+
+  <h2>1.2 రాజ్యాంగ సభ (Constituent Assembly)</h2>
+  <ul>
+    <li><b>కేబినెట్ మిషన్ ప్లాన్ (1946)</b> ప్రకారం ఏర్పాటు; సభ్యులు ప్రాంతీయ శాసనసభల ద్వారా <b>పరోక్షంగా</b> ఎన్నిక. మొత్తం 389 స్థానాలు; విభజన తర్వాత <b>299</b>.</li>
+    <li>మొదటి సమావేశం <b>9 డిసెంబర్ 1946</b> — తాత్కాలిక అధ్యక్షుడు <b>డా. సచ్చిదానంద సిన్హా</b>; శాశ్వత అధ్యక్షుడు <b>డా. రాజేంద్ర ప్రసాద్</b> (11 డిసెంబర్ 1946); ఉపాధ్యక్షుడు హెచ్.సి. ముఖర్జీ; రాజ్యాంగ సలహాదారు <b>బి.ఎన్. రావు</b>.</li>
+    <li><b>లక్ష్యాల తీర్మానం</b> (Objectives Resolution) — నెహ్రూ, <b>13 డిసెంబర్ 1946</b>; 22 జనవరి 1947న ఆమోదం → ఇదే తర్వాత <b>పీఠిక</b>గా మారింది.</li>
+    <li><b>ముసాయిదా కమిటీ</b> (29 ఆగస్టు 1947) — అధ్యక్షుడు <b>డా. బి.ఆర్. అంబేద్కర్</b>; 7 మంది సభ్యులు.</li>
+    <li>రాజ్యాంగ ఆమోదం <b>26 నవంబర్ 1949</b> (2015 నుండి "రాజ్యాంగ దినోత్సవం") · అమలు <b>26 జనవరి 1950</b> (1930 పూర్ణ స్వరాజ్ దినానికి గుర్తుగా). పట్టిన సమయం: <b>2 సంవత్సరాలు, 11 నెలలు, 18 రోజులు</b>; 11 సమావేశాలు.</li>
+    <li>ముఖ్య కమిటీలు: కేంద్ర అధికారాలు, కేంద్ర రాజ్యాంగం — <b>నెహ్రూ</b>; రాష్ట్రాల రాజ్యాంగం, ప్రాథమిక హక్కులు & మైనారిటీల సలహా కమిటీ — <b>సర్దార్ పటేల్</b>; విధాన నియమాలు — <b>రాజేంద్ర ప్రసాద్</b>.</li>
+  </ul>
+
+  <h2>1.3 రాజ్యాంగ మూలాలు ("అరువు తెచ్చుకున్న" లక్షణాలు)</h2>
+  <div class="table-wrap"><table>
+    <tr><th>మూలం</th><th>తీసుకున్న లక్షణాలు</th></tr>
+    <tr><td><b>భారత ప్రభుత్వ చట్టం 1935</b></td><td>సమాఖ్య వ్యవస్థ, గవర్నర్ పదవి, న్యాయవ్యవస్థ, PSCలు, అత్యవసర నిబంధనలు, పరిపాలనా వివరాలు</td></tr>
+    <tr><td><b>బ్రిటన్</b></td><td>పార్లమెంటరీ ప్రభుత్వం, చట్టబద్ధ పాలన, ఏక పౌరసత్వం, కేబినెట్ వ్యవస్థ, ద్విసభా విధానం, రిట్లు</td></tr>
+    <tr><td><b>అమెరికా</b></td><td>ప్రాథమిక హక్కులు, న్యాయ సమీక్ష, న్యాయవ్యవస్థ స్వాతంత్ర్యం, రాష్ట్రపతి అభిశంసన, ఉపరాష్ట్రపతి పదవి</td></tr>
+    <tr><td><b>ఐర్లాండ్</b></td><td>ఆదేశిక సూత్రాలు (DPSP), రాజ్యసభకు నామినేషన్, రాష్ట్రపతి ఎన్నిక విధానం</td></tr>
+    <tr><td><b>కెనడా</b></td><td>బలమైన కేంద్రంతో సమాఖ్య, అవశిష్ట అధికారాలు కేంద్రానికి, గవర్నర్ నియామకం కేంద్రం చేతిలో</td></tr>
+    <tr><td><b>ఆస్ట్రేలియా</b></td><td>ఉమ్మడి జాబితా, వ్యాపార-వాణిజ్య స్వేచ్ఛ, సంయుక్త సమావేశం</td></tr>
+    <tr><td><b>జర్మనీ (వైమర్)</b></td><td>అత్యవసర సమయంలో ప్రాథమిక హక్కుల సస్పెన్షన్</td></tr>
+    <tr><td><b>సోవియట్ యూనియన్</b></td><td>ప్రాథమిక విధులు, పీఠికలో సామాజిక-ఆర్థిక-రాజకీయ న్యాయం</td></tr>
+    <tr><td><b>ఫ్రాన్స్</b></td><td>గణతంత్రం; పీఠికలో స్వేచ్ఛ, సమానత్వం, సౌభ్రాతృత్వం</td></tr>
+    <tr><td><b>దక్షిణాఫ్రికా</b></td><td>రాజ్యాంగ సవరణ విధానం, రాజ్యసభ సభ్యుల ఎన్నిక</td></tr>
+    <tr><td><b>జపాన్</b></td><td>"చట్టం నిర్దేశించిన విధానం" (Procedure established by law)</td></tr>
+  </table></div>
+
+  <h2>1.4 నిర్మాణం & పీఠిక</h2>
+  <p><b>మూల రాజ్యాంగం:</b> 395 ఆర్టికల్స్, 22 భాగాలు, 8 షెడ్యూళ్లు. <b>ప్రస్తుతం:</b> 25 భాగాలు, 12 షెడ్యూళ్లు; ఆర్టికల్ నంబరింగ్ 395 వరకే కొనసాగుతుంది, కొత్తవి 21A, 243A వంటి ఉప-ఆర్టికల్స్‌గా చేరాయి (మొత్తం ~450+). ప్రపంచంలోనే అతి పొడవైన లిఖిత రాజ్యాంగం.</p>
+  <p><b>పీఠిక</b> — "మేము, భారత ప్రజలు..." — భారతదేశాన్ని <b>సార్వభౌమ, సామ్యవాద, లౌకిక, ప్రజాస్వామ్య, గణతంత్ర</b> రాజ్యంగా ప్రకటిస్తుంది. లక్ష్యాలు: న్యాయం (సామాజిక, ఆర్థిక, రాజకీయ), స్వేచ్ఛ, సమానత్వం, సౌభ్రాతృత్వం. "సామ్యవాద", "లౌకిక", "సమగ్రత" పదాలు <b>42వ సవరణ (1976)</b> ద్వారా చేరాయి — పీఠిక ఇప్పటివరకు సవరించబడింది ఒక్కసారే.</p>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — రాజ్యాంగ నిర్మాణ వాస్తవాలు">
+<pre># తేదీలు
+మొదటి సమావేశం      →  9 డిసెంబర్ 1946     # తాత్కాలిక అధ్య: సచ్చిదానంద సిన్హా
+లక్ష్యాల తీర్మానం     →  13 డిసెంబర్ 1946    # నెహ్రూ
+ముసాయిదా కమిటీ     →  29 ఆగస్టు 1947      # అంబేద్కర్
+ఆమోదం             →  26 నవంబర్ 1949      # రాజ్యాంగ దినోత్సవం
+అమలు              →  26 జనవరి 1950       # గణతంత్ర దినోత్సవం
+
+# సంఖ్యలు
+మూల నిర్మాణం  = 395 ఆర్టికల్స్ | 22 భాగాలు | 8 షెడ్యూళ్లు
+ప్రస్తుతం      = 25 భాగాలు | 12 షెడ్యూళ్లు
+సమయం        = 2 సం. 11 నెలలు 18 రోజులు
+
+# పీఠిక
+42వ సవరణ 1976  →  సామ్యవాద + లౌకిక + సమగ్రత
+బెరుబారి 1960   →  పీఠిక రాజ్యాంగంలో భాగం కాదు
+కేశవానంద 1973  →  పీఠిక రాజ్యాంగంలో భాగమే   # తుది తీర్పు</pre>
+  </div>
+
+  <details class="collapsible" id="c1-adv">
+    <summary>🔍 లోతుగా: రాజ్యాంగం సమాఖ్యా లేక ఏకకేంద్రమా? ("Quasi-federal")</summary>
+    <div class="inner">
+      <p><b>సమాఖ్య లక్షణాలు:</b> రెండు స్థాయిల ప్రభుత్వాలు, అధికార విభజన (7వ షెడ్యూల్ — కేంద్ర, రాష్ట్ర, ఉమ్మడి జాబితాలు), లిఖిత & దృఢమైన రాజ్యాంగం, స్వతంత్ర న్యాయవ్యవస్థ, ద్విసభా విధానం.</p>
+      <p><b>ఏకకేంద్ర లక్షణాలు:</b> బలమైన కేంద్రం, అవశిష్ట అధికారాలు కేంద్రానికి, ఏక పౌరసత్వం, ఏకీకృత న్యాయవ్యవస్థ, అఖిల భారత సర్వీసులు, గవర్నర్ నియామకం, అత్యవసర నిబంధనలు, రాష్ట్రాల సరిహద్దులను పార్లమెంట్ మార్చగలగడం (ఆర్టికల్ 3).</p>
+      <p><b>పండితుల అభిప్రాయాలు:</b> కె.సి. వేర్ — "Quasi-federal"; గ్రాన్‌విల్ ఆస్టిన్ — "Cooperative federalism"; అంబేద్కర్ — "Union of States" (విడిపోలేని యూనియన్). <b>ఎస్.ఆర్. బొమ్మై (1994)</b> తీర్పు సమాఖ్య వ్యవస్థను <b>మౌలిక స్వరూపం</b>లో భాగంగా ప్రకటించింది. మెయిన్స్‌లో ఈ ప్రశ్న పదే పదే వస్తుంది — GST కౌన్సిల్, ఆర్థిక సంఘం, గవర్నర్ పాత్ర వంటి ప్రస్తుత ఉదాహరణలతో రాయండి.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q1-1">
+      <p><strong>Q1:</strong> ఆదేశిక సూత్రాలు (DPSP) ఏ దేశ రాజ్యాంగం నుండి తీసుకోబడ్డాయి?</p>
+      <ol type="a"><li>అమెరికా</li><li>ఐర్లాండ్</li><li>కెనడా</li><li>సోవియట్ యూనియన్</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) ఐర్లాండ్.</b> (ఐర్లాండ్ వాటిని స్పెయిన్ నుండి తీసుకుంది.)</p>
+    </div>
+    <div class="quiz-question" id="q1-2">
+      <p><strong>Q2:</strong> భారతదేశంలో మొదటిసారిగా "ప్రత్యేక నియోజకవర్గాలు" (మత ప్రాతిపదిక ప్రాతినిధ్యం) ప్రవేశపెట్టిన చట్టం ఏది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>భారత కౌన్సిళ్ల చట్టం 1909</b> (మింటో-మార్లే సంస్కరణలు) — ముస్లింలకు ప్రత్యేక నియోజకవర్గాలు. లార్డ్ మింటోను "మత ప్రాతిపదిక ఎన్నికల పితామహుడు" అంటారు.</p>
+    </div>
+    <div class="quiz-question" id="q1-3">
+      <p><strong>Q3:</strong> రాజ్యాంగ సభ ముసాయిదా కమిటీ అధ్యక్షుడు ఎవరు, రాజ్యాంగ సలహాదారు ఎవరు?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">అధ్యక్షుడు — <b>డా. బి.ఆర్. అంబేద్కర్</b>; రాజ్యాంగ సలహాదారు — <b>సర్ బి.ఎన్. రావు</b>.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>1773 నుండి 1947 వరకు బ్రిటిష్ చట్టాలు పునాది వేశాయి; 1935 చట్టం అతిపెద్ద మూలం.</li>
+      <li>రాజ్యాంగ సభ: 9 డిసెంబర్ 1946 మొదటి సమావేశం → 26 నవంబర్ 1949 ఆమోదం → 26 జనవరి 1950 అమలు.</li>
+      <li>మూలాలు: బ్రిటన్ (పార్లమెంటరీ), అమెరికా (హక్కులు, న్యాయ సమీక్ష), ఐర్లాండ్ (DPSP), కెనడా (బలమైన కేంద్రం).</li>
+      <li>పీఠిక రాజ్యాంగంలో భాగం (కేశవానంద 1973); 42వ సవరణ ద్వారా ఒక్కసారి సవరించబడింది.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 2 ============ -->
+<section id="chapter-2" class="chapter" data-ch="2">
+  <h1>అధ్యాయం 2: సంపూర్ణ సిలబస్ మ్యాప్</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <p>మొత్తం పాలిటీ సిలబస్‌ను <b>12 మాడ్యూళ్లు</b>గా విభజించవచ్చు. కింది మ్యాప్‌లో ఏ మాడ్యూల్‌పైనైనా క్లిక్ చేస్తే — ఏ భాగాలు/ఆర్టికల్స్, ఏ ఉప-అంశాలు, పరీక్ష ప్రాధాన్యత — కుడివైపు కనిపిస్తాయి. <b>రంగు = ప్రాధాన్యత</b>.</p>
+
+  <figure class="diagram">
+    <svg id="mapSvg" viewBox="0 0 760 470" role="img" aria-label="పాలిటీ సిలబస్ మాడ్యూల్ మ్యాప్">
+      <g id="mapLines" class="anim"></g>
+      <g class="anim">
+        <circle cx="240" cy="235" r="58" fill="#0066cc"/>
+        <text x="240" y="228" text-anchor="middle" font-size="14" font-weight="700" style="fill:#fff">భారత</text>
+        <text x="240" y="248" text-anchor="middle" font-size="14" font-weight="700" style="fill:#fff">రాజ్యాంగం</text>
+      </g>
+      <g id="mapNodes" class="anim d2"></g>
+      <g class="anim d3">
+        <rect x="490" y="15" width="260" height="440" rx="12" fill="#fafafa" stroke="#ddd"/>
+        <rect x="506" y="32" width="14" height="14" rx="3" fill="#ffe3d6" stroke="#ff6b35"/><text x="526" y="44" font-size="12.5" font-weight="700">★★★ అత్యధిక ప్రాధాన్యం</text>
+        <rect x="506" y="54" width="14" height="14" rx="3" fill="#dbeafe" stroke="#0066cc"/><text x="526" y="66" font-size="12.5" font-weight="700">★★ ఎక్కువ</text>
+        <rect x="506" y="76" width="14" height="14" rx="3" fill="#d6f5e3" stroke="#00b359"/><text x="526" y="88" font-size="12.5" font-weight="700">★ మధ్యస్థం</text>
+        <line x1="506" y1="102" x2="734" y2="102" stroke="#ddd"/>
+        <text id="mapTitle" x="506" y="126" font-size="14.5" font-weight="700" fill="#0066cc">ఒక మాడ్యూల్‌పై క్లిక్ చేయండి</text>
+        <foreignObject x="500" y="134" width="246" height="315"><div xmlns="http://www.w3.org/1999/xhtml" id="mapDesc" style="font-size:13px;line-height:1.55;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">12 మాడ్యూళ్లు కలిపి మొత్తం సిలబస్. ప్రతి దాని వివరాలు, అధ్యాయం 4లోని ట్రాకర్‌తో మీ పురోగతిని గుర్తించండి.</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 2.1 — పాలిటీ సిలబస్ మ్యాప్: 12 మాడ్యూళ్లు. మాడ్యూల్‌పై క్లిక్ చేయండి (లేదా Tab + Enter).</figcaption>
+  </figure>
+
+  <h2>2.1 మాడ్యూల్ వారీ వివరణాత్మక సిలబస్</h2>
+  <div class="table-wrap"><table>
+    <tr><th>#</th><th>మాడ్యూల్</th><th>రాజ్యాంగ భాగం / ఆర్టికల్స్</th><th>తప్పక చదవాల్సిన ఉప-అంశాలు</th></tr>
+    <tr><td>1</td><td>చారిత్రక నేపథ్యం & రాజ్యాంగ సభ</td><td>—</td><td>1773–1947 చట్టాలు, కేబినెట్ మిషన్, కమిటీలు, మూలాలు</td></tr>
+    <tr><td>2</td><td>పీఠిక & ముఖ్య లక్షణాలు</td><td>పీఠిక</td><td>పార్లమెంటరీ వ్యవస్థ, సమాఖ్య, లౌకికత్వం, మౌలిక స్వరూపం</td></tr>
+    <tr><td>3</td><td>యూనియన్, భూభాగం, పౌరసత్వం</td><td>భాగం I–II (ఆర్టి. 1–11)</td><td>రాష్ట్రాల పునర్వ్యవస్థీకరణ, ఆర్టి. 3, పౌరసత్వ చట్టం 1955 & సవరణలు (CAA 2019), OCI</td></tr>
+    <tr><td>4</td><td>ప్రాథమిక హక్కులు, DPSP, ప్రాథమిక విధులు</td><td>భాగం III (12–35), IV (36–51), IVA (51A)</td><td>6 హక్కులు, రిట్లు, హక్కులు vs DPSP, 11 విధులు</td></tr>
+    <tr><td>5</td><td>కేంద్ర కార్యనిర్వాహక వర్గం</td><td>భాగం V (52–78)</td><td>రాష్ట్రపతి (ఎన్నిక, అధికారాలు, వీటో, ఆర్డినెన్స్ — 123, క్షమాభిక్ష — 72), ఉపరాష్ట్రపతి, PM, మంత్రిమండలి, అటార్నీ జనరల్ (76)</td></tr>
+    <tr><td>6</td><td>పార్లమెంట్</td><td>భాగం V (79–122)</td><td>లోక్‌సభ, రాజ్యసభ, స్పీకర్, బిల్లులు, ద్రవ్య బిల్లు (110), సంయుక్త సమావేశం (108), బడ్జెట్, కమిటీలు, ప్రశ్నోత్తరాలు, జీరో అవర్</td></tr>
+    <tr><td>7</td><td>న్యాయవ్యవస్థ</td><td>124–147 (SC), 214–231 (HC), 233–237</td><td>నియామకాలు (కొలీజియం, NJAC కేసు 2015), అధికార పరిధులు, న్యాయ సమీక్ష, PIL, ట్రిబ్యునళ్లు, లోక్ అదాలత్</td></tr>
+    <tr><td>8</td><td>రాష్ట్ర ప్రభుత్వం</td><td>భాగం VI (152–237)</td><td>గవర్నర్ (విచక్షణాధికారాలు), CM, శాసనసభ, శాసనమండలి (169)</td></tr>
+    <tr><td>9</td><td>స్థానిక స్వపరిపాలన</td><td>భాగం IX, IXA; 5వ & 6వ షెడ్యూళ్లు</td><td>73వ, 74వ సవరణలు (1992), 11వ & 12వ షెడ్యూళ్లు, PESA 1996, షెడ్యూల్డ్ & గిరిజన ప్రాంతాలు</td></tr>
+    <tr><td>10</td><td>కేంద్ర-రాష్ట్ర సంబంధాలు & అత్యవసర పరిస్థితి</td><td>భాగం XI, XII, XVIII (352, 356, 360)</td><td>శాసన/పరిపాలన/ఆర్థిక సంబంధాలు, GST (279A), ఆర్థిక సంఘం (280), అంతర్-రాష్ట్ర మండలి (263), సర్కారియా & పూంఛీ కమిషన్లు</td></tr>
+    <tr><td>11</td><td>రాజ్యాంగ & రాజ్యాంగేతర సంస్థలు</td><td>324, 315–323, 148, 280, 338–338B</td><td>ఎన్నికల సంఘం, UPSC/SPSC, CAG, NCSC, NCST, NCBC; NITI ఆయోగ్, NHRC, CVC, CBI, లోక్‌పాల్, సమాచార కమిషన్</td></tr>
+    <tr><td>12</td><td>సవరణలు, ఎన్నికలు & సమకాలీన అంశాలు</td><td>368; 10వ షెడ్యూల్; 326</td><td>సవరణ విధానం, మౌలిక స్వరూప సిద్ధాంతం, పార్టీ ఫిరాయింపుల నిరోధం, ఎన్నికల సంస్కరణలు, ప్రజాప్రాతినిధ్య చట్టం 1951, ఒకే దేశం–ఒకే ఎన్నిక చర్చ</td></tr>
+  </table></div>
+
+  <h2>2.2 APPSC / TSPSC కు ప్రత్యేకం</h2>
+  <ul>
+    <li><b>ఆర్టికల్ 371D</b> — ఆంధ్రప్రదేశ్‌కు ప్రత్యేక నిబంధనలు (విద్య, ఉద్యోగాల్లో స్థానిక రిజర్వేషన్ — 32వ సవరణ 1973); 2014 తర్వాత AP, తెలంగాణ రెండింటికీ వర్తింపు. <b>371E</b> — ఆంధ్రప్రదేశ్‌లో కేంద్ర విశ్వవిద్యాలయం.</li>
+    <li><b>ఆంధ్రప్రదేశ్ పునర్విభజన చట్టం 2014</b> — తెలంగాణ ఏర్పాటు (2 జూన్ 2014), ఆర్టికల్ 3 ప్రక్రియ, షెడ్యూల్ 9 & 10 సంస్థలు, ఉమ్మడి రాజధాని నిబంధనలు.</li>
+    <li>చారిత్రకంగా: ఆంధ్ర రాష్ట్రం (1 అక్టోబర్ 1953, పొట్టి శ్రీరాములు), ఫజల్ అలీ కమిషన్ (రాష్ట్రాల పునర్వ్యవస్థీకరణ సంఘం), <b>రాష్ట్రాల పునర్వ్యవస్థీకరణ చట్టం 1956</b>, పెద్దమనుషుల ఒప్పందం.</li>
+    <li>రాష్ట్ర స్థాయి సంస్థలు: రాష్ట్ర ఎన్నికల సంఘం (243K), రాష్ట్ర ఆర్థిక సంఘం (243I), లోకాయుక్త, రాష్ట్ర మానవ హక్కుల కమిషన్; రెండు రాష్ట్రాల పంచాయతీ రాజ్ చట్టాలు.</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — భాగాలు & షెడ్యూళ్లు">
+<pre># ముఖ్య భాగాలు
+భాగం I      →  యూనియన్ & భూభాగం        # 1–4
+భాగం II     →  పౌరసత్వం                # 5–11
+భాగం III    →  ప్రాథమిక హక్కులు          # 12–35
+భాగం IV     →  ఆదేశిక సూత్రాలు           # 36–51
+భాగం IVA    →  ప్రాథమిక విధులు           # 51A
+భాగం V      →  కేంద్రం                  # 52–151
+భాగం VI     →  రాష్ట్రాలు                # 152–237
+భాగం IX     →  పంచాయతీలు              # 243–243O
+భాగం IXA    →  మున్సిపాలిటీలు            # 243P–243ZG
+భాగం XVIII  →  అత్యవసర నిబంధనలు        # 352–360
+భాగం XX     →  సవరణ                   # 368
+
+# 12 షెడ్యూళ్లు
+1 రాష్ట్రాలు & UTలు  | 2 జీతభత్యాలు     | 3 ప్రమాణాలు
+4 రాజ్యసభ సీట్లు     | 5 షెడ్యూల్డ్ ప్రాంతాలు | 6 ఈశాన్య గిరిజన ప్రాంతాలు
+7 మూడు జాబితాలు     | 8 22 భాషలు       | 9 భూ సంస్కరణ చట్టాలు
+10 ఫిరాయింపుల నిరోధం | 11 పంచాయతీలు (29 అంశాలు) | 12 మున్సిపాలిటీలు (18 అంశాలు)</pre>
+  </div>
+
+  <details class="collapsible" id="c2-adv">
+    <summary>🔍 లోతుగా: షెడ్యూళ్లను గుర్తుంచుకోవడానికి ఒక చిట్కా</summary>
+    <div class="inner">
+      <p>ఏ షెడ్యూల్ ఏ సవరణ ద్వారా వచ్చిందో ప్రిలిమ్స్‌లో తరచుగా అడుగుతారు:</p>
+      <ul>
+        <li><b>9వ షెడ్యూల్</b> — <b>1వ సవరణ (1951)</b>; భూ సంస్కరణలను న్యాయ సమీక్ష నుండి రక్షించడానికి. కానీ <b>ఐ.ఆర్. కోయెల్హో (2007)</b>: 24 ఏప్రిల్ 1973 తర్వాత చేర్చిన చట్టాలు మౌలిక స్వరూపాన్ని ఉల్లంఘిస్తే సమీక్షించవచ్చు.</li>
+        <li><b>10వ షెడ్యూల్</b> — <b>52వ సవరణ (1985)</b>, పార్టీ ఫిరాయింపుల నిరోధం; <b>91వ సవరణ (2003)</b> "1/3 చీలిక" మినహాయింపు తొలగించి, మంత్రిమండలి పరిమాణాన్ని 15%కి పరిమితం చేసింది.</li>
+        <li><b>11వ షెడ్యూల్</b> — 73వ సవరణ (1992), 29 అంశాలు; <b>12వ షెడ్యూల్</b> — 74వ సవరణ (1992), 18 అంశాలు.</li>
+        <li><b>8వ షెడ్యూల్</b> — మొదట 14 భాషలు; ఇప్పుడు <b>22</b> (చివరగా 92వ సవరణ 2003: బోడో, డోగ్రీ, మైథిలి, సంథాలీ).</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q2-1">
+      <p><strong>Q1:</strong> ఆర్థిక అత్యవసర పరిస్థితికి సంబంధించిన ఆర్టికల్ ఏది?</p>
+      <ol type="a"><li>352</li><li>356</li><li>360</li><li>365</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) 360.</b> 352 — జాతీయ అత్యవసర పరిస్థితి; 356 — రాష్ట్రపతి పాలన. ఆర్థిక అత్యవసర పరిస్థితి ఇప్పటివరకు ఎప్పుడూ విధించబడలేదు.</p>
+    </div>
+    <div class="quiz-question" id="q2-2">
+      <p><strong>Q2:</strong> పంచాయతీలకు సంబంధించిన 29 అంశాలు ఏ షెడ్యూల్‌లో ఉన్నాయి, అది ఏ సవరణ ద్వారా వచ్చింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>11వ షెడ్యూల్</b> — <b>73వ సవరణ (1992)</b>, 24 ఏప్రిల్ 1993 నుండి అమలు (జాతీయ పంచాయతీ రాజ్ దినోత్సవం).</p>
+    </div>
+    <div class="quiz-question" id="q2-3">
+      <p><strong>Q3:</strong> ఆంధ్రప్రదేశ్ & తెలంగాణలో విద్య, ఉద్యోగాల్లో స్థానిక రిజర్వేషన్‌కు రాజ్యాంగ ఆధారం ఏమిటి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>ఆర్టికల్ 371D</b> (32వ సవరణ, 1973) — దీని కింద రాష్ట్రపతి ఉత్తర్వులు (Presidential Order) జోన్ల వారీ స్థానిక కేడర్‌ను నిర్ణయిస్తాయి.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>సిలబస్ = 12 మాడ్యూళ్లు; ★★★ మాడ్యూళ్లు: హక్కులు/DPSP, పార్లమెంట్, న్యాయవ్యవస్థ, కేంద్ర-రాష్ట్ర సంబంధాలు, సవరణలు.</li>
+      <li>ముఖ్య భాగాలు (I–VI, IX, IXA, XVIII, XX) & 12 షెడ్యూళ్లను నోటికి రావాలి.</li>
+      <li>రాష్ట్ర PSCలకు: 371D, AP పునర్విభజన చట్టం 2014, రాష్ట్రాల పునర్వ్యవస్థీకరణ చరిత్ర.</li>
+      <li>ప్రతి మాడ్యూల్‌ను "ఆర్టికల్ → సవరణ → తీర్పు → ప్రస్తుత పరిణామం" అనే నాలుగు పొరలుగా చదవండి.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 3 ============ -->
+<section id="chapter-3" class="chapter" data-ch="3">
+  <h1>అధ్యాయం 3: అధిక ప్రాధాన్య అంశాలు</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>3.1 ప్రాథమిక హక్కులు (భాగం III)</h2>
+  <p>మూల రాజ్యాంగంలో 7 హక్కులు; <b>ఆస్తి హక్కు</b>ను <b>44వ సవరణ (1978)</b> తొలగించి ఆర్టికల్ <b>300A</b> కింద చట్టబద్ధ హక్కుగా మార్చింది. ఇప్పుడు <b>6</b>:</p>
+  <div class="table-wrap"><table>
+    <tr><th>హక్కు</th><th>ఆర్టికల్స్</th><th>పరీక్షకు కీలకం</th></tr>
+    <tr><td>సమానత్వ హక్కు</td><td>14–18</td><td>14 — చట్టం ముందు సమానత్వం; 15, 16 — రిజర్వేషన్లు (EWS 10% — 103వ సవరణ 2019); 17 — అంటరానితనం నిర్మూలన; 18 — బిరుదుల రద్దు</td></tr>
+    <tr><td>స్వేచ్ఛా హక్కు</td><td>19–22</td><td>19 — ఆరు స్వేచ్ఛలు; 20 — నేరాలకు రక్షణ; <b>21 — జీవించే హక్కు</b> (విస్తృత వ్యాఖ్యానం: గోప్యత, ఆరోగ్యకర పర్యావరణం...); <b>21A</b> — విద్యా హక్కు (86వ సవరణ 2002); 22 — అరెస్ట్ నుండి రక్షణ</td></tr>
+    <tr><td>దోపిడీకి వ్యతిరేక హక్కు</td><td>23–24</td><td>వెట్టిచాకిరీ, 14 ఏళ్లలోపు బాల కార్మికుల నిషేధం</td></tr>
+    <tr><td>మత స్వేచ్ఛా హక్కు</td><td>25–28</td><td>లౌకికత్వానికి ఆధారం</td></tr>
+    <tr><td>సాంస్కృతిక & విద్యా హక్కులు</td><td>29–30</td><td>మైనారిటీ విద్యాసంస్థలు</td></tr>
+    <tr><td>రాజ్యాంగ పరిహారాల హక్కు</td><td><b>32</b></td><td>అంబేద్కర్: "రాజ్యాంగానికి హృదయం, ఆత్మ"; 5 రిట్లు</td></tr>
+  </table></div>
+  <p><b>5 రిట్లు</b> (SC — ఆర్టి. 32; HC — ఆర్టి. 226, HC పరిధి విస్తృతం): <b>హెబియస్ కార్పస్</b> (శరీరాన్ని హాజరుపరచండి), <b>మాండమస్</b> (మేము ఆదేశిస్తున్నాం), <b>ప్రొహిబిషన్</b> (నిషేధం — దిగువ కోర్టుకు, విచారణ జరుగుతుండగా), <b>సెర్షియోరరి</b> (తీర్పు రద్దు — విచారణ తర్వాత), <b>కో-వారంటో</b> (ఏ అధికారంతో? — ప్రభుత్వ పదవి).</p>
+
+  <h2>3.2 DPSP & ప్రాథమిక విధులు</h2>
+  <ul>
+    <li><b>DPSP (36–51)</b>: న్యాయస్థానాల ద్వారా అమలు చేయించలేనివి (non-justiciable), కానీ పాలనకు ప్రాథమికం (ఆర్టి. 37). వర్గీకరణ — సామ్యవాద (38, 39, 41, 42, 43), గాంధేయ (40 — పంచాయతీలు, 43 — కుటీర పరిశ్రమలు, 47 — మద్యపాన నిషేధం, 48 — గోవధ నిషేధం), ఉదారవాద-మేధో (44 — ఉమ్మడి పౌర స్మృతి, 45, 48A — పర్యావరణం, 50 — న్యాయ-కార్యనిర్వాహక విభజన, 51 — అంతర్జాతీయ శాంతి).</li>
+    <li><b>హక్కులు vs DPSP</b>: చంపకం దొరైరాజన్ (1951) — హక్కులదే పైచేయి → మినర్వా మిల్స్ (1980) — రెండింటి మధ్య <b>సమతుల్యత</b> మౌలిక స్వరూపంలో భాగం.</li>
+    <li><b>ప్రాథమిక విధులు (51A)</b>: <b>స్వరణ్ సింగ్ కమిటీ</b> సిఫార్సుతో <b>42వ సవరణ (1976)</b> — 10 విధులు; <b>86వ సవరణ (2002)</b> — 11వ విధి (6–14 ఏళ్ల పిల్లలకు విద్యావకాశం కల్పించడం తల్లిదండ్రుల బాధ్యత).</li>
+  </ul>
+
+  <h2>3.3 చట్టం ఎలా తయారవుతుంది? — ఇంటరాక్టివ్ చిత్రం</h2>
+  <p>సాధారణ బిల్లు పార్లమెంట్‌లో ప్రయాణించే మార్గం. రెండో సభ అంగీకరిస్తే నేరుగా రాష్ట్రపతికి; అంగీకరించకపోతే (లేదా 6 నెలలు పెండింగ్‌లో ఉంటే) రాష్ట్రపతి <b>సంయుక్త సమావేశం (ఆర్టి. 108)</b> పిలవవచ్చు. బటన్లతో రెండు మార్గాలనూ ప్రయత్నించండి.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 305" role="img" aria-label="బిల్లు చట్టంగా మారే విధానం — స్టేట్ మెషీన్">
+      <defs>
+        <marker id="arrP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#9bb8d6"/></marker>
+      </defs>
+      <path id="b-e1" class="sm-edge" d="M120,85 L133,85" marker-end="url(#arrP)"/>
+      <path id="b-e2" class="sm-edge" d="M245,85 L258,85" marker-end="url(#arrP)"/>
+      <path id="b-e3" class="sm-edge" d="M370,85 L383,85" marker-end="url(#arrP)"/>
+      <path id="b-e4" class="sm-edge" d="M495,85 L508,85" marker-end="url(#arrP)"/>
+      <path id="b-e5" class="sm-edge" d="M440,125 C440,170 470,200 505,215" marker-end="url(#arrP)" stroke-dasharray="6 4"/>
+      <path id="b-e6" class="sm-edge" d="M600,205 C610,170 590,150 570,127" marker-end="url(#arrP)"/>
+      <path id="b-e7" class="sm-edge" d="M620,85 L633,85" marker-end="url(#arrP)"/>
+      <path id="b-r" class="sm-edge" d="M700,125 C715,335 50,335 65,127" stroke-dasharray="5 5" marker-end="url(#arrP)"/>
+      <g class="sm-state" data-state="intro"><rect class="box" x="10" y="45" width="110" height="80" rx="12" fill="#f4f4f4" stroke="#888" stroke-width="2"/>
+        <text x="65" y="78" text-anchor="middle" font-size="13" font-weight="700">బిల్లు ప్రవేశం</text><text x="65" y="98" text-anchor="middle" font-size="11" fill="#555">మొదటి పఠనం</text></g>
+      <g class="sm-state" data-state="second"><rect class="box" x="135" y="45" width="110" height="80" rx="12" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="190" y="78" text-anchor="middle" font-size="13" font-weight="700">రెండో పఠనం</text><text x="190" y="98" text-anchor="middle" font-size="11" fill="#555">చర్చ · కమిటీ</text></g>
+      <g class="sm-state" data-state="third"><rect class="box" x="260" y="45" width="110" height="80" rx="12" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="315" y="78" text-anchor="middle" font-size="13" font-weight="700">మూడో పఠనం</text><text x="315" y="98" text-anchor="middle" font-size="11" fill="#555">ఓటింగ్ · ఆమోదం</text></g>
+      <g class="sm-state" data-state="other"><rect class="box" x="385" y="45" width="110" height="80" rx="12" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+        <text x="440" y="78" text-anchor="middle" font-size="13" font-weight="700">రెండో సభ</text><text x="440" y="98" text-anchor="middle" font-size="11" fill="#555">అవే 3 దశలు</text></g>
+      <g class="sm-state" data-state="pres"><rect class="box" x="510" y="45" width="110" height="80" rx="12" fill="#f1ecfb" stroke="#7a5cc8" stroke-width="2"/>
+        <text x="565" y="78" text-anchor="middle" font-size="13" font-weight="700">రాష్ట్రపతి</text><text x="565" y="98" text-anchor="middle" font-size="11" fill="#555">ఆర్టి. 111</text></g>
+      <g class="sm-state" data-state="act"><rect class="box" x="635" y="45" width="115" height="80" rx="12" fill="#f0f9f4" stroke="#00b359" stroke-width="2"/>
+        <text x="692" y="78" text-anchor="middle" font-size="13" font-weight="700">చట్టం ✓</text><text x="692" y="98" text-anchor="middle" font-size="11" fill="#555">గెజిట్ ప్రచురణ</text></g>
+      <g class="sm-state" data-state="joint"><rect class="box" x="505" y="190" width="130" height="62" rx="12" fill="#fff8e1" stroke="#d4a017" stroke-width="2"/>
+        <text x="570" y="216" text-anchor="middle" font-size="13" font-weight="700">సంయుక్త సమావేశం</text><text x="570" y="236" text-anchor="middle" font-size="10" fill="#555">ఆర్టి. 108 · స్పీకర్ అధ్యక్షత</text></g>
+      <text x="250" y="160" font-size="11.5" fill="#c4471a">తిరస్కరణ / సవరణలపై విభేదం /</text>
+      <text x="250" y="176" font-size="11.5" fill="#c4471a">6 నెలలకు పైగా పెండింగ్</text>
+    </svg>
+    <div class="sm-status" aria-live="polite">ప్రస్తుత దశ: <span id="smLabel"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#555" id="smDesc"></div>
+    <div class="sm-controls" id="smControls">
+      <button data-ev="e1">చర్చకు స్వీకరించు</button>
+      <button data-ev="e2">క్లాజ్ వారీ ఆమోదం</button>
+      <button data-ev="e3">రెండో సభకు పంపు</button>
+      <button data-ev="e4">రెండో సభ ఆమోదం ✔</button>
+      <button data-ev="e5">రెండో సభ తిరస్కరణ ✘</button>
+      <button data-ev="e6">సంయుక్త సమావేశంలో ఆమోదం</button>
+      <button data-ev="e7">రాష్ట్రపతి సమ్మతి</button>
+      <button data-ev="reset">↺ రీసెట్</button>
+      <button class="auto" id="smAuto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 3.1 — సాధారణ బిల్లు మార్గం. <b>ద్రవ్య బిల్లులు, రాజ్యాంగ సవరణ బిల్లులకు</b> సంయుక్త సమావేశం ఉండదు.</figcaption>
+  </figure>
+
+  <h2>3.4 రాజ్యాంగ సవరణ (ఆర్టి. 368) & మౌలిక స్వరూపం</h2>
+  <p>మూడు రకాల సవరణలు: (1) <b>సాధారణ మెజారిటీ</b> — ఆర్టి. 368 పరిధిలోకి రావు (ఉదా: కొత్త రాష్ట్రాల ఏర్పాటు — ఆర్టి. 2, 3, 4); (2) <b>ప్రత్యేక మెజారిటీ</b> — ప్రతి సభలో మొత్తం సభ్యుల్లో మెజారిటీ + హాజరై ఓటు వేసిన వారిలో 2/3 (ఉదా: ప్రాథమిక హక్కులు); (3) <b>ప్రత్యేక మెజారిటీ + సగం రాష్ట్రాల ఆమోదం</b> — సమాఖ్య అంశాలు (ఉదా: రాష్ట్రపతి ఎన్నిక, 7వ షెడ్యూల్, GST).</p>
+  <div class="table-wrap"><table>
+    <tr><th>సవరణ</th><th>సంవత్సరం</th><th>ముఖ్యాంశం</th></tr>
+    <tr><td>1వ</td><td>1951</td><td>9వ షెడ్యూల్; ఆర్టి. 15(4) — సామాజికంగా వెనుకబడిన వర్గాలకు ప్రత్యేక నిబంధనలు</td></tr>
+    <tr><td>7వ</td><td>1956</td><td>భాషా ప్రాతిపదికన రాష్ట్రాల పునర్వ్యవస్థీకరణ; Part A/B/C/D రద్దు</td></tr>
+    <tr><td>42వ</td><td>1976</td><td>"మినీ రాజ్యాంగం" — పీఠిక, ప్రాథమిక విధులు, 5 అంశాలు రాష్ట్ర నుండి ఉమ్మడి జాబితాకు</td></tr>
+    <tr><td>44వ</td><td>1978</td><td>ఆస్తి హక్కు తొలగింపు; "అంతర్గత కల్లోలం" స్థానంలో "సాయుధ తిరుగుబాటు"; 20, 21 అత్యవసర పరిస్థితిలోనూ రద్దు కావు</td></tr>
+    <tr><td>52వ</td><td>1985</td><td>10వ షెడ్యూల్ — పార్టీ ఫిరాయింపుల నిరోధం</td></tr>
+    <tr><td>61వ</td><td>1989</td><td>ఓటింగ్ వయసు 21 → 18</td></tr>
+    <tr><td>73వ / 74వ</td><td>1992</td><td>పంచాయతీలు / మున్సిపాలిటీలకు రాజ్యాంగ హోదా</td></tr>
+    <tr><td>86వ</td><td>2002</td><td>21A విద్యా హక్కు; 11వ ప్రాథమిక విధి</td></tr>
+    <tr><td>101వ</td><td>2016</td><td>GST; GST కౌన్సిల్ (279A)</td></tr>
+    <tr><td>103వ</td><td>2019</td><td>ఆర్థికంగా బలహీన వర్గాలకు (EWS) 10% రిజర్వేషన్</td></tr>
+    <tr><td>105వ</td><td>2021</td><td>OBC జాబితా తయారీ అధికారం రాష్ట్రాలకు పునరుద్ధరణ</td></tr>
+    <tr><td>106వ</td><td>2023</td><td>నారీ శక్తి వందన్ — లోక్‌సభ, శాసనసభల్లో మహిళలకు 1/3 రిజర్వేషన్ (జనగణన + పునర్విభజన తర్వాత అమలు)</td></tr>
+  </table></div>
+  <div class="callout"><b>ప్రస్తుత పరిణామాలు (సెప్టెంబర్ 2026 నాటికి):</b> అమలులోకి వచ్చిన తాజా సవరణ 106వదే. <b>129వ సవరణ బిల్లు</b> (ఒకే దేశం–ఒకే ఎన్నిక, డిసెంబర్ 2024), <b>130వ సవరణ బిల్లు</b> (30 రోజులు నిర్బంధంలో ఉన్న PM/CM/మంత్రుల తొలగింపు, ఆగస్టు 2025) సంయుక్త పార్లమెంటరీ కమిటీకి పంపబడ్డాయి. <b>131వ సవరణ బిల్లు 2026</b> (2011 జనగణన ఆధారంగా పునర్విభజన, లోక్‌సభ గరిష్ఠ సీట్లు 850కి పెంపు, మహిళా రిజర్వేషన్ త్వరగా అమలు) ఏప్రిల్ 2026లో లోక్‌సభలో వీగిపోయింది. ఇలాంటి వాటిని <a href="https://prsindia.org/billtrack" target="_blank" rel="noopener">PRS India</a>లో ట్రాక్ చేయండి.</div>
+
+  <h3>తప్పక తెలిసుండాల్సిన తీర్పులు</h3>
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — కీలక తీర్పులు">
+<pre># కేసు                          సంవత్సరం  →  సూత్రం
+ఎ.కె. గోపాలన్                    1950   →  "చట్టం నిర్దేశించిన విధానం" సంకుచిత వ్యాఖ్యానం
+శంకరీ ప్రసాద్                    1951   →  హక్కులను సవరించవచ్చు
+గోలక్‌నాథ్                       1967   →  హక్కులను సవరించలేరు
+కేశవానంద భారతి                 1973   →  మౌలిక స్వరూప సిద్ధాంతం   # 13 మంది జడ్జీలు
+ఇందిరా గాంధీ vs రాజ్ నారాయణ్    1975   →  స్వేచ్ఛాయుత ఎన్నికలు మౌలిక స్వరూపం
+మేనకా గాంధీ                     1978   →  21 విస్తరణ; "న్యాయమైన విధానం"
+మినర్వా మిల్స్                    1980   →  న్యాయ సమీక్ష, హక్కులు-DPSP సమతుల్యత
+ఇందిరా సాహ్నీ (మండల్)           1992   →  రిజర్వేషన్ గరిష్ఠం 50%; క్రీమీ లేయర్
+ఎస్.ఆర్. బొమ్మై                  1994   →  356 దుర్వినియోగంపై నియంత్రణ; సమాఖ్య, లౌకికత్వం
+విశాఖ                           1997   →  పని ప్రదేశంలో లైంగిక వేధింపుల మార్గదర్శకాలు
+NJAC కేసు                       2015   →  NJAC రద్దు; కొలీజియం కొనసాగింపు
+కె.ఎస్. పుట్టస్వామి               2017   →  గోప్యత ప్రాథమిక హక్కు (21)</pre>
+  </div>
+
+  <details class="collapsible" id="c3-adv">
+    <summary>🔍 లోతుగా: మౌలిక స్వరూపంలో ఏమేమి ఉన్నాయి?</summary>
+    <div class="inner">
+      <p>మౌలిక స్వరూపానికి రాజ్యాంగంలో నిర్వచనం లేదు; సుప్రీంకోర్టు కేసుల వారీగా గుర్తించింది. ముఖ్యమైనవి: రాజ్యాంగ ఆధిక్యత, గణతంత్ర-ప్రజాస్వామ్య ప్రభుత్వం, లౌకికత్వం, అధికార విభజన, సమాఖ్య వ్యవస్థ, దేశ సార్వభౌమత్వం & ఐక్యత, న్యాయ సమీక్ష, స్వేచ్ఛాయుత-న్యాయమైన ఎన్నికలు, చట్టబద్ధ పాలన, పార్లమెంటరీ వ్యవస్థ, హక్కులు-DPSP సమతుల్యత, సవరణ అధికారంపై పరిమితి, న్యాయవ్యవస్థ స్వాతంత్ర్యం, సుప్రీంకోర్టు అధికార పరిధి (32, 136, 141, 142).</p>
+      <p><b>మెయిన్స్ కోణం:</b> మౌలిక స్వరూపం "న్యాయవ్యవస్థ అతిక్రమణ" (judicial overreach) అని విమర్శలు ఉన్నాయి; అదే సమయంలో "మెజారిటీ నిరంకుశత్వం" నుండి రాజ్యాంగాన్ని కాపాడే రక్షణ కవచం అని సమర్థకుల వాదన. రెండు వైపులా రాసి, సమతుల్య ముగింపు ఇవ్వండి.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q3-1">
+      <p><strong>Q1:</strong> ఏ బిల్లులకు సంయుక్త సమావేశం (ఆర్టి. 108) వర్తించదు?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>ద్రవ్య బిల్లులు</b> (రాజ్యసభ 14 రోజుల్లోపు సిఫార్సులతో తిరిగి పంపాలి; లోక్‌సభ వాటిని ఒప్పుకోవాల్సిన అవసరం లేదు) మరియు <b>రాజ్యాంగ సవరణ బిల్లులు</b> (రెండు సభలూ విడివిడిగా ప్రత్యేక మెజారిటీతో ఆమోదించాలి).</p>
+    </div>
+    <div class="quiz-question" id="q3-2">
+      <p><strong>Q2:</strong> ఒక ప్రభుత్వ అధికారి తనకు అర్హత లేని పదవిలో ఉన్నాడు. అతనిని ప్రశ్నించడానికి ఏ రిట్ ఉపయోగిస్తారు?</p>
+      <ol type="a"><li>మాండమస్</li><li>సెర్షియోరరి</li><li>కో-వారంటో</li><li>ప్రొహిబిషన్</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) కో-వారంటో</b> — "ఏ అధికారంతో?" ఇది ఎవరైనా (బాధితుడు కాకపోయినా) దాఖలు చేయవచ్చు.</p>
+    </div>
+    <div class="quiz-question" id="q3-3">
+      <p><strong>Q3:</strong> మౌలిక స్వరూప సిద్ధాంతాన్ని ప్రతిపాదించిన కేసు ఏది, ఎన్ని మంది జడ్జీల ధర్మాసనం?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>కేశవానంద భారతి vs కేరళ రాష్ట్రం (1973)</b> — 13 మంది జడ్జీలు, 7:6 మెజారిటీ. పార్లమెంట్ రాజ్యాంగంలోని ఏ భాగాన్నైనా సవరించవచ్చు, కానీ మౌలిక స్వరూపాన్ని మార్చకూడదు.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>6 ప్రాథమిక హక్కులు; ఆర్టి. 21 అత్యంత విస్తృతం; ఆర్టి. 32 "హృదయం, ఆత్మ"; 5 రిట్లు.</li>
+      <li>DPSP న్యాయస్థానాల ద్వారా అమలు కావు; హక్కులు-DPSP సమతుల్యత మౌలిక స్వరూపం (మినర్వా మిల్స్).</li>
+      <li>సాధారణ బిల్లు: 3 పఠనాలు × 2 సభలు → రాష్ట్రపతి; విభేదం వస్తే సంయుక్త సమావేశం.</li>
+      <li>42, 44, 73/74, 86, 101, 103, 106 సవరణలు & కేశవానంద, మేనకా, బొమ్మై, పుట్టస్వామి తీర్పులు తప్పనిసరి.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 4 ============ -->
+<section id="chapter-4" class="chapter" data-ch="4">
+  <h1>అధ్యాయం 4: ప్రిపరేషన్ రోడ్‌మ్యాప్ & ట్రాకర్</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>4.1 16 వారాల దశలవారీ ప్రణాళిక</h2>
+  <p>రోజుకు <b>1.5–2 గంటలు</b> పాలిటీకి కేటాయిస్తే, 16 వారాల్లో సిలబస్ పూర్తిచేసి రెండుసార్లు రివిజన్ చేయవచ్చు. (చరిత్ర వంటి ఇతర సబ్జెక్టులతో సమాంతరంగా నడుస్తుంది.)</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 270" role="img" aria-label="16 వారాల పాలిటీ రోడ్‌మ్యాప్ గాంట్ చార్ట్">
+      <g class="anim" font-size="11" fill="#555">
+        <text x="150" y="22">వారం →</text>
+      </g>
+      <g id="ganttAxis" class="anim"></g>
+      <g class="anim d1 hov"><title>దశ 1: NCERT పునాది — వారాలు 1–3</title>
+        <text x="10" y="62" font-size="13" font-weight="700">1 · NCERT పునాది</text>
+        <rect class="box" x="150" y="46" width="108" height="26" rx="6" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="204" y="63" text-anchor="middle" font-size="11">వా. 1–3</text></g>
+      <g class="anim d2 hov"><title>దశ 2: లక్ష్మీకాంత్ మాడ్యూల్ వారీ — వారాలు 4–10 (12 మాడ్యూళ్లు)</title>
+        <text x="10" y="107" font-size="13" font-weight="700">2 · ప్రామాణిక గ్రంథం</text>
+        <rect class="box" x="258" y="91" width="252" height="26" rx="6" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+        <text x="384" y="108" text-anchor="middle" font-size="11">వా. 4–10 · 12 మాడ్యూళ్లు + బేర్ యాక్ట్</text></g>
+      <g class="anim d3 hov"><title>దశ 3: PYQలు + కరెంట్ అఫైర్స్ అనుసంధానం — వారాలు 8–13 (దశ 2తో అతివ్యాప్తి)</title>
+        <text x="10" y="152" font-size="13" font-weight="700">3 · PYQ + కరెంట్</text>
+        <rect class="box" x="402" y="136" width="216" height="26" rx="6" fill="#f0f9f4" stroke="#00b359" stroke-width="2"/>
+        <text x="510" y="153" text-anchor="middle" font-size="11">వా. 8–13 · గత 10 ఏళ్ల ప్రశ్నలు</text></g>
+      <g class="anim d4 hov"><title>దశ 4: రివిజన్, మాక్ టెస్టులు, సమాధాన రచన — వారాలు 14–16</title>
+        <text x="10" y="197" font-size="13" font-weight="700">4 · రివిజన్ & మాక్స్</text>
+        <rect class="box" x="618" y="181" width="108" height="26" rx="6" fill="#f1ecfb" stroke="#7a5cc8" stroke-width="2"/>
+        <text x="672" y="198" text-anchor="middle" font-size="11">వా. 14–16</text></g>
+      <g class="anim d5">
+        <text x="10" y="242" font-size="13" font-weight="700" fill="#0066cc">నిరంతరం</text>
+        <rect x="150" y="226" width="576" height="26" rx="6" fill="#fafafa" stroke="#0066cc" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="438" y="243" text-anchor="middle" font-size="11">రోజూ వార్తాపత్రిక · వారానికి ఒక Markdown నోట్ · ఆదివారం రివిజన్</text></g>
+    </svg>
+    <figcaption>చిత్రం 4.1 — 16 వారాల గాంట్ చార్ట్. దశ 2, 3 వారాలు 8–10లో అతివ్యాప్తి చెందుతాయి — ఒక మాడ్యూల్ చదివిన వెంటనే దాని PYQలు చేయండి.</figcaption>
+  </figure>
+
+  <h2>4.2 దశల వారీ వివరాలు & పుస్తకాలు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>దశ</th><th>ఏం చదవాలి</th><th>ఎలా చదవాలి</th></tr>
+    <tr><td><b>1 · పునాది</b><br>వా. 1–3</td><td>NCERT Class 11 — <i>Indian Constitution at Work</i>; Class 12 — <i>Politics in India since Independence</i>; Class 9–10 Democratic Politics (వేగంగా); AP/TS తెలుగు అకాడమీ / రాష్ట్ర బోర్డు పౌరశాస్త్ర పుస్తకాలు</td><td>భావనలు అర్థం చేసుకోవడమే లక్ష్యం — "ఎందుకు?" అని ప్రశ్నించుకోండి. నోట్స్ తక్కువగా.</td></tr>
+    <tr><td><b>2 · ప్రామాణిక గ్రంథం</b><br>వా. 4–10</td><td><b>M. లక్ష్మీకాంత్ — <i>Indian Polity</i></b> (ప్రధాన పుస్తకం); సందేహాలకు D.D. బసు — <i>Introduction to the Constitution of India</i>; సుభాష్ కశ్యప్ — <i>Our Constitution</i>; <b>బేర్ యాక్ట్</b> (రాజ్యాంగ మూల పాఠం)</td><td>అధ్యాయం 2 లోని 12 మాడ్యూళ్ల క్రమంలో; ప్రతి మాడ్యూల్ తర్వాత ఆర్టికల్స్‌ను బేర్ యాక్ట్‌లో చదవండి. వారానికి 2 మాడ్యూళ్లు.</td></tr>
+    <tr><td><b>3 · PYQ + కరెంట్</b><br>వా. 8–13</td><td>UPSC ప్రిలిమ్స్ (గత 10 ఏళ్లు), మెయిన్స్ GS-2 PYQలు; APPSC/TSPSC గ్రూప్ పేపర్లు; <i>The Hindu</i> / <i>Indian Express</i> ఎడిటోరియల్స్; PRS India (బిల్లులు), PIB; 2వ ARC నివేదికలు (మెయిన్స్ కోసం సారాంశాలు)</td><td>ప్రతి PYQని సంబంధిత మాడ్యూల్‌కు ట్యాగ్ చేయండి. ప్రతి వార్తను "ఏ ఆర్టికల్? ఏ సంస్థ? ఏ తీర్పు?"తో కలపండి.</td></tr>
+    <tr><td><b>4 · రివిజన్ & మాక్స్</b><br>వా. 14–16</td><td>మీ సొంత నోట్స్, ఒక మాక్ టెస్ట్ సిరీస్, మెయిన్స్ సమాధాన రచన</td><td>వారానికి 2 మాక్ టెస్టులు; తప్పుల లాగ్; రోజుకు 2 మెయిన్స్ సమాధానాలు (150/250 పదాలు) — పరిచయం → ఆర్టికల్/తీర్పు ఆధారిత విశ్లేషణ → ముగింపు.</td></tr>
+  </table></div>
+
+  <h2>4.3 నోట్స్ వ్యూహం (Git / Markdown)</h2>
+  <p>చరిత్ర లాగే, పాలిటీకి కూడా ఈ రిపోజిటరీలో ప్రతి మాడ్యూల్‌కు ఒక <code>.md</code> ఫైల్ రాయండి. ప్రతి ఫైల్‌కు ఒకే టెంప్లేట్ వాడితే రివిజన్ చాలా వేగంగా అవుతుంది:</p>
+  <div class="code-block" data-title="📋 నోట్స్ టెంప్లేట్ — polity/06_parliament.md">
+<pre># మాడ్యూల్ 6: పార్లమెంట్
+## ఆర్టికల్స్
+79–122 | 108 = సంయుక్త సమావేశం | 110 = ద్రవ్య బిల్లు
+## కీలక సవరణలు
+42వ (1976), 61వ (1989 — ఓటు వయసు 18)
+## కీలక తీర్పులు
+కిహోటో హోలోహాన్ (1992) — స్పీకర్ ఫిరాయింపు నిర్ణయం న్యాయ సమీక్షకు లోబడి ఉంటుంది
+## ప్రస్తుత పరిణామాలు
+- YYYY-MM-DD: వార్త → ఏ ఆర్టికల్‌కు సంబంధం
+## PYQలు
+- UPSC 20XX Prelims Q.. — సమాధానం, తప్పు చేసిన కారణం
+## నా సందేహాలు
+- ...</pre>
+  </div>
+
+  <h2>4.4 మీ ప్రోగ్రెస్ ట్రాకర్</h2>
+  <p>ఒక మాడ్యూల్‌లో ప్రతి దశ పూర్తయినప్పుడు టిక్ చేయండి. మీ టిక్‌లు ఈ బ్రౌజర్‌లో సేవ్ అవుతాయి (వేరే బ్రౌజర్/పరికరంలో కనిపించవు).</p>
+  <div class="tracker">
+    <div class="tracker-sum"><span id="trkPct">0%</span> పూర్తయింది · <span id="trkCount">0</span>/48 <button id="trkReset" class="copy-btn" style="margin-left:10px">అన్నీ తొలగించు</button></div>
+    <div class="table-wrap"><table id="trkTable">
+      <thead><tr><th>మాడ్యూల్</th><th>NCERT</th><th>లక్ష్మీకాంత్</th><th>PYQలు</th><th>నోట్స్ (.md)</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </div>
+
+  <details class="collapsible" id="c4-adv">
+    <summary>🔍 లోతుగా: PYQ ట్రెండ్‌లు — UPSC ఏం అడుగుతోంది?</summary>
+    <div class="inner">
+      <ul>
+        <li><b>ప్రిలిమ్స్:</b> నేరుగా "ఏ ఆర్టికల్?" అనే ప్రశ్నలు తగ్గాయి; <b>"సరైన ప్రకటనలు ఎన్ని?"</b> (How many statements are correct) ఫార్మాట్ పెరిగింది — కాబట్టి పాక్షిక జ్ఞానం పనిచేయదు, ప్రతి వాక్యం ఖచ్చితంగా తెలియాలి. సంస్థల (EC, CAG, ఆర్థిక సంఘం) అధికారాలు, పార్లమెంటరీ విధానాలు (వాయిదా, ప్రోరోగ్, రద్దు), రాష్ట్రపతి-గవర్నర్ అధికారాల పోలిక తరచుగా వస్తాయి.</li>
+        <li><b>మెయిన్స్ GS-2:</b> గవర్నర్ పాత్ర & రాష్ట్ర బిల్లులపై జాప్యం, సహకార సమాఖ్య, ఒకే దేశం–ఒకే ఎన్నిక, పార్టీ ఫిరాయింపులు & స్పీకర్ పాత్ర, న్యాయ నియామకాలు, పార్లమెంట్ పనితీరు (తక్కువ సమావేశ రోజులు, కమిటీలకు బిల్లులు పంపకపోవడం), రాజ్యాంగ సంస్థల స్వతంత్రత — "ప్రస్తుత సంఘటన + రాజ్యాంగ సూత్రం" కలయిక.</li>
+        <li><b>APPSC/TSPSC:</b> వాస్తవ ఆధారిత ప్రశ్నలు ఎక్కువ; రాష్ట్ర పునర్విభజన, 371D, స్థానిక సంస్థల చట్టాలు, రాష్ట్ర సంక్షేమ పథకాలు-గవర్నెన్స్ కూడా.</li>
+      </ul>
+      <p><b>చిట్కా:</b> తప్పుల లాగ్‌లో ప్రతి తప్పును "భావన తెలియదు / వాస్తవం మర్చిపోయాను / ప్రశ్న సరిగ్గా చదవలేదు" అని వర్గీకరించండి — మూడో రకం ఎక్కువైతే చదవాల్సింది కాదు, ప్రాక్టీస్ పెంచాలి.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష (రోడ్‌మ్యాప్)</h3>
+    <div class="quiz-question" id="q4-1">
+      <p><strong>Q1:</strong> లక్ష్మీకాంత్ చదువుతున్నప్పుడు బేర్ యాక్ట్ ఎందుకు పక్కన ఉంచుకోవాలి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">ప్రిలిమ్స్ ప్రశ్నలు రాజ్యాంగ మూల పదాలపై ("shall" vs "may", "total membership" vs "present and voting") ఆధారపడతాయి. పుస్తకాల సారాంశాల్లో ఈ సూక్ష్మత పోతుంది; మూల పాఠం చదివితే "ఎన్ని ప్రకటనలు సరైనవి" ప్రశ్నల్లో ఖచ్చితత్వం పెరుగుతుంది.</p>
+    </div>
+    <div class="quiz-question" id="q4-2">
+      <p><strong>Q2:</strong> "గవర్నర్ రాష్ట్ర బిల్లులను నిరవధికంగా ఆపివేయడం" అనే వార్త చదివారు. దాన్ని మీ నోట్స్‌లో ఏ మాడ్యూల్, ఏ ఆర్టికల్స్ కింద రాయాలి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>మాడ్యూల్ 8</b> (రాష్ట్ర ప్రభుత్వం) — <b>ఆర్టి. 200</b> (బిల్లులపై గవర్నర్ సమ్మతి), <b>201</b> (రాష్ట్రపతి పరిశీలనకు రిజర్వ్), 163 (విచక్షణాధికారం); క్రాస్-లింక్ <b>మాడ్యూల్ 10</b> (కేంద్ర-రాష్ట్ర సంబంధాలు, సర్కారియా/పూంఛీ సిఫార్సులు). సంబంధిత సుప్రీంకోర్టు తీర్పులను కూడా చేర్చండి.</p>
+    </div>
+    <div class="quiz-question" id="q4-3">
+      <p><strong>Q3:</strong> 16 వారాల ప్లాన్‌లో దశ 2, దశ 3 ఎందుకు అతివ్యాప్తి చెందుతాయి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">ఒక మాడ్యూల్ చదివిన వెంటనే దాని PYQలు చేస్తే, "పరీక్ష ఏ కోణంలో అడుగుతుంది" అనేది తర్వాతి మాడ్యూళ్ల పఠనాన్ని దిశానిర్దేశం చేస్తుంది (active recall). అన్నీ చదివాక చివర్లో PYQలు చేయడం కంటే ఇది ఎక్కువ ప్రభావవంతం.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>NCERT (వా. 1–3) → లక్ష్మీకాంత్ + బేర్ యాక్ట్ (వా. 4–10) → PYQ + కరెంట్ (వా. 8–13) → రివిజన్ + మాక్స్ (వా. 14–16).</li>
+      <li>ఒకే ప్రధాన పుస్తకం, చాలాసార్లు రివిజన్ — అనేక పుస్తకాలు ఒక్కసారి చదవడం కంటే మేలు.</li>
+      <li>ప్రతి మాడ్యూల్‌కు ఒకే టెంప్లేట్‌తో Markdown నోట్స్; ప్రతి వార్తను ఆర్టికల్‌కు లింక్ చేయండి.</li>
+      <li>ట్రాకర్‌లో 48 టిక్‌లు పూర్తయితే — మీరు ప్రిలిమ్స్ పాలిటీకి సిద్ధం!</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">సూచికకు తిరిగి ✓</button></div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  const TOTAL = 4, P = 'pol-';
+  const NS = 'http://www.w3.org/2000/svg';
+  const store = {
+    get(k){ try{ return JSON.parse(sessionStorage.getItem(P+k)); }catch(e){ return null; } },
+    set(k,v){ try{ sessionStorage.setItem(P+k, JSON.stringify(v)); }catch(e){} }
+  };
+  const sections = [...document.querySelectorAll('.chapter')];
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  let visited = new Set(store.get('visited') || []);
+  let current = 0;
+
+  function show(n, push){
+    n = Math.max(0, Math.min(TOTAL, n));
+    current = n;
+    sections.forEach(s => s.classList.toggle('visible', +s.dataset.ch === n));
+    if (n > 0) { visited.add(n); store.set('visited', [...visited]); }
+    tocLinks.forEach(a => { a.classList.toggle('active', +a.dataset.ch === n); a.classList.toggle('done', visited.has(+a.dataset.ch)); });
+    document.getElementById('progressFill').style.width = (visited.size / TOTAL * 100) + '%';
+    document.getElementById('chapterCount').textContent = visited.size + '/' + TOTAL + ' అధ్యాయాలు';
+    if (push !== false) history.replaceState(null, '', '#' + sections[n].id);
+    window.scrollTo({top:0, behavior:'smooth'});
+    document.getElementById('sidebar').classList.remove('open');
+  }
+  window.goToChapter = n => show(n);
+  window.nextChapter = () => current < TOTAL ? show(current + 1) : (location.href = 'index.html');
+  window.previousChapter = () => show(current - 1);
+  document.querySelectorAll('.next-btn').forEach(b => b.addEventListener('click', nextChapter));
+  document.querySelectorAll('.prev-btn').forEach(b => b.addEventListener('click', previousChapter));
+  document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', () => show(+el.dataset.go)));
+  tocLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(+a.dataset.ch); }));
+  document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' && current < TOTAL) show(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+  });
+
+  // Quiz reveal
+  const revealed = new Set(store.get('quiz') || []);
+  document.querySelectorAll('.quiz-question').forEach(q => {
+    const btn = q.querySelector('.reveal-btn'), ans = q.querySelector('.answer'), label = btn.textContent;
+    const set = on => { ans.classList.toggle('show', on); btn.textContent = on ? 'సమాధానం దాచు' : label; btn.setAttribute('aria-expanded', on); };
+    set(revealed.has(q.id));
+    btn.addEventListener('click', () => { const on = !ans.classList.contains('show'); set(on); on ? revealed.add(q.id) : revealed.delete(q.id); store.set('quiz', [...revealed]); });
+  });
+
+  // Collapsibles
+  const openSet = new Set(store.get('open') || []);
+  document.querySelectorAll('details.collapsible').forEach(d => {
+    if (openSet.has(d.id)) d.open = true;
+    d.addEventListener('toggle', () => { d.open ? openSet.add(d.id) : openSet.delete(d.id); store.set('open', [...openSet]); });
+  });
+
+  // Revision blocks
+  const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  document.querySelectorAll('.code-block').forEach(cb => {
+    const pre = cb.querySelector('pre');
+    const raw = pre.textContent.replace(/^\n+|\s+$/g, '');
+    pre.innerHTML = raw.split('\n').map((line, i) => {
+      let h = esc(line), com = '';
+      const k = h.indexOf('#');
+      if (k >= 0) { com = '<span class="tok-com">' + h.slice(k) + '</span>'; h = h.slice(0, k); }
+      h = h.replace(/(→|=|\|)/g, '<span class="tok-key">$1</span>').replace(/(\d+)/g, '<span class="tok-num">$1</span>');
+      return '<span class="ln" data-n="' + (i + 1) + '">' + h + com + '</span>';
+    }).join('');
+    const head = document.createElement('div'); head.className = 'cb-head';
+    head.innerHTML = '<span>' + esc(cb.dataset.title || 'నోట్స్') + '</span>';
+    const btn = document.createElement('button'); btn.className = 'copy-btn'; btn.textContent = 'కాపీ'; btn.setAttribute('aria-label', 'నోట్స్ కాపీ చేయండి');
+    btn.addEventListener('click', () => {
+      const done = () => { btn.textContent = '✓ కాపీ అయింది'; setTimeout(() => btn.textContent = 'కాపీ', 1500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(raw).then(done, () => {});
+      else { const t = document.createElement('textarea'); t.value = raw; document.body.appendChild(t); t.select(); try{ document.execCommand('copy'); done(); }catch(e){} t.remove(); }
+    });
+    head.appendChild(btn); cb.insertBefore(head, pre);
+  });
+
+  // Generic clickable SVG nodes
+  function el(tag, attrs, text){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; }
+  function makeNodes(container, items, titleEl, descEl){
+    const groups = [];
+    items.forEach((it, i) => {
+      const g = el('g', {class:'hov', tabindex:'0', role:'button', 'aria-label': it.name, style:'cursor:pointer'});
+      if (it.spoke) g.appendChild(el('line', it.spoke));
+      g.appendChild(el('circle', {class:'box', cx:it.x, cy:it.y, r:it.r, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      g.appendChild(el('text', {x:it.x, y:it.y - 12, 'text-anchor':'middle', 'font-size':10.5, fill:'#555'}, it.num));
+      g.appendChild(el('text', {x:it.x, y:it.y + 14, 'text-anchor':'middle', 'font-size':it.fs || 11.5, 'font-weight':700}, it.short));
+      const pick = () => {
+        groups.forEach(x => x.querySelector('.box').setAttribute('stroke-width', 2));
+        g.querySelector('.box').setAttribute('stroke-width', 4.5);
+        g.classList.remove('pulse'); void g.getBoundingClientRect(); g.classList.add('pulse');
+        titleEl.textContent = it.name; descEl.innerHTML = it.desc;
+      };
+      g.addEventListener('click', pick);
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      container.appendChild(g); groups.push(g);
+    });
+  }
+
+  // ---------- Generic state machine ----------
+  function stateMachine(o){
+    let st = o.start, timer = null, step = 0;
+    const btns = o.buttons;
+    function render(edge){
+      document.querySelectorAll(o.scope + ' .sm-state').forEach(g => g.classList.toggle('active', g.dataset.state === st));
+      document.getElementById(o.label).textContent = o.states[st].label;
+      document.getElementById(o.desc).innerHTML = o.states[st].desc;
+      btns.forEach(b => { const t = o.T[b.dataset.ev]; b.disabled = b.dataset.ev === 'reset' ? st === o.start : t[0] !== st; });
+      document.querySelectorAll(o.scope + ' .sm-edge').forEach(p => p.classList.remove('run'));
+      if (edge) { const p = document.getElementById(edge); void p.getBoundingClientRect(); p.classList.add('run'); }
+    }
+    function fire(ev){ const t = o.T[ev]; if (t[0] !== null && t[0] !== st) return; st = t[1]; render(t[2]); }
+    function stopAuto(){ if (timer) { clearInterval(timer); timer = null; o.auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    btns.forEach(b => b.addEventListener('click', () => { stopAuto(); fire(b.dataset.ev); }));
+    o.auto.addEventListener('click', () => {
+      if (timer) return stopAuto();
+      st = o.start; render(); step = 0;
+      o.auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => { fire(o.order[step % o.order.length]); step++; }, 2000);
+    });
+    render();
+  }
+
+  // ---------- Chapter 1: constitutional timeline (stepper) ----------
+  const TL = [
+    ['1773','రెగ్యులేటింగ్','రెగ్యులేటింగ్ చట్టం 1773','EIC వ్యవహారాలను నియంత్రించడానికి బ్రిటిష్ పార్లమెంట్ తొలి అడుగు. బెంగాల్ గవర్నర్ → <b>బెంగాల్ గవర్నర్ జనరల్</b> (వారెన్ హేస్టింగ్స్). కలకత్తాలో <b>సుప్రీంకోర్టు</b> (1774).'],
+    ['1833','చార్టర్','చార్టర్ చట్టం 1833','కేంద్రీకరణ తుది దశ: <b>భారత గవర్నర్ జనరల్</b> (విలియం బెంటింక్) — సకల శాసన అధికారాలు. EIC వాణిజ్య కార్యకలాపాలు ముగిసి, కేవలం పరిపాలనా సంస్థగా మారింది. సివిల్ సర్వీసులకు బహిరంగ పోటీ ప్రతిపాదన.'],
+    ['1858','GoI చట్టం','భారత ప్రభుత్వ చట్టం 1858','1857 తిరుగుబాటు తర్వాత <b>కంపెనీ పాలన అంతం, బ్రిటిష్ రాణి పాలన</b>. గవర్నర్ జనరల్ → <b>వైస్రాయ్</b> (లార్డ్ కానింగ్). <b>భారత వ్యవహారాల కార్యదర్శి</b> + 15 మంది సభ్యుల కౌన్సిల్. ద్వంద్వ ప్రభుత్వం (బోర్డ్ ఆఫ్ కంట్రోల్ + కోర్ట్ ఆఫ్ డైరెక్టర్స్) రద్దు.'],
+    ['1909','మింటో-మార్లే','భారత కౌన్సిళ్ల చట్టం 1909 (మింటో-మార్లే)','శాసన మండళ్ల విస్తరణ; <b>ముస్లింలకు ప్రత్యేక నియోజకవర్గాలు</b> — మత ప్రాతిపదిక ఎన్నికలకు నాంది. వైస్రాయ్ కార్యనిర్వాహక మండలిలో తొలి భారతీయుడు — <b>సత్యేంద్ర ప్రసాద్ సిన్హా</b>.'],
+    ['1919','మాంట్-ఫర్డ్','భారత ప్రభుత్వ చట్టం 1919 (మాంటేగ్-చెమ్స్‌ఫర్డ్)','రాష్ట్రాల్లో <b>ద్వంద్వ పాలన (Dyarchy)</b> — బదిలీ చేసిన / రిజర్వ్ చేసిన అంశాలు. కేంద్రంలో <b>ద్విసభా విధానం</b>, ప్రత్యక్ష ఎన్నికలు. ప్రత్యేక నియోజకవర్గాలు సిక్కులు, క్రైస్తవులు, ఆంగ్లో-ఇండియన్లకు విస్తరణ. కేంద్ర పబ్లిక్ సర్వీస్ కమిషన్ (1926).'],
+    ['1935','GoI చట్టం','భారత ప్రభుత్వ చట్టం 1935','అత్యంత సుదీర్ఘ చట్టం (321 సెక్షన్లు, 10 షెడ్యూళ్లు). <b>అఖిల భారత సమాఖ్య</b> (అమలు కాలేదు), <b>రాష్ట్ర స్వయంప్రతిపత్తి</b>, కేంద్రంలో ద్వంద్వ పాలన (అమలు కాలేదు), <b>మూడు జాబితాలు</b>, RBI, <b>ఫెడరల్ కోర్టు</b> (1937). మన రాజ్యాంగానికి అతిపెద్ద మూలం.'],
+    ['1947','స్వాతంత్ర్యం','భారత స్వాతంత్ర్య చట్టం 1947','మౌంట్‌బాటెన్ ప్లాన్ ఆధారంగా; <b>15 ఆగస్టు 1947</b>న బ్రిటిష్ పాలన అంతం; భారత్, పాకిస్తాన్ విభజన. రాజ్యాంగ సభకు <b>సార్వభౌమ హోదా</b> — శాసన సభగా కూడా పనిచేసింది (శాసన సభగా సమావేశమైనప్పుడు అధ్యక్షుడు జి.వి. మావలంకర్). గవర్నర్ జనరల్ రాజ్యాంగ అధిపతి మాత్రమే.'],
+    ['1950','రాజ్యాంగం','భారత రాజ్యాంగం అమలు — 26 జనవరి 1950','భారతదేశం <b>సార్వభౌమ ప్రజాస్వామ్య గణతంత్రం</b>. ఆర్టికల్ 395 ద్వారా 1935 చట్టం, 1947 స్వాతంత్ర్య చట్టం రద్దు. డా. రాజేంద్ర ప్రసాద్ మొదటి రాష్ట్రపతి. (పౌరసత్వం, ఎన్నికలు, తాత్కాలిక పార్లమెంట్ వంటి కొన్ని నిబంధనలు 26 నవంబర్ 1949 నుండే అమలు.)']
+  ];
+  (function(){
+    const nodes = document.getElementById('tlNodes'), edges = document.getElementById('tlEdges');
+    const X = i => 50 + i * (660 / (TL.length - 1));
+    const circles = [], segs = [];
+    TL.forEach((t, i) => {
+      if (i > 0) { const p = el('path', {class:'sm-edge', d:`M${X(i-1)+22},95 L${X(i)-22},95`}); edges.appendChild(p); segs.push(p); }
+      const g = el('g', {class:'sm-state hov', tabindex:'0', role:'button', 'aria-label': t[2], style:'cursor:pointer'});
+      g.appendChild(el('circle', {class:'box', cx:X(i), cy:95, r:22, fill: i === TL.length-1 ? '#f0f9f4' : '#e8f1fb', stroke: i === TL.length-1 ? '#00b359' : '#0066cc', 'stroke-width':2}));
+      g.appendChild(el('text', {x:X(i), y:100, 'text-anchor':'middle', 'font-size':11, 'font-weight':700}, (i+1)+''));
+      g.appendChild(el('text', {x:X(i), y:58, 'text-anchor':'middle', 'font-size':14, 'font-weight':700, fill:'#0066cc'}, t[0]));
+      g.appendChild(el('text', {x:X(i), y:137, 'text-anchor':'middle', 'font-size':11.5}, t[1]));
+      g.addEventListener('click', () => { stop(); go(i); });
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); go(i); } });
+      nodes.appendChild(g); circles.push(g);
+    });
+    let cur = 0, timer = null;
+    const prev = document.getElementById('tlPrev'), next = document.getElementById('tlNext'), auto = document.getElementById('tlAuto');
+    function go(i){
+      const fwd = i === cur + 1;
+      cur = Math.max(0, Math.min(TL.length - 1, i));
+      circles.forEach((g, k) => { g.classList.toggle('active', k === cur); g.querySelector('.box').setAttribute('fill-opacity', k <= cur ? 1 : .45); });
+      segs.forEach((p, k) => { p.classList.remove('run'); p.style.stroke = k < cur ? '#0066cc' : ''; p.style.strokeWidth = k < cur ? 3 : ''; });
+      if (fwd && cur > 0) { const p = segs[cur-1]; void p.getBoundingClientRect(); p.classList.add('run'); }
+      document.getElementById('tlLabel').textContent = TL[cur][0] + ' · ' + TL[cur][2];
+      document.getElementById('tlDesc').innerHTML = TL[cur][3];
+      prev.disabled = cur === 0; next.disabled = cur === TL.length - 1;
+    }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    prev.addEventListener('click', () => { stop(); go(cur - 1); });
+    next.addEventListener('click', () => { stop(); go(cur + 1); });
+    document.getElementById('tlReset').addEventListener('click', () => { stop(); go(0); });
+    auto.addEventListener('click', () => {
+      if (timer) return stop();
+      go(0); auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => go(cur === TL.length - 1 ? 0 : cur + 1), 2000);
+    });
+    go(0);
+  })();
+
+  // ---------- Chapter 2: syllabus module map ----------
+  const PRI = {3:['#ffe3d6','#ff6b35','★★★'], 2:['#dbeafe','#0066cc','★★'], 1:['#d6f5e3','#00b359','★']};
+  const MODS = [
+    ['చారిత్రక నేపథ్యం & రాజ్యాంగ సభ','నేపథ్యం',2,'1773–1947 చట్టాలు, కేబినెట్ మిషన్, రాజ్యాంగ సభ కమిటీలు, మూలాలు.<br><b>చిట్కా:</b> ప్రతి చట్టం "మొదటిసారి ఏమి తెచ్చింది" అనే పట్టిక తయారు చేయండి.'],
+    ['పీఠిక & ముఖ్య లక్షణాలు','పీఠిక',2,'పీఠికలోని పదాల అర్థాలు, 42వ సవరణ, బెరుబారి vs కేశవానంద; పార్లమెంటరీ vs అధ్యక్ష వ్యవస్థ; సమాఖ్య లక్షణాలు; లౌకికత్వం.'],
+    ['యూనియన్, భూభాగం & పౌరసత్వం','పౌరసత్వం',1,'<b>భాగం I–II (ఆర్టి. 1–11).</b> ఆర్టి. 3 కింద కొత్త రాష్ట్రాలు; రాష్ట్రాల పునర్వ్యవస్థీకరణ (ఫజల్ అలీ, 1956); పౌరసత్వ చట్టం 1955 — పొందే/కోల్పోయే విధానాలు, CAA 2019, OCI.'],
+    ['ప్రాథమిక హక్కులు, DPSP, విధులు','హక్కులు',3,'<b>భాగం III, IV, IVA (12–51A).</b> 6 హక్కులు, 5 రిట్లు, ఆర్టి. 21 విస్తరణ, రిజర్వేషన్లు; DPSP వర్గీకరణ; హక్కులు vs DPSP తీర్పులు; 11 విధులు.<br><b>ప్రిలిమ్స్‌లో అత్యధిక ప్రశ్నలు ఇక్కడి నుండే.</b>'],
+    ['కేంద్ర కార్యనిర్వాహక వర్గం','కేంద్రం',3,'<b>ఆర్టి. 52–78.</b> రాష్ట్రపతి ఎన్నిక (ఎలక్టోరల్ కాలేజీ), అభిశంసన (61), వీటో రకాలు, ఆర్డినెన్స్ (123), క్షమాభిక్ష (72); ఉపరాష్ట్రపతి; PM & మంత్రిమండలి (74, 75); అటార్నీ జనరల్ (76).'],
+    ['పార్లమెంట్','పార్లమెంట్',3,'<b>ఆర్టి. 79–122.</b> సభల నిర్మాణం, స్పీకర్, బిల్లుల రకాలు, ద్రవ్య బిల్లు (110), సంయుక్త సమావేశం (108), బడ్జెట్ ప్రక్రియ, పార్లమెంటరీ కమిటీలు (PAC, అంచనాల కమిటీ), ప్రశ్నోత్తరాలు, తీర్మానాలు, వాయిదా vs ప్రోరోగ్ vs రద్దు.'],
+    ['న్యాయవ్యవస్థ','కోర్టులు',3,'<b>ఆర్టి. 124–147, 214–237.</b> నియామకాలు (మూడు జడ్జీల కేసులు, NJAC 2015), SC అధికార పరిధులు (మౌలిక, అప్పీలు, సలహా — 143), న్యాయ సమీక్ష, PIL, క్యూరేటివ్ పిటిషన్, ట్రిబ్యునళ్లు, లోక్ అదాలత్‌లు.'],
+    ['రాష్ట్ర ప్రభుత్వం','రాష్ట్రాలు',2,'<b>ఆర్టి. 152–237.</b> గవర్నర్ — నియామకం, విచక్షణాధికారాలు (163), బిల్లులపై సమ్మతి (200, 201); CM; శాసనసభ; శాసనమండలి ఏర్పాటు/రద్దు (169) — AP, తెలంగాణ రెండింటికీ మండలి ఉంది.'],
+    ['స్థానిక స్వపరిపాలన','స్థానిక',2,'<b>భాగం IX, IXA.</b> బల్వంత్ రాయ్ మెహతా, అశోక్ మెహతా కమిటీలు; 73వ, 74వ సవరణలు; 11వ, 12వ షెడ్యూళ్లు; రాష్ట్ర ఎన్నికల సంఘం, ఆర్థిక సంఘం; PESA 1996; 5వ, 6వ షెడ్యూళ్లు.'],
+    ['కేంద్ర-రాష్ట్ర సంబంధాలు & అత్యవసరం','సమాఖ్య',3,'<b>భాగం XI, XII, XVIII.</b> 7వ షెడ్యూల్ జాబితాలు, ఆర్టి. 249, 252; అఖిల భారత సర్వీసులు; ఆర్థిక సంఘం (280), GST కౌన్సిల్; 352, 356, 360; సర్కారియా, పూంఛీ కమిషన్లు; అంతర్-రాష్ట్ర నదీ జలాల వివాదాలు (262).'],
+    ['రాజ్యాంగ & ఇతర సంస్థలు','సంస్థలు',2,'<b>రాజ్యాంగ:</b> ఎన్నికల సంఘం (324), UPSC (315), CAG (148), ఆర్థిక సంఘం (280), NCSC, NCST, NCBC.<br><b>రాజ్యాంగేతర:</b> NITI ఆయోగ్, NHRC, CVC, CBI, లోక్‌పాల్, CIC.<br>నియామకం-తొలగింపు-నివేదిక పోలిక పట్టిక తయారు చేయండి.'],
+    ['సవరణలు, ఎన్నికలు & సమకాలీనం','సవరణలు',3,'<b>ఆర్టి. 368, 10వ షెడ్యూల్, 324–329.</b> సవరణ రకాలు, మౌలిక స్వరూపం, ముఖ్య సవరణలు; పార్టీ ఫిరాయింపుల నిరోధం; ప్రజాప్రాతినిధ్య చట్టం 1951; ఎన్నికల సంస్కరణలు; ఒకే దేశం–ఒకే ఎన్నిక, పునర్విభజన, మహిళా రిజర్వేషన్ చర్చలు.']
+  ];
+  (function(){
+    const cx = 240, cy = 235, R = 180, lines = document.getElementById('mapLines');
+    const items = MODS.map((m, i) => {
+      const a = -Math.PI/2 + i * 2*Math.PI/MODS.length, x = cx + R*Math.cos(a), y = cy + R*Math.sin(a);
+      lines.appendChild(el('line', {x1:cx, y1:cy, x2:x.toFixed(1), y2:y.toFixed(1), stroke:'#c9d9ec', 'stroke-width':2}));
+      const p = PRI[m[2]];
+      return { name:'M'+(i+1)+' · '+m[1], short:m[1], num:'M'+(i+1), desc:'<b>'+m[0]+'</b><br>ప్రాధాన్యత: <b>'+p[2]+'</b><br>'+m[3], x:x.toFixed(1), y:y.toFixed(1), r:39, fs:11, fill:p[0], stroke:p[1] };
+    });
+    makeNodes(document.getElementById('mapNodes'), items, document.getElementById('mapTitle'), document.getElementById('mapDesc'));
+  })();
+
+  // ---------- Chapter 3: how a bill becomes law ----------
+  stateMachine({
+    scope:'#chapter-3', start:'intro', label:'smLabel', desc:'smDesc',
+    buttons:[...document.querySelectorAll('#smControls [data-ev]')], auto:document.getElementById('smAuto'),
+    states:{
+      intro:{label:'బిల్లు ప్రవేశం (మొదటి పఠనం)', desc:'మంత్రి (ప్రభుత్వ బిల్లు) లేదా సభ్యుడు (ప్రైవేట్ బిల్లు) సభ అనుమతితో ప్రవేశపెడతారు; గెజిట్‌లో ప్రచురణ. ఈ దశలో చర్చ ఉండదు.'},
+      second:{label:'రెండో పఠనం — చర్చ & కమిటీ', desc:'అత్యంత కీలక దశ: సాధారణ చర్చ → సెలెక్ట్/సంయుక్త/స్టాండింగ్ కమిటీకి పంపవచ్చు → క్లాజ్ వారీ పరిశీలన, సవరణలు.'},
+      third:{label:'మూడో పఠనం — ఓటింగ్', desc:'మొత్తం బిల్లును ఆమోదించడం లేదా తిరస్కరించడం మాత్రమే; సవరణలు అనుమతించరు. సాధారణ మెజారిటీ చాలు.'},
+      other:{label:'రెండో సభ', desc:'అవే మూడు దశలు. రెండో సభ (1) ఆమోదించవచ్చు, (2) సవరణలతో తిరిగి పంపవచ్చు, (3) తిరస్కరించవచ్చు, లేదా (4) 6 నెలలకు పైగా ఏ చర్యా తీసుకోకపోవచ్చు.'},
+      joint:{label:'సంయుక్త సమావేశం (ఆర్టి. 108)', desc:'రాష్ట్రపతి పిలుస్తారు; <b>లోక్‌సభ స్పీకర్</b> అధ్యక్షత. హాజరై ఓటు వేసిన వారిలో మెజారిటీతో నిర్ణయం — లోక్‌సభ సంఖ్యాబలం ఎక్కువ కాబట్టి సాధారణంగా అదే గెలుస్తుంది. ఇప్పటివరకు కేవలం 3 సార్లు: 1961 (వరకట్న నిషేధం), 1978 (బ్యాంకింగ్ సర్వీస్ కమిషన్ రద్దు), 2002 (POTA).'},
+      pres:{label:'రాష్ట్రపతి పరిశీలన (ఆర్టి. 111)', desc:'మూడు ఎంపికలు: సమ్మతి ఇవ్వడం; నిలిపివేయడం (సంపూర్ణ వీటో); పునఃపరిశీలనకు తిరిగి పంపడం (నిలుపుదల వీటో — మళ్లీ ఆమోదిస్తే సమ్మతి తప్పనిసరి). కాలపరిమితి లేకపోవడం వల్ల "పాకెట్ వీటో" కూడా సాధ్యం (1986 — జైల్ సింగ్, పోస్ట్ ఆఫీస్ సవరణ బిల్లు).'},
+      act:{label:'చట్టం ✓', desc:'రాష్ట్రపతి సమ్మతితో బిల్లు <b>చట్టం (Act)</b> అవుతుంది; గెజిట్‌లో ప్రచురణ. ప్రభుత్వం నోటిఫై చేసిన తేదీ నుండి అమలు.'}
+    },
+    T:{ e1:['intro','second','b-e1'], e2:['second','third','b-e2'], e3:['third','other','b-e3'], e4:['other','pres','b-e4'],
+        e5:['other','joint','b-e5'], e6:['joint','pres','b-e6'], e7:['pres','act','b-e7'], reset:[null,'intro','b-r'] },
+    order:['e1','e2','e3','e4','e7','reset','e1','e2','e3','e5','e6','e7','reset']
+  });
+
+  // ---------- Chapter 4: Gantt axis ----------
+  (function(){
+    const ax = document.getElementById('ganttAxis');
+    for (let w = 1; w <= 16; w++) {
+      const x = 150 + (w-1)*36;
+      ax.appendChild(el('line', {x1:x, y1:30, x2:x, y2:258, stroke:'#eee', 'stroke-width':1}));
+      ax.appendChild(el('text', {x:x+18, y:36, 'text-anchor':'middle', 'font-size':11, fill:'#555'}, w+''));
+    }
+    ax.appendChild(el('line', {x1:726, y1:30, x2:726, y2:258, stroke:'#eee', 'stroke-width':1}));
+  })();
+
+  // ---------- Chapter 4: progress tracker (per-browser) ----------
+  (function(){
+    const KEY = 'pol-tracker-v1';
+    let data = {};
+    try { data = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { data = {}; }
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e) {} };
+    const tbody = document.querySelector('#trkTable tbody');
+    const STAGES = ['NCERT','లక్ష్మీకాంత్','PYQలు','నోట్స్'];
+    MODS.forEach((m, i) => {
+      const tr = document.createElement('tr');
+      const td0 = document.createElement('td'); td0.innerHTML = '<b>M' + (i+1) + '</b> ' + m[0] + ' <span style="color:' + PRI[m[2]][1] + '">' + PRI[m[2]][2] + '</span>'; tr.appendChild(td0);
+      STAGES.forEach((s, j) => {
+        const td = document.createElement('td'); td.style.textAlign = 'center';
+        const cb = document.createElement('input'); cb.type = 'checkbox'; cb.className = 'trk';
+        const k = i + '-' + j; cb.checked = !!data[k];
+        cb.setAttribute('aria-label', 'M' + (i+1) + ' ' + m[0] + ' — ' + s);
+        cb.addEventListener('change', () => { cb.checked ? data[k] = 1 : delete data[k]; save(); sum(); });
+        td.appendChild(cb); tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+    function sum(){
+      const n = document.querySelectorAll('.trk:checked').length, t = document.querySelectorAll('.trk').length;
+      document.getElementById('trkCount').textContent = n;
+      document.getElementById('trkPct').textContent = Math.round(n / t * 100) + '%';
+    }
+    document.getElementById('trkReset').addEventListener('click', () => { data = {}; save(); document.querySelectorAll('.trk').forEach(c => c.checked = false); sum(); });
+    sum();
+  })();
+
+  const idx = sections.findIndex(s => '#' + s.id === location.hash);
+  show(idx >= 0 ? +sections[idx].dataset.ch : 0, false);
+})();
+</script>
+</body>
+</html>

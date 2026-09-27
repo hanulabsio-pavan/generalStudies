@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M2: పీఠిక & ముఖ్య లక్షణాలు — Indian Polity</title>
+<style>
+:root{
+  --primary:#0066cc; --primary-dark:#004f9e; --primary-light:#e8f1fb;
+  --secondary:#00b359; --secondary-light:#f0f9f4;
+  --accent:#ff6b35; --accent-light:#fff3ee;
+  --bg:#ffffff; --sidebar:#f8f8f8; --text:#1a1a1a; --muted:#555; --border:#ddd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Nirmala UI','Noto Sans Telugu','Gautami',sans-serif;
+  font-size:16px;line-height:1.75;letter-spacing:.3px}
+.container{display:flex;min-height:100vh}
+/* Sidebar */
+.sidebar{width:280px;flex-shrink:0;background:var(--sidebar);border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 16px}
+.sidebar h2{margin:0 0 4px;font-size:18px;color:var(--primary)}
+.sidebar .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.progress-bar{height:8px;background:#e4e4e4;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--secondary);transition:width .4s ease}
+.chapter-count{font-size:13px;color:var(--muted);margin:6px 0 16px}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{display:block;padding:8px 10px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14.5px;line-height:1.4;
+  border-left:3px solid transparent;transition:background .3s,border-color .3s}
+.toc a:hover{background:var(--accent-light);border-left-color:var(--accent)}
+.toc a.active{background:var(--primary-light);border-left-color:var(--primary);color:var(--primary);font-weight:600}
+.toc a.done::after{content:" ✓";color:var(--secondary);font-weight:700}
+.back-link{display:inline-block;margin-top:18px;font-size:13px;color:var(--primary)}
+.menu-btn{display:none}
+/* Content */
+.content{flex:1;min-width:0;padding:32px 24px 64px}
+.chapter{max-width:900px;margin:0 auto;display:none;animation:fade .5s ease-in}
+.chapter.visible{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:28px;color:var(--primary);margin:0 0 8px;line-height:1.35}
+h2{font-size:22px;color:var(--primary);margin:2rem 0 .6rem;line-height:1.4}
+h3{font-size:18px;color:#333;margin:1.4rem 0 .5rem}
+.meta{color:var(--muted);font-size:14px;margin-bottom:1.5rem}
+p{margin:.6rem 0}
+.hl{background:var(--accent-light);padding:0 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--primary-light);color:var(--primary-dark)}
+tr:nth-child(even) td{background:#fafafa}
+.table-wrap{overflow-x:auto}
+.callout{border-left:4px solid var(--accent);background:var(--accent-light);padding:10px 14px;border-radius:0 6px 6px 0;margin:1rem 0}
+.callout b{color:#c4471a}
+/* Intro */
+.intro-page .subtitle{font-size:18px;color:var(--muted);margin-top:0}
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:1.2rem 0}
+.intro-card{border:1px solid var(--border);border-top:4px solid var(--primary);border-radius:8px;padding:12px 14px;cursor:pointer;transition:box-shadow .3s,transform .3s}
+.intro-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-2px)}
+.intro-card .n{font-size:13px;color:var(--accent);font-weight:700}
+.start-btn,.nav-buttons button,.sm-controls button,.reveal-btn{font:inherit;cursor:pointer;border-radius:6px;transition:background .3s,color .3s,border-color .3s}
+.start-btn{background:var(--primary);color:#fff;border:0;padding:12px 22px;font-size:16px;font-weight:600;margin-top:10px}
+.start-btn:hover{background:var(--primary-dark)}
+/* Diagrams */
+figure.diagram{margin:1.5rem 0;border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff}
+figure.diagram svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);text-align:center;margin-top:8px}
+.chapter.visible svg .anim{opacity:0;animation:fade .7s ease-in forwards}
+.chapter.visible svg .d1{animation-delay:.15s}.chapter.visible svg .d2{animation-delay:.35s}
+.chapter.visible svg .d3{animation-delay:.55s}.chapter.visible svg .d4{animation-delay:.75s}
+.chapter.visible svg .d5{animation-delay:.95s}.chapter.visible svg .d6{animation-delay:1.15s}
+svg .box{transition:stroke .3s,fill .3s}
+svg g.hov:hover .box{stroke:#003d7a;stroke-width:3}
+svg text{font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif;fill:#1a1a1a}
+svg g[tabindex]:focus{outline:none}svg g[tabindex]:focus-visible .box{stroke-dasharray:4 3}
+.pulse{animation:pulse 1s ease-in-out 2}
+@keyframes pulse{50%{filter:drop-shadow(0 0 6px var(--accent))}}
+/* Revision (code-style) block */
+.code-block{position:relative;margin:1.2rem 0;border:1px solid #f3c2ad;border-radius:8px;background:var(--accent-light);overflow:hidden}
+.code-block .cb-head{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:#ffe3d6;font-size:13px;font-weight:600;color:#a33c12}
+.copy-btn{font:inherit;font-size:12px;border:1px solid var(--accent);background:#fff;color:#a33c12;border-radius:4px;padding:2px 10px;cursor:pointer}
+.copy-btn:hover{background:var(--accent);color:#fff}
+.code-block pre{margin:0;padding:10px 0;overflow-x:auto;font-family:'Monaco','Consolas','Courier New','Nirmala UI',monospace;font-size:13.5px;line-height:1.7}
+.code-block .ln{display:block;padding:0 14px 0 0;white-space:pre}
+.code-block .ln::before{content:attr(data-n);display:inline-block;width:2.6em;text-align:right;padding-right:12px;margin-right:10px;color:#b98a78;border-right:1px solid #f3c2ad;user-select:none}
+.tok-num{color:var(--accent);font-weight:600}.tok-com{color:#666;font-style:italic}.tok-key{color:var(--primary);font-weight:600}
+/* Collapsible */
+details.collapsible{border:1px solid var(--border);border-radius:8px;margin:1rem 0;background:#fcfcfc}
+details.collapsible summary{cursor:pointer;padding:10px 14px;font-weight:600;color:var(--primary)}
+details.collapsible[open] summary{border-bottom:1px solid var(--border)}
+details.collapsible .inner{padding:4px 16px 12px}
+/* Quiz */
+.quiz{border:2px solid var(--primary-light);border-radius:10px;padding:6px 18px 14px;margin:2rem 0}
+.quiz h3{color:var(--primary)}
+.quiz-question{margin:1rem 0;padding-bottom:12px;border-bottom:1px dashed var(--border)}
+.quiz-question:last-child{border-bottom:0}
+.quiz-question ol{margin:.3rem 0 .5rem;padding-left:1.6rem}
+.reveal-btn{background:#fff;border:1px solid var(--accent);color:#c4471a;padding:5px 14px;font-size:14px}
+.reveal-btn:hover{background:var(--accent);color:#fff}
+.answer{display:none;margin-top:10px;background:var(--secondary-light);border-left:4px solid var(--secondary);padding:8px 12px;border-radius:0 6px 6px 0;animation:fade .4s ease-in}
+.answer.show{display:block}
+/* Takeaways */
+.key-takeaways{background:var(--secondary-light);border:1px solid #bfe8d1;border-left:5px solid var(--secondary);border-radius:8px;padding:6px 18px 10px;margin:2rem 0}
+.key-takeaways h3{color:#007a3d}
+.key-takeaways li{margin:4px 0}
+/* Nav */
+.nav-buttons{display:flex;justify-content:space-between;gap:10px;margin-top:2rem}
+.nav-buttons button{background:#fff;border:2px solid var(--primary);color:var(--primary);padding:9px 18px;font-weight:600}
+.nav-buttons button:hover:not(:disabled){background:var(--primary);color:#fff}
+.nav-buttons button:disabled{opacity:.35;cursor:default}
+/* State machine */
+.sm-status{text-align:center;font-weight:600;margin:6px 0;font-size:15px}
+.sm-status span{color:var(--primary)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.sm-controls button{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:6px 12px;font-size:14px}
+.sm-controls button:hover:not(:disabled){background:var(--primary);color:#fff}
+.sm-controls button:disabled{opacity:.35;cursor:default}
+.sm-controls .auto{border-color:var(--accent);color:#c4471a}
+.sm-controls .auto:hover{background:var(--accent)!important;color:#fff!important}
+.sm-state .box{transition:stroke-width .4s,filter .4s}
+.sm-state.active .box{stroke-width:4;filter:drop-shadow(0 0 7px rgba(0,102,204,.65))}
+.sm-edge{fill:none;stroke:#9bb8d6;stroke-width:2}
+.sm-edge.run{stroke:var(--accent);stroke-width:3.5;stroke-dasharray:400;stroke-dashoffset:400;animation:draw .8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* Responsive */
+@media (max-width:768px){
+  .container{display:block}
+  .sidebar{position:fixed;left:0;top:0;z-index:20;transform:translateX(-100%);transition:transform .3s;box-shadow:2px 0 12px rgba(0,0,0,.15)}
+  .sidebar.open{transform:none}
+  .menu-btn{display:block;position:fixed;top:10px;left:10px;z-index:30;background:var(--primary);color:#fff;border:0;border-radius:6px;padding:8px 12px;font-size:18px;cursor:pointer}
+  .content{padding:56px 16px 48px}
+  h1{font-size:24px}
+}
+.tracker{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:1rem 0}
+.tracker-sum{font-weight:700;color:#007a3d;margin-bottom:6px}
+.trk{width:18px;height:18px;accent-color:var(--secondary);cursor:pointer}
+code{background:var(--accent-light);padding:1px 5px;border-radius:3px;font-size:14px}
+</style>
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="విషయ సూచిక తెరవండి">☰</button>
+<div class="container">
+<aside class="sidebar" id="sidebar" aria-label="విషయ సూచిక">
+  <h2>📘 M2 · పీఠిక & లక్షణాలు</h2>
+  <div class="sub">Indian Polity · మాడ్యూల్ 2 · ★★</div>
+  <div class="progress-bar" role="progressbar" aria-label="పురోగతి"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="chapter-count" id="chapterCount">0/4 అధ్యాయాలు</div>
+  <nav class="toc">
+    <ul>
+      <li><a href="#intro" data-ch="0">పరిచయం</a></li>
+      <li><a href="#chapter-1" data-ch="1">1. పీఠిక: పాఠం & పదాల అర్థం</a></li>
+      <li><a href="#chapter-2" data-ch="2">2. పీఠిక: న్యాయ స్థితి & తీర్పులు</a></li>
+      <li><a href="#chapter-3" data-ch="3">3. రాజ్యాంగ ముఖ్య లక్షణాలు</a></li>
+      <li><a href="#chapter-4" data-ch="4">4. పార్లమెంటరీ వ్యవస్థ, సమాఖ్య, లౌకికత్వం</a></li>
+    </ul>
+  </nav>
+  <a class="back-link" href="indian_polity_roadmap.html">← పాలిటీ రోడ్‌మ్యాప్</a><br>
+  <a class="back-link" style="margin-top:6px" href="index.html">← సూచిక (Index)</a>
+</aside>
+
+<main class="content" id="content">
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="chapter intro-page" data-ch="0">
+  <h1>📘 మాడ్యూల్ 2: పీఠిక & రాజ్యాంగ ముఖ్య లక్షణాలు</h1>
+  <p class="subtitle">Preamble & Salient Features · UPSC / APPSC / TSPSC</p>
+  <p>పీఠిక రాజ్యాంగానికి "గుర్తింపు కార్డు" — కొన్ని వాక్యాల్లోనే రాజ్యాంగం ఎవరిది, భారత రాజ్య స్వభావం ఏమిటి, దాని లక్ష్యాలు ఏమిటి అని చెబుతుంది. ముఖ్య లక్షణాలు ఆ లక్ష్యాలను సాధించడానికి నిర్మించిన వ్యవస్థను వివరిస్తాయి. మెయిన్స్‌లో దాదాపు ప్రతి సమాధానానికి ఈ మాడ్యూల్ పునాది.</p>
+  <div class="intro-grid">
+    <div class="intro-card" data-go="1"><div class="n">అధ్యాయం 1</div>పీఠిక పాఠం, నాలుగు అంశాలు, ప్రతి కీలక పదం అర్థం (ఇంటరాక్టివ్)</div>
+    <div class="intro-card" data-go="2"><div class="n">అధ్యాయం 2</div>పీఠిక రాజ్యాంగంలో భాగమా? సవరించవచ్చా? — బెరుబారి నుండి 2024 తీర్పు వరకు</div>
+    <div class="intro-card" data-go="3"><div class="n">అధ్యాయం 3</div>దృఢత్వం–సరళత్వం, న్యాయ సమీక్ష, ఏకీకృత న్యాయవ్యవస్థ సహా 15 ముఖ్య లక్షణాలు</div>
+    <div class="intro-card" data-go="4"><div class="n">అధ్యాయం 4</div>అవిశ్వాస తీర్మానం (ఇంటరాక్టివ్), పార్లమెంటరీ vs అధ్యక్ష, భారతీయ లౌకికత్వం</div>
+  </div>
+  <p><b>మొత్తం సమయం:</b> ~75 నిమిషాలు · ⌨️ ← / → బాణం కీలతో అధ్యాయాల మధ్య కదలండి.</p>
+  <button class="start-btn" data-go="1">ప్రారంభించండి →</button>
+</section>
+
+<!-- ============ CHAPTER 1 ============ -->
+<section id="chapter-1" class="chapter" data-ch="1">
+  <h1>అధ్యాయం 1: పీఠిక — పాఠం & పదాల అర్థం</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>1.1 పీఠిక పాఠం</h2>
+  <p>పీఠిక నెహ్రూ ప్రవేశపెట్టిన <b>లక్ష్యాల తీర్మానం</b> (13 డిసెంబర్ 1946) ఆధారంగా రూపొందింది. అమెరికా రాజ్యాంగం మొదట పీఠికతో ప్రారంభమైన తొలి రాజ్యాంగం. పరీక్షల్లో పదాల <b>క్రమం</b> కూడా అడుగుతారు — మూల పాఠాన్ని ఒకసారి గట్టిగా చదవండి:</p>
+  <div class="code-block" data-title="📋 పీఠిక — ఆంగ్ల మూల పాఠం (42వ సవరణ తర్వాత)">
+<pre>WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a
+SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens:
+JUSTICE, social, economic and political;
+LIBERTY of thought, expression, belief, faith and worship;
+EQUALITY of status and of opportunity;
+and to promote among them all
+FRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation;
+IN OUR CONSTITUENT ASSEMBLY this twenty-sixth day of November, 1949,
+do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.
+# "SOCIALIST", "SECULAR", "and integrity" → 42వ సవరణ (1976) ద్వారా చేర్పు</pre>
+  </div>
+
+  <h2>1.2 పీఠికలోని నాలుగు అంశాలు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>అంశం</th><th>పీఠికలో ఎక్కడ?</th><th>అర్థం</th></tr>
+    <tr><td><b>1. అధికార మూలం</b></td><td>"మేము, భారత ప్రజలు"</td><td>రాజ్యాంగానికి అధికారం ప్రజల నుండే — ప్రజా సార్వభౌమత్వం</td></tr>
+    <tr><td><b>2. భారత రాజ్య స్వభావం</b></td><td>సార్వభౌమ, సామ్యవాద, లౌకిక, ప్రజాస్వామ్య, గణతంత్ర</td><td>రాజ్యం ఎలాంటిది</td></tr>
+    <tr><td><b>3. లక్ష్యాలు</b></td><td>న్యాయం, స్వేచ్ఛ, సమానత్వం, సౌభ్రాతృత్వం</td><td>రాజ్యాంగం సాధించాలనుకునేది</td></tr>
+    <tr><td><b>4. ఆమోద తేదీ</b></td><td>26 నవంబర్ 1949</td><td>రాజ్యాంగ సభ ఆమోదించిన రోజు (అమలు తేదీ కాదు!)</td></tr>
+  </table></div>
+
+  <h2>1.3 కీలక పదాలు — ఇంటరాక్టివ్</h2>
+  <p>ప్రతి పదంపై క్లిక్ చేసి దాని అర్థం, మూలం, పరీక్షా కోణం చూడండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 360" role="img" aria-label="పీఠిక కీలక పదాలు">
+      <g class="anim">
+        <text x="380" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#0066cc">భారత రాజ్య స్వభావం</text>
+        <text x="380" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#007a3d">రాజ్యాంగ లక్ష్యాలు</text>
+      </g>
+      <g id="prNodes" class="anim d2"></g>
+      <g class="anim d3">
+        <rect x="10" y="222" width="740" height="130" rx="10" fill="#fafafa" stroke="#ddd"/>
+        <text id="prTitle" x="26" y="248" font-size="14.5" font-weight="700" fill="#0066cc">ఒక పదంపై క్లిక్ చేయండి</text>
+        <foreignObject x="20" y="256" width="720" height="92"><div xmlns="http://www.w3.org/1999/xhtml" id="prDesc" style="font-size:13.5px;line-height:1.55;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">పై వరుస = రాజ్య స్వభావం (5 పదాలు); కింది వరుస = లక్ష్యాలు (4 పదాలు).</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 1.1 — పీఠికలోని 9 కీలక పదాలు. నారింజ అంచు = 42వ సవరణ ద్వారా చేరినవి.</figcaption>
+  </figure>
+
+  <details class="collapsible" id="c1-adv">
+    <summary>🔍 లోతుగా: మూడు రకాల న్యాయం & వాటి మూలాలు</summary>
+    <div class="inner">
+      <ul>
+        <li><b>సామాజిక న్యాయం</b> — కులం, మతం, లింగం, జాతి భేదాలు లేకుండా అందరికీ సమాన గౌరవం; ప్రత్యేక సౌకర్యాలు లేని సమాజం; వెనుకబడిన వర్గాల అభ్యున్నతి.</li>
+        <li><b>ఆర్థిక న్యాయం</b> — సంపద, ఆదాయం, ఆస్తి ఆధారంగా వివక్ష లేకపోవడం; అసమానతల తగ్గింపు.</li>
+        <li><b>రాజకీయ న్యాయం</b> — అందరికీ సమాన రాజకీయ హక్కులు: ఓటు, పదవులకు పోటీ, ప్రభుత్వంలో సమాన గొంతు.</li>
+      </ul>
+      <p>సామాజిక + ఆర్థిక న్యాయం కలిస్తే <b>"పంపిణీ న్యాయం"</b> (distributive justice). ఈ మూడు రకాల న్యాయ భావన <b>రష్యా విప్లవం (1917)</b> నుండి; స్వేచ్ఛ-సమానత్వం-సౌభ్రాతృత్వం <b>ఫ్రెంచ్ విప్లవం (1789)</b> నుండి.</p>
+      <p>ఇవి హక్కులు, DPSPలలో ఎలా ప్రతిఫలిస్తాయి: సమానత్వం → ఆర్టి. 14–18; స్వేచ్ఛ → 19–22, 25–28; న్యాయం → DPSP 38, 39 (ఆర్టి. 38 "సామాజిక, ఆర్థిక, రాజకీయ న్యాయం" అనే పదాలను మళ్లీ వాడుతుంది).</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q1-1">
+      <p><strong>Q1:</strong> పీఠికలో ఉన్న తేదీ ఏది, అది దేనిని సూచిస్తుంది?</p>
+      <ol type="a"><li>26 జనవరి 1950 — అమలు</li><li>26 నవంబర్ 1949 — ఆమోదం</li><li>15 ఆగస్టు 1947 — స్వాతంత్ర్యం</li><li>9 డిసెంబర్ 1946 — మొదటి సమావేశం</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) 26 నవంబర్ 1949</b> — రాజ్యాంగ సభ రాజ్యాంగాన్ని ఆమోదించిన తేదీ.</p>
+    </div>
+    <div class="quiz-question" id="q1-2">
+      <p><strong>Q2:</strong> పీఠికలో "స్వేచ్ఛ" ఏ ఐదు విషయాలకు హామీ ఇస్తుంది? "సమానత్వం" ఏ రెండింటికి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">స్వేచ్ఛ: <b>ఆలోచన, భావ ప్రకటన, నమ్మకం, విశ్వాసం, ఆరాధన</b> (thought, expression, belief, faith, worship). సమానత్వం: <b>హోదా, అవకాశం</b> (status, opportunity).</p>
+    </div>
+    <div class="quiz-question" id="q1-3">
+      <p><strong>Q3:</strong> "సౌభ్రాతృత్వం" ఏ రెండింటికి హామీ ఇస్తుంది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>వ్యక్తి గౌరవం</b> (dignity of the individual) & <b>దేశ ఐక్యత, సమగ్రత</b> (unity and integrity of the Nation). "సమగ్రత" 42వ సవరణ ద్వారా చేరింది. ప్రాథమిక విధి 51A(e) కూడా సౌభ్రాతృత్వాన్ని ప్రోత్సహిస్తుంది.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>పీఠిక = అధికార మూలం (ప్రజలు) + రాజ్య స్వభావం (5 పదాలు) + లక్ష్యాలు (4) + ఆమోద తేదీ.</li>
+      <li>సార్వభౌమ, సామ్యవాద, లౌకిక, ప్రజాస్వామ్య, గణతంత్ర — ఈ క్రమం గుర్తుంచుకోండి.</li>
+      <li>న్యాయం: సామాజిక-ఆర్థిక-రాజకీయ (రష్యా); స్వేచ్ఛ-సమానత్వం-సౌభ్రాతృత్వం (ఫ్రాన్స్).</li>
+      <li>భారత సామ్యవాదం = ప్రజాస్వామ్య సామ్యవాదం (మిశ్రమ ఆర్థిక వ్యవస్థ); లౌకికత్వం = సానుకూల లౌకికత్వం.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 2 ============ -->
+<section id="chapter-2" class="chapter" data-ch="2">
+  <h1>అధ్యాయం 2: పీఠిక — న్యాయ స్థితి & తీర్పులు</h1>
+  <div class="meta">⏱ ~16 నిమిషాలు</div>
+
+  <h2>2.1 రెండు కీలక ప్రశ్నలు</h2>
+  <p>పీఠిక గురించి సుప్రీంకోర్టు రెండు ప్రశ్నలకు సమాధానం చెప్పింది: <b>(1) పీఠిక రాజ్యాంగంలో భాగమా?</b> <b>(2) దాన్ని ఆర్టి. 368 కింద సవరించవచ్చా?</b> కింది కాలరేఖలో తీర్పులు ఎలా మారాయో చూడండి.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 170" role="img" aria-label="పీఠికపై తీర్పుల కాలరేఖ">
+      <line x1="50" y1="85" x2="710" y2="85" stroke="#ddd" stroke-width="6" stroke-linecap="round"/>
+      <g id="t2Edges"></g><g id="t2Nodes"></g>
+    </svg>
+    <div class="sm-status" aria-live="polite"><span id="t2Label"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#333;max-width:780px;margin:0 auto;text-align:left" id="t2Desc"></div>
+    <div class="sm-controls">
+      <button id="t2Prev">◀ మునుపటి</button><button id="t2Next">తదుపరి ▶</button><button id="t2Reset">↺ రీసెట్</button>
+      <button class="auto" id="t2Auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 2.1 — పీఠికపై న్యాయ వ్యాఖ్యానం: 1960 నుండి 2024 వరకు.</figcaption>
+  </figure>
+
+  <h2>2.2 పీఠిక — ఏది అవును, ఏది కాదు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>ప్రశ్న</th><th>సమాధానం</th></tr>
+    <tr><td>రాజ్యాంగంలో భాగమా?</td><td>✅ అవును (కేశవానంద 1973; LIC 1995)</td></tr>
+    <tr><td>సవరించవచ్చా?</td><td>✅ అవును — కానీ మౌలిక లక్షణాలను మార్చకుండా; ఇప్పటివరకు ఒక్కసారే (42వ, 1976)</td></tr>
+    <tr><td>శాసనసభకు అధికారాల మూలమా?</td><td>❌ కాదు — అధికారాలు నిర్దిష్ట ఆర్టికల్స్ నుండే</td></tr>
+    <tr><td>శాసనసభ అధికారాలపై పరిమితా?</td><td>❌ కాదు</td></tr>
+    <tr><td>కోర్టుల్లో అమలు చేయించవచ్చా?</td><td>❌ కాదు (non-justiciable)</td></tr>
+    <tr><td>ఉపయోగం ఏమిటి?</td><td>ఆర్టికల్స్ భాష అస్పష్టంగా ఉన్నప్పుడు <b>వ్యాఖ్యానానికి</b> మార్గదర్శి; మౌలిక స్వరూపాన్ని గుర్తించడానికి ఆధారం</td></tr>
+  </table></div>
+
+  <h2>2.3 పీఠికపై ప్రముఖుల వ్యాఖ్యలు</h2>
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — ఎవరు ఏమన్నారు">
+<pre>ఠాకూర్‌దాస్ భార్గవ    →  "రాజ్యాంగానికి ఆత్మ" (soul)
+కె.ఎం. మున్షీ          →  "సార్వభౌమ ప్రజాస్వామ్య గణతంత్రపు జాతకం" (horoscope)
+ఎర్నెస్ట్ బార్కర్         →  "రాజ్యాంగానికి కీలక స్వరం" (key-note)
+ఎన్.ఎ. పాల్కీవాలా      →  "రాజ్యాంగానికి గుర్తింపు కార్డు" (identity card)
+జస్టిస్ హిదాయతుల్లా     →  "అమెరికా స్వాతంత్ర్య ప్రకటన లాంటిది, అంతకంటే ఎక్కువ — రాజ్యాంగానికి ఆత్మ"
+సర్ అల్లాడి కృష్ణస్వామి అయ్యర్ →  "మన దీర్ఘకాల కలల ప్రతిబింబం"
+# 42వ సవరణ (1976) — స్వరణ్ సింగ్ కమిటీ సిఫార్సు; ఇందిరా గాంధీ ప్రభుత్వం, ఎమర్జెన్సీ కాలం</pre>
+  </div>
+
+  <details class="collapsible" id="c2-adv">
+    <summary>🔍 లోతుగా: "సామ్యవాద", "లౌకిక" పదాలపై చర్చ</summary>
+    <div class="inner">
+      <p><b>చేర్పును వ్యతిరేకించిన వాదనలు:</b> (1) రాజ్యాంగ సభ ఉద్దేశపూర్వకంగానే వీటిని చేర్చలేదు — అంబేద్కర్: ఆర్థిక విధానాన్ని ప్రతి తరం ప్రజలే నిర్ణయించుకోవాలి; (2) ఎమర్జెన్సీ కాలంలో, 6 ఏళ్ల కాలపరిమితి గల లోక్‌సభ చేసిన సవరణ; (3) పీఠికలోని "26 నవంబర్ 1949" తేదీ మారకుండానే పదాలు చేర్చడం చారిత్రకంగా అసంగతం.</p>
+      <p><b>సమర్థించిన వాదనలు:</b> (1) లౌకికత్వం ఆర్టి. 25–28 ద్వారా, సామ్యవాద ఆదర్శాలు DPSP ద్వారా అప్పటికే రాజ్యాంగంలో అంతర్లీనం — పదాలు కేవలం స్పష్టం చేశాయి; (2) కేశవానంద ప్రకారం పీఠికను సవరించవచ్చు; (3) 44వ సవరణ (1978, జనతా ప్రభుత్వం) ఈ పదాలను తొలగించలేదు — తర్వాతి పార్లమెంట్ కూడా ఆమోదించినట్లే.</p>
+      <p><b>సుప్రీంకోర్టు (నవంబర్ 2024, డా. బల్‌రామ్ సింగ్ vs భారత ప్రభుత్వం):</b> ఈ చేర్పులను సవాలు చేసిన పిటిషన్లను కొట్టివేసింది — సవరణ అధికారం పీఠికకూ వర్తిస్తుంది; ఆమోద తేదీ ఆ అధికారాన్ని పరిమితం చేయదు; భారత "సామ్యవాదం" ఒక సంక్షేమ రాజ్య భావన, ప్రైవేట్ రంగాన్ని అడ్డుకోదు; లౌకికత్వం మౌలిక స్వరూపంలో భాగం.</p>
+      <p><b>మెయిన్స్ చిట్కా:</b> రెండు వైపులా వాదనలు రాసి, కోర్టు తీర్పుతో ముగించండి — మీ సొంత రాజకీయ అభిప్రాయం కాదు, రాజ్యాంగ విశ్లేషణ ముఖ్యం.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q2-1">
+      <p><strong>Q1:</strong> "పీఠిక రాజ్యాంగంలో భాగం కాదు" అని చెప్పిన తీర్పు ఏది, దాన్ని తిరగరాసింది ఏది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>బెరుబారి యూనియన్ కేసు (1960)</b> — "భాగం కాదు" (కానీ రూపకర్తల ఆలోచనలకు తాళం చెవి అని అంగీకరించింది). <b>కేశవానంద భారతి (1973)</b> — "భాగమే" అని తిరగరాసింది; <b>LIC కేసు (1995)</b> మళ్లీ ధృవీకరించింది.</p>
+    </div>
+    <div class="quiz-question" id="q2-2">
+      <p><strong>Q2:</strong> కింది ప్రకటనల్లో సరైనవి ఎన్ని? (1) పీఠిక శాసనసభకు అధికారాల మూలం (2) పీఠికను కోర్టుల్లో అమలు చేయించలేం (3) పీఠిక ఇప్పటివరకు రెండుసార్లు సవరించబడింది</p>
+      <ol type="a"><li>ఒక్కటి మాత్రమే</li><li>రెండు మాత్రమే</li><li>మూడూ</li><li>ఏదీ కాదు</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(a) ఒక్కటి మాత్రమే</b> — (2) సరైనది. (1) తప్పు — అధికారాల మూలం కాదు; (3) తప్పు — ఒక్కసారే (42వ).</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>బెరుబారి (1960): భాగం కాదు → కేశవానంద (1973): భాగమే → LIC (1995): ధృవీకరణ.</li>
+      <li>సవరించవచ్చు, కానీ మౌలిక స్వరూపాన్ని మార్చకూడదు; 42వ సవరణ ఒక్కటే.</li>
+      <li>అధికార మూలం కాదు, పరిమితి కాదు, న్యాయస్థానాల్లో అమలు కాదు — వ్యాఖ్యానానికి మార్గదర్శి.</li>
+      <li>2024 బల్‌రామ్ సింగ్ తీర్పు: "సామ్యవాద", "లౌకిక" చేర్పులు చెల్లుతాయి.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 3 ============ -->
+<section id="chapter-3" class="chapter" data-ch="3">
+  <h1>అధ్యాయం 3: రాజ్యాంగ ముఖ్య లక్షణాలు</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>3.1 పదిహేను ముఖ్య లక్షణాలు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>#</th><th>లక్షణం</th><th>ఒక్క వాక్యంలో</th></tr>
+    <tr><td>1</td><td><b>అతి పొడవైన లిఖిత రాజ్యాంగం</b></td><td>భౌగోళిక విస్తృతి, వైవిధ్యం, 1935 చట్టం ప్రభావం, కేంద్ర-రాష్ట్రాలకు ఒకే రాజ్యాంగం (జమ్మూ కశ్మీర్ 2019 వరకు మినహాయింపు), న్యాయవాదుల ఆధిపత్యం — కారణాలు</td></tr>
+    <tr><td>2</td><td><b>వివిధ మూలాల నుండి</b></td><td>"అరువు తెచ్చుకున్న రాజ్యాంగం" — కానీ భారత పరిస్థితులకు అనుగుణంగా మార్చుకున్నది</td></tr>
+    <tr><td>3</td><td><b>దృఢత్వం + సరళత్వం</b></td><td>మూడు రకాల సవరణ విధానాలు (చిత్రం 3.1 చూడండి)</td></tr>
+    <tr><td>4</td><td><b>ఏకకేంద్ర మొగ్గుతో సమాఖ్య</b></td><td>"సమాఖ్య" పదం లేదు; ఆర్టి. 1 — "రాష్ట్రాల యూనియన్"</td></tr>
+    <tr><td>5</td><td><b>పార్లమెంటరీ ప్రభుత్వం</b></td><td>కేంద్రం, రాష్ట్రాలు రెండింటిలో బ్రిటిష్ (వెస్ట్‌మిన్‌స్టర్) నమూనా</td></tr>
+    <tr><td>6</td><td><b>పార్లమెంటరీ సార్వభౌమత్వం + న్యాయ ఆధిక్యత సమన్వయం</b></td><td>బ్రిటన్ (పార్లమెంట్ సర్వోన్నతం) & అమెరికా (న్యాయస్థానం సర్వోన్నతం) మధ్య మార్గం</td></tr>
+    <tr><td>7</td><td><b>ఏకీకృత & స్వతంత్ర న్యాయవ్యవస్థ</b></td><td>SC పైన, HCలు, దిగువ కోర్టులు — ఒకే వ్యవస్థ కేంద్ర, రాష్ట్ర చట్టాలు రెండింటినీ అమలు చేస్తుంది</td></tr>
+    <tr><td>8</td><td><b>ప్రాథమిక హక్కులు</b></td><td>రాజకీయ ప్రజాస్వామ్యం; న్యాయస్థానాల ద్వారా అమలు; పరిమితులతో కూడినవి</td></tr>
+    <tr><td>9</td><td><b>ఆదేశిక సూత్రాలు</b></td><td>సామాజిక-ఆర్థిక ప్రజాస్వామ్యం, "సంక్షేమ రాజ్యం"; అమలు చేయించలేనివి — అంబేద్కర్: "నవల లక్షణం"</td></tr>
+    <tr><td>10</td><td><b>ప్రాథమిక విధులు</b></td><td>42వ సవరణ (1976); ప్రస్తుతం 11</td></tr>
+    <tr><td>11</td><td><b>లౌకిక రాజ్యం</b></td><td>రాజ్య మతం లేదు; అన్ని మతాలకు సమాన గౌరవం</td></tr>
+    <tr><td>12</td><td><b>సార్వజనీన వయోజన ఓటు హక్కు</b></td><td>ఆర్టి. 326; 61వ సవరణ (1989) — 21 → 18 ఏళ్లు</td></tr>
+    <tr><td>13</td><td><b>ఏక పౌరసత్వం</b></td><td>అమెరికాలా ద్వంద్వ పౌరసత్వం లేదు</td></tr>
+    <tr><td>14</td><td><b>స్వతంత్ర సంస్థలు</b></td><td>ఎన్నికల సంఘం, CAG, UPSC, SPSC — ప్రజాస్వామ్య రక్షకులు</td></tr>
+    <tr><td>15</td><td><b>అత్యవసర నిబంధనలు & మూడంచెల ప్రభుత్వం</b></td><td>352/356/360; 73వ, 74వ సవరణలతో స్థానిక సంస్థలు; 97వ సవరణ (2011) — సహకార సంఘాలు</td></tr>
+  </table></div>
+
+  <h2>3.2 దృఢత్వం–సరళత్వం స్పెక్ట్రం — ఇంటరాక్టివ్</h2>
+  <p>భారత రాజ్యాంగం బ్రిటన్‌లా పూర్తిగా సరళమైనదీ (సాధారణ చట్టంలా మార్చవచ్చు) కాదు, అమెరికాలా అతి దృఢమైనదీ (27 సవరణలు మాత్రమే) కాదు. ప్రతి పెట్టెపై క్లిక్ చేయండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 330" role="img" aria-label="రాజ్యాంగ సవరణ దృఢత్వ స్పెక్ట్రం">
+      <defs><linearGradient id="spec" x1="0" x2="1"><stop offset="0" stop-color="#d6f5e3"/><stop offset=".5" stop-color="#dbeafe"/><stop offset="1" stop-color="#ffe3d6"/></linearGradient></defs>
+      <g class="anim">
+        <rect x="30" y="30" width="700" height="22" rx="11" fill="url(#spec)" stroke="#ddd"/>
+        <text x="30" y="72" font-size="12.5" font-weight="700" fill="#007a3d">← సరళం (Flexible)</text>
+        <text x="730" y="72" text-anchor="end" font-size="12.5" font-weight="700" fill="#c4471a">దృఢం (Rigid) →</text>
+      </g>
+      <g id="spNodes" class="anim d2"></g>
+      <g class="anim d3">
+        <rect x="10" y="190" width="740" height="130" rx="10" fill="#fafafa" stroke="#ddd"/>
+        <text id="spTitle" x="26" y="216" font-size="14.5" font-weight="700" fill="#0066cc">ఒక పెట్టెపై క్లిక్ చేయండి</text>
+        <foreignObject x="20" y="224" width="720" height="92"><div xmlns="http://www.w3.org/1999/xhtml" id="spDesc" style="font-size:13.5px;line-height:1.55;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">మధ్యలోని మూడు భారతీయ విధానాలు = "దృఢత్వం, సరళత్వాల మిశ్రమం".</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 3.1 — బ్రిటన్ (అత్యంత సరళం) నుండి అమెరికా (అత్యంత దృఢం) వరకు; భారత్‌కు మూడు స్థాయిలు.</figcaption>
+  </figure>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — లక్షణం → మూలం → ఆర్టికల్">
+<pre># లక్షణం                   →  మూలం         # ఆర్టికల్ / సవరణ
+పార్లమెంటరీ ప్రభుత్వం        →  బ్రిటన్         # 74, 75, 163, 164
+న్యాయ సమీక్ష                →  అమెరికా        # 13, 32, 226
+DPSP                      →  ఐర్లాండ్        # 36–51
+బలమైన కేంద్రంతో సమాఖ్య     →  కెనడా         # 1, 246, 248
+ప్రాథమిక విధులు             →  USSR          # 51A — 42వ (1976)
+సవరణ విధానం               →  దక్షిణాఫ్రికా    # 368
+సార్వజనీన వయోజన ఓటు హక్కు   →  —             # 326; 61వ (1989)
+మూడంచెల ప్రభుత్వం          →  —             # 73వ, 74వ (1992)
+సహకార సంఘాలు             →  —             # 97వ (2011) — 19(1)(c), 43B, భాగం IXB</pre>
+  </div>
+
+  <details class="collapsible" id="c3-adv">
+    <summary>🔍 లోతుగా: పార్లమెంటరీ సార్వభౌమత్వం vs న్యాయ ఆధిక్యత — భారత సమతుల్యత</summary>
+    <div class="inner">
+      <p><b>బ్రిటన్:</b> పార్లమెంట్ ఏ చట్టమైనా చేయగలదు; కోర్టులు దాన్ని కొట్టివేయలేవు (లిఖిత రాజ్యాంగం లేదు). <b>అమెరికా:</b> సుప్రీంకోర్టు "due process of law" కింద చట్టాల న్యాయబద్ధతను కూడా పరిశీలిస్తుంది — విస్తృత న్యాయ సమీక్ష.</p>
+      <p><b>భారత్:</b> రాజ్యాంగ సభ మొదట "procedure established by law" (జపాన్) స్వీకరించి న్యాయ సమీక్షను పరిమితం చేసింది. కానీ <b>మేనకా గాంధీ (1978)</b> తర్వాత ఆర్టి. 21 కింద విధానం "న్యాయమైనది, సహేతుకమైనది" కావాలి — అమెరికా "due process"కు దగ్గరైంది. మరోవైపు, పార్లమెంట్ రాజ్యాంగంలోని ఏ భాగాన్నైనా సవరించవచ్చు, కానీ <b>మౌలిక స్వరూపాన్ని</b> కాదు (కేశవానంద).</p>
+      <p>ఫలితం: పార్లమెంట్ న్యాయ సమీక్షను సవరణలతో పరిమితం చేయగలదు; కోర్టు ఆ సవరణలను మౌలిక స్వరూప పరీక్షతో కొట్టివేయగలదు — ఇదే "సమన్వయం" (synthesis). 24వ, 42వ సవరణలు vs మినర్వా మిల్స్ (1980) ఈ ఉద్రిక్తతకు ఉదాహరణలు.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q3-1">
+      <p><strong>Q1:</strong> కొత్త రాష్ట్రాల ఏర్పాటుకు ఏ సవరణ విధానం అవసరం?</p>
+      <ol type="a"><li>సాధారణ మెజారిటీ (ఆర్టి. 368 వెలుపల)</li><li>ప్రత్యేక మెజారిటీ</li><li>ప్రత్యేక మెజారిటీ + సగం రాష్ట్రాల ఆమోదం</li><li>జాతీయ రిఫరెండం</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(a)</b> — ఆర్టి. 4 ప్రకారం ఆర్టి. 2, 3 కింద చేసే చట్టాలు ఆర్టి. 368 కింద "సవరణ"గా పరిగణించబడవు. భారత్‌లో రిఫరెండం విధానం లేదు.</p>
+    </div>
+    <div class="quiz-question" id="q3-2">
+      <p><strong>Q2:</strong> ఏకీకృత న్యాయవ్యవస్థ అంటే ఏమిటి? అమెరికాకు ఎలా భిన్నం?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">భారత్‌లో SC → HC → దిగువ కోర్టులు ఒకే పిరమిడ్; ఇవే కేంద్ర, రాష్ట్ర చట్టాలు రెండింటినీ అమలు చేస్తాయి. అమెరికాలో <b>ద్వంద్వ న్యాయవ్యవస్థ</b> — ఫెడరల్ కోర్టులు ఫెడరల్ చట్టాలకు, స్టేట్ కోర్టులు స్టేట్ చట్టాలకు.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>15 లక్షణాలు: పొడవైన, అరువు, దృఢ-సరళ, ఏకకేంద్ర మొగ్గు సమాఖ్య, పార్లమెంటరీ, సమన్వయం, ఏకీకృత న్యాయవ్యవస్థ, FR, DPSP, FD, లౌకిక, సార్వజనీన ఓటు, ఏక పౌరసత్వం, స్వతంత్ర సంస్థలు, అత్యవసర & మూడంచెల.</li>
+      <li>సవరణకు మూడు స్థాయిలు: సాధారణ మెజారిటీ · ప్రత్యేక మెజారిటీ · ప్రత్యేక + సగం రాష్ట్రాలు.</li>
+      <li>పార్లమెంటరీ సార్వభౌమత్వం (బ్రిటన్) + న్యాయ ఆధిక్యత (అమెరికా) = భారత సమన్వయం; మౌలిక స్వరూపమే సమతుల్య బిందువు.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 4 ============ -->
+<section id="chapter-4" class="chapter" data-ch="4">
+  <h1>అధ్యాయం 4: పార్లమెంటరీ వ్యవస్థ, సమాఖ్య, లౌకికత్వం</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>4.1 పార్లమెంటరీ ప్రభుత్వం — లక్షణాలు</h2>
+  <ul>
+    <li><b>నామమాత్ర & వాస్తవ కార్యనిర్వాహకులు</b> — రాష్ట్రపతి (de jure) vs ప్రధాని నేతృత్వంలోని మంత్రిమండలి (de facto).</li>
+    <li><b>మెజారిటీ పార్టీ పాలన</b>; <b>సమష్టి బాధ్యత</b> — మంత్రిమండలి లోక్‌సభకు సమష్టిగా బాధ్యత (ఆర్టి. 75(3)).</li>
+    <li><b>ద్వంద్వ సభ్యత్వం</b> — మంత్రులు పార్లమెంట్ సభ్యులై ఉండాలి (6 నెలల్లోపు).</li>
+    <li><b>ప్రధాని నాయకత్వం</b>; <b>దిగువ సభ రద్దు</b> — ప్రధాని సలహాతో రాష్ట్రపతి లోక్‌సభను రద్దు చేయవచ్చు; <b>రహస్యత</b> ప్రమాణం.</li>
+  </ul>
+  <p><b>భారత్ ఎందుకు ఎంచుకుంది?</b> (1) వ్యవస్థతో పరిచయం (1919 నుండి అనుభవం); (2) <b>స్థిరత్వం కంటే బాధ్యతకు ప్రాధాన్యం</b> — అంబేద్కర్: "అధ్యక్ష వ్యవస్థ ఎక్కువ స్థిరత్వం, పార్లమెంటరీ ఎక్కువ బాధ్యత ఇస్తుంది"; (3) శాసన-కార్యనిర్వాహక వర్గాల మధ్య ఘర్షణ నివారణ; (4) వైవిధ్యభరిత సమాజంలో అన్ని వర్గాలకు ప్రభుత్వంలో ప్రాతినిధ్యం.</p>
+
+  <h2>4.2 అవిశ్వాస తీర్మానం — ఇంటరాక్టివ్ చిత్రం</h2>
+  <p>పార్లమెంటరీ వ్యవస్థలో ప్రభుత్వ మనుగడ లోక్‌సభ విశ్వాసంపై ఆధారపడి ఉంటుంది. అవిశ్వాస తీర్మానం ఏ మార్గాల్లో వెళ్లవచ్చో బటన్లతో ప్రయత్నించండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 300" role="img" aria-label="అవిశ్వాస తీర్మానం — స్టేట్ మెషీన్">
+      <defs><marker id="arrN" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#9bb8d6"/></marker></defs>
+      <path id="n-e1" class="sm-edge" d="M150,80 L243,80" marker-end="url(#arrN)"/>
+      <path id="n-e2" class="sm-edge" d="M310,45 C290,5 130,5 95,43" marker-end="url(#arrN)"/>
+      <path id="n-e3" class="sm-edge" d="M385,80 L478,80" marker-end="url(#arrN)"/>
+      <path id="n-e4" class="sm-edge" d="M590,118 L640,190" marker-end="url(#arrN)"/>
+      <path id="n-e5" class="sm-edge" d="M520,118 L440,190" marker-end="url(#arrN)"/>
+      <path id="n-e6" class="sm-edge" d="M300,235 C200,235 110,190 85,120" marker-end="url(#arrN)"/>
+      <path id="n-e7" class="sm-edge" d="M660,265 C600,300 120,300 60,120" marker-end="url(#arrN)"/>
+      <g class="sm-state" data-state="gov"><rect class="box" x="10" y="45" width="140" height="72" rx="12" fill="#f0f9f4" stroke="#00b359" stroke-width="2"/>
+        <text x="80" y="76" text-anchor="middle" font-size="13.5" font-weight="700">ప్రభుత్వం</text><text x="80" y="96" text-anchor="middle" font-size="11" fill="#555">లోక్‌సభ విశ్వాసంతో</text></g>
+      <g class="sm-state" data-state="motion"><rect class="box" x="245" y="45" width="140" height="72" rx="12" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+        <text x="315" y="76" text-anchor="middle" font-size="13.5" font-weight="700">అవిశ్వాస తీర్మానం</text><text x="315" y="96" text-anchor="middle" font-size="11" fill="#555">≥ 50 మంది మద్దతు</text></g>
+      <g class="sm-state" data-state="resign"><rect class="box" x="480" y="45" width="140" height="72" rx="12" fill="#f1ecfb" stroke="#7a5cc8" stroke-width="2"/>
+        <text x="550" y="76" text-anchor="middle" font-size="13.5" font-weight="700">మంత్రిమండలి</text><text x="550" y="96" text-anchor="middle" font-size="11" fill="#555">రాజీనామా</text></g>
+      <g class="sm-state" data-state="dissolve"><rect class="box" x="300" y="195" width="150" height="72" rx="12" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="375" y="226" text-anchor="middle" font-size="13.5" font-weight="700">లోక్‌సభ రద్దు</text><text x="375" y="246" text-anchor="middle" font-size="11" fill="#555">→ మధ్యంతర ఎన్నికలు</text></g>
+      <g class="sm-state" data-state="alt"><rect class="box" x="585" y="195" width="165" height="72" rx="12" fill="#fff8e1" stroke="#d4a017" stroke-width="2"/>
+        <text x="667" y="226" text-anchor="middle" font-size="13.5" font-weight="700">ప్రత్యామ్నాయ</text><text x="667" y="246" text-anchor="middle" font-size="11" fill="#555">ప్రభుత్వ ఏర్పాటు</text></g>
+    </svg>
+    <div class="sm-status" aria-live="polite">ప్రస్తుత దశ: <span id="nLabel"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#555" id="nDesc"></div>
+    <div class="sm-controls" id="nControls">
+      <button data-ev="e1">ప్రతిపక్షం తీర్మానం</button>
+      <button data-ev="e2">తీర్మానం వీగింది</button>
+      <button data-ev="e3">తీర్మానం నెగ్గింది</button>
+      <button data-ev="e5">ప్రధాని సలహా: రద్దు</button>
+      <button data-ev="e4">ప్రత్యామ్నాయ మెజారిటీ</button>
+      <button data-ev="e6">ఎన్నికల ఫలితం</button>
+      <button data-ev="e7">కొత్త ప్రధాని ప్రమాణం</button>
+      <button data-ev="reset">↺ రీసెట్</button>
+      <button class="auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 4.1 — అవిశ్వాస తీర్మానం మార్గాలు. రాజ్యాంగంలో "అవిశ్వాస తీర్మానం" అనే పదం లేదు — ఆర్టి. 75(3) సమష్టి బాధ్యత నుండి, లోక్‌సభ నియమం 198 ప్రకారం.</figcaption>
+  </figure>
+
+  <h2>4.3 పార్లమెంటరీ vs అధ్యక్ష వ్యవస్థ</h2>
+  <div class="table-wrap"><table>
+    <tr><th>అంశం</th><th>పార్లమెంటరీ (భారత్, బ్రిటన్)</th><th>అధ్యక్ష (అమెరికా)</th></tr>
+    <tr><td>కార్యనిర్వాహక వర్గం</td><td>ద్వంద్వ — నామమాత్ర + వాస్తవ</td><td>ఏక — అధ్యక్షుడే రాజ్యాధిపతి & ప్రభుత్వాధిపతి</td></tr>
+    <tr><td>శాసనసభతో సంబంధం</td><td>అధికారాల కలయిక; మంత్రులు సభ్యులు</td><td>అధికారాల విభజన; మంత్రులు కాంగ్రెస్ సభ్యులు కారు</td></tr>
+    <tr><td>బాధ్యత</td><td>దిగువ సభకు; అవిశ్వాసంతో తొలగింపు</td><td>నిర్ణీత పదవీకాలం; అభిశంసన మాత్రమే</td></tr>
+    <tr><td>దిగువ సభ రద్దు</td><td>సాధ్యం</td><td>సాధ్యం కాదు</td></tr>
+    <tr><td>బలం / బలహీనత</td><td>బాధ్యత, సమన్వయం / అస్థిరత, సంకీర్ణ ఒత్తిళ్లు</td><td>స్థిరత్వం, నిపుణుల మంత్రిమండలి / నిరంకుశత్వ ప్రమాదం, ప్రతిష్ఠంభన</td></tr>
+  </table></div>
+
+  <h2>4.4 భారతీయ లౌకికత్వం</h2>
+  <div class="table-wrap"><table>
+    <tr><th>పాశ్చాత్య (అమెరికా/ఫ్రాన్స్) నమూనా</th><th>భారతీయ నమూనా</th></tr>
+    <tr><td><b>ప్రతికూల</b> భావన — మతం, రాజ్యం పూర్తిగా వేరు ("separation wall")</td><td><b>సానుకూల</b> భావన — "సర్వధర్మ సమభావం"; అన్ని మతాలకు సమాన గౌరవం, సమాన రక్షణ</td></tr>
+    <tr><td>రాజ్యం మత వ్యవహారాల్లో జోక్యం చేసుకోదు</td><td>సంస్కరణల కోసం జోక్యం చేసుకోవచ్చు — అంటరానితనం నిర్మూలన (17), దేవాలయ ప్రవేశం (25(2)(b)); రాజీవ్ భార్గవ: <b>"సూత్రబద్ధ దూరం"</b> (principled distance)</td></tr>
+    <tr><td>మత విద్యాసంస్థలకు ప్రభుత్వ సహాయం లేదు</td><td>మైనారిటీ విద్యాసంస్థలకు సహాయంలో వివక్ష లేదు (30(2))</td></tr>
+  </table></div>
+  <p>రాజ్యాంగ ఆధారాలు: పీఠిక ("లౌకిక"), ఆర్టి. 14, 15, 16 (మతం ఆధారంగా వివక్ష నిషేధం), 25–28 (మత స్వేచ్ఛ), 29–30, 44 (ఉమ్మడి పౌర స్మృతి — DPSP), 51A(e). <b>ఎస్.ఆర్. బొమ్మై (1994)</b>: లౌకికత్వం మౌలిక స్వరూపంలో భాగం.</p>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — పార్లమెంటరీ వ్యవస్థ పదజాలం">
+<pre>ఆర్టి. 74        →  రాష్ట్రపతికి సలహా ఇవ్వడానికి ప్రధాని నేతృత్వంలో మంత్రిమండలి
+ఆర్టి. 75(3)     →  లోక్‌సభకు సమష్టి బాధ్యత
+అవిశ్వాస తీర్మానం  →  మొత్తం మంత్రిమండలిపై; కారణం చెప్పనక్కర్లేదు; లోక్‌సభలో మాత్రమే; ≥ 50 మంది
+విశ్వాస తీర్మానం   →  ప్రభుత్వమే మెజారిటీ నిరూపణకు (ఉదా: 1999 వాజ్‌పేయి — 1 ఓటుతో ఓటమి)
+నిందా తీర్మానం    →  నిర్దిష్ట విధానం/మంత్రిపై; కారణం చెప్పాలి; నెగ్గినా రాజీనామా తప్పనిసరి కాదు
+కోత తీర్మానం      →  బడ్జెట్ డిమాండ్ల తగ్గింపు — విధాన/ఆర్థిక/టోకెన్ కోత
+# తొలి అవిశ్వాస తీర్మానం: 1963, నెహ్రూ ప్రభుత్వంపై (ఆచార్య కృపలానీ)</pre>
+  </div>
+
+  <details class="collapsible" id="c4-adv">
+    <summary>🔍 లోతుగా: భారత్ సమాఖ్యా? — "Quasi-federal" చర్చ</summary>
+    <div class="inner">
+      <p><b>సమాఖ్య లక్షణాలు:</b> ద్వంద్వ ప్రభుత్వం, అధికార విభజన (7వ షెడ్యూల్), లిఖిత రాజ్యాంగం, రాజ్యాంగ ఆధిక్యత, దృఢత్వం (సమాఖ్య అంశాలకు రాష్ట్రాల ఆమోదం), స్వతంత్ర న్యాయవ్యవస్థ, ద్విసభా విధానం (రాజ్యసభ — రాష్ట్రాల సభ).</p>
+      <p><b>ఏకకేంద్ర లక్షణాలు:</b> బలమైన కేంద్రం, రాష్ట్రాలు "విడదీయలేనివి" కావు (ఆర్టి. 3), ఏక రాజ్యాంగం, ఏక పౌరసత్వం, సరళత్వం, రాజ్యసభలో అసమాన ప్రాతినిధ్యం, అత్యవసర నిబంధనలు, ఏకీకృత న్యాయవ్యవస్థ, అఖిల భారత సర్వీసులు, గవర్నర్ నియామకం, ఏకీకృత ఎన్నికల యంత్రాంగం, ఆర్థిక ఆధారపడటం.</p>
+      <p><b>అభిప్రాయాలు:</b> కె.సి. వేర్ — "quasi-federal"; గ్రాన్‌విల్ ఆస్టిన్ — "cooperative federalism"; మోరిస్ జోన్స్ — "bargaining federalism"; ఐవర్ జెన్నింగ్స్ — "బలమైన కేంద్రీకరణ ధోరణి గల సమాఖ్య"; అంబేద్కర్ — "Union" పదం ఎందుకంటే (1) ఇది రాష్ట్రాల ఒప్పందం ఫలితం కాదు, (2) రాష్ట్రాలకు విడిపోయే హక్కు లేదు.</p>
+      <p><b>సుప్రీంకోర్టు:</b> ఎస్.ఆర్. బొమ్మై (1994) — సమాఖ్య మౌలిక స్వరూపం; <b>పశ్చిమ బెంగాల్ vs కేంద్రం (1962)</b> — భారత్ సంపూర్ణ సమాఖ్య కాదు. సమకాలీన ఉదాహరణలు: GST కౌన్సిల్ (సహకార సమాఖ్య), ఆర్థిక సంఘం, NITI ఆయోగ్ (పోటీ సమాఖ్య).</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q4-1">
+      <p><strong>Q1:</strong> అవిశ్వాస తీర్మానం గురించి సరైనది ఏది?</p>
+      <ol type="a"><li>రాజ్యసభలో కూడా ప్రవేశపెట్టవచ్చు</li><li>కారణాలు తప్పక పేర్కొనాలి</li><li>లోక్‌సభలో మాత్రమే; కనీసం 50 మంది మద్దతు కావాలి</li><li>ఒక మంత్రిపై మాత్రమే ప్రవేశపెట్టవచ్చు</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c).</b> కారణాలు అవసరం లేదు; మొత్తం మంత్రిమండలిపై మాత్రమే (సమష్టి బాధ్యత).</p>
+    </div>
+    <div class="quiz-question" id="q4-2">
+      <p><strong>Q2:</strong> భారత లౌకికత్వాన్ని "సూత్రబద్ధ దూరం" అని ఎవరు వర్ణించారు, దాని అర్థం?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>రాజీవ్ భార్గవ</b> — రాజ్యం అన్ని మతాల నుండి సమాన దూరం పాటిస్తుంది, కానీ సమానత్వం, స్వేచ్ఛ వంటి రాజ్యాంగ విలువలను కాపాడటానికి అవసరమైనప్పుడు ఏ మతంలోనైనా జోక్యం చేసుకోవచ్చు (లేదా దూరంగా ఉండవచ్చు).</p>
+    </div>
+    <div class="quiz-question" id="q4-3">
+      <p><strong>Q3 (మెయిన్స్ శైలి):</strong> "భారత్ స్థిరత్వం కంటే బాధ్యతకే ప్రాధాన్యం ఇస్తూ పార్లమెంటరీ వ్యవస్థను ఎంచుకుంది." విశ్లేషించండి. (150 పదాలు)</p>
+      <button class="reveal-btn">సమాధాన రూపురేఖ చూపించు</button>
+      <p class="answer"><b>రూపురేఖ:</b> (1) అంబేద్కర్ వాదన — రాజ్యాంగ సభలో. (2) బాధ్యత యంత్రాంగాలు: ప్రశ్నోత్తరాలు, అవిశ్వాసం, కమిటీలు, సమష్టి బాధ్యత. (3) స్థిరత్వ సవాళ్లు: 1989–99 సంకీర్ణ యుగం, ఫిరాయింపులు → 10వ షెడ్యూల్ (52వ, 91వ సవరణలు) స్థిరత్వాన్ని పెంచాయి. (4) ప్రతివాదం: బలమైన మెజారిటీ ప్రభుత్వాల కాలంలో పార్లమెంటరీ పర్యవేక్షణ బలహీనపడే ప్రమాదం. (5) ముగింపు — వైవిధ్యభరిత దేశానికి పార్లమెంటరీ వ్యవస్థే తగినది; పార్లమెంటరీ సంస్థల బలోపేతం అవసరం.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>పార్లమెంటరీ: నామమాత్ర+వాస్తవ కార్యనిర్వాహకులు, సమష్టి బాధ్యత, ద్వంద్వ సభ్యత్వం, సభ రద్దు.</li>
+      <li>అవిశ్వాస తీర్మానం: లోక్‌సభ మాత్రమే, 50 మంది, కారణాలు అక్కర్లేదు, మొత్తం మంత్రిమండలిపై.</li>
+      <li>భారత సమాఖ్య = ఏకకేంద్ర మొగ్గు గల సమాఖ్య (quasi-federal); బొమ్మై — మౌలిక స్వరూపం.</li>
+      <li>భారతీయ లౌకికత్వం సానుకూలమైనది — సర్వధర్మ సమభావం, సూత్రబద్ధ దూరం.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">సూచికకు తిరిగి ✓</button></div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  const TOTAL = 4, P = 'pm2-';
+  const NS = 'http://www.w3.org/2000/svg';
+  const store = {
+    get(k){ try{ return JSON.parse(sessionStorage.getItem(P+k)); }catch(e){ return null; } },
+    set(k,v){ try{ sessionStorage.setItem(P+k, JSON.stringify(v)); }catch(e){} }
+  };
+  const $ = id => document.getElementById(id);
+  const sections = [...document.querySelectorAll('.chapter')];
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  let visited = new Set(store.get('visited') || []);
+  let current = 0;
+
+  function show(n, push){
+    n = Math.max(0, Math.min(TOTAL, n));
+    current = n;
+    sections.forEach(s => s.classList.toggle('visible', +s.dataset.ch === n));
+    if (n > 0) { visited.add(n); store.set('visited', [...visited]); }
+    tocLinks.forEach(a => { a.classList.toggle('active', +a.dataset.ch === n); a.classList.toggle('done', visited.has(+a.dataset.ch)); });
+    $('progressFill').style.width = (visited.size / TOTAL * 100) + '%';
+    $('chapterCount').textContent = visited.size + '/' + TOTAL + ' అధ్యాయాలు';
+    if (push !== false) history.replaceState(null, '', '#' + sections[n].id);
+    window.scrollTo({top:0, behavior:'smooth'});
+    $('sidebar').classList.remove('open');
+  }
+  window.goToChapter = n => show(n);
+  window.nextChapter = () => current < TOTAL ? show(current + 1) : (location.href = 'index.html');
+  window.previousChapter = () => show(current - 1);
+  document.querySelectorAll('.next-btn').forEach(b => b.addEventListener('click', nextChapter));
+  document.querySelectorAll('.prev-btn').forEach(b => b.addEventListener('click', previousChapter));
+  document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', () => show(+el.dataset.go)));
+  tocLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(+a.dataset.ch); }));
+  $('menuBtn').addEventListener('click', () => $('sidebar').classList.toggle('open'));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' && current < TOTAL) show(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+  });
+
+  // Quiz reveal
+  const revealed = new Set(store.get('quiz') || []);
+  document.querySelectorAll('.quiz-question').forEach(q => {
+    const btn = q.querySelector('.reveal-btn'), ans = q.querySelector('.answer'), label = btn.textContent;
+    const set = on => { ans.classList.toggle('show', on); btn.textContent = on ? 'సమాధానం దాచు' : label; btn.setAttribute('aria-expanded', on); };
+    set(revealed.has(q.id));
+    btn.addEventListener('click', () => { const on = !ans.classList.contains('show'); set(on); on ? revealed.add(q.id) : revealed.delete(q.id); store.set('quiz', [...revealed]); });
+  });
+
+  // Collapsibles
+  const openSet = new Set(store.get('open') || []);
+  document.querySelectorAll('details.collapsible').forEach(d => {
+    if (openSet.has(d.id)) d.open = true;
+    d.addEventListener('toggle', () => { d.open ? openSet.add(d.id) : openSet.delete(d.id); store.set('open', [...openSet]); });
+  });
+
+  // Revision blocks
+  const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  document.querySelectorAll('.code-block').forEach(cb => {
+    const pre = cb.querySelector('pre');
+    const raw = pre.textContent.replace(/^\n+|\s+$/g, '');
+    pre.innerHTML = raw.split('\n').map((line, i) => {
+      let h = esc(line), com = '';
+      const k = h.indexOf('#');
+      if (k >= 0) { com = '<span class="tok-com">' + h.slice(k) + '</span>'; h = h.slice(0, k); }
+      h = h.replace(/(→|=|\|)/g, '<span class="tok-key">$1</span>').replace(/(\d+)/g, '<span class="tok-num">$1</span>');
+      return '<span class="ln" data-n="' + (i + 1) + '">' + h + com + '</span>';
+    }).join('');
+    const head = document.createElement('div'); head.className = 'cb-head';
+    head.innerHTML = '<span>' + esc(cb.dataset.title || 'నోట్స్') + '</span>';
+    const btn = document.createElement('button'); btn.className = 'copy-btn'; btn.textContent = 'కాపీ'; btn.setAttribute('aria-label', 'నోట్స్ కాపీ చేయండి');
+    btn.addEventListener('click', () => {
+      const done = () => { btn.textContent = '✓ కాపీ అయింది'; setTimeout(() => btn.textContent = 'కాపీ', 1500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(raw).then(done, () => {});
+      else { const t = document.createElement('textarea'); t.value = raw; document.body.appendChild(t); t.select(); try{ document.execCommand('copy'); done(); }catch(e){} t.remove(); }
+    });
+    head.appendChild(btn); cb.insertBefore(head, pre);
+  });
+
+  // ---------- helpers ----------
+  function el(tag, attrs, text){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; }
+
+  // Clickable circle nodes with a detail panel
+  function makeNodes(container, items, titleEl, descEl){
+    const groups = [];
+    items.forEach(it => {
+      const g = el('g', {class:'hov', tabindex:'0', role:'button', 'aria-label': it.name, style:'cursor:pointer'});
+      if (it.spoke) g.appendChild(el('line', it.spoke));
+      if (it.w) g.appendChild(el('rect', {class:'box', x:it.x - it.w/2, y:it.y - it.h/2, width:it.w, height:it.h, rx:10, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      else g.appendChild(el('circle', {class:'box', cx:it.x, cy:it.y, r:it.r, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      if (it.num) g.appendChild(el('text', {x:it.x, y:it.y - 10, 'text-anchor':'middle', 'font-size':10.5, fill:'#555'}, it.num));
+      g.appendChild(el('text', {x:it.x, y:it.y + (it.num ? 12 : 5), 'text-anchor':'middle', 'font-size':it.fs || 11.5, 'font-weight':700}, it.short));
+      const pick = () => {
+        groups.forEach(x => x.querySelector('.box').setAttribute('stroke-width', 2));
+        g.querySelector('.box').setAttribute('stroke-width', 4.5);
+        g.classList.remove('pulse'); void g.getBoundingClientRect(); g.classList.add('pulse');
+        titleEl.textContent = it.name; descEl.innerHTML = it.desc;
+        if (it.onPick) it.onPick();
+      };
+      g.addEventListener('click', pick);
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      container.appendChild(g); groups.push(g);
+    });
+    return groups;
+  }
+
+  // Generic state machine (states drawn in HTML as <g class="sm-state" data-state=..>)
+  function stateMachine(o){
+    let st = o.start, timer = null, step = 0;
+    const btns = [...document.querySelectorAll(o.controls + ' [data-ev]')];
+    const auto = document.querySelector(o.controls + ' .auto');
+    function render(edge){
+      document.querySelectorAll(o.scope + ' .sm-state').forEach(g => g.classList.toggle('active', g.dataset.state === st));
+      $(o.label).textContent = o.states[st].label;
+      $(o.desc).innerHTML = o.states[st].desc;
+      btns.forEach(b => { const t = o.T[b.dataset.ev]; b.disabled = b.dataset.ev === 'reset' ? st === o.start : t[0] !== st; });
+      document.querySelectorAll(o.scope + ' .sm-edge').forEach(p => p.classList.remove('run'));
+      if (edge) { const p = $(edge); void p.getBoundingClientRect(); p.classList.add('run'); }
+    }
+    function fire(ev){ const t = o.T[ev]; if (t[0] !== null && t[0] !== st) return; st = t[1]; render(t[2]); }
+    function stopAuto(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    btns.forEach(b => b.addEventListener('click', () => { stopAuto(); fire(b.dataset.ev); }));
+    auto.addEventListener('click', () => {
+      if (timer) return stopAuto();
+      st = o.start; render(); step = 0;
+      auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => { fire(o.order[step % o.order.length]); step++; }, o.interval || 2000);
+    });
+    render();
+  }
+
+  // Timeline stepper: items = [[top, bottom, title, descHTML], ...]
+  function stepper(o){
+    const nodes = $(o.nodes), edges = $(o.edges), y = o.y || 95, x0 = o.x0 || 50, x1 = o.x1 || 710;
+    const X = i => x0 + i * ((x1 - x0) / (o.items.length - 1));
+    const circles = [], segs = [];
+    o.items.forEach((t, i) => {
+      if (i > 0) { const p = el('path', {class:'sm-edge', d:`M${X(i-1)+22},${y} L${X(i)-22},${y}`}); edges.appendChild(p); segs.push(p); }
+      const last = i === o.items.length - 1;
+      const g = el('g', {class:'sm-state hov', tabindex:'0', role:'button', 'aria-label': t[2], style:'cursor:pointer'});
+      g.appendChild(el('circle', {class:'box', cx:X(i), cy:y, r:22, fill: last ? '#f0f9f4' : '#e8f1fb', stroke: last ? '#00b359' : '#0066cc', 'stroke-width':2}));
+      g.appendChild(el('text', {x:X(i), y:y+5, 'text-anchor':'middle', 'font-size':11, 'font-weight':700}, (i+1)+''));
+      g.appendChild(el('text', {x:X(i), y:y-37, 'text-anchor':'middle', 'font-size':o.topFs || 14, 'font-weight':700, fill:'#0066cc'}, t[0]));
+      g.appendChild(el('text', {x:X(i), y:y+42, 'text-anchor':'middle', 'font-size':o.botFs || 11.5}, t[1]));
+      g.addEventListener('click', () => { stop(); go(i); });
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); go(i); } });
+      nodes.appendChild(g); circles.push(g);
+    });
+    let cur = 0, timer = null;
+    const prev = $(o.prev), next = $(o.next), auto = $(o.auto);
+    function go(i){
+      const fwd = i === cur + 1;
+      cur = Math.max(0, Math.min(o.items.length - 1, i));
+      circles.forEach((g, k) => { g.classList.toggle('active', k === cur); g.querySelector('.box').setAttribute('fill-opacity', k <= cur ? 1 : .45); });
+      segs.forEach((p, k) => { p.classList.remove('run'); p.style.stroke = k < cur ? '#0066cc' : ''; p.style.strokeWidth = k < cur ? 3 : ''; });
+      if (fwd && cur > 0) { const p = segs[cur-1]; void p.getBoundingClientRect(); p.classList.add('run'); }
+      $(o.label).textContent = o.items[cur][0] + ' · ' + o.items[cur][2];
+      $(o.desc).innerHTML = o.items[cur][3];
+      prev.disabled = cur === 0; next.disabled = cur === o.items.length - 1;
+    }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    prev.addEventListener('click', () => { stop(); go(cur - 1); });
+    next.addEventListener('click', () => { stop(); go(cur + 1); });
+    $(o.reset).addEventListener('click', () => { stop(); go(0); });
+    auto.addEventListener('click', () => {
+      if (timer) return stop();
+      go(0); auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => go(cur === o.items.length - 1 ? 0 : cur + 1), o.interval || 2200);
+    });
+    go(0);
+  }
+
+  // ---------- lesson-specific ----------
+  // Chapter 1 — preamble keywords
+  (function(){
+    const W = [
+      ['సార్వభౌమ','Sovereign',0,0,'భారత్ ఏ విదేశీ శక్తికీ లోబడని స్వతంత్ర రాజ్యం — అంతర్గతంగా, బాహ్యంగా. కామన్వెల్త్ సభ్యత్వం, ఐరాస సభ్యత్వం సార్వభౌమత్వాన్ని తగ్గించవు (స్వచ్ఛంద సభ్యత్వం). విదేశీ భూభాగాన్ని పొందవచ్చు, వదులుకోవచ్చు (ఆర్టి. 368 సవరణతో).'],
+      ['సామ్యవాద','Socialist',1,0,'<b>42వ సవరణ (1976).</b> భారత సామ్యవాదం = <b>ప్రజాస్వామ్య సామ్యవాదం</b> — మార్క్సిస్ట్/రాజ్య సామ్యవాదం కాదు; ప్రభుత్వ, ప్రైవేట్ రంగాలు కలిసిన <b>మిశ్రమ ఆర్థిక వ్యవస్థ</b>. లక్ష్యం: పేదరికం, అసమానతల నిర్మూలన. 1991 సరళీకరణ తర్వాత కూడా సంక్షేమ రాజ్య భావనగా కొనసాగుతోంది (2024 బల్‌రామ్ సింగ్ తీర్పు).'],
+      ['లౌకిక','Secular',1,0,'<b>42వ సవరణ (1976).</b> రాజ్య మతం లేదు; అన్ని మతాలకు సమాన హోదా, రక్షణ — <b>సానుకూల లౌకికత్వం</b> (సర్వధర్మ సమభావం). ఎస్.ఆర్. బొమ్మై (1994): లౌకికత్వం మౌలిక స్వరూపం. ఆధారాలు: ఆర్టి. 14–16, 25–30, 44.'],
+      ['ప్రజాస్వామ్య','Democratic',0,0,'ప్రజా సార్వభౌమత్వం — అధికారం ప్రజల చేతిలో. భారత్‌లో <b>ప్రాతినిధ్య పార్లమెంటరీ ప్రజాస్వామ్యం</b>. రాజకీయ ప్రజాస్వామ్యమే కాదు — సామాజిక, ఆర్థిక ప్రజాస్వామ్యం కూడా లక్ష్యం. అంబేద్కర్: "సామాజిక ప్రజాస్వామ్యం పునాది లేకపోతే రాజకీయ ప్రజాస్వామ్యం నిలవదు." ప్రత్యక్ష ప్రజాస్వామ్య సాధనాలు (రిఫరెండం, రీకాల్) భారత్‌లో లేవు.'],
+      ['గణతంత్ర','Republic',0,0,'రాజ్యాధిపతి <b>ఎన్నికైనవాడు</b> — వంశపారంపర్యం కాదు (బ్రిటన్‌లా రాచరికం కాదు). రాష్ట్రపతి 5 ఏళ్లకు పరోక్షంగా ఎన్నిక. అర్థాలు: (1) రాజకీయ సార్వభౌమత్వం ప్రజలలో; (2) ప్రత్యేక హక్కులు గల వర్గం లేదు; (3) అన్ని ప్రభుత్వ పదవులు ప్రతి పౌరుడికీ వివక్ష లేకుండా అందుబాటు.'],
+      ['న్యాయం','Justice',0,1,'<b>సామాజిక, ఆర్థిక, రాజకీయ</b> న్యాయం — <b>రష్యా విప్లవం (1917)</b> నుండి. హక్కులు, DPSP ద్వారా అమలు. సామాజిక + ఆర్థిక = పంపిణీ న్యాయం. DPSP ఆర్టి. 38 ఇవే పదాలను వాడుతుంది.'],
+      ['స్వేచ్ఛ','Liberty',0,1,'<b>ఆలోచన, భావ ప్రకటన, నమ్మకం, విశ్వాసం, ఆరాధన</b> స్వేచ్ఛ. అపరిమిత స్వేచ్ఛ కాదు — రాజ్యాంగంలోని పరిమితులకు లోబడి (ఆర్టి. 19(2)–(6)). ప్రాథమిక హక్కుల ద్వారా అమలు. ఫ్రెంచ్ విప్లవం నుండి.'],
+      ['సమానత్వం','Equality',0,1,'<b>హోదా, అవకాశాల</b> సమానత్వం — ప్రత్యేక హక్కుల తొలగింపు. మూడు కోణాలు: <b>పౌర</b> (ఆర్టి. 14–18), <b>రాజకీయ</b> (325, 326 — మతం, కులం ఆధారంగా ఓటరు జాబితాలో వివక్ష లేదు; సార్వజనీన ఓటు), <b>ఆర్థిక</b> (39 — సమాన పనికి సమాన వేతనం).'],
+      ['సౌభ్రాతృత్వం','Fraternity',0,1,'సోదరభావం — <b>వ్యక్తి గౌరవం</b> & <b>దేశ ఐక్యత, సమగ్రత</b> (సమగ్రత — 42వ సవరణ). ఏక పౌరసత్వం, ప్రాథమిక విధి 51A(e) దీన్ని బలపరుస్తాయి. అంబేద్కర్: "సౌభ్రాతృత్వం లేకుంటే స్వేచ్ఛ, సమానత్వం సహజంగా నిలవవు."']
+    ];
+    const items = W.map((w, i) => {
+      const row = w[3], idx = row ? i - 5 : i, n = row ? 4 : 5, gap = row ? 175 : 142;
+      const x0 = 380 - (n - 1) * gap / 2;
+      return { name: w[0] + ' (' + w[1] + ')', short: w[0], num: w[1], x: x0 + idx * gap, y: row ? 170 : 70, w: row ? 150 : 128, h: 58, fs: 13,
+        fill: row ? '#f0f9f4' : '#e8f1fb', stroke: w[2] ? '#ff6b35' : (row ? '#00b359' : '#0066cc'), desc: w[4] };
+    });
+    makeNodes($('prNodes'), items, $('prTitle'), $('prDesc'));
+  })();
+
+  // Chapter 2 — judgments timeline
+  stepper({ nodes:'t2Nodes', edges:'t2Edges', y:85, x0:70, x1:690, prev:'t2Prev', next:'t2Next', reset:'t2Reset', auto:'t2Auto', label:'t2Label', desc:'t2Desc', items:[
+    ['1960','బెరుబారి','బెరుబారి యూనియన్ కేసు (రాష్ట్రపతి సలహా అభిప్రాయం)','భారత్–పాకిస్తాన్ (నెహ్రూ–నూన్ ఒప్పందం) భూభాగ బదిలీపై ఆర్టి. 143 కింద సలహా. కోర్టు: పీఠిక <b>రాజ్యాంగంలో భాగం కాదు</b>; కానీ రూపకర్తల మనసును తెరిచే "తాళం చెవి". భూభాగ బదిలీకి ఆర్టి. 3 సరిపోదు, <b>ఆర్టి. 368 సవరణ</b> అవసరం → 9వ సవరణ (1960).'],
+    ['1973','కేశవానంద','కేశవానంద భారతి vs కేరళ రాష్ట్రం','13 మంది జడ్జీల ధర్మాసనం (7:6). బెరుబారి అభిప్రాయాన్ని తిరస్కరించి — పీఠిక <b>రాజ్యాంగంలో భాగమే</b>. రాజ్యాంగ సభ చర్చల ఆధారం: పీఠికను రాజ్యాంగం మొత్తం ఆమోదించాక చివరగా ఆమోదించారు — అది మిగతా రాజ్యాంగంతో అనుగుణంగా ఉండాలని. పీఠికను <b>సవరించవచ్చు</b>, కానీ <b>మౌలిక స్వరూపాన్ని</b> మార్చకూడదు.'],
+    ['1976','42వ సవరణ','42వ రాజ్యాంగ సవరణ','స్వరణ్ సింగ్ కమిటీ సిఫార్సుతో, ఎమర్జెన్సీ కాలంలో. పీఠికలో <b>"సామ్యవాద", "లౌకిక", "సమగ్రత"</b> చేర్పు — ఇప్పటివరకు పీఠికకు జరిగిన <b>ఏకైక సవరణ</b>. ("సార్వభౌమ ప్రజాస్వామ్య గణతంత్రం" → "సార్వభౌమ సామ్యవాద లౌకిక ప్రజాస్వామ్య గణతంత్రం"; "దేశ ఐక్యత" → "దేశ ఐక్యత, సమగ్రత".)'],
+    ['1994','బొమ్మై','ఎస్.ఆర్. బొమ్మై vs భారత ప్రభుత్వం','9 మంది జడ్జీలు. ఆర్టి. 356 దుర్వినియోగంపై నియంత్రణ (బల పరీక్ష సభలోనే; న్యాయ సమీక్షకు లోబడి). పీఠికలోని <b>లౌకికత్వం</b>, <b>సమాఖ్య</b> మౌలిక స్వరూపంలో భాగం; లౌకికత్వాన్ని ఉల్లంఘించే రాష్ట్ర ప్రభుత్వాన్ని 356 కింద తొలగించవచ్చు.'],
+    ['1995','LIC','LIC of India vs కన్స్యూమర్ ఎడ్యుకేషన్ & రీసెర్చ్ సెంటర్','పీఠిక <b>రాజ్యాంగంలో అంతర్భాగం</b> అని సుప్రీంకోర్టు మళ్లీ స్పష్టం చేసింది. సామాజిక-ఆర్థిక న్యాయం కోసం చట్టాలను పీఠిక వెలుగులో వ్యాఖ్యానించాలి.'],
+    ['2024','బల్‌రామ్ సింగ్','డా. బల్‌రామ్ సింగ్ vs భారత ప్రభుత్వం (నవంబర్ 2024)','42వ సవరణ ద్వారా "సామ్యవాద", "లౌకిక" చేర్పులను సవాలు చేసిన పిటిషన్లు <b>కొట్టివేత</b>. సవరణ అధికారం పీఠికకూ వర్తిస్తుంది; పీఠికలోని ఆమోద తేదీ ఆ అధికారాన్ని పరిమితం చేయదు; దశాబ్దాలుగా ఆమోదం పొందిన ఈ పదాలను ఇప్పుడు ప్రశ్నించడానికి సహేతుక కారణం లేదు.']
+  ]});
+
+  // Chapter 3 — rigidity spectrum
+  (function(){
+    const S = [
+      ['బ్రిటన్','అత్యంత సరళం',85,'#d6f5e3','#00b359','లిఖిత రాజ్యాంగం లేదు; పార్లమెంట్ సాధారణ చట్టంతోనే రాజ్యాంగ సూత్రాలను మార్చగలదు — <b>పార్లమెంటరీ సార్వభౌమత్వం</b>.'],
+      ['సాధారణ మెజారిటీ','ఆర్టి. 368 వెలుపల',232,'#e8f1fb','#0066cc','పార్లమెంట్ సాధారణ చట్టంలా — హాజరై ఓటు వేసిన వారిలో మెజారిటీ. ఉదా: <b>కొత్త రాష్ట్రాలు (ఆర్టి. 2, 3, 4)</b>, రాష్ట్ర శాసనమండలి ఏర్పాటు/రద్దు (169), పౌరసత్వం (11), పార్లమెంట్ కోరం, జీతభత్యాలు (2వ షెడ్యూల్), 5వ & 6వ షెడ్యూళ్లు, SC అధికార పరిధి విస్తరణ.'],
+      ['ప్రత్యేక మెజారిటీ','ఆర్టి. 368(2)',380,'#e8f1fb','#0066cc','ప్రతి సభలో <b>మొత్తం సభ్యుల్లో మెజారిటీ + హాజరై ఓటు వేసిన వారిలో 2/3</b>. రెండు సభలూ విడివిడిగా; సంయుక్త సమావేశం లేదు. ఉదా: <b>ప్రాథమిక హక్కులు, DPSP</b>, మరియు మూడో వర్గంలో లేని ఇతర నిబంధనలు. ఎక్కువ సవరణలు ఈ పద్ధతిలోనే.'],
+      ['ప్రత్యేక + సగం రాష్ట్రాలు','ఆర్టి. 368(2) నిబంధన',528,'#fff3ee','#ff6b35','ప్రత్యేక మెజారిటీ + <b>సగం రాష్ట్ర శాసనసభల ఆమోదం</b> (సాధారణ మెజారిటీతో, కాలపరిమితి లేదు). <b>సమాఖ్య అంశాలు</b>: రాష్ట్రపతి ఎన్నిక (54, 55), కేంద్ర-రాష్ట్ర కార్యనిర్వాహక అధికార పరిధి, SC & HCలు, 7వ షెడ్యూల్ జాబితాలు, GST కౌన్సిల్, రాజ్యసభలో రాష్ట్రాల ప్రాతినిధ్యం, ఆర్టి. 368 స్వయంగా. ఉదా: 101వ సవరణ (GST).'],
+      ['అమెరికా','అత్యంత దృఢం',675,'#ffe3d6','#ff6b35','కాంగ్రెస్ ఉభయ సభల్లో 2/3 + <b>3/4 రాష్ట్రాల</b> ఆమోదం (లేదా రాష్ట్రాల సదస్సు). 1789 నుండి కేవలం <b>27</b> సవరణలు. (భారత్‌లో 1950 నుండి 106 సవరణలు.)']
+    ];
+    const items = S.map(s => ({ name: s[0] + ' — ' + s[1], short: s[0].replace('ప్రత్యేక + సగం రాష్ట్రాలు','ప్రత్యేక + రాష్ట్రాలు'), num: s[1], x: s[2], y: 128, w: 140, h: 62, fs: s[0].length > 12 ? 11 : 13, fill: s[3], stroke: s[4], desc: s[5] }));
+    makeNodes($('spNodes'), items, $('spTitle'), $('spDesc'));
+  })();
+
+  // Chapter 4 — no-confidence motion state machine
+  stateMachine({
+    scope:'#chapter-4', controls:'#nControls', start:'gov', label:'nLabel', desc:'nDesc',
+    states:{
+      gov:{label:'ప్రభుత్వం (లోక్‌సభ విశ్వాసంతో)', desc:'ప్రధాని నేతృత్వంలోని మంత్రిమండలి లోక్‌సభ మెజారిటీ మద్దతుతో పదవిలో ఉంటుంది — ఆర్టి. 75(3) సమష్టి బాధ్యత.'},
+      motion:{label:'అవిశ్వాస తీర్మానం', desc:'లోక్‌సభ నియమం 198: కనీసం <b>50 మంది</b> సభ్యుల మద్దతుతో స్పీకర్ అనుమతిస్తారు; 10 రోజుల్లోపు చర్చ. <b>కారణాలు చెప్పనక్కర్లేదు.</b> రాజ్యసభలో ప్రవేశపెట్టలేరు.'},
+      resign:{label:'మంత్రిమండలి రాజీనామా', desc:'తీర్మానం నెగ్గితే మొత్తం మంత్రిమండలి రాజీనామా చేయాలి. (విశ్వాస తీర్మానంలో ఓడినా అదే ఫలితం — ఉదా: 1990 వి.పి. సింగ్, 1997 దేవెగౌడ, 1999 వాజ్‌పేయి — 1 ఓటు తేడాతో.)'},
+      dissolve:{label:'లోక్‌సభ రద్దు', desc:'ఆపద్ధర్మ ప్రధాని సలహాతో / ప్రత్యామ్నాయం లేనప్పుడు రాష్ట్రపతి లోక్‌సభను రద్దు చేస్తారు (ఆర్టి. 85(2)(b)) → 6 నెలల్లోపు మధ్యంతర ఎన్నికలు. పాత ప్రభుత్వం ఆపద్ధర్మంగా కొనసాగుతుంది.'},
+      alt:{label:'ప్రత్యామ్నాయ ప్రభుత్వం', desc:'మరో నాయకుడికి/కూటమికి మెజారిటీ ఉందని రాష్ట్రపతి సంతృప్తి చెందితే ఆహ్వానిస్తారు — తర్వాత సభలో బల పరీక్ష. ఇక్కడ రాష్ట్రపతి <b>వ్యక్తిగత విచక్షణ</b> ఉపయోగిస్తారు (హంగ్ పార్లమెంట్).'}
+    },
+    T:{ e1:['gov','motion','n-e1'], e2:['motion','gov','n-e2'], e3:['motion','resign','n-e3'], e4:['resign','alt','n-e4'],
+        e5:['resign','dissolve','n-e5'], e6:['dissolve','gov','n-e6'], e7:['alt','gov','n-e7'], reset:[null,'gov',null] },
+    order:['e1','e2','e1','e3','e5','e6','e1','e3','e4','e7']
+  });
+
+
+  const idx = sections.findIndex(s => '#' + s.id === location.hash);
+  show(idx >= 0 ? +sections[idx].dataset.ch : 0, false);
+})();
+</script>
+</body>
+</html>

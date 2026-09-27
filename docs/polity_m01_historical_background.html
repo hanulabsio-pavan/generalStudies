@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M1: చారిత్రక నేపథ్యం & రాజ్యాంగ సభ — Indian Polity</title>
+<style>
+:root{
+  --primary:#0066cc; --primary-dark:#004f9e; --primary-light:#e8f1fb;
+  --secondary:#00b359; --secondary-light:#f0f9f4;
+  --accent:#ff6b35; --accent-light:#fff3ee;
+  --bg:#ffffff; --sidebar:#f8f8f8; --text:#1a1a1a; --muted:#555; --border:#ddd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Nirmala UI','Noto Sans Telugu','Gautami',sans-serif;
+  font-size:16px;line-height:1.75;letter-spacing:.3px}
+.container{display:flex;min-height:100vh}
+/* Sidebar */
+.sidebar{width:280px;flex-shrink:0;background:var(--sidebar);border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 16px}
+.sidebar h2{margin:0 0 4px;font-size:18px;color:var(--primary)}
+.sidebar .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.progress-bar{height:8px;background:#e4e4e4;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--secondary);transition:width .4s ease}
+.chapter-count{font-size:13px;color:var(--muted);margin:6px 0 16px}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{display:block;padding:8px 10px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14.5px;line-height:1.4;
+  border-left:3px solid transparent;transition:background .3s,border-color .3s}
+.toc a:hover{background:var(--accent-light);border-left-color:var(--accent)}
+.toc a.active{background:var(--primary-light);border-left-color:var(--primary);color:var(--primary);font-weight:600}
+.toc a.done::after{content:" ✓";color:var(--secondary);font-weight:700}
+.back-link{display:inline-block;margin-top:18px;font-size:13px;color:var(--primary)}
+.menu-btn{display:none}
+/* Content */
+.content{flex:1;min-width:0;padding:32px 24px 64px}
+.chapter{max-width:900px;margin:0 auto;display:none;animation:fade .5s ease-in}
+.chapter.visible{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:28px;color:var(--primary);margin:0 0 8px;line-height:1.35}
+h2{font-size:22px;color:var(--primary);margin:2rem 0 .6rem;line-height:1.4}
+h3{font-size:18px;color:#333;margin:1.4rem 0 .5rem}
+.meta{color:var(--muted);font-size:14px;margin-bottom:1.5rem}
+p{margin:.6rem 0}
+.hl{background:var(--accent-light);padding:0 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--primary-light);color:var(--primary-dark)}
+tr:nth-child(even) td{background:#fafafa}
+.table-wrap{overflow-x:auto}
+.callout{border-left:4px solid var(--accent);background:var(--accent-light);padding:10px 14px;border-radius:0 6px 6px 0;margin:1rem 0}
+.callout b{color:#c4471a}
+/* Intro */
+.intro-page .subtitle{font-size:18px;color:var(--muted);margin-top:0}
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:1.2rem 0}
+.intro-card{border:1px solid var(--border);border-top:4px solid var(--primary);border-radius:8px;padding:12px 14px;cursor:pointer;transition:box-shadow .3s,transform .3s}
+.intro-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-2px)}
+.intro-card .n{font-size:13px;color:var(--accent);font-weight:700}
+.start-btn,.nav-buttons button,.sm-controls button,.reveal-btn{font:inherit;cursor:pointer;border-radius:6px;transition:background .3s,color .3s,border-color .3s}
+.start-btn{background:var(--primary);color:#fff;border:0;padding:12px 22px;font-size:16px;font-weight:600;margin-top:10px}
+.start-btn:hover{background:var(--primary-dark)}
+/* Diagrams */
+figure.diagram{margin:1.5rem 0;border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff}
+figure.diagram svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);text-align:center;margin-top:8px}
+.chapter.visible svg .anim{opacity:0;animation:fade .7s ease-in forwards}
+.chapter.visible svg .d1{animation-delay:.15s}.chapter.visible svg .d2{animation-delay:.35s}
+.chapter.visible svg .d3{animation-delay:.55s}.chapter.visible svg .d4{animation-delay:.75s}
+.chapter.visible svg .d5{animation-delay:.95s}.chapter.visible svg .d6{animation-delay:1.15s}
+svg .box{transition:stroke .3s,fill .3s}
+svg g.hov:hover .box{stroke:#003d7a;stroke-width:3}
+svg text{font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif;fill:#1a1a1a}
+svg g[tabindex]:focus{outline:none}svg g[tabindex]:focus-visible .box{stroke-dasharray:4 3}
+.pulse{animation:pulse 1s ease-in-out 2}
+@keyframes pulse{50%{filter:drop-shadow(0 0 6px var(--accent))}}
+/* Revision (code-style) block */
+.code-block{position:relative;margin:1.2rem 0;border:1px solid #f3c2ad;border-radius:8px;background:var(--accent-light);overflow:hidden}
+.code-block .cb-head{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:#ffe3d6;font-size:13px;font-weight:600;color:#a33c12}
+.copy-btn{font:inherit;font-size:12px;border:1px solid var(--accent);background:#fff;color:#a33c12;border-radius:4px;padding:2px 10px;cursor:pointer}
+.copy-btn:hover{background:var(--accent);color:#fff}
+.code-block pre{margin:0;padding:10px 0;overflow-x:auto;font-family:'Monaco','Consolas','Courier New','Nirmala UI',monospace;font-size:13.5px;line-height:1.7}
+.code-block .ln{display:block;padding:0 14px 0 0;white-space:pre}
+.code-block .ln::before{content:attr(data-n);display:inline-block;width:2.6em;text-align:right;padding-right:12px;margin-right:10px;color:#b98a78;border-right:1px solid #f3c2ad;user-select:none}
+.tok-num{color:var(--accent);font-weight:600}.tok-com{color:#666;font-style:italic}.tok-key{color:var(--primary);font-weight:600}
+/* Collapsible */
+details.collapsible{border:1px solid var(--border);border-radius:8px;margin:1rem 0;background:#fcfcfc}
+details.collapsible summary{cursor:pointer;padding:10px 14px;font-weight:600;color:var(--primary)}
+details.collapsible[open] summary{border-bottom:1px solid var(--border)}
+details.collapsible .inner{padding:4px 16px 12px}
+/* Quiz */
+.quiz{border:2px solid var(--primary-light);border-radius:10px;padding:6px 18px 14px;margin:2rem 0}
+.quiz h3{color:var(--primary)}
+.quiz-question{margin:1rem 0;padding-bottom:12px;border-bottom:1px dashed var(--border)}
+.quiz-question:last-child{border-bottom:0}
+.quiz-question ol{margin:.3rem 0 .5rem;padding-left:1.6rem}
+.reveal-btn{background:#fff;border:1px solid var(--accent);color:#c4471a;padding:5px 14px;font-size:14px}
+.reveal-btn:hover{background:var(--accent);color:#fff}
+.answer{display:none;margin-top:10px;background:var(--secondary-light);border-left:4px solid var(--secondary);padding:8px 12px;border-radius:0 6px 6px 0;animation:fade .4s ease-in}
+.answer.show{display:block}
+/* Takeaways */
+.key-takeaways{background:var(--secondary-light);border:1px solid #bfe8d1;border-left:5px solid var(--secondary);border-radius:8px;padding:6px 18px 10px;margin:2rem 0}
+.key-takeaways h3{color:#007a3d}
+.key-takeaways li{margin:4px 0}
+/* Nav */
+.nav-buttons{display:flex;justify-content:space-between;gap:10px;margin-top:2rem}
+.nav-buttons button{background:#fff;border:2px solid var(--primary);color:var(--primary);padding:9px 18px;font-weight:600}
+.nav-buttons button:hover:not(:disabled){background:var(--primary);color:#fff}
+.nav-buttons button:disabled{opacity:.35;cursor:default}
+/* State machine */
+.sm-status{text-align:center;font-weight:600;margin:6px 0;font-size:15px}
+.sm-status span{color:var(--primary)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.sm-controls button{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:6px 12px;font-size:14px}
+.sm-controls button:hover:not(:disabled){background:var(--primary);color:#fff}
+.sm-controls button:disabled{opacity:.35;cursor:default}
+.sm-controls .auto{border-color:var(--accent);color:#c4471a}
+.sm-controls .auto:hover{background:var(--accent)!important;color:#fff!important}
+.sm-state .box{transition:stroke-width .4s,filter .4s}
+.sm-state.active .box{stroke-width:4;filter:drop-shadow(0 0 7px rgba(0,102,204,.65))}
+.sm-edge{fill:none;stroke:#9bb8d6;stroke-width:2}
+.sm-edge.run{stroke:var(--accent);stroke-width:3.5;stroke-dasharray:400;stroke-dashoffset:400;animation:draw .8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* Responsive */
+@media (max-width:768px){
+  .container{display:block}
+  .sidebar{position:fixed;left:0;top:0;z-index:20;transform:translateX(-100%);transition:transform .3s;box-shadow:2px 0 12px rgba(0,0,0,.15)}
+  .sidebar.open{transform:none}
+  .menu-btn{display:block;position:fixed;top:10px;left:10px;z-index:30;background:var(--primary);color:#fff;border:0;border-radius:6px;padding:8px 12px;font-size:18px;cursor:pointer}
+  .content{padding:56px 16px 48px}
+  h1{font-size:24px}
+}
+.tracker{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:1rem 0}
+.tracker-sum{font-weight:700;color:#007a3d;margin-bottom:6px}
+.trk{width:18px;height:18px;accent-color:var(--secondary);cursor:pointer}
+code{background:var(--accent-light);padding:1px 5px;border-radius:3px;font-size:14px}
+</style>
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="విషయ సూచిక తెరవండి">☰</button>
+<div class="container">
+<aside class="sidebar" id="sidebar" aria-label="విషయ సూచిక">
+  <h2>📜 M1 · చారిత్రక నేపథ్యం</h2>
+  <div class="sub">Indian Polity · మాడ్యూల్ 1 · ★★</div>
+  <div class="progress-bar" role="progressbar" aria-label="పురోగతి"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="chapter-count" id="chapterCount">0/4 అధ్యాయాలు</div>
+  <nav class="toc">
+    <ul>
+      <li><a href="#intro" data-ch="0">పరిచయం</a></li>
+      <li><a href="#chapter-1" data-ch="1">1. కంపెనీ పాలన (1773–1858)</a></li>
+      <li><a href="#chapter-2" data-ch="2">2. రాణి పాలన: ప్రాతినిధ్యం వైపు (1858–1909)</a></li>
+      <li><a href="#chapter-3" data-ch="3">3. 1919 & 1935 చట్టాలు</a></li>
+      <li><a href="#chapter-4" data-ch="4">4. రాజ్యాంగ సభ (1946–1950)</a></li>
+    </ul>
+  </nav>
+  <a class="back-link" href="indian_polity_roadmap.html">← పాలిటీ రోడ్‌మ్యాప్</a><br>
+  <a class="back-link" style="margin-top:6px" href="index.html">← సూచిక (Index)</a>
+</aside>
+
+<main class="content" id="content">
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="chapter intro-page" data-ch="0">
+  <h1>📜 మాడ్యూల్ 1: చారిత్రక నేపథ్యం & రాజ్యాంగ సభ</h1>
+  <p class="subtitle">Historical Background & Making of the Constitution · UPSC / APPSC / TSPSC</p>
+  <p>మన రాజ్యాంగం 1950లో అకస్మాత్తుగా పుట్టలేదు. 1773 నుండి బ్రిటిష్ పార్లమెంట్ చేసిన ఒక్కో చట్టం ఒక్కో కొత్త సంస్థను తెచ్చింది — గవర్నర్ జనరల్, శాసన మండలి, ఎన్నికలు, సమాఖ్య, మూడు జాబితాలు, ప్రజా సేవా సంఘాలు. ఈ పరిణామాన్ని అర్థం చేసుకుంటే మిగిలిన పాలిటీ అంతా "ఎందుకు ఇలా ఉంది?" అనేది స్పష్టమవుతుంది.</p>
+  <div class="callout"><b>పరీక్ష సూత్రం:</b> ప్రతి చట్టం గురించి ఒకే ప్రశ్న అడగండి — <b>"ఇది మొదటిసారి ఏమి ప్రవేశపెట్టింది?"</b> ప్రిలిమ్స్‌లో దాదాపు అన్ని ప్రశ్నలూ ఈ రూపంలోనే వస్తాయి.</div>
+  <div class="intro-grid">
+    <div class="intro-card" data-go="1"><div class="n">అధ్యాయం 1</div>రెగ్యులేటింగ్ చట్టం నుండి 1853 చార్టర్ చట్టం వరకు — కేంద్రీకరణ ప్రయాణం</div>
+    <div class="intro-card" data-go="2"><div class="n">అధ్యాయం 2</div>1858, 1861, 1892, 1909 — భారతీయులకు ప్రాతినిధ్యం ఎలా వచ్చింది</div>
+    <div class="intro-card" data-go="3"><div class="n">అధ్యాయం 3</div>ద్వంద్వ పాలన (ఇంటరాక్టివ్), సైమన్ కమిషన్, కమ్యూనల్ అవార్డ్, 1935 చట్టం</div>
+    <div class="intro-card" data-go="4"><div class="n">అధ్యాయం 4</div>ఆగస్టు ఆఫర్ నుండి 26 జనవరి 1950 వరకు — రాజ్యాంగ సభ పూర్తి కథ</div>
+  </div>
+  <p><b>మొత్తం సమయం:</b> ~75 నిమిషాలు · ⌨️ ← / → బాణం కీలతో అధ్యాయాల మధ్య కదలండి.</p>
+  <button class="start-btn" data-go="1">ప్రారంభించండి →</button>
+</section>
+
+<!-- ============ CHAPTER 1 ============ -->
+<section id="chapter-1" class="chapter" data-ch="1">
+  <h1>అధ్యాయం 1: కంపెనీ పాలన (1773–1858)</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>1.1 నేపథ్యం</h2>
+  <p>ఈస్ట్ ఇండియా కంపెనీ (EIC) 1600లో ఎలిజబెత్ I చార్టర్‌తో <b>వ్యాపార సంస్థ</b>గా భారత్‌కు వచ్చింది. 1765లో బెంగాల్, బిహార్, ఒడిశాలపై <b>దివానీ</b> (పన్ను వసూలు హక్కు) పొందాక అది ఒక రాజకీయ శక్తిగా మారింది. ఒక ప్రైవేట్ కంపెనీ కోట్ల మంది ప్రజలను పాలించడం, దాని అధికారుల అవినీతి, కంపెనీ ఆర్థిక సంక్షోభం — ఇవన్నీ బ్రిటిష్ పార్లమెంట్ జోక్యానికి దారితీశాయి. ఈ కాలంలో చట్టాల దిశ ఒక్కటే: <b>కేంద్రీకరణ</b> (Centralisation) మరియు <b>కంపెనీపై బ్రిటిష్ ప్రభుత్వ నియంత్రణ</b>.</p>
+
+  <h2>1.2 ఆరు చట్టాలు — ఇంటరాక్టివ్ కాలరేఖ</h2>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 170" role="img" aria-label="కంపెనీ పాలన చట్టాల కాలరేఖ">
+      <line x1="50" y1="85" x2="710" y2="85" stroke="#ddd" stroke-width="6" stroke-linecap="round"/>
+      <g id="t1Edges"></g><g id="t1Nodes"></g>
+    </svg>
+    <div class="sm-status" aria-live="polite"><span id="t1Label"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#333;max-width:780px;margin:0 auto;text-align:left" id="t1Desc"></div>
+    <div class="sm-controls">
+      <button id="t1Prev">◀ మునుపటి</button><button id="t1Next">తదుపరి ▶</button><button id="t1Reset">↺ రీసెట్</button>
+      <button class="auto" id="t1Auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 1.1 — కంపెనీ పాలనలో ఆరు చట్టాలు. వృత్తంపై క్లిక్ చేసినా ఆ చట్టానికి వెళ్తుంది.</figcaption>
+  </figure>
+
+  <h2>1.3 గవర్నర్ జనరల్ పదవి పరిణామం</h2>
+  <div class="table-wrap"><table>
+    <tr><th>చట్టం</th><th>పదవి</th><th>మొదటి వ్యక్తి</th></tr>
+    <tr><td>రెగ్యులేటింగ్ చట్టం 1773</td><td>బెంగాల్ గవర్నర్ జనరల్</td><td><b>వారెన్ హేస్టింగ్స్</b></td></tr>
+    <tr><td>చార్టర్ చట్టం 1833</td><td>భారత గవర్నర్ జనరల్</td><td><b>విలియం బెంటింక్</b></td></tr>
+    <tr><td>భారత ప్రభుత్వ చట్టం 1858</td><td>వైస్రాయ్ (రాణి ప్రతినిధి)</td><td><b>లార్డ్ కానింగ్</b></td></tr>
+    <tr><td>స్వాతంత్ర్యం తర్వాత</td><td>స్వతంత్ర భారత గవర్నర్ జనరల్</td><td>మౌంట్‌బాటెన్; ఏకైక భారతీయుడు — <b>సి. రాజగోపాలాచారి</b></td></tr>
+  </table></div>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — కంపెనీ పాలన చట్టాలు">
+<pre># చట్టం               →  "మొదటిసారి"
+రెగ్యులేటింగ్ 1773    →  కంపెనీపై పార్లమెంట్ నియంత్రణ; బెంగాల్ GG; కలకత్తా సుప్రీంకోర్టు (1774)
+పిట్స్ ఇండియా 1784    →  ద్వంద్వ ప్రభుత్వం: బోర్డ్ ఆఫ్ కంట్రోల్ (రాజకీయ) + కోర్ట్ ఆఫ్ డైరెక్టర్స్ (వ్యాపారం)
+చార్టర్ 1793         →  బోర్డ్ సభ్యుల జీతాలు భారత ఆదాయం నుండి; GG కౌన్సిల్‌ను అధిగమించే అధికారం
+చార్టర్ 1813         →  వ్యాపార గుత్తాధిపత్యం అంతం (టీ, చైనా వ్యాపారం మినహా); విద్యకు ₹1 లక్ష
+చార్టర్ 1833         →  భారత GG; కంపెనీ వ్యాపారం పూర్తిగా అంతం; లా కమిషన్ (మెకాలే)
+చార్టర్ 1853         →  శాసన-కార్యనిర్వాహక విధుల విభజన; సివిల్ సర్వీసులకు బహిరంగ పోటీ   # చివరి చార్టర్ చట్టం</pre>
+  </div>
+
+  <details class="collapsible" id="c1-adv">
+    <summary>🔍 లోతుగా: 1853 కేంద్ర శాసన మండలి — "చిన్న పార్లమెంట్"</summary>
+    <div class="inner">
+      <p>1853 చట్టం గవర్నర్ జనరల్ కౌన్సిల్‌లో <b>6 మంది కొత్త శాసన సభ్యులను</b> చేర్చి, శాసన విధులను కార్యనిర్వాహక విధుల నుండి వేరు చేసింది. ఈ "భారత (కేంద్ర) శాసన మండలి" బ్రిటిష్ పార్లమెంట్ పద్ధతిలోనే పనిచేసింది — అందుకే దీన్ని <b>"మినీ పార్లమెంట్"</b> అన్నారు. ఆ 6 మందిలో <b>4 మందిని</b> మద్రాస్, బొంబాయి, బెంగాల్, ఆగ్రా స్థానిక (ప్రాంతీయ) ప్రభుత్వాలు నియమించాయి — కేంద్ర శాసన మండలిలో <b>స్థానిక ప్రాతినిధ్యం</b> ఇదే మొదటిసారి.</p>
+      <p>సివిల్ సర్వీసుల బహిరంగ పోటీకి విధివిధానాల కోసం 1854లో <b>మెకాలే కమిటీ</b> నియమించబడింది. అంతకుముందు కంపెనీ డైరెక్టర్లే నామినేట్ చేసేవారు (patronage). తొలి భారతీయ ICS అధికారి — <b>సత్యేంద్రనాథ్ ఠాగూర్</b> (1863).</p>
+      <p>1853 చట్టం కంపెనీ పాలనను 20 ఏళ్లకు కాకుండా <b>నిరవధికంగా</b> పొడిగించింది — పార్లమెంట్ ఎప్పుడైనా ముగించవచ్చని సంకేతం. ఐదేళ్లలోనే (1858) అదే జరిగింది.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q1-1">
+      <p><strong>Q1:</strong> భారతదేశంలో కేంద్రీకృత పాలనకు తుది రూపం ఇచ్చి, "భారత గవర్నర్ జనరల్" పదవిని సృష్టించిన చట్టం ఏది?</p>
+      <ol type="a"><li>రెగ్యులేటింగ్ చట్టం 1773</li><li>పిట్స్ ఇండియా చట్టం 1784</li><li>చార్టర్ చట్టం 1833</li><li>చార్టర్ చట్టం 1853</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) చార్టర్ చట్టం 1833.</b> విలియం బెంటింక్ మొదటి భారత గవర్నర్ జనరల్. బొంబాయి, మద్రాస్ గవర్నర్ల శాసన అధికారాలు తొలగించబడ్డాయి.</p>
+    </div>
+    <div class="quiz-question" id="q1-2">
+      <p><strong>Q2:</strong> "ద్వంద్వ ప్రభుత్వం" (Double Government) ప్రవేశపెట్టిన చట్టం ఏది, అది ఏ చట్టంతో ముగిసింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>పిట్స్ ఇండియా చట్టం 1784</b> ప్రవేశపెట్టింది (బోర్డ్ ఆఫ్ కంట్రోల్ + కోర్ట్ ఆఫ్ డైరెక్టర్స్); <b>భారత ప్రభుత్వ చట్టం 1858</b> రద్దు చేసింది. <i>(జాగ్రత్త: 1919 చట్టంలోని "ద్వంద్వ పాలన — Dyarchy" వేరు.)</i></p>
+    </div>
+    <div class="quiz-question" id="q1-3">
+      <p><strong>Q3:</strong> సివిల్ సర్వీసులకు బహిరంగ పోటీ పద్ధతిని ప్రవేశపెట్టిన చట్టం, దాని కోసం ఏర్పాటైన కమిటీ?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>చార్టర్ చట్టం 1853</b>; <b>మెకాలే కమిటీ</b> (1854). (1833 చట్టం ప్రతిపాదించినా, డైరెక్టర్ల వ్యతిరేకతతో అమలు కాలేదు.)</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>1773 నుండి 1853 వరకు దిశ: కేంద్రీకరణ + కంపెనీపై పార్లమెంట్ నియంత్రణ పెరుగుదల.</li>
+      <li>బెంగాల్ GG (1773, హేస్టింగ్స్) → భారత GG (1833, బెంటింక్) → వైస్రాయ్ (1858, కానింగ్).</li>
+      <li>1784 — ద్వంద్వ ప్రభుత్వం; 1813 — గుత్తాధిపత్యం పాక్షిక అంతం; 1833 — పూర్తి అంతం.</li>
+      <li>1853 — శాసన/కార్యనిర్వాహక విభజన, బహిరంగ పోటీ, స్థానిక ప్రాతినిధ్యం; చివరి చార్టర్ చట్టం.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 2 ============ -->
+<section id="chapter-2" class="chapter" data-ch="2">
+  <h1>అధ్యాయం 2: రాణి పాలన — ప్రాతినిధ్యం వైపు (1858–1909)</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>2.1 భారత ప్రభుత్వ చట్టం 1858 — "భారతదేశ సుపరిపాలన చట్టం"</h2>
+  <p>1857 తిరుగుబాటు తర్వాత కంపెనీ పాలన అంతమై, భారతదేశం నేరుగా <b>బ్రిటిష్ రాణి (Crown)</b> పాలనలోకి వచ్చింది. ఈ చట్టం యంత్రాంగంలో మార్పు తెచ్చింది కానీ, పాలనా వ్యవస్థను పెద్దగా మార్చలేదు.</p>
+  <ul>
+    <li>గవర్నర్ జనరల్ → <b>వైస్రాయ్</b> (రాణి ప్రత్యక్ష ప్రతినిధి) — లార్డ్ కానింగ్.</li>
+    <li><b>భారత వ్యవహారాల కార్యదర్శి</b> (Secretary of State for India) — బ్రిటిష్ కేబినెట్ సభ్యుడు, బ్రిటిష్ పార్లమెంట్‌కు బాధ్యుడు; సహాయానికి <b>15 మంది సభ్యుల భారత కౌన్సిల్</b>.</li>
+    <li>బోర్డ్ ఆఫ్ కంట్రోల్, కోర్ట్ ఆఫ్ డైరెక్టర్స్ రద్దు → ద్వంద్వ ప్రభుత్వం అంతం.</li>
+    <li>భారత కార్యదర్శి ఒక <b>కార్పొరేట్ సంస్థ</b> — భారత్‌లో, ఇంగ్లాండ్‌లో దావాలు వేయవచ్చు, వేయించుకోవచ్చు.</li>
+  </ul>
+
+  <h2>2.2 ప్రాతినిధ్య మెట్లు — భారతీయుల గొంతు ఎలా పెరిగింది?</h2>
+  <p>1861 నుండి 1950 వరకు శాసన మండళ్లలో భారతీయుల భాగస్వామ్యం ఒక్కో మెట్టుగా పెరిగింది. ప్రతి మెట్టుపై మౌస్ ఉంచండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 330" role="img" aria-label="ప్రాతినిధ్య పరిణామం మెట్ల చిత్రం">
+      <g font-size="12">
+        <g class="anim hov"><title>1861: వైస్రాయ్ కొందరు భారతీయులను అనధికార సభ్యులుగా నామినేట్ చేశాడు (బెనారస్ రాజా, పటియాలా మహారాజా, సర్ దినకర్ రావు — 1862)</title>
+          <rect class="box" x="20" y="250" width="100" height="60" rx="6" fill="#f4f4f4" stroke="#888" stroke-width="2"/>
+          <text x="70" y="274" text-anchor="middle" font-weight="700" font-size="14">1861</text><text x="70" y="294" text-anchor="middle">నామినేషన్</text></g>
+        <g class="anim d1 hov"><title>1892: విశ్వవిద్యాలయాలు, జిల్లా బోర్డులు, మునిసిపాలిటీలు, జమీందార్లు, వాణిజ్య మండళ్ల సిఫార్సుపై నియామకం — పరోక్ష ఎన్నిక (ఆ పదం వాడలేదు)</title>
+          <rect class="box" x="125" y="215" width="100" height="95" rx="6" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+          <text x="175" y="240" text-anchor="middle" font-weight="700" font-size="14">1892</text><text x="175" y="260" text-anchor="middle">పరోక్ష</text><text x="175" y="276" text-anchor="middle">ఎన్నిక</text></g>
+        <g class="anim d2 hov"><title>1909: పరోక్ష ఎన్నికలు చట్టబద్ధం; ముస్లింలకు ప్రత్యేక నియోజకవర్గాలు; కేంద్ర మండలి 16 → 60</title>
+          <rect class="box" x="230" y="175" width="100" height="135" rx="6" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+          <text x="280" y="200" text-anchor="middle" font-weight="700" font-size="14">1909</text><text x="280" y="220" text-anchor="middle">ప్రత్యేక</text><text x="280" y="236" text-anchor="middle" font-size="10.5">నియోజకవర్గాలు</text></g>
+        <g class="anim d3 hov"><title>1919: కేంద్రంలో ద్విసభా విధానం; ఎక్కువ మంది ప్రత్యక్ష ఎన్నిక; ఆస్తి/పన్ను/విద్య ఆధారిత పరిమిత ఓటు హక్కు</title>
+          <rect class="box" x="335" y="130" width="100" height="180" rx="6" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+          <text x="385" y="155" text-anchor="middle" font-weight="700" font-size="14">1919</text><text x="385" y="175" text-anchor="middle">ప్రత్యక్ష</text><text x="385" y="191" text-anchor="middle">ఎన్నికలు</text></g>
+        <g class="anim d4 hov"><title>1935: ఓటు హక్కు జనాభాలో సుమారు 10%కి విస్తరణ; రాష్ట్రాల్లో బాధ్యతాయుత ప్రభుత్వం (రాష్ట్ర స్వయంప్రతిపత్తి — 1937)</title>
+          <rect class="box" x="440" y="85" width="100" height="225" rx="6" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+          <text x="490" y="110" text-anchor="middle" font-weight="700" font-size="14">1935</text><text x="490" y="130" text-anchor="middle">~10%</text><text x="490" y="146" text-anchor="middle">ఓటు హక్కు</text></g>
+        <g class="anim d5 hov"><title>1946: రాజ్యాంగ సభ — రాష్ట్ర శాసనసభలు పరోక్షంగా ఎన్నుకున్నాయి</title>
+          <rect class="box" x="545" y="50" width="100" height="260" rx="6" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+          <text x="595" y="75" text-anchor="middle" font-weight="700" font-size="14">1946</text><text x="595" y="95" text-anchor="middle">రాజ్యాంగ</text><text x="595" y="111" text-anchor="middle">సభ</text></g>
+        <g class="anim d6 hov"><title>1950: సార్వజనీన వయోజన ఓటు హక్కు (21 ఏళ్లు; 1989 నుండి 18) — ఆర్టికల్ 326</title>
+          <rect class="box" x="650" y="15" width="100" height="295" rx="6" fill="#f0f9f4" stroke="#00b359" stroke-width="2"/>
+          <text x="700" y="40" text-anchor="middle" font-weight="700" font-size="14">1950</text><text x="700" y="60" text-anchor="middle">సార్వజనీన</text><text x="700" y="76" text-anchor="middle">ఓటు హక్కు</text></g>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 2.1 — ప్రాతినిధ్యం ఒక్కో మెట్టు: నామినేషన్ → పరోక్ష ఎన్నిక → ప్రత్యేక నియోజకవర్గాలు → ప్రత్యక్ష ఎన్నికలు → విస్తృత ఓటు హక్కు → సార్వజనీన ఓటు హక్కు.</figcaption>
+  </figure>
+
+  <h2>2.3 భారత కౌన్సిళ్ల చట్టాలు 1861, 1892, 1909</h2>
+  <div class="table-wrap"><table>
+    <tr><th>చట్టం</th><th>ముఖ్య నిబంధనలు</th></tr>
+    <tr><td><b>1861</b></td><td>భారతీయులను అనధికార సభ్యులుగా నామినేట్ చేయడం ప్రారంభం; బొంబాయి, మద్రాస్‌లకు శాసన అధికారాల పునరుద్ధరణ → <b>వికేంద్రీకరణకు నాంది</b> (1937 రాష్ట్ర స్వయంప్రతిపత్తి వరకు); బెంగాల్ (1862), NWFP (1866), పంజాబ్ (1897)లకు కొత్త శాసన మండళ్లు; కానింగ్ 1859లో ప్రవేశపెట్టిన <b>పోర్ట్‌ఫోలియో వ్యవస్థ</b>కు గుర్తింపు (కేబినెట్ వ్యవస్థకు పునాది); అత్యవసర పరిస్థితిలో వైస్రాయ్‌కు <b>ఆర్డినెన్స్</b> అధికారం (6 నెలలు)</td></tr>
+    <tr><td><b>1892</b></td><td>అనధికార సభ్యుల సంఖ్య పెంపు; <b>బడ్జెట్‌పై చర్చించే హక్కు</b> (ఓటింగ్ లేదు); కార్యనిర్వాహక వర్గానికి <b>ప్రశ్నలు</b> అడిగే హక్కు; సిఫార్సు ఆధారిత నియామకం — <b>పరోక్ష ఎన్నికకు నాంది</b></td></tr>
+    <tr><td><b>1909</b><br>(మార్లే-మింటో)</td><td>కేంద్ర శాసన మండలి 16 → <b>60</b>; అనుబంధ ప్రశ్నలు, బడ్జెట్‌పై తీర్మానాలు; వైస్రాయ్ కార్యనిర్వాహక మండలిలో తొలి భారతీయుడు — <b>సత్యేంద్ర ప్రసాద్ సిన్హా</b> (న్యాయ సభ్యుడు); <b>ముస్లింలకు ప్రత్యేక నియోజకవర్గాలు</b> (ముస్లిం ఓటర్లు ముస్లిం అభ్యర్థులకు మాత్రమే) — మింటో "మత ప్రాతిపదిక ఎన్నికల పితామహుడు"; ప్రెసిడెన్సీ కార్పొరేషన్లు, వాణిజ్య మండళ్లు, విశ్వవిద్యాలయాలు, జమీందార్లకు ప్రత్యేక ప్రాతినిధ్యం</td></tr>
+  </table></div>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — 1858 నుండి 1909">
+<pre># చట్టం            →  "మొదటిసారి"
+GoI 1858          →  రాణి పాలన; వైస్రాయ్; భారత కార్యదర్శి + 15 మంది కౌన్సిల్
+కౌన్సిళ్ల 1861      →  భారతీయుల నామినేషన్; వికేంద్రీకరణ; పోర్ట్‌ఫోలియో; ఆర్డినెన్స్
+కౌన్సిళ్ల 1892      →  బడ్జెట్ చర్చ; ప్రశ్నలు; పరోక్ష ఎన్నిక (సిఫార్సు)
+కౌన్సిళ్ల 1909      →  ప్రత్యేక నియోజకవర్గాలు (ముస్లింలు); 16 → 60; ఎస్.పి. సిన్హా
+
+# వ్యక్తులు
+లార్డ్ కానింగ్       →  మొదటి వైస్రాయ్; పోర్ట్‌ఫోలియో వ్యవస్థ (1859)
+మార్లే             →  భారత వ్యవహారాల కార్యదర్శి
+మింటో             →  వైస్రాయ్   # మత ప్రాతిపదిక ఎన్నికల పితామహుడు</pre>
+  </div>
+
+  <details class="collapsible" id="c2-adv">
+    <summary>🔍 లోతుగా: ప్రత్యేక నియోజకవర్గాలు — దీర్ఘకాలిక పర్యవసానాలు</summary>
+    <div class="inner">
+      <p>1906లో ఆగాఖాన్ నాయకత్వంలో <b>సిమ్లా ప్రతినిధి బృందం</b> మింటోను కలిసి ముస్లింలకు ప్రత్యేక ప్రాతినిధ్యం కోరింది; అదే ఏడాది ఢాకాలో <b>ముస్లిం లీగ్</b> స్థాపించబడింది. 1909 చట్టం ఈ డిమాండ్‌ను అంగీకరించింది.</p>
+      <p>తర్వాతి చట్టాలు దీన్ని విస్తరించాయి: <b>1919</b> — సిక్కులు, భారతీయ క్రైస్తవులు, ఆంగ్లో-ఇండియన్లు, యూరోపియన్లు; <b>1935</b> — అణగారిన వర్గాలు (షెడ్యూల్డ్ కులాలు), స్త్రీలు, కార్మికులు. చరిత్రకారులు దీనిని "విభజించు-పాలించు" విధానంలో భాగంగా, చివరికి <b>దేశ విభజనకు</b> దారితీసిన అంశాల్లో ఒకటిగా చూస్తారు.</p>
+      <p><b>రాజ్యాంగ సభ స్పందన:</b> ప్రత్యేక నియోజకవర్గాలను పూర్తిగా రద్దు చేసి, <b>ఉమ్మడి నియోజకవర్గాలలో SC/STలకు రిజర్వ్డ్ సీట్లు</b> (ఆర్టి. 330, 332) పెట్టారు — ఇది పూనా ఒప్పందం (1932) నమూనా.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q2-1">
+      <p><strong>Q1:</strong> శాసన మండలి సభ్యులకు మొదటిసారి బడ్జెట్‌పై చర్చించే హక్కు ఇచ్చిన చట్టం ఏది?</p>
+      <ol type="a"><li>1861</li><li>1892</li><li>1909</li><li>1919</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) 1892.</b> చర్చ మాత్రమే — ఓటింగ్ హక్కు లేదు. 1909 బడ్జెట్‌పై తీర్మానాలు ప్రవేశపెట్టే హక్కు ఇచ్చింది.</p>
+    </div>
+    <div class="quiz-question" id="q2-2">
+      <p><strong>Q2:</strong> "వికేంద్రీకరణ విధానానికి నాంది పలికిన చట్టం" ఏది? ఎందుకు?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>భారత కౌన్సిళ్ల చట్టం 1861</b> — 1833లో తొలగించిన శాసన అధికారాలను బొంబాయి, మద్రాస్ ప్రెసిడెన్సీలకు తిరిగి ఇచ్చింది. ఈ ప్రక్రియ 1937లో రాష్ట్రాలకు పూర్తి అంతర్గత స్వయంప్రతిపత్తితో ముగిసింది.</p>
+    </div>
+    <div class="quiz-question" id="q2-3">
+      <p><strong>Q3:</strong> వైస్రాయ్ కార్యనిర్వాహక మండలిలో చేరిన మొదటి భారతీయుడు ఎవరు, ఏ శాఖ?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>సత్యేంద్ర ప్రసాద్ సిన్హా</b> — <b>న్యాయ సభ్యుడు</b> (Law Member), 1909 చట్టం కింద.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>1858: రాణి పాలన, వైస్రాయ్, భారత వ్యవహారాల కార్యదర్శి; ద్వంద్వ ప్రభుత్వం అంతం.</li>
+      <li>1861: భారతీయుల నామినేషన్, వికేంద్రీకరణ, పోర్ట్‌ఫోలియో, ఆర్డినెన్స్.</li>
+      <li>1892: బడ్జెట్ చర్చ + ప్రశ్నలు + పరోక్ష ఎన్నిక; 1909: ప్రత్యేక నియోజకవర్గాలు.</li>
+      <li>ప్రాతినిధ్య మెట్లు: నామినేషన్ → పరోక్ష → ప్రత్యేక → ప్రత్యక్ష → విస్తృత → సార్వజనీన.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 3 ============ -->
+<section id="chapter-3" class="chapter" data-ch="3">
+  <h1>అధ్యాయం 3: 1919 & 1935 చట్టాలు</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>3.1 భారత ప్రభుత్వ చట్టం 1919 (మాంటేగ్-చెమ్స్‌ఫర్డ్ సంస్కరణలు)</h2>
+  <p>20 ఆగస్టు 1917న భారత వ్యవహారాల కార్యదర్శి <b>మాంటేగ్</b> ప్రకటన: బ్రిటిష్ ప్రభుత్వ లక్ష్యం భారత్‌లో <b>"బాధ్యతాయుత ప్రభుత్వాన్ని క్రమంగా ప్రవేశపెట్టడం"</b>. దాని ఫలితమే 1919 చట్టం (1921 నుండి అమలు).</p>
+  <ul>
+    <li>కేంద్ర, రాష్ట్ర అంశాల స్పష్టమైన విభజన (devolution rules) — కేంద్ర అధికారం సడలింపు.</li>
+    <li>రాష్ట్ర అంశాలు మళ్లీ రెండుగా — <b>బదిలీ చేసినవి</b> (Transferred) & <b>రిజర్వ్ చేసినవి</b> (Reserved) = <b>ద్వంద్వ పాలన (Dyarchy)</b>. (ఈ పదం లియోనెల్ కర్టిస్ ఆలోచన.)</li>
+    <li>కేంద్రంలో <b>ద్విసభా విధానం</b>: ఎగువ సభ — <b>కౌన్సిల్ ఆఫ్ స్టేట్</b>; దిగువ సభ — <b>లెజిస్లేటివ్ అసెంబ్లీ</b>. ఎక్కువ మంది సభ్యులు <b>ప్రత్యక్ష ఎన్నిక</b>.</li>
+    <li>వైస్రాయ్ కార్యనిర్వాహక మండలిలోని 6 మందిలో (కమాండర్-ఇన్-చీఫ్ కాకుండా) <b>3 మంది భారతీయులు</b>.</li>
+    <li>ఆస్తి, పన్ను, విద్య ఆధారంగా <b>పరిమిత ఓటు హక్కు</b>.</li>
+    <li>లండన్‌లో <b>భారత హై కమిషనర్</b> పదవి; భారత కార్యదర్శి జీతం బ్రిటిష్ ఖజానా నుండి.</li>
+    <li>కేంద్ర పబ్లిక్ సర్వీస్ కమిషన్ ఏర్పాటుకు నిబంధన → <b>1926</b>లో ఏర్పాటు.</li>
+    <li>కేంద్ర బడ్జెట్ నుండి రాష్ట్ర బడ్జెట్లు వేరు (1921); రాష్ట్రాలు సొంత బడ్జెట్ రూపొందించుకునే అధికారం.</li>
+    <li>10 ఏళ్ల తర్వాత పనితీరు సమీక్షకు <b>చట్టబద్ధ కమిషన్</b> → సైమన్ కమిషన్.</li>
+  </ul>
+
+  <h2>3.2 ద్వంద్వ పాలన — ఇంటరాక్టివ్ వర్గీకరణ</h2>
+  <p>ప్రతి అంశంపై క్లిక్ చేయండి — అది <span style="color:#c4471a;font-weight:700">రిజర్వ్</span> (గవర్నర్ + కార్యనిర్వాహక మండలి; శాసనసభకు బాధ్యత లేదు) లేదా <span style="color:#007a3d;font-weight:700">బదిలీ</span> (మంత్రులు; శాసనసభకు బాధ్యులు) అంశమో తెలుస్తుంది. ముందే ఊహించి తర్వాత క్లిక్ చేయండి!</p>
+  <figure class="diagram">
+    <svg id="dySvg" viewBox="0 0 760 330" role="img" aria-label="ద్వంద్వ పాలన — అంశాల వర్గీకరణ">
+      <g class="anim">
+        <rect x="10" y="10" width="740" height="36" rx="8" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="380" y="34" text-anchor="middle" font-size="14" font-weight="700">గవర్నర్ (రాష్ట్రం) — ద్వంద్వ పాలన 1921–1937</text>
+      </g>
+      <g id="dyNodes" class="anim d2"></g>
+      <g class="anim d3">
+        <rect x="10" y="226" width="740" height="94" rx="10" fill="#fafafa" stroke="#ddd"/>
+        <text id="dyTitle" x="26" y="252" font-size="14.5" font-weight="700" fill="#0066cc">ఒక అంశంపై క్లిక్ చేయండి</text>
+        <foreignObject x="20" y="258" width="720" height="60"><div xmlns="http://www.w3.org/1999/xhtml" id="dyDesc" style="font-size:13.5px;line-height:1.55;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">వర్గీకరించినవి: <span id="dyScore">0</span>/10</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 3.1 — రాష్ట్ర అంశాల రెండు వర్గాలు. రిజర్వ్ = నారింజ, బదిలీ = ఆకుపచ్చ.</figcaption>
+  </figure>
+  <p><b>ద్వంద్వ పాలన ఎందుకు విఫలమైంది?</b> ఆర్థిక శాఖ రిజర్వ్‌లో ఉండటంతో బదిలీ అంశాల మంత్రులకు నిధులు లేవు; గవర్నర్ మంత్రులను అధిగమించేవాడు; రెండు వర్గాల మధ్య సమన్వయం లేదు; మంత్రులు శాసనసభకూ, గవర్నర్‌కూ రెండింటికీ జవాబుదారీ.</p>
+
+  <h2>3.3 సైమన్ కమిషన్ నుండి 1935 వరకు</h2>
+  <ul>
+    <li><b>సైమన్ కమిషన్</b> (నవంబర్ 1927, అమలుకు రెండేళ్లు ముందుగానే): 7 మంది సభ్యులూ బ్రిటిషర్లు → "సైమన్ గో బ్యాక్" బహిష్కరణ. 1930 నివేదిక: ద్వంద్వ పాలన రద్దు, రాష్ట్రాల్లో బాధ్యతాయుత ప్రభుత్వ విస్తరణ, సమాఖ్య ఏర్పాటు, ప్రత్యేక నియోజకవర్గాల కొనసాగింపు.</li>
+    <li>ప్రతిస్పందనగా <b>నెహ్రూ నివేదిక</b> (1928, మోతీలాల్ నెహ్రూ) — భారతీయులే రాసిన తొలి రాజ్యాంగ ముసాయిదా ప్రయత్నం; ప్రాథమిక హక్కుల జాబితా.</li>
+    <li>మూడు <b>రౌండ్ టేబుల్ సమావేశాలు</b> (1930, 1931, 1932) — రెండో దానికే గాంధీ హాజరు.</li>
+    <li><b>కమ్యూనల్ అవార్డ్</b> (ఆగస్టు 1932, రామ్‌సే మెక్‌డొనాల్డ్): అణగారిన వర్గాలకూ ప్రత్యేక నియోజకవర్గాలు → గాంధీ ఎరవాడ జైలులో నిరాహార దీక్ష → <b>పూనా ఒప్పందం</b> (సెప్టెంబర్ 1932, గాంధీ-అంబేద్కర్): ఉమ్మడి నియోజకవర్గాల్లో రిజర్వ్డ్ సీట్లు.</li>
+  </ul>
+
+  <h2>3.4 భారత ప్రభుత్వ చట్టం 1935</h2>
+  <p>321 సెక్షన్లు, 10 షెడ్యూళ్లు — అత్యంత సుదీర్ఘ, సమగ్రమైన చట్టం; <b>పూర్తి బాధ్యతాయుత ప్రభుత్వం దిశగా మైలురాయి</b>. నెహ్రూ దీనిని "బలమైన బ్రేకులు ఉన్నా ఇంజన్ లేని యంత్రం" అని విమర్శించారు.</p>
+  <div class="table-wrap"><table>
+    <tr><th>నిబంధన</th><th>వివరం</th><th>అమలు?</th></tr>
+    <tr><td><b>అఖిల భారత సమాఖ్య</b></td><td>బ్రిటిష్ ప్రావిన్సులు + సంస్థానాలు (యూనిట్లు)</td><td>❌ సంస్థానాలు చేరలేదు</td></tr>
+    <tr><td><b>మూడు జాబితాలు</b></td><td>ఫెడరల్ (59), ప్రావిన్షియల్ (54), ఉమ్మడి (36); <b>అవశిష్ట అధికారాలు వైస్రాయ్‌కు</b></td><td>✅</td></tr>
+    <tr><td><b>రాష్ట్ర స్వయంప్రతిపత్తి</b></td><td>రాష్ట్రాల్లో ద్వంద్వ పాలన రద్దు; బాధ్యతాయుత మంత్రుల ప్రభుత్వం</td><td>✅ 1937 (కాంగ్రెస్ 8 రాష్ట్రాల్లో ప్రభుత్వాలు)</td></tr>
+    <tr><td><b>కేంద్రంలో ద్వంద్వ పాలన</b></td><td>ఫెడరల్ అంశాలు రిజర్వ్ / బదిలీ</td><td>❌</td></tr>
+    <tr><td><b>రాష్ట్రాల్లో ద్విసభా విధానం</b></td><td>11లో 6 రాష్ట్రాల్లో — బెంగాల్, బొంబాయి, మద్రాస్, బిహార్, అస్సాం, యునైటెడ్ ప్రావిన్సెస్</td><td>✅</td></tr>
+    <tr><td><b>ప్రత్యేక నియోజకవర్గాల విస్తరణ</b></td><td>అణగారిన వర్గాలు, స్త్రీలు, కార్మికులు</td><td>✅</td></tr>
+    <tr><td><b>భారత కౌన్సిల్ రద్దు</b></td><td>1858లో ఏర్పడిన భారత కార్యదర్శి కౌన్సిల్ స్థానంలో సలహాదారులు</td><td>✅</td></tr>
+    <tr><td><b>సంస్థలు</b></td><td><b>RBI</b> (1935); ఫెడరల్, ప్రావిన్షియల్, జాయింట్ PSCలు; <b>ఫెడరల్ కోర్టు</b> (1937)</td><td>✅</td></tr>
+  </table></div>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — 1919 vs 1935">
+<pre># లక్షణం            1919                    |  1935
+ద్వంద్వ పాలన        రాష్ట్రాల్లో               |  కేంద్రంలో (అమలు కాలేదు)
+ద్విసభా విధానం      కేంద్రంలో                |  6 రాష్ట్రాల్లో కూడా
+ఓటు హక్కు          పరిమితం                 |  ~10% జనాభా
+ప్రత్యేక నియోజకవర్గాలు సిక్కులు, క్రైస్తవులు...  |  అణగారిన వర్గాలు, స్త్రీలు, కార్మికులు
+PSC               నిబంధన → CPSC 1926      |  ఫెడరల్ + ప్రావిన్షియల్ + జాయింట్ PSC
+జాబితాలు           కేంద్ర / రాష్ట్ర            |  ఫెడరల్ 59 | ప్రావిన్షియల్ 54 | ఉమ్మడి 36
+అవశిష్ట అధికారాలు    —                       |  వైస్రాయ్ (ఇప్పుడు: పార్లమెంట్ — ఆర్టి. 248)</pre>
+  </div>
+
+  <details class="collapsible" id="c3-adv">
+    <summary>🔍 లోతుగా: 1935 చట్టం నుండి రాజ్యాంగంలోకి ఏమేమి వచ్చాయి?</summary>
+    <div class="inner">
+      <p>రాజ్యాంగంలోని "నిర్మాణ భాగం" (structural part) అంతా దాదాపు 1935 చట్టం నుండే — సమాఖ్య పథకం, గవర్నర్ పదవి, న్యాయవ్యవస్థ నిర్మాణం, PSCలు, అత్యవసర నిబంధనలు, పరిపాలనా వివరాలు. మూడు జాబితాలు 7వ షెడ్యూల్‌గా మారాయి. గవర్నర్‌కు ఉన్న "ప్రత్యేక బాధ్యతలు", "విచక్షణాధికారాలు" భావన కూడా ఇక్కడిదే.</p>
+      <p><b>కానీ తేడాలు:</b> అవశిష్ట అధికారాలు వైస్రాయ్ నుండి <b>పార్లమెంట్‌</b>కు (ఆర్టి. 248, కెనడా నమూనా); ప్రత్యేక నియోజకవర్గాలు రద్దు; ప్రాథమిక హక్కులు కొత్తగా చేరాయి (1935లో లేవు); సార్వభౌమత్వం బ్రిటిష్ పార్లమెంట్ నుండి <b>భారత ప్రజలకు</b>.</p>
+      <p><b>మెయిన్స్ ప్రశ్న సూచన:</b> "భారత రాజ్యాంగం 1935 చట్టపు కొనసాగింపు మాత్రమేనా?" — నిర్మాణంలో అవును; కానీ తత్వశాస్త్రం (పీఠిక, హక్కులు, DPSP, సార్వజనీన ఓటు హక్కు) పూర్తిగా కొత్తది అని వాదించండి.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q3-1">
+      <p><strong>Q1:</strong> రాష్ట్రాల్లో ద్వంద్వ పాలనను ప్రవేశపెట్టిన చట్టం, దాన్ని రద్దు చేసిన చట్టం ఏవి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>1919 చట్టం</b> ప్రవేశపెట్టింది (1921 నుండి); <b>1935 చట్టం</b> రద్దు చేసి రాష్ట్ర స్వయంప్రతిపత్తి ఇచ్చింది (1937 నుండి).</p>
+    </div>
+    <div class="quiz-question" id="q3-2">
+      <p><strong>Q2:</strong> 1935 చట్టం ప్రకారం అవశిష్ట అధికారాలు ఎవరికి?</p>
+      <ol type="a"><li>ఫెడరల్ శాసనసభ</li><li>ప్రావిన్షియల్ శాసనసభలు</li><li>గవర్నర్ జనరల్ (వైస్రాయ్)</li><li>భారత వ్యవహారాల కార్యదర్శి</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) గవర్నర్ జనరల్.</b> రాజ్యాంగంలో అవి పార్లమెంట్‌కు (ఆర్టి. 248, కేంద్ర జాబితా 97వ అంశం).</p>
+    </div>
+    <div class="quiz-question" id="q3-3">
+      <p><strong>Q3:</strong> కేంద్ర పబ్లిక్ సర్వీస్ కమిషన్ ఏ సంవత్సరంలో, ఏ చట్టం నిబంధన ఆధారంగా ఏర్పడింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>1926</b>లో, <b>1919 చట్టం</b> నిబంధన ఆధారంగా (లీ కమిషన్ 1924 సిఫార్సుతో). 1935 చట్టం దాన్ని ఫెడరల్ PSCగా మార్చింది; 1950లో UPSC.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>1919: రాష్ట్రాల్లో ద్వంద్వ పాలన, కేంద్రంలో ద్విసభా విధానం, ప్రత్యక్ష ఎన్నికలు, CPSC (1926).</li>
+      <li>సైమన్ కమిషన్ (1927) → నెహ్రూ నివేదిక (1928) → రౌండ్ టేబుల్ → కమ్యూనల్ అవార్డ్ → పూనా ఒప్పందం (1932).</li>
+      <li>1935: సమాఖ్య (అమలు కాలేదు), 3 జాబితాలు, రాష్ట్ర స్వయంప్రతిపత్తి (1937), RBI, ఫెడరల్ కోర్టు.</li>
+      <li>రాజ్యాంగ నిర్మాణానికి 1935 చట్టమే అతిపెద్ద మూలం — కానీ తత్వం కొత్తది.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 4 ============ -->
+<section id="chapter-4" class="chapter" data-ch="4">
+  <h1>అధ్యాయం 4: రాజ్యాంగ సభ (1946–1950)</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>4.1 రాజ్యాంగ సభ ఆలోచన</h2>
+  <p>భారతీయులే తమ రాజ్యాంగాన్ని రాసుకోవాలనే ఆలోచనను మొదట 1934లో <b>ఎం.ఎన్. రాయ్</b> ప్రతిపాదించారు. 1935లో కాంగ్రెస్ అధికారికంగా డిమాండ్ చేసింది; 1938లో నెహ్రూ "వయోజన ఓటు హక్కుతో ఎన్నికైన సభ" అని స్పష్టం చేశారు. బ్రిటిష్ వారు మొదటిసారి సూత్రప్రాయంగా ఒప్పుకుంది <b>ఆగస్టు ఆఫర్ (1940)</b>లో. కింది కాలరేఖలో మొత్తం ప్రయాణం చూడండి.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 170" role="img" aria-label="రాజ్యాంగ సభ ప్రయాణం కాలరేఖ">
+      <line x1="50" y1="85" x2="710" y2="85" stroke="#ddd" stroke-width="6" stroke-linecap="round"/>
+      <g id="t4Edges"></g><g id="t4Nodes"></g>
+    </svg>
+    <div class="sm-status" aria-live="polite"><span id="t4Label"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#333;max-width:780px;margin:0 auto;text-align:left" id="t4Desc"></div>
+    <div class="sm-controls">
+      <button id="t4Prev">◀ మునుపటి</button><button id="t4Next">తదుపరి ▶</button><button id="t4Reset">↺ రీసెట్</button>
+      <button class="auto" id="t4Auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 4.1 — ఆగస్టు ఆఫర్ (1940) నుండి గణతంత్రం (1950) వరకు.</figcaption>
+  </figure>
+
+  <h2>4.2 కూర్పు (కేబినెట్ మిషన్ ప్లాన్ ప్రకారం)</h2>
+  <div class="table-wrap"><table>
+    <tr><th>అంశం</th><th>వివరం</th></tr>
+    <tr><td>మొత్తం స్థానాలు</td><td><b>389</b> = బ్రిటిష్ ఇండియా 296 (11 గవర్నర్ ప్రావిన్సుల నుండి 292 + 4 చీఫ్ కమిషనర్ ప్రావిన్సుల నుండి 4) + సంస్థానాలు 93</td></tr>
+    <tr><td>సీట్ల కేటాయింపు</td><td>జనాభా ఆధారంగా — సుమారు <b>10 లక్షల మందికి ఒక సీటు</b>; ప్రతి ప్రావిన్స్ సీట్లు ముస్లిం, సిక్కు, జనరల్ వర్గాలకు జనాభా నిష్పత్తిలో</td></tr>
+    <tr><td>ఎన్నిక విధానం</td><td>ప్రావిన్షియల్ శాసనసభ సభ్యులు — <b>దామాషా ప్రాతినిధ్యం, ఏక బదిలీ ఓటు</b> ద్వారా (పరోక్ష); సంస్థానాల ప్రతినిధులను పాలకులు నామినేట్ చేశారు</td></tr>
+    <tr><td>1946 ఎన్నికల ఫలితాలు (296)</td><td>కాంగ్రెస్ <b>208</b> · ముస్లిం లీగ్ <b>73</b> · చిన్న పార్టీలు & స్వతంత్రులు <b>15</b></td></tr>
+    <tr><td>విభజన తర్వాత</td><td><b>299</b> (ప్రావిన్సులు 229 + సంస్థానాలు 70)</td></tr>
+    <tr><td>స్వభావం</td><td>పాక్షికంగా ఎన్నికైన, పాక్షికంగా నామినేటెడ్ సభ; అన్ని మతాలు, వర్గాలకు ప్రాతినిధ్యం; తుది సభలో 15 మంది మహిళా సభ్యులు</td></tr>
+  </table></div>
+
+  <h2>4.3 పనితీరు & కమిటీలు</h2>
+  <ul>
+    <li>మొదటి సమావేశం <b>9 డిసెంబర్ 1946</b> — ముస్లిం లీగ్ బహిష్కరణ; 211 మంది హాజరు; తాత్కాలిక అధ్యక్షుడు <b>సచ్చిదానంద సిన్హా</b> (ఫ్రెంచ్ పద్ధతిలో అత్యంత వృద్ధ సభ్యుడు). శాశ్వత అధ్యక్షుడు <b>రాజేంద్ర ప్రసాద్</b>, ఉపాధ్యక్షులు <b>హెచ్.సి. ముఖర్జీ</b>, <b>వి.టి. కృష్ణమాచారి</b>.</li>
+    <li>స్వాతంత్ర్య చట్టం 1947 తర్వాత రెండు పాత్రలు: <b>రాజ్యాంగ నిర్మాణం</b> (అధ్యక్షుడు రాజేంద్ర ప్రసాద్) & <b>డొమినియన్ శాసనసభ</b> (అధ్యక్షుడు <b>జి.వి. మావలంకర్</b>) — 1952 తొలి లోక్‌సభ వరకు "తాత్కాలిక పార్లమెంట్".</li>
+    <li>ఇతర పనులు: జాతీయ పతాకం ఆమోదం (<b>22 జూలై 1947</b>); కామన్వెల్త్ సభ్యత్వ ధృవీకరణ (మే 1949); జాతీయ గీతం, జాతీయ గేయం ఆమోదం, రాజేంద్ర ప్రసాద్‌ను తొలి రాష్ట్రపతిగా ఎన్నిక (<b>24 జనవరి 1950</b> — చివరి సమావేశం, 284 మంది సంతకాలు).</li>
+    <li>మొత్తం <b>11 సమావేశాలు</b>, 165 రోజులు; ముసాయిదా పరిశీలనకే 114 రోజులు; ~7,600 సవరణలు ప్రతిపాదన, ~2,400 చర్చ. ఖర్చు సుమారు ₹64 లక్షలు. సభ చిహ్నం: <b>ఏనుగు</b>.</li>
+  </ul>
+  <div class="table-wrap"><table>
+    <tr><th>ప్రధాన కమిటీ</th><th>అధ్యక్షుడు</th></tr>
+    <tr><td>కేంద్ర అధికారాల కమిటీ; కేంద్ర రాజ్యాంగ కమిటీ; రాష్ట్రాల (సంస్థానాలతో చర్చల) కమిటీ</td><td>జవహర్‌లాల్ నెహ్రూ</td></tr>
+    <tr><td>ప్రావిన్షియల్ రాజ్యాంగ కమిటీ; ప్రాథమిక హక్కులు, మైనారిటీలు, గిరిజన ప్రాంతాల సలహా కమిటీ</td><td>సర్దార్ పటేల్</td></tr>
+    <tr><td>విధాన నియమాల కమిటీ; స్టీరింగ్ కమిటీ</td><td>రాజేంద్ర ప్రసాద్</td></tr>
+    <tr><td><b>ముసాయిదా కమిటీ</b> (29 ఆగస్టు 1947)</td><td><b>బి.ఆర్. అంబేద్కర్</b></td></tr>
+    <tr><td>ప్రాథమిక హక్కుల ఉప-కమిటీ / మైనారిటీల ఉప-కమిటీ</td><td>జె.బి. కృపలానీ / హెచ్.సి. ముఖర్జీ</td></tr>
+    <tr><td>హౌస్ కమిటీ</td><td><b>బి. పట్టాభి సీతారామయ్య</b></td></tr>
+  </table></div>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — ముసాయిదా కమిటీ (7 మంది)">
+<pre>1  డా. బి.ఆర్. అంబేద్కర్              # అధ్యక్షుడు
+2  ఎన్. గోపాలస్వామి అయ్యంగార్
+3  అల్లాడి కృష్ణస్వామి అయ్యర్            # నెల్లూరు జిల్లా — తెలుగు మూలాలు
+4  డా. కె.ఎం. మున్షీ
+5  సయ్యద్ మొహమ్మద్ సాదుల్లా
+6  ఎన్. మాధవ రావు                    # బి.ఎల్. మిట్టర్ స్థానంలో
+7  టి.టి. కృష్ణమాచారి                  # డి.పి. ఖైతాన్ (1948 మరణం) స్థానంలో
+
+# ముసాయిదా ప్రచురణ   →  ఫిబ్రవరి 1948
+# మూడు పఠనాలు       →  నవంబర్ 1948 – నవంబర్ 1949
+# ఆమోదం            →  26-11-1949   = పీఠిక + 395 ఆర్టికల్స్ + 8 షెడ్యూళ్లు</pre>
+  </div>
+
+  <details class="collapsible" id="c4-adv">
+    <summary>🔍 లోతుగా: రాజ్యాంగ సభపై విమర్శలు & తెలుగు సభ్యులు</summary>
+    <div class="inner">
+      <p><b>విమర్శలు:</b></p>
+      <ul>
+        <li><b>ప్రాతినిధ్య సభ కాదు</b> — సభ్యులు వయోజన ఓటు హక్కుతో ప్రత్యక్షంగా ఎన్నిక కాలేదు.</li>
+        <li><b>సార్వభౌమ సభ కాదు</b> — బ్రిటిష్ ప్రతిపాదనలతో, వారి అనుమతితో ఏర్పడింది.</li>
+        <li><b>ఎక్కువ సమయం</b> — అమెరికా రాజ్యాంగ రచనకు కేవలం 4 నెలలు.</li>
+        <li><b>కాంగ్రెస్ ఆధిపత్యం</b> — గ్రాన్‌విల్ ఆస్టిన్: "రాజ్యాంగ సభ ఏకపార్టీ దేశంలో ఏకపార్టీ సంస్థ; సభ అంటే కాంగ్రెస్, కాంగ్రెస్ అంటే భారతదేశం."</li>
+        <li><b>న్యాయవాదుల ఆధిపత్యం</b> — ఐవర్ జెన్నింగ్స్: "లాయర్ల స్వర్గం"; భాష క్లిష్టంగా మారింది.</li>
+        <li><b>హిందూ ఆధిపత్యం</b> — విస్కౌంట్ సైమన్, చర్చిల్ విమర్శ.</li>
+      </ul>
+      <p><b>ప్రతివాదం:</b> కాంగ్రెస్‌లోనే అన్ని భావజాలాలు ఉన్నాయి; అంబేద్కర్, శ్యామా ప్రసాద్ ముఖర్జీ వంటి కాంగ్రెసేతరులకు కీలక బాధ్యతలు; ఏకాభిప్రాయం (consensus), సర్దుబాటు (accommodation) పద్ధతిలో నిర్ణయాలు.</p>
+      <p><b>తెలుగు ప్రాంత సభ్యులు (కొందరు):</b> అల్లాడి కృష్ణస్వామి అయ్యర్ (ముసాయిదా కమిటీ), <b>దుర్గాబాయి దేశ్‌ముఖ్</b> (మహిళా సభ్యురాలు, తర్వాత కేంద్ర సామాజిక సంక్షేమ బోర్డు తొలి అధ్యక్షురాలు), <b>ఎన్.జి. రంగా</b>, <b>బి. పట్టాభి సీతారామయ్య</b> (హౌస్ కమిటీ అధ్యక్షుడు). APPSC/TSPSC కి ఉపయోగకరం.</p>
+      <p><b>ఇతర విశేషాలు:</b> మూల ప్రతిని చేతితో రాసినది <b>ప్రేమ్ బిహారీ నారాయణ్ రైజాదా</b> (ఇటాలిక్ శైలి); శాంతినికేతన్ కళాకారులు <b>నందలాల్ బోస్</b> బృందం చిత్రాలు; హిందీ ప్రతి వసంత్ కృష్ణ వైద్య.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q4-1">
+      <p><strong>Q1:</strong> రాజ్యాంగ సభ సభ్యులు ఎలా ఎన్నికయ్యారు?</p>
+      <ol type="a"><li>వయోజన ఓటు హక్కుతో ప్రత్యక్షంగా</li><li>ప్రావిన్షియల్ శాసనసభల ద్వారా దామాషా ప్రాతినిధ్యం–ఏక బదిలీ ఓటుతో</li><li>వైస్రాయ్ నామినేషన్</li><li>కాంగ్రెస్, ముస్లిం లీగ్ నామినేషన్</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b).</b> బ్రిటిష్ ప్రావిన్సుల సభ్యులు పరోక్షంగా ఎన్నిక; సంస్థానాల ప్రతినిధులు నామినేట్ చేయబడ్డారు.</p>
+    </div>
+    <div class="quiz-question" id="q4-2">
+      <p><strong>Q2:</strong> రాజ్యాంగ సభ డొమినియన్ శాసనసభగా పనిచేసినప్పుడు అధ్యక్షత వహించింది ఎవరు?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>జి.వి. మావలంకర్</b> (తర్వాత తొలి లోక్‌సభ స్పీకర్).</p>
+    </div>
+    <div class="quiz-question" id="q4-3">
+      <p><strong>Q3:</strong> రాజ్యాంగంలోని కొన్ని నిబంధనలు 26 నవంబర్ 1949 నుండే అమల్లోకి వచ్చాయి. అవి ఏవి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">పౌరసత్వం (5–9), ఎన్నికలు (324), తాత్కాలిక పార్లమెంట్ (379), తాత్కాలిక–పరివర్తన నిబంధనలు, సంక్షిప్త శీర్షిక (393) వంటివి — ఆర్టికల్ 394లో జాబితా. మిగిలినవన్నీ 26 జనవరి 1950 నుండి.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>ఆలోచన: ఎం.ఎన్. రాయ్ (1934) → ఆగస్టు ఆఫర్ (1940) → క్రిప్స్ (1942) → కేబినెట్ మిషన్ (1946).</li>
+      <li>389 స్థానాలు (296 + 93) → విభజన తర్వాత 299; పరోక్ష ఎన్నిక; కాంగ్రెస్ 208.</li>
+      <li>9-12-1946 మొదటి సమావేశం; అంబేద్కర్ ముసాయిదా కమిటీ (7 సభ్యులు); 26-11-1949 ఆమోదం; 24-01-1950 చివరి సమావేశం.</li>
+      <li>సభ రెండు పాత్రలు: రాజ్యాంగ నిర్మాణం (ప్రసాద్) + డొమినియన్ శాసనసభ (మావలంకర్).</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">సూచికకు తిరిగి ✓</button></div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  const TOTAL = 4, P = 'pm1-';
+  const NS = 'http://www.w3.org/2000/svg';
+  const store = {
+    get(k){ try{ return JSON.parse(sessionStorage.getItem(P+k)); }catch(e){ return null; } },
+    set(k,v){ try{ sessionStorage.setItem(P+k, JSON.stringify(v)); }catch(e){} }
+  };
+  const $ = id => document.getElementById(id);
+  const sections = [...document.querySelectorAll('.chapter')];
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  let visited = new Set(store.get('visited') || []);
+  let current = 0;
+
+  function show(n, push){
+    n = Math.max(0, Math.min(TOTAL, n));
+    current = n;
+    sections.forEach(s => s.classList.toggle('visible', +s.dataset.ch === n));
+    if (n > 0) { visited.add(n); store.set('visited', [...visited]); }
+    tocLinks.forEach(a => { a.classList.toggle('active', +a.dataset.ch === n); a.classList.toggle('done', visited.has(+a.dataset.ch)); });
+    $('progressFill').style.width = (visited.size / TOTAL * 100) + '%';
+    $('chapterCount').textContent = visited.size + '/' + TOTAL + ' అధ్యాయాలు';
+    if (push !== false) history.replaceState(null, '', '#' + sections[n].id);
+    window.scrollTo({top:0, behavior:'smooth'});
+    $('sidebar').classList.remove('open');
+  }
+  window.goToChapter = n => show(n);
+  window.nextChapter = () => current < TOTAL ? show(current + 1) : (location.href = 'index.html');
+  window.previousChapter = () => show(current - 1);
+  document.querySelectorAll('.next-btn').forEach(b => b.addEventListener('click', nextChapter));
+  document.querySelectorAll('.prev-btn').forEach(b => b.addEventListener('click', previousChapter));
+  document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', () => show(+el.dataset.go)));
+  tocLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(+a.dataset.ch); }));
+  $('menuBtn').addEventListener('click', () => $('sidebar').classList.toggle('open'));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' && current < TOTAL) show(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+  });
+
+  // Quiz reveal
+  const revealed = new Set(store.get('quiz') || []);
+  document.querySelectorAll('.quiz-question').forEach(q => {
+    const btn = q.querySelector('.reveal-btn'), ans = q.querySelector('.answer'), label = btn.textContent;
+    const set = on => { ans.classList.toggle('show', on); btn.textContent = on ? 'సమాధానం దాచు' : label; btn.setAttribute('aria-expanded', on); };
+    set(revealed.has(q.id));
+    btn.addEventListener('click', () => { const on = !ans.classList.contains('show'); set(on); on ? revealed.add(q.id) : revealed.delete(q.id); store.set('quiz', [...revealed]); });
+  });
+
+  // Collapsibles
+  const openSet = new Set(store.get('open') || []);
+  document.querySelectorAll('details.collapsible').forEach(d => {
+    if (openSet.has(d.id)) d.open = true;
+    d.addEventListener('toggle', () => { d.open ? openSet.add(d.id) : openSet.delete(d.id); store.set('open', [...openSet]); });
+  });
+
+  // Revision blocks
+  const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  document.querySelectorAll('.code-block').forEach(cb => {
+    const pre = cb.querySelector('pre');
+    const raw = pre.textContent.replace(/^\n+|\s+$/g, '');
+    pre.innerHTML = raw.split('\n').map((line, i) => {
+      let h = esc(line), com = '';
+      const k = h.indexOf('#');
+      if (k >= 0) { com = '<span class="tok-com">' + h.slice(k) + '</span>'; h = h.slice(0, k); }
+      h = h.replace(/(→|=|\|)/g, '<span class="tok-key">$1</span>').replace(/(\d+)/g, '<span class="tok-num">$1</span>');
+      return '<span class="ln" data-n="' + (i + 1) + '">' + h + com + '</span>';
+    }).join('');
+    const head = document.createElement('div'); head.className = 'cb-head';
+    head.innerHTML = '<span>' + esc(cb.dataset.title || 'నోట్స్') + '</span>';
+    const btn = document.createElement('button'); btn.className = 'copy-btn'; btn.textContent = 'కాపీ'; btn.setAttribute('aria-label', 'నోట్స్ కాపీ చేయండి');
+    btn.addEventListener('click', () => {
+      const done = () => { btn.textContent = '✓ కాపీ అయింది'; setTimeout(() => btn.textContent = 'కాపీ', 1500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(raw).then(done, () => {});
+      else { const t = document.createElement('textarea'); t.value = raw; document.body.appendChild(t); t.select(); try{ document.execCommand('copy'); done(); }catch(e){} t.remove(); }
+    });
+    head.appendChild(btn); cb.insertBefore(head, pre);
+  });
+
+  // ---------- helpers ----------
+  function el(tag, attrs, text){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; }
+
+  // Clickable circle nodes with a detail panel
+  function makeNodes(container, items, titleEl, descEl){
+    const groups = [];
+    items.forEach(it => {
+      const g = el('g', {class:'hov', tabindex:'0', role:'button', 'aria-label': it.name, style:'cursor:pointer'});
+      if (it.spoke) g.appendChild(el('line', it.spoke));
+      if (it.w) g.appendChild(el('rect', {class:'box', x:it.x - it.w/2, y:it.y - it.h/2, width:it.w, height:it.h, rx:10, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      else g.appendChild(el('circle', {class:'box', cx:it.x, cy:it.y, r:it.r, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      if (it.num) g.appendChild(el('text', {x:it.x, y:it.y - 10, 'text-anchor':'middle', 'font-size':10.5, fill:'#555'}, it.num));
+      g.appendChild(el('text', {x:it.x, y:it.y + (it.num ? 12 : 5), 'text-anchor':'middle', 'font-size':it.fs || 11.5, 'font-weight':700}, it.short));
+      const pick = () => {
+        groups.forEach(x => x.querySelector('.box').setAttribute('stroke-width', 2));
+        g.querySelector('.box').setAttribute('stroke-width', 4.5);
+        g.classList.remove('pulse'); void g.getBoundingClientRect(); g.classList.add('pulse');
+        titleEl.textContent = it.name; descEl.innerHTML = it.desc;
+        if (it.onPick) it.onPick();
+      };
+      g.addEventListener('click', pick);
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      container.appendChild(g); groups.push(g);
+    });
+    return groups;
+  }
+
+  // Generic state machine (states drawn in HTML as <g class="sm-state" data-state=..>)
+  function stateMachine(o){
+    let st = o.start, timer = null, step = 0;
+    const btns = [...document.querySelectorAll(o.controls + ' [data-ev]')];
+    const auto = document.querySelector(o.controls + ' .auto');
+    function render(edge){
+      document.querySelectorAll(o.scope + ' .sm-state').forEach(g => g.classList.toggle('active', g.dataset.state === st));
+      $(o.label).textContent = o.states[st].label;
+      $(o.desc).innerHTML = o.states[st].desc;
+      btns.forEach(b => { const t = o.T[b.dataset.ev]; b.disabled = b.dataset.ev === 'reset' ? st === o.start : t[0] !== st; });
+      document.querySelectorAll(o.scope + ' .sm-edge').forEach(p => p.classList.remove('run'));
+      if (edge) { const p = $(edge); void p.getBoundingClientRect(); p.classList.add('run'); }
+    }
+    function fire(ev){ const t = o.T[ev]; if (t[0] !== null && t[0] !== st) return; st = t[1]; render(t[2]); }
+    function stopAuto(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    btns.forEach(b => b.addEventListener('click', () => { stopAuto(); fire(b.dataset.ev); }));
+    auto.addEventListener('click', () => {
+      if (timer) return stopAuto();
+      st = o.start; render(); step = 0;
+      auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => { fire(o.order[step % o.order.length]); step++; }, o.interval || 2000);
+    });
+    render();
+  }
+
+  // Timeline stepper: items = [[top, bottom, title, descHTML], ...]
+  function stepper(o){
+    const nodes = $(o.nodes), edges = $(o.edges), y = o.y || 95, x0 = o.x0 || 50, x1 = o.x1 || 710;
+    const X = i => x0 + i * ((x1 - x0) / (o.items.length - 1));
+    const circles = [], segs = [];
+    o.items.forEach((t, i) => {
+      if (i > 0) { const p = el('path', {class:'sm-edge', d:`M${X(i-1)+22},${y} L${X(i)-22},${y}`}); edges.appendChild(p); segs.push(p); }
+      const last = i === o.items.length - 1;
+      const g = el('g', {class:'sm-state hov', tabindex:'0', role:'button', 'aria-label': t[2], style:'cursor:pointer'});
+      g.appendChild(el('circle', {class:'box', cx:X(i), cy:y, r:22, fill: last ? '#f0f9f4' : '#e8f1fb', stroke: last ? '#00b359' : '#0066cc', 'stroke-width':2}));
+      g.appendChild(el('text', {x:X(i), y:y+5, 'text-anchor':'middle', 'font-size':11, 'font-weight':700}, (i+1)+''));
+      g.appendChild(el('text', {x:X(i), y:y-37, 'text-anchor':'middle', 'font-size':o.topFs || 14, 'font-weight':700, fill:'#0066cc'}, t[0]));
+      g.appendChild(el('text', {x:X(i), y:y+42, 'text-anchor':'middle', 'font-size':o.botFs || 11.5}, t[1]));
+      g.addEventListener('click', () => { stop(); go(i); });
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); go(i); } });
+      nodes.appendChild(g); circles.push(g);
+    });
+    let cur = 0, timer = null;
+    const prev = $(o.prev), next = $(o.next), auto = $(o.auto);
+    function go(i){
+      const fwd = i === cur + 1;
+      cur = Math.max(0, Math.min(o.items.length - 1, i));
+      circles.forEach((g, k) => { g.classList.toggle('active', k === cur); g.querySelector('.box').setAttribute('fill-opacity', k <= cur ? 1 : .45); });
+      segs.forEach((p, k) => { p.classList.remove('run'); p.style.stroke = k < cur ? '#0066cc' : ''; p.style.strokeWidth = k < cur ? 3 : ''; });
+      if (fwd && cur > 0) { const p = segs[cur-1]; void p.getBoundingClientRect(); p.classList.add('run'); }
+      $(o.label).textContent = o.items[cur][0] + ' · ' + o.items[cur][2];
+      $(o.desc).innerHTML = o.items[cur][3];
+      prev.disabled = cur === 0; next.disabled = cur === o.items.length - 1;
+    }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    prev.addEventListener('click', () => { stop(); go(cur - 1); });
+    next.addEventListener('click', () => { stop(); go(cur + 1); });
+    $(o.reset).addEventListener('click', () => { stop(); go(0); });
+    auto.addEventListener('click', () => {
+      if (timer) return stop();
+      go(0); auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => go(cur === o.items.length - 1 ? 0 : cur + 1), o.interval || 2200);
+    });
+    go(0);
+  }
+
+  // ---------- lesson-specific ----------
+  // Chapter 1 — company rule acts
+  stepper({ nodes:'t1Nodes', edges:'t1Edges', y:85, prev:'t1Prev', next:'t1Next', reset:'t1Reset', auto:'t1Auto', label:'t1Label', desc:'t1Desc', items:[
+    ['1773','రెగ్యులేటింగ్','రెగ్యులేటింగ్ చట్టం','కంపెనీ వ్యవహారాలను నియంత్రించడానికి బ్రిటిష్ ప్రభుత్వం తీసుకున్న <b>తొలి చర్య</b>; కంపెనీ రాజకీయ, పరిపాలనా విధులను మొదటిసారి గుర్తించింది; <b>కేంద్రీకృత పాలనకు పునాది</b>.<br>• బెంగాల్ గవర్నర్ → <b>బెంగాల్ గవర్నర్ జనరల్</b> (వారెన్ హేస్టింగ్స్) + 4 మంది సభ్యుల కార్యనిర్వాహక మండలి<br>• బొంబాయి, మద్రాస్ గవర్నర్లు బెంగాల్ GG కింద<br>• కలకత్తాలో <b>సుప్రీంకోర్టు</b> (1774) — ఒక ప్రధాన న్యాయమూర్తి + 3 న్యాయమూర్తులు (మొదటి CJ: ఎలిజా ఇంపే)<br>• కంపెనీ ఉద్యోగుల ప్రైవేట్ వ్యాపారం, లంచాలు నిషేధం'],
+    ['1784','పిట్స్ ఇండియా','పిట్స్ ఇండియా చట్టం','కంపెనీ వ్యాపార, రాజకీయ విధులను వేరు చేసింది:<br>• <b>కోర్ట్ ఆఫ్ డైరెక్టర్స్</b> — వ్యాపారం<br>• <b>బోర్డ్ ఆఫ్ కంట్రోల్</b> — రాజకీయ వ్యవహారాలు (బ్రిటిష్ ప్రభుత్వ సంస్థ)<br>→ <b>"ద్వంద్వ ప్రభుత్వం"</b> (Double Government)<br>• కంపెనీ భూభాగాలను మొదటిసారి <b>"భారతదేశంలో బ్రిటిష్ ఆధీన ప్రాంతాలు"</b> అని పిలిచింది<br>• బ్రిటిష్ ప్రభుత్వానికి కంపెనీ వ్యవహారాలపై <b>అత్యున్నత నియంత్రణ</b>'],
+    ['1793','చార్టర్','చార్టర్ చట్టం 1793','• కంపెనీ వ్యాపార గుత్తాధిపత్యం మరో 20 ఏళ్లు పొడిగింపు<br>• గవర్నర్ జనరల్‌కు తన కౌన్సిల్ నిర్ణయాన్ని <b>అధిగమించే (override) అధికారం</b><br>• బోర్డ్ ఆఫ్ కంట్రోల్ సభ్యులు, సిబ్బంది జీతాలు <b>భారత ఆదాయం</b> నుండి (1919 వరకు కొనసాగింది)'],
+    ['1813','చార్టర్','చార్టర్ చట్టం 1813','• కంపెనీ వ్యాపార గుత్తాధిపత్యం <b>అంతం</b> — అయితే <b>టీ వ్యాపారం, చైనాతో వ్యాపారం</b> మినహా; భారత వ్యాపారం బ్రిటిష్ వ్యాపారులందరికీ తెరుచుకుంది<br>• భారతీయుల విద్యకు ఏటా <b>₹1 లక్ష</b> కేటాయింపు (తొలి విద్యా నిధి)<br>• క్రైస్తవ మిషనరీలకు భారత్‌కు రావడానికి అనుమతి<br>• స్థానిక ప్రభుత్వాలకు ప్రజలపై పన్నులు విధించే అధికారం'],
+    ['1833','చార్టర్','చార్టర్ చట్టం 1833','<b>బ్రిటిష్ ఇండియాలో కేంద్రీకరణ తుది దశ.</b><br>• బెంగాల్ GG → <b>భారత గవర్నర్ జనరల్</b> (లార్డ్ విలియం బెంటింక్) — అన్ని పౌర, సైనిక అధికారాలు<br>• బొంబాయి, మద్రాస్ గవర్నర్ల శాసన అధికారాలు తొలగింపు; GG చేసిన చట్టాలను <b>"చట్టాలు" (Acts)</b> అన్నారు (అంతకుముందు "Regulations")<br>• కంపెనీ వ్యాపార కార్యకలాపాలు <b>పూర్తిగా అంతం</b> — కేవలం పరిపాలనా సంస్థ<br>• చట్టాల క్రోడీకరణకు <b>లా కమిషన్</b> (మెకాలే) — IPC ముసాయిదా<br>• సివిల్ సర్వీసులకు బహిరంగ పోటీ ప్రయత్నం (డైరెక్టర్ల వ్యతిరేకతతో విఫలం)'],
+    ['1853','చార్టర్','చార్టర్ చట్టం 1853','<b>చివరి చార్టర్ చట్టం.</b><br>• GG కౌన్సిల్ <b>శాసన, కార్యనిర్వాహక విధుల విభజన</b> — 6 కొత్త శాసన సభ్యులు → "కేంద్ర శాసన మండలి" (మినీ పార్లమెంట్)<br>• సివిల్ సర్వీసులకు <b>బహిరంగ పోటీ</b> — భారతీయులకూ అవకాశం; <b>మెకాలే కమిటీ</b> (1854)<br>• కేంద్ర శాసన మండలిలో <b>స్థానిక ప్రాతినిధ్యం</b> — 6లో 4 సభ్యులను మద్రాస్, బొంబాయి, బెంగాల్, ఆగ్రా ప్రభుత్వాలు నియమించాయి<br>• కంపెనీ పాలన <b>నిరవధికంగా</b> పొడిగింపు (కాలపరిమితి లేదు)']
+  ]});
+
+  // Chapter 3 — dyarchy sorter
+  (function(){
+    const S = [
+      ['పోలీసు','R','శాంతిభద్రతలు — బ్రిటిష్ పాలనకు కీలకం కాబట్టి గవర్నర్ చేతిలోనే.'],
+      ['న్యాయం','R','న్యాయ పరిపాలన — రిజర్వ్.'],
+      ['భూమి శిస్తు','R','ఆదాయానికి ప్రధాన వనరు — ఆర్థిక నియంత్రణ బ్రిటిష్ అధికారుల చేతిలో.'],
+      ['నీటిపారుదల','R','కాలువలు, నీటిపారుదల — రిజర్వ్ (ఆదాయంతో ముడిపడి ఉంది).'],
+      ['ఆర్థికం','R','రాష్ట్ర ఆర్థిక శాఖ రిజర్వ్ — అందుకే బదిలీ అంశాల మంత్రులకు నిధుల కొరత; ద్వంద్వ పాలన వైఫల్యానికి ప్రధాన కారణం.'],
+      ['విద్య','T','బదిలీ — భారతీయ మంత్రులు, శాసనసభకు బాధ్యులు.'],
+      ['ప్రజారోగ్యం','T','బదిలీ — ఆరోగ్యం, పారిశుద్ధ్యం.'],
+      ['స్థానిక స్వపరిపాలన','T','బదిలీ — మునిసిపాలిటీలు, జిల్లా బోర్డులు.'],
+      ['వ్యవసాయం','T','బదిలీ — వ్యవసాయం, పశుసంవర్ధకం, సహకార సంఘాలు.'],
+      ['ఎక్సైజ్','T','బదిలీ — మద్యం మొదలైన వాటిపై సుంకం.']
+    ];
+    const seen = new Set();
+    const items = S.map((s, i) => {
+      const col = i % 5, row = Math.floor(i / 5);
+      return { name: s[0], short: s[0], x: 85 + col * 147, y: 95 + row * 72, w: 134, h: 50, fs: s[0].length > 12 ? 11 : 12.5, fill:'#f4f4f4', stroke:'#888', desc:'' };
+    });
+    const groups = makeNodes(document.getElementById('dyNodes'), items, $('dyTitle'), $('dyDesc'));
+    groups.forEach((g, i) => g.addEventListener('click', () => reveal(i)));
+    groups.forEach((g, i) => g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') reveal(i); }));
+    function reveal(i){
+      const s = S[i], R = s[1] === 'R', box = groups[i].querySelector('.box');
+      box.setAttribute('fill', R ? '#ffe3d6' : '#d6f5e3'); box.setAttribute('stroke', R ? '#ff6b35' : '#00b359');
+      seen.add(i);
+      $('dyTitle').textContent = s[0] + ' → ' + (R ? 'రిజర్వ్ (Reserved)' : 'బదిలీ (Transferred)');
+      $('dyDesc').innerHTML = s[2] + ' &nbsp;·&nbsp; <b>వర్గీకరించినవి: ' + seen.size + '/10</b>';
+    }
+  })();
+
+  // Chapter 4 — journey of the Constituent Assembly
+  stepper({ nodes:'t4Nodes', edges:'t4Edges', y:85, prev:'t4Prev', next:'t4Next', reset:'t4Reset', auto:'t4Auto', label:'t4Label', desc:'t4Desc', topFs:12.5, botFs:11, items:[
+    ['ఆగ 1940','ఆగస్టు ఆఫర్','ఆగస్టు ఆఫర్ (లిన్‌లిత్‌గో)','భారత రాజ్యాంగాన్ని ప్రధానంగా <b>భారతీయులే</b> రూపొందించాలనే డిమాండ్‌ను బ్రిటిష్ ప్రభుత్వం <b>మొదటిసారి సూత్రప్రాయంగా</b> అంగీకరించింది (యుద్ధం తర్వాత). కాంగ్రెస్ తిరస్కరించింది.'],
+    ['మార్చి 1942','క్రిప్స్ మిషన్','క్రిప్స్ ప్రతిపాదనలు','యుద్ధం తర్వాత ఎన్నికైన రాజ్యాంగ సభ; డొమినియన్ హోదా; ఏ ప్రావిన్స్ అయినా వేరుగా ఉండే హక్కు. గాంధీ: "దివాలా తీస్తున్న బ్యాంకుపై ముందు తేదీ చెక్కు". కాంగ్రెస్, ముస్లిం లీగ్ రెండూ తిరస్కరించాయి → క్విట్ ఇండియా.'],
+    ['మే 1946','కేబినెట్ మిషన్','కేబినెట్ మిషన్ ప్లాన్','సభ్యులు: <b>పెథిక్-లారెన్స్, స్టాఫర్డ్ క్రిప్స్, ఎ.వి. అలెగ్జాండర్</b>. ముస్లిం లీగ్ పాకిస్తాన్ డిమాండ్ తిరస్కరణ; మూడు గ్రూపులుగా ప్రావిన్సులు; <b>389 సభ్యుల రాజ్యాంగ సభ</b> — ప్రావిన్షియల్ శాసనసభల ద్వారా ఎన్నిక.'],
+    ['జూలై 1946','ఎన్నికలు','రాజ్యాంగ సభ ఎన్నికలు','బ్రిటిష్ ఇండియాకు కేటాయించిన 296 స్థానాలకు ఎన్నికలు: కాంగ్రెస్ <b>208</b>, ముస్లిం లీగ్ <b>73</b>, ఇతరులు <b>15</b>. సంస్థానాలు (93) మొదట్లో దూరంగా ఉన్నాయి.'],
+    ['డిసెం 1946','తొలి సమావేశం','మొదటి సమావేశం & లక్ష్యాల తీర్మానం','<b>9 డిసెంబర్</b>: మొదటి సమావేశం (ముస్లిం లీగ్ బహిష్కరణ, 211 మంది). <b>11 డిసెంబర్</b>: రాజేంద్ర ప్రసాద్ అధ్యక్షుడు. <b>13 డిసెంబర్</b>: నెహ్రూ <b>లక్ష్యాల తీర్మానం</b> — 22 జనవరి 1947న ఏకగ్రీవ ఆమోదం → పీఠికకు మూలం.'],
+    ['ఆగ 1947','స్వాతంత్ర్యం','స్వాతంత్ర్య చట్టం & ముసాయిదా కమిటీ','3 జూన్ మౌంట్‌బాటెన్ ప్లాన్ → 18 జూలై <b>భారత స్వాతంత్ర్య చట్టం</b> → 15 ఆగస్టు స్వాతంత్ర్యం. సభ <b>సార్వభౌమ సంస్థ</b>గా మారింది; పాకిస్తాన్ ప్రాంతాల సభ్యులు వైదొలగడంతో బలం 299. <b>29 ఆగస్టు</b>: అంబేద్కర్ అధ్యక్షతన ముసాయిదా కమిటీ.'],
+    ['నవం 1949','ఆమోదం','రాజ్యాంగ ఆమోదం','ముసాయిదా ఫిబ్రవరి 1948లో ప్రచురణ; మూడు పఠనాలు. <b>26 నవంబర్ 1949</b>న ఆమోదం — పీఠిక, 395 ఆర్టికల్స్, 8 షెడ్యూళ్లు. ఆర్టి. 394లోని కొన్ని నిబంధనలు (పౌరసత్వం, ఎన్నికలు, తాత్కాలిక పార్లమెంట్) వెంటనే అమలు.'],
+    ['జన 1950','గణతంత్రం','గణతంత్ర భారతం','<b>24 జనవరి</b>: చివరి సమావేశం — 284 మంది సంతకాలు; జాతీయ గీతం, గేయం ఆమోదం; రాజేంద్ర ప్రసాద్ తొలి రాష్ట్రపతిగా ఎన్నిక. <b>26 జనవరి 1950</b>: రాజ్యాంగం పూర్తిగా అమలు — 1930 లాహోర్ కాంగ్రెస్ "పూర్ణ స్వరాజ్" దినానికి గుర్తుగా ఈ తేదీ ఎంపిక.']
+  ]});
+
+
+  const idx = sections.findIndex(s => '#' + s.id === location.hash);
+  show(idx >= 0 ? +sections[idx].dataset.ch : 0, false);
+})();
+</script>
+</body>
+</html>

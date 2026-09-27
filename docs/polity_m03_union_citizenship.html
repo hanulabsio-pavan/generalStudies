@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M3: యూనియన్, భూభాగం & పౌరసత్వం — Indian Polity</title>
+<style>
+:root{
+  --primary:#0066cc; --primary-dark:#004f9e; --primary-light:#e8f1fb;
+  --secondary:#00b359; --secondary-light:#f0f9f4;
+  --accent:#ff6b35; --accent-light:#fff3ee;
+  --bg:#ffffff; --sidebar:#f8f8f8; --text:#1a1a1a; --muted:#555; --border:#ddd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Nirmala UI','Noto Sans Telugu','Gautami',sans-serif;
+  font-size:16px;line-height:1.75;letter-spacing:.3px}
+.container{display:flex;min-height:100vh}
+/* Sidebar */
+.sidebar{width:280px;flex-shrink:0;background:var(--sidebar);border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 16px}
+.sidebar h2{margin:0 0 4px;font-size:18px;color:var(--primary)}
+.sidebar .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.progress-bar{height:8px;background:#e4e4e4;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--secondary);transition:width .4s ease}
+.chapter-count{font-size:13px;color:var(--muted);margin:6px 0 16px}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{display:block;padding:8px 10px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14.5px;line-height:1.4;
+  border-left:3px solid transparent;transition:background .3s,border-color .3s}
+.toc a:hover{background:var(--accent-light);border-left-color:var(--accent)}
+.toc a.active{background:var(--primary-light);border-left-color:var(--primary);color:var(--primary);font-weight:600}
+.toc a.done::after{content:" ✓";color:var(--secondary);font-weight:700}
+.back-link{display:inline-block;margin-top:18px;font-size:13px;color:var(--primary)}
+.menu-btn{display:none}
+/* Content */
+.content{flex:1;min-width:0;padding:32px 24px 64px}
+.chapter{max-width:900px;margin:0 auto;display:none;animation:fade .5s ease-in}
+.chapter.visible{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:28px;color:var(--primary);margin:0 0 8px;line-height:1.35}
+h2{font-size:22px;color:var(--primary);margin:2rem 0 .6rem;line-height:1.4}
+h3{font-size:18px;color:#333;margin:1.4rem 0 .5rem}
+.meta{color:var(--muted);font-size:14px;margin-bottom:1.5rem}
+p{margin:.6rem 0}
+.hl{background:var(--accent-light);padding:0 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--primary-light);color:var(--primary-dark)}
+tr:nth-child(even) td{background:#fafafa}
+.table-wrap{overflow-x:auto}
+.callout{border-left:4px solid var(--accent);background:var(--accent-light);padding:10px 14px;border-radius:0 6px 6px 0;margin:1rem 0}
+.callout b{color:#c4471a}
+/* Intro */
+.intro-page .subtitle{font-size:18px;color:var(--muted);margin-top:0}
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:1.2rem 0}
+.intro-card{border:1px solid var(--border);border-top:4px solid var(--primary);border-radius:8px;padding:12px 14px;cursor:pointer;transition:box-shadow .3s,transform .3s}
+.intro-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-2px)}
+.intro-card .n{font-size:13px;color:var(--accent);font-weight:700}
+.start-btn,.nav-buttons button,.sm-controls button,.reveal-btn{font:inherit;cursor:pointer;border-radius:6px;transition:background .3s,color .3s,border-color .3s}
+.start-btn{background:var(--primary);color:#fff;border:0;padding:12px 22px;font-size:16px;font-weight:600;margin-top:10px}
+.start-btn:hover{background:var(--primary-dark)}
+/* Diagrams */
+figure.diagram{margin:1.5rem 0;border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff}
+figure.diagram svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);text-align:center;margin-top:8px}
+.chapter.visible svg .anim{opacity:0;animation:fade .7s ease-in forwards}
+.chapter.visible svg .d1{animation-delay:.15s}.chapter.visible svg .d2{animation-delay:.35s}
+.chapter.visible svg .d3{animation-delay:.55s}.chapter.visible svg .d4{animation-delay:.75s}
+.chapter.visible svg .d5{animation-delay:.95s}.chapter.visible svg .d6{animation-delay:1.15s}
+svg .box{transition:stroke .3s,fill .3s}
+svg g.hov:hover .box{stroke:#003d7a;stroke-width:3}
+svg text{font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif;fill:#1a1a1a}
+svg g[tabindex]:focus{outline:none}svg g[tabindex]:focus-visible .box{stroke-dasharray:4 3}
+.pulse{animation:pulse 1s ease-in-out 2}
+@keyframes pulse{50%{filter:drop-shadow(0 0 6px var(--accent))}}
+/* Revision (code-style) block */
+.code-block{position:relative;margin:1.2rem 0;border:1px solid #f3c2ad;border-radius:8px;background:var(--accent-light);overflow:hidden}
+.code-block .cb-head{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:#ffe3d6;font-size:13px;font-weight:600;color:#a33c12}
+.copy-btn{font:inherit;font-size:12px;border:1px solid var(--accent);background:#fff;color:#a33c12;border-radius:4px;padding:2px 10px;cursor:pointer}
+.copy-btn:hover{background:var(--accent);color:#fff}
+.code-block pre{margin:0;padding:10px 0;overflow-x:auto;font-family:'Monaco','Consolas','Courier New','Nirmala UI',monospace;font-size:13.5px;line-height:1.7}
+.code-block .ln{display:block;padding:0 14px 0 0;white-space:pre}
+.code-block .ln::before{content:attr(data-n);display:inline-block;width:2.6em;text-align:right;padding-right:12px;margin-right:10px;color:#b98a78;border-right:1px solid #f3c2ad;user-select:none}
+.tok-num{color:var(--accent);font-weight:600}.tok-com{color:#666;font-style:italic}.tok-key{color:var(--primary);font-weight:600}
+/* Collapsible */
+details.collapsible{border:1px solid var(--border);border-radius:8px;margin:1rem 0;background:#fcfcfc}
+details.collapsible summary{cursor:pointer;padding:10px 14px;font-weight:600;color:var(--primary)}
+details.collapsible[open] summary{border-bottom:1px solid var(--border)}
+details.collapsible .inner{padding:4px 16px 12px}
+/* Quiz */
+.quiz{border:2px solid var(--primary-light);border-radius:10px;padding:6px 18px 14px;margin:2rem 0}
+.quiz h3{color:var(--primary)}
+.quiz-question{margin:1rem 0;padding-bottom:12px;border-bottom:1px dashed var(--border)}
+.quiz-question:last-child{border-bottom:0}
+.quiz-question ol{margin:.3rem 0 .5rem;padding-left:1.6rem}
+.reveal-btn{background:#fff;border:1px solid var(--accent);color:#c4471a;padding:5px 14px;font-size:14px}
+.reveal-btn:hover{background:var(--accent);color:#fff}
+.answer{display:none;margin-top:10px;background:var(--secondary-light);border-left:4px solid var(--secondary);padding:8px 12px;border-radius:0 6px 6px 0;animation:fade .4s ease-in}
+.answer.show{display:block}
+/* Takeaways */
+.key-takeaways{background:var(--secondary-light);border:1px solid #bfe8d1;border-left:5px solid var(--secondary);border-radius:8px;padding:6px 18px 10px;margin:2rem 0}
+.key-takeaways h3{color:#007a3d}
+.key-takeaways li{margin:4px 0}
+/* Nav */
+.nav-buttons{display:flex;justify-content:space-between;gap:10px;margin-top:2rem}
+.nav-buttons button{background:#fff;border:2px solid var(--primary);color:var(--primary);padding:9px 18px;font-weight:600}
+.nav-buttons button:hover:not(:disabled){background:var(--primary);color:#fff}
+.nav-buttons button:disabled{opacity:.35;cursor:default}
+/* State machine */
+.sm-status{text-align:center;font-weight:600;margin:6px 0;font-size:15px}
+.sm-status span{color:var(--primary)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.sm-controls button{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:6px 12px;font-size:14px}
+.sm-controls button:hover:not(:disabled){background:var(--primary);color:#fff}
+.sm-controls button:disabled{opacity:.35;cursor:default}
+.sm-controls .auto{border-color:var(--accent);color:#c4471a}
+.sm-controls .auto:hover{background:var(--accent)!important;color:#fff!important}
+.sm-state .box{transition:stroke-width .4s,filter .4s}
+.sm-state.active .box{stroke-width:4;filter:drop-shadow(0 0 7px rgba(0,102,204,.65))}
+.sm-edge{fill:none;stroke:#9bb8d6;stroke-width:2}
+.sm-edge.run{stroke:var(--accent);stroke-width:3.5;stroke-dasharray:400;stroke-dashoffset:400;animation:draw .8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* Responsive */
+@media (max-width:768px){
+  .container{display:block}
+  .sidebar{position:fixed;left:0;top:0;z-index:20;transform:translateX(-100%);transition:transform .3s;box-shadow:2px 0 12px rgba(0,0,0,.15)}
+  .sidebar.open{transform:none}
+  .menu-btn{display:block;position:fixed;top:10px;left:10px;z-index:30;background:var(--primary);color:#fff;border:0;border-radius:6px;padding:8px 12px;font-size:18px;cursor:pointer}
+  .content{padding:56px 16px 48px}
+  h1{font-size:24px}
+}
+.tracker{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:1rem 0}
+.tracker-sum{font-weight:700;color:#007a3d;margin-bottom:6px}
+.trk{width:18px;height:18px;accent-color:var(--secondary);cursor:pointer}
+code{background:var(--accent-light);padding:1px 5px;border-radius:3px;font-size:14px}
+</style>
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="విషయ సూచిక తెరవండి">☰</button>
+<div class="container">
+<aside class="sidebar" id="sidebar" aria-label="విషయ సూచిక">
+  <h2>🗺️ M3 · యూనియన్ & పౌరసత్వం</h2>
+  <div class="sub">Indian Polity · మాడ్యూల్ 3 · ★</div>
+  <div class="progress-bar" role="progressbar" aria-label="పురోగతి"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="chapter-count" id="chapterCount">0/4 అధ్యాయాలు</div>
+  <nav class="toc">
+    <ul>
+      <li><a href="#intro" data-ch="0">పరిచయం</a></li>
+      <li><a href="#chapter-1" data-ch="1">1. యూనియన్ & భూభాగం (ఆర్టి. 1–4)</a></li>
+      <li><a href="#chapter-2" data-ch="2">2. రాష్ట్రాల పునర్వ్యవస్థీకరణ & ఆంధ్ర-తెలంగాణ</a></li>
+      <li><a href="#chapter-3" data-ch="3">3. పౌరసత్వం: ఆర్టి. 5–11 & 1955 చట్టం</a></li>
+      <li><a href="#chapter-4" data-ch="4">4. CAA, OCI & సమకాలీన అంశాలు</a></li>
+    </ul>
+  </nav>
+  <a class="back-link" href="indian_polity_roadmap.html">← పాలిటీ రోడ్‌మ్యాప్</a><br>
+  <a class="back-link" style="margin-top:6px" href="index.html">← సూచిక (Index)</a>
+</aside>
+
+<main class="content" id="content">
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="chapter intro-page" data-ch="0">
+  <h1>🗺️ మాడ్యూల్ 3: యూనియన్, భూభాగం & పౌరసత్వం</h1>
+  <p class="subtitle">Union & its Territory (Part I) · Citizenship (Part II) · UPSC / APPSC / TSPSC</p>
+  <p>రాజ్యాంగంలోని మొదటి రెండు భాగాలు రెండు ప్రాథమిక ప్రశ్నలకు సమాధానం చెబుతాయి: <b>భారతదేశం అంటే ఏ భూభాగం?</b> మరియు <b>భారతీయుడు అంటే ఎవరు?</b> ఈ మాడ్యూల్ UPSCకి మధ్యస్థ ప్రాధాన్యం (★) అయినా, <b>APPSC/TSPSCకి అత్యంత ముఖ్యం</b> — ఆంధ్ర రాష్ట్ర ఏర్పాటు, 1956 విలీనం, 2014 విభజన అన్నీ ఆర్టి. 3 కథలే.</p>
+  <div class="intro-grid">
+    <div class="intro-card" data-go="1"><div class="n">అధ్యాయం 1</div>"రాష్ట్రాల యూనియన్" అర్థం, ఆర్టి. 3 ప్రక్రియ (ఇంటరాక్టివ్), భూభాగ బదిలీ</div>
+    <div class="intro-card" data-go="2"><div class="n">అధ్యాయం 2</div>ధార్ కమిషన్ నుండి తెలంగాణ వరకు — కాలరేఖ (ఇంటరాక్టివ్), ఆంధ్ర-తెలంగాణ చరిత్ర</div>
+    <div class="intro-card" data-go="3"><div class="n">అధ్యాయం 3</div>ఆర్టి. 5–11, పౌరసత్వ పొందే/కోల్పోయే విధానాలు, జనన నియమాలు (ఇంటరాక్టివ్)</div>
+    <div class="intro-card" data-go="4"><div class="n">అధ్యాయం 4</div>పౌరులు vs NRI vs OCI vs విదేశీయులు, CAA 2019, అస్సాం సెక్షన్ 6A</div>
+  </div>
+  <p><b>మొత్తం సమయం:</b> ~75 నిమిషాలు · ⌨️ ← / → బాణం కీలతో అధ్యాయాల మధ్య కదలండి.</p>
+  <button class="start-btn" data-go="1">ప్రారంభించండి →</button>
+</section>
+
+<!-- ============ CHAPTER 1 ============ -->
+<section id="chapter-1" class="chapter" data-ch="1">
+  <h1>అధ్యాయం 1: యూనియన్ & భూభాగం (ఆర్టికల్స్ 1–4)</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>1.1 ఆర్టికల్ 1 — "ఇండియా, అంటే భారత్, రాష్ట్రాల యూనియన్"</h2>
+  <p>ఆర్టి. 1 మూడు విషయాలు చెబుతుంది: (1) దేశం పేరు — <b>ఇండియా, అంటే భారత్</b>; (2) రాజకీయ స్వభావం — <b>రాష్ట్రాల యూనియన్</b> (Union of States), "సమాఖ్య" (Federation) కాదు; (3) భూభాగం.</p>
+  <p><b>"యూనియన్" ఎందుకు? — అంబేద్కర్ రెండు కారణాలు:</b> (1) భారత సమాఖ్య అమెరికాలా రాష్ట్రాల <b>ఒప్పందం ఫలితం కాదు</b>; (2) రాష్ట్రాలకు <b>విడిపోయే హక్కు లేదు</b> — సమాఖ్య "విడదీయలేని యూనియన్".</p>
+  <div class="table-wrap"><table>
+    <tr><th>"భారత భూభాగం" (Territory of India)</th><th>"భారత యూనియన్" (Union of India)</th></tr>
+    <tr><td>(1) రాష్ట్రాల భూభాగాలు + (2) కేంద్రపాలిత ప్రాంతాలు + (3) భవిష్యత్తులో భారత్ పొందే భూభాగాలు</td><td>రాష్ట్రాలు మాత్రమే — కేంద్రంతో అధికారాలు పంచుకునే సమాఖ్య యూనిట్లు</td></tr>
+    <tr><td>విస్తృత భావన</td><td>సంకుచిత భావన</td></tr>
+  </table></div>
+  <p>రాష్ట్రాలు, UTల పేర్లు, వాటి భూభాగాలు <b>1వ షెడ్యూల్</b>లో. ప్రస్తుతం <b>28 రాష్ట్రాలు, 8 కేంద్రపాలిత ప్రాంతాలు</b>.</p>
+
+  <h2>1.2 ఆర్టికల్స్ 2, 3, 4</h2>
+  <ul>
+    <li><b>ఆర్టి. 2</b> — భారత యూనియన్‌లో <b>లేని</b> కొత్త రాష్ట్రాలను చేర్చుకోవడం / ఏర్పాటు చేయడం (ఉదా: సిక్కిం 1975).</li>
+    <li><b>ఆర్టి. 3</b> — <b>ఇప్పటికే ఉన్న</b> రాష్ట్రాల పునర్వ్యవస్థీకరణ: (a) కొత్త రాష్ట్రం ఏర్పాటు (విభజన/విలీనం), (b) విస్తీర్ణం పెంచడం, (c) తగ్గించడం, (d) సరిహద్దులు మార్చడం, (e) పేరు మార్చడం.</li>
+    <li><b>ఆర్టి. 4</b> — ఆర్టి. 2, 3 కింద చేసే చట్టాలు ఆర్టి. 368 కింద <b>రాజ్యాంగ సవరణలుగా పరిగణించబడవు</b> → సాధారణ మెజారిటీ చాలు.</li>
+  </ul>
+
+  <h2>1.3 ఆర్టికల్ 3 ప్రక్రియ — ఇంటరాక్టివ్</h2>
+  <p>తెలంగాణ ఏర్పాటు (2014) ఉదాహరణతో దశలవారీగా చూడండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 170" role="img" aria-label="ఆర్టికల్ 3 కింద కొత్త రాష్ట్ర ఏర్పాటు ప్రక్రియ">
+      <line x1="60" y1="85" x2="700" y2="85" stroke="#ddd" stroke-width="6" stroke-linecap="round"/>
+      <g id="t1Edges"></g><g id="t1Nodes"></g>
+    </svg>
+    <div class="sm-status" aria-live="polite"><span id="t1Label"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#333;max-width:780px;margin:0 auto;text-align:left" id="t1Desc"></div>
+    <div class="sm-controls">
+      <button id="t1Prev">◀ మునుపటి దశ</button><button id="t1Next">తదుపరి దశ ▶</button><button id="t1Reset">↺ రీసెట్</button>
+      <button class="auto" id="t1Auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 1.1 — ఆర్టి. 3 ప్రక్రియ. <b>ముఖ్యం:</b> రాష్ట్ర శాసనసభ అభిప్రాయం పార్లమెంట్‌కు కట్టుబాటు కాదు.</figcaption>
+  </figure>
+
+  <h2>1.4 భూభాగాన్ని విదేశానికి ఇవ్వవచ్చా?</h2>
+  <ul>
+    <li><b>బెరుబారి యూనియన్ కేసు (1960):</b> భారత భూభాగాన్ని విదేశానికి బదిలీ (cession) చేయడానికి ఆర్టి. 3 సరిపోదు — <b>ఆర్టి. 368 కింద సవరణ</b> అవసరం → <b>9వ సవరణ (1960)</b>: బెరుబారి భాగాన్ని పాకిస్తాన్ (తూర్పు)కు.</li>
+    <li><b>సరిహద్దు వివాద పరిష్కారం</b> (భూభాగ బదిలీ కాని సరిహద్దు నిర్ధారణ) కార్యనిర్వాహక చర్యతో సాధ్యం — సవరణ అక్కర్లేదు (1969 SC).</li>
+    <li><b>100వ సవరణ (2015):</b> భారత్–బంగ్లాదేశ్ భూ సరిహద్దు ఒప్పందం (LBA) — <b>111 ఎన్‌క్లేవ్‌లు</b> బంగ్లాదేశ్‌కు, <b>51</b> భారత్‌కు; అస్సాం, పశ్చిమ బెంగాల్, మేఘాలయ, త్రిపుర భూభాగాల్లో మార్పు (1వ షెడ్యూల్ సవరణ).</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — భాగం I">
+<pre>ఆర్టి. 1   →  ఇండియా అంటే భారత్; రాష్ట్రాల యూనియన్; భూభాగం
+ఆర్టి. 2   →  యూనియన్ బయటి కొత్త రాష్ట్రాల చేర్పు       # సిక్కిం
+ఆర్టి. 3   →  ఉన్న రాష్ట్రాల పునర్వ్యవస్థీకరణ             # తెలంగాణ 2014
+ఆర్టి. 4   →  2, 3 కింద చట్టాలు = సవరణ కాదు (సాధారణ మెజారిటీ)
+1వ షెడ్యూల్ →  28 రాష్ట్రాలు + 8 UTలు
+
+# భూభాగ సేకరణ / బదిలీ సవరణలు
+9వ (1960)   →  బెరుబారి బదిలీ (పాకిస్తాన్‌కు)
+10వ (1961)  →  దాద్రా & నగర్ హవేలీ (UT)
+12వ (1962)  →  గోవా, డామన్ & డయ్యూ (UT)
+14వ (1962)  →  పుదుచ్చేరి (UT)
+35వ (1974)  →  సిక్కిం — "అనుబంధ రాష్ట్రం"
+36వ (1975)  →  సిక్కిం — పూర్తి రాష్ట్రం (22వ)
+100వ (2015) →  భారత్–బంగ్లాదేశ్ LBA</pre>
+  </div>
+
+  <details class="collapsible" id="c1-adv">
+    <summary>🔍 లోతుగా: "విడదీయలేని యూనియన్ — విడదీయగల రాష్ట్రాలు"</summary>
+    <div class="inner">
+      <p>అమెరికాలో రాష్ట్రాల సరిహద్దులను వాటి సమ్మతి లేకుండా మార్చలేరు ("indestructible Union of indestructible States"). భారత్‌లో పార్లమెంట్ రాష్ట్రాల పేర్లు, సరిహద్దులను <b>ఏకపక్షంగా</b> మార్చగలదు — అందుకే భారత్ "<b>విడదీయలేని యూనియన్, విడదీయగల రాష్ట్రాలు</b>" (indestructible Union of destructible States).</p>
+      <p><b>2019 జమ్మూ & కశ్మీర్ పునర్వ్యవస్థీకరణ:</b> ఒక రాష్ట్రాన్ని రెండు కేంద్రపాలిత ప్రాంతాలుగా (జమ్మూ & కశ్మీర్ — శాసనసభతో; లద్దాఖ్ — శాసనసభ లేకుండా) మార్చడం ఇదే మొదటిసారి. ఆ సమయంలో రాష్ట్రపతి పాలన ఉండటంతో రాష్ట్ర శాసనసభ అభిప్రాయం స్థానంలో పార్లమెంట్ అభిప్రాయం తీసుకున్నారు. <b>సుప్రీంకోర్టు (డిసెంబర్ 2023)</b> ఆర్టి. 370 రద్దును సమర్థించింది; రాష్ట్ర హోదా వీలైనంత త్వరగా పునరుద్ధరించాలని, ఎన్నికలు నిర్వహించాలని సూచించింది (2024లో శాసనసభ ఎన్నికలు జరిగాయి).</p>
+      <p><b>మెయిన్స్ కోణం:</b> ఆర్టి. 3 కింద పార్లమెంట్ విస్తృత అధికారం — దేశ ఐక్యతకు రక్షణ అని ఒక వాదన; రాష్ట్రాల స్వయంప్రతిపత్తికి, సహకార సమాఖ్యకు ప్రమాదం అని మరో వాదన. సర్కారియా, పూంఛీ కమిషన్ల సూచనలతో సమతుల్యంగా రాయండి.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q1-1">
+      <p><strong>Q1:</strong> ఆర్టి. 3 కింద కొత్త రాష్ట్ర ఏర్పాటు బిల్లు గురించి సరైనది ఏది?</p>
+      <ol type="a"><li>సంబంధిత రాష్ట్ర శాసనసభ ఆమోదం తప్పనిసరి</li><li>రాష్ట్రపతి ముందస్తు సిఫార్సుతోనే ప్రవేశపెట్టాలి; రాష్ట్ర అభిప్రాయం కట్టుబాటు కాదు</li><li>ప్రత్యేక మెజారిటీ అవసరం</li><li>సగం రాష్ట్రాల ఆమోదం అవసరం</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b).</b> 2014లో ఆంధ్రప్రదేశ్ శాసనసభ తెలంగాణ ముసాయిదా బిల్లును తిరస్కరించినా, పార్లమెంట్ ఆమోదించింది — ఇదే దీనికి ఉదాహరణ. సాధారణ మెజారిటీ చాలు (ఆర్టి. 4).</p>
+    </div>
+    <div class="quiz-question" id="q1-2">
+      <p><strong>Q2:</strong> "భారత భూభాగం" మరియు "భారత యూనియన్" మధ్య తేడా ఏమిటి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">భారత భూభాగం = రాష్ట్రాలు + UTలు + పొందే భూభాగాలు (విస్తృతం). భారత యూనియన్ = రాష్ట్రాలు మాత్రమే (సమాఖ్య వ్యవస్థలో భాగస్వాములు). UTలు నేరుగా కేంద్ర పాలనలో ఉంటాయి.</p>
+    </div>
+    <div class="quiz-question" id="q1-3">
+      <p><strong>Q3:</strong> భారత్–బంగ్లాదేశ్ భూ సరిహద్దు ఒప్పందాన్ని అమలు చేసిన సవరణ ఏది? అది ఏ షెడ్యూల్‌ను సవరించింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>100వ సవరణ (2015)</b> — <b>1వ షెడ్యూల్</b>లోని అస్సాం, పశ్చిమ బెంగాల్, మేఘాలయ, త్రిపుర భూభాగాల వివరణ.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>ఆర్టి. 1: "రాష్ట్రాల యూనియన్" — ఒప్పందం ఫలితం కాదు, విడిపోయే హక్కు లేదు.</li>
+      <li>ఆర్టి. 3: రాష్ట్రపతి సిఫార్సు → రాష్ట్ర అభిప్రాయం (కట్టుబాటు కాదు) → సాధారణ మెజారిటీ.</li>
+      <li>విదేశానికి భూభాగ బదిలీకి ఆర్టి. 368 సవరణ అవసరం (బెరుబారి 1960; 9వ, 100వ సవరణలు).</li>
+      <li>భారత్ = "విడదీయలేని యూనియన్, విడదీయగల రాష్ట్రాలు"; ప్రస్తుతం 28 రాష్ట్రాలు, 8 UTలు.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 2 ============ -->
+<section id="chapter-2" class="chapter" data-ch="2">
+  <h1>అధ్యాయం 2: రాష్ట్రాల పునర్వ్యవస్థీకరణ & ఆంధ్ర-తెలంగాణ</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>2.1 1950 నాటి నాలుగు వర్గాల రాష్ట్రాలు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>వర్గం</th><th>ఏమిటి?</th><th>సంఖ్య</th><th>ఉదాహరణ</th></tr>
+    <tr><td><b>పార్ట్ A</b></td><td>బ్రిటిష్ ఇండియాలోని గవర్నర్ ప్రావిన్సులు</td><td>9</td><td>మద్రాస్, బొంబాయి, యునైటెడ్ ప్రావిన్సెస్</td></tr>
+    <tr><td><b>పార్ట్ B</b></td><td>శాసనసభలు గల పెద్ద సంస్థానాలు (రాజప్రముఖ్ పాలన)</td><td>9</td><td><b>హైదరాబాద్</b>, మైసూర్, జమ్మూ & కశ్మీర్</td></tr>
+    <tr><td><b>పార్ట్ C</b></td><td>చీఫ్ కమిషనర్ ప్రావిన్సులు & కొన్ని చిన్న సంస్థానాలు</td><td>10</td><td>ఢిల్లీ, కచ్, త్రిపుర</td></tr>
+    <tr><td><b>పార్ట్ D</b></td><td>అండమాన్ & నికోబార్ దీవులు</td><td>1</td><td>—</td></tr>
+  </table></div>
+  <p>ఈ నాలుగు వర్గాల విభజనను <b>7వ సవరణ (1956)</b> రద్దు చేసి "రాష్ట్రాలు", "కేంద్రపాలిత ప్రాంతాలు" అనే రెండు వర్గాలుగా మార్చింది.</p>
+
+  <h2>2.2 భాషా ప్రయుక్త రాష్ట్రాల కోసం కమిషన్లు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>కమిషన్ / కమిటీ</th><th>సంవత్సరం</th><th>సిఫార్సు</th></tr>
+    <tr><td><b>ధార్ కమిషన్</b> (ఎస్.కె. ధార్)</td><td>జూన్ 1948</td><td>భాష కాదు, <b>పరిపాలనా సౌలభ్యం</b> ఆధారంగా పునర్వ్యవస్థీకరణ</td></tr>
+    <tr><td><b>JVP కమిటీ</b> (జవహర్‌లాల్, వల్లభ్‌భాయ్, <b>పట్టాభి సీతారామయ్య</b>)</td><td>డిసెంబర్ 1948 (నివేదిక ఏప్రిల్ 1949)</td><td>భాషను ప్రాతిపదికగా <b>అధికారికంగా తిరస్కరించింది</b></td></tr>
+    <tr><td><b>ఫజల్ అలీ కమిషన్</b> (సభ్యులు: కె.ఎం. పణిక్కర్, హెచ్.ఎన్. కుంజ్రూ)</td><td>డిసెంబర్ 1953 (నివేదిక సెప్టెంబర్ 1955)</td><td>భాషను ప్రధాన ప్రాతిపదికగా <b>అంగీకరించింది</b>, కానీ "ఒక భాష–ఒక రాష్ట్రం" సిద్ధాంతాన్ని తిరస్కరించింది; దేశ ఐక్యత, ఆర్థిక-పరిపాలనా సాధ్యత కూడా పరిగణించాలి; 4 వర్గాల రద్దు → <b>16 రాష్ట్రాలు, 3 UTలు</b> సూచన</td></tr>
+  </table></div>
+  <p>ప్రభుత్వం కొద్ది మార్పులతో అంగీకరించి <b>రాష్ట్రాల పునర్వ్యవస్థీకరణ చట్టం 1956</b> + <b>7వ సవరణ</b> ద్వారా <b>14 రాష్ట్రాలు, 6 UTలు</b> ఏర్పాటు చేసింది (1 నవంబర్ 1956).</p>
+
+  <h2>2.3 కొత్త రాష్ట్రాల కాలరేఖ — ఇంటరాక్టివ్</h2>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 170" role="img" aria-label="భారత రాష్ట్రాల ఏర్పాటు కాలరేఖ">
+      <line x1="40" y1="85" x2="720" y2="85" stroke="#ddd" stroke-width="6" stroke-linecap="round"/>
+      <g id="t2Edges"></g><g id="t2Nodes"></g>
+    </svg>
+    <div class="sm-status" aria-live="polite"><span id="t2Label"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#333;max-width:780px;margin:0 auto;text-align:left" id="t2Desc"></div>
+    <div class="sm-controls">
+      <button id="t2Prev">◀ మునుపటి</button><button id="t2Next">తదుపరి ▶</button><button id="t2Reset">↺ రీసెట్</button>
+      <button class="auto" id="t2Auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 2.1 — 1953 ఆంధ్ర రాష్ట్రం నుండి 2019 జమ్మూ & కశ్మీర్ పునర్వ్యవస్థీకరణ వరకు.</figcaption>
+  </figure>
+
+  <h2>2.4 ఆంధ్రప్రదేశ్ & తెలంగాణ — APPSC/TSPSC ప్రత్యేకం</h2>
+  <div class="table-wrap"><table>
+    <tr><th>తేదీ</th><th>సంఘటన</th></tr>
+    <tr><td>19 అక్టో – 15 డిసెం 1952</td><td><b>పొట్టి శ్రీరాములు</b> 58 రోజుల నిరాహార దీక్ష, మద్రాస్‌లో మరణం → తీవ్ర ఆందోళనలు → నెహ్రూ ప్రకటన (19 డిసెంబర్ 1952)</td></tr>
+    <tr><td><b>1 అక్టోబర్ 1953</b></td><td><b>ఆంధ్ర రాష్ట్రం</b> — భాషా ప్రాతిపదికన తొలి రాష్ట్రం; రాజధాని <b>కర్నూలు</b>; తొలి CM <b>టంగుటూరి ప్రకాశం</b>; ఆంధ్ర రాష్ట్ర చట్టం 1953</td></tr>
+    <tr><td>1955</td><td>ఫజల్ అలీ కమిషన్ — తెలంగాణ ప్రాంతాన్ని (హైదరాబాద్ రాష్ట్రం) కొంతకాలం (1961 సాధారణ ఎన్నికల వరకు) వేరు రాష్ట్రంగా ఉంచి, ఆ తర్వాత శాసనసభ 2/3 మెజారిటీతో కోరితే విలీనం చేయాలని సూచన</td></tr>
+    <tr><td>20 ఫిబ్రవరి 1956</td><td><b>పెద్దమనుషుల ఒప్పందం</b> — తెలంగాణ ప్రాంత రక్షణలు: ప్రాంతీయ మండలి, ఉద్యోగాల్లో ముల్కీ నిబంధనలు, విద్య, భూముల అమ్మకంపై నియంత్రణ, మంత్రిమండలిలో ప్రాతినిధ్యం</td></tr>
+    <tr><td><b>1 నవంబర్ 1956</b></td><td><b>ఆంధ్రప్రదేశ్</b> ఏర్పాటు (ఆంధ్ర + హైదరాబాద్ రాష్ట్రంలోని తెలుగు ప్రాంతాలు); రాజధాని హైదరాబాద్; తొలి CM <b>నీలం సంజీవ రెడ్డి</b></td></tr>
+    <tr><td>1969 / 1972</td><td>"జై తెలంగాణ" / "జై ఆంధ్ర" ఉద్యమాలు</td></tr>
+    <tr><td>1973–75</td><td><b>ఆరు సూత్రాల పథకం</b> → <b>32వ సవరణ (1973)</b>: <b>ఆర్టి. 371D</b> (విద్య, ఉద్యోగాల్లో స్థానిక రిజర్వేషన్; అడ్మినిస్ట్రేటివ్ ట్రిబ్యునల్), <b>371E</b> (కేంద్ర విశ్వవిద్యాలయం); <b>రాష్ట్రపతి ఉత్తర్వు 1975</b> — జోన్లు</td></tr>
+    <tr><td>2009–2013</td><td>తెలంగాణ ఉద్యమ తీవ్రరూపం; <b>శ్రీకృష్ణ కమిటీ</b> (2010) నివేదిక; కేంద్ర కేబినెట్ నిర్ణయం (2013)</td></tr>
+    <tr><td>జనవరి 2014</td><td>ఆంధ్రప్రదేశ్ శాసనసభ ముసాయిదా బిల్లును తిరస్కరించింది (ఆర్టి. 3 కింద అభిప్రాయం కట్టుబాటు కాదు)</td></tr>
+    <tr><td><b>2 జూన్ 2014</b></td><td><b>తెలంగాణ</b> — 29వ రాష్ట్రం (ఆంధ్రప్రదేశ్ పునర్విభజన చట్టం 2014); హైదరాబాద్ <b>10 ఏళ్లు ఉమ్మడి రాజధాని</b> (2 జూన్ 2024తో ముగిసింది); షెడ్యూల్ 9, 10 సంస్థల విభజన; కృష్ణా, గోదావరి నదీ యాజమాన్య బోర్డులు</td></tr>
+  </table></div>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — పునర్వ్యవస్థీకరణ">
+<pre># కమిషన్            సంవత్సరం   →  వైఖరి
+ధార్ కమిషన్         1948      →  పరిపాలనా సౌలభ్యం (భాష కాదు)
+JVP కమిటీ          1948–49   →  భాష తిరస్కరణ
+ఫజల్ అలీ కమిషన్     1953–55   →  భాష అంగీకారం, కానీ "ఒక భాష–ఒక రాష్ట్రం" కాదు
+SRA 1956 + 7వ సవరణ →  14 రాష్ట్రాలు + 6 UTలు; A/B/C/D రద్దు
+
+# ఆంధ్ర-తెలంగాణ
+ఆంధ్ర రాష్ట్రం     →  1-10-1953 · కర్నూలు · టి. ప్రకాశం
+ఆంధ్రప్రదేశ్       →  1-11-1956 · హైదరాబాద్ · నీలం సంజీవ రెడ్డి
+371D / 371E      →  32వ సవరణ 1973
+తెలంగాణ          →  2-6-2014 · 29వ రాష్ట్రం</pre>
+  </div>
+
+  <details class="collapsible" id="c2-adv">
+    <summary>🔍 లోతుగా: చిన్న రాష్ట్రాలు — అనుకూల & ప్రతికూల వాదనలు</summary>
+    <div class="inner">
+      <p><b>అనుకూలం:</b> మెరుగైన పరిపాలన, ప్రజలకు దగ్గరగా ప్రభుత్వం; ప్రాంతీయ అసమానతల పరిష్కారం; స్థానిక గుర్తింపు, ఆకాంక్షల గౌరవం; అంబేద్కర్ కూడా పెద్ద రాష్ట్రాల విభజనను సమర్థించారు ("Thoughts on Linguistic States", 1955).</p>
+      <p><b>ప్రతికూలం:</b> కొత్త రాజధాని, పరిపాలనా యంత్రాంగం ఖర్చు; నదీ జలాలు, ఆస్తులు, అప్పుల విభజన వివాదాలు; మరిన్ని విభజన డిమాండ్లు (విదర్భ, గోర్ఖాలాండ్, బుందేల్‌ఖండ్...); చిన్న రాష్ట్రాల్లో రాజకీయ అస్థిరత; కేంద్రంపై ఆర్థిక ఆధారపడటం.</p>
+      <p><b>రెండో SRC డిమాండ్:</b> కొత్త రాష్ట్రాల డిమాండ్లను ఏకపక్షంగా కాకుండా స్పష్టమైన ప్రమాణాలతో పరిశీలించడానికి రెండో రాష్ట్రాల పునర్వ్యవస్థీకరణ కమిషన్ ఏర్పాటు చేయాలనే సూచన తరచుగా వస్తుంది. మెయిన్స్‌లో 2000, 2014 అనుభవాలతో సమతుల్య విశ్లేషణ రాయండి.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q2-1">
+      <p><strong>Q1:</strong> భాషా ప్రాతిపదికన రాష్ట్రాల పునర్వ్యవస్థీకరణను తిరస్కరించిన JVP కమిటీలో "P" ఎవరు?</p>
+      <ol type="a"><li>పురుషోత్తమ్ దాస్ టాండన్</li><li>పట్టాభి సీతారామయ్య</li><li>పండిత్ పంత్</li><li>పొట్టి శ్రీరాములు</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) భోగరాజు పట్టాభి సీతారామయ్య</b> — ఆసక్తికరంగా, ఆయనే ఆంధ్ర ఉద్యమ నాయకుల్లో ఒకరు.</p>
+    </div>
+    <div class="quiz-question" id="q2-2">
+      <p><strong>Q2:</strong> 1956 రాష్ట్రాల పునర్వ్యవస్థీకరణ చట్టం ఎన్ని రాష్ట్రాలు, UTలను ఏర్పాటు చేసింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>14 రాష్ట్రాలు, 6 కేంద్రపాలిత ప్రాంతాలు</b> (ఫజల్ అలీ కమిషన్ 16 + 3 సూచించింది).</p>
+    </div>
+    <div class="quiz-question" id="q2-3">
+      <p><strong>Q3:</strong> ఆర్టి. 371D ఏ సవరణ ద్వారా వచ్చింది? దాని ప్రధాన ఉద్దేశం?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>32వ సవరణ (1973)</b>, ఆరు సూత్రాల పథకం ఆధారంగా. ఉద్దేశం: ప్రాంతాల మధ్య సమాన అవకాశాలు — విద్య, ప్రభుత్వ ఉద్యోగాల్లో <b>స్థానిక అభ్యర్థులకు</b> రిజర్వేషన్ (రాష్ట్రపతి ఉత్తర్వు ద్వారా); సర్వీసు వివాదాలకు అడ్మినిస్ట్రేటివ్ ట్రిబ్యునల్.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>1950: పార్ట్ A/B/C/D → 7వ సవరణ (1956): రాష్ట్రాలు + UTలు.</li>
+      <li>ధార్ (1948, పరిపాలన) → JVP (1949, భాష వద్దు) → ఫజల్ అలీ (1955, భాష అవును, కానీ పరిమితులతో).</li>
+      <li>ఆంధ్ర రాష్ట్రం (1953) — తొలి భాషా రాష్ట్రం; ఆంధ్రప్రదేశ్ (1956); తెలంగాణ (2014) — 29వ రాష్ట్రం.</li>
+      <li>371D (32వ సవరణ, 1973) — రెండు తెలుగు రాష్ట్రాల స్థానిక రిజర్వేషన్లకు ఆధారం.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 3 ============ -->
+<section id="chapter-3" class="chapter" data-ch="3">
+  <h1>అధ్యాయం 3: పౌరసత్వం — ఆర్టి. 5–11 & పౌరసత్వ చట్టం 1955</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>3.1 భాగం II — ఆర్టికల్స్ 5 నుండి 11</h2>
+  <p>రాజ్యాంగం పౌరసత్వంపై <b>సమగ్ర చట్టం చేయలేదు</b> — 26 జనవరి 1950 నాటికి ఎవరు పౌరులు అని మాత్రమే నిర్ణయించింది; మిగతాది పార్లమెంట్‌కు వదిలేసింది (ఆర్టి. 11). ఈ ఆర్టికల్స్ 26 నవంబర్ 1949 నుండే అమల్లోకి వచ్చాయి.</p>
+  <div class="table-wrap"><table>
+    <tr><th>ఆర్టికల్</th><th>ఎవరు పౌరులు / నియమం</th></tr>
+    <tr><td><b>5</b></td><td>రాజ్యాంగ ప్రారంభం నాటికి భారత్‌లో నివాసం (domicile) ఉండి — (a) భారత్‌లో జన్మించినవారు, లేదా (b) తల్లిదండ్రుల్లో ఒకరు భారత్‌లో జన్మించినవారు, లేదా (c) 5 ఏళ్లుగా సాధారణ నివాసులు</td></tr>
+    <tr><td><b>6</b></td><td><b>పాకిస్తాన్ నుండి వలస వచ్చినవారు</b> — 19 జూలై 1948కి ముందు వచ్చినవారు స్వయంచాలకంగా; ఆ తర్వాత వచ్చినవారు రిజిస్ట్రేషన్‌తో</td></tr>
+    <tr><td><b>7</b></td><td>1 మార్చి 1947 తర్వాత <b>పాకిస్తాన్‌కు వలస వెళ్లినవారు</b> పౌరులు కారు — అయితే పునరావాస అనుమతితో తిరిగి వచ్చినవారు మినహాయింపు</td></tr>
+    <tr><td><b>8</b></td><td>విదేశాల్లో నివసిస్తున్న భారత సంతతి వారు — దౌత్య/కాన్సులర్ కార్యాలయంలో రిజిస్ట్రేషన్‌తో</td></tr>
+    <tr><td><b>9</b></td><td>స్వచ్ఛందంగా విదేశీ పౌరసత్వం పొందితే భారత పౌరసత్వం కోల్పోతారు</td></tr>
+    <tr><td><b>10</b></td><td>పార్లమెంట్ చట్టానికి లోబడి పౌరసత్వ కొనసాగింపు</td></tr>
+    <tr><td><b>11</b></td><td>పౌరసత్వం పొందడం, కోల్పోవడం, ఇతర అంశాలపై చట్టం చేసే అధికారం <b>పార్లమెంట్‌</b>కు → పౌరసత్వ చట్టం 1955</td></tr>
+  </table></div>
+
+  <h2>3.2 పౌరసత్వ చట్టం 1955 — ఐదు మార్గాలు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>మార్గం</th><th>నియమం (సంక్షిప్తంగా)</th></tr>
+    <tr><td><b>1. జననం</b></td><td>భారత్‌లో జననం — జనన తేదీని బట్టి మూడు నియమాలు (కింది ఇంటరాక్టివ్ చిత్రం). విదేశీ దౌత్యవేత్తలు, శత్రు దేశ పౌరుల పిల్లలకు వర్తించదు.</td></tr>
+    <tr><td><b>2. సంతతి (Descent)</b></td><td>భారత్ బయట జననం — తల్లిదండ్రుల్లో ఒకరు భారత పౌరులైతే; 3 డిసెంబర్ 2004 తర్వాత జన్మిస్తే <b>1 ఏడాదిలోపు</b> భారత కాన్సులేట్‌లో రిజిస్ట్రేషన్ + వేరే దేశ పాస్‌పోర్ట్ లేదని ప్రకటన</td></tr>
+    <tr><td><b>3. రిజిస్ట్రేషన్</b></td><td>భారత సంతతి వ్యక్తులు (7 ఏళ్ల నివాసం), భారత పౌరులను వివాహం చేసుకున్నవారు (7 ఏళ్ల నివాసం), భారత పౌరుల మైనర్ పిల్లలు, OCI కార్డుదారులు (5 ఏళ్లు) మొదలైనవారు. <b>అక్రమ వలసదారులు అనర్హులు.</b></td></tr>
+    <tr><td><b>4. సహజీకరణ (Naturalisation)</b></td><td>విదేశీయులు — దరఖాస్తుకు ముందు 12 నెలలు నిరంతర నివాసం + అంతకుముందు 14 ఏళ్లలో 11 ఏళ్లు; మంచి ప్రవర్తన, 8వ షెడ్యూల్ భాష పరిజ్ఞానం. విశిష్ట సేవ చేసినవారికి నిబంధనల మినహాయింపు.</td></tr>
+    <tr><td><b>5. భూభాగ విలీనం</b></td><td>విదేశీ భూభాగం భారత్‌లో విలీనమైతే, కేంద్రం ఆ ప్రజల్లో ఎవరు పౌరులో నోటిఫై చేస్తుంది (ఉదా: పుదుచ్చేరి, గోవా)</td></tr>
+  </table></div>
+
+  <h2>3.3 జనన ఆధారిత పౌరసత్వం — ఇంటరాక్టివ్ నిర్ణయ చిత్రం</h2>
+  <p>ఒక వ్యక్తి <b>భారత్‌లో జన్మించాడు</b>. అతను/ఆమె పుట్టుకతో భారత పౌరులా? జనన కాలాన్ని ఎంచుకోండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 300" role="img" aria-label="జనన ఆధారిత పౌరసత్వ నిర్ణయ చిత్రం">
+      <defs><marker id="arrC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#9bb8d6"/></marker></defs>
+      <path id="c-e1" class="sm-edge" d="M200,150 C260,150 260,55 318,55" marker-end="url(#arrC)"/>
+      <path id="c-e2" class="sm-edge" d="M200,150 L318,150" marker-end="url(#arrC)"/>
+      <path id="c-e3" class="sm-edge" d="M200,150 C260,150 260,245 318,245" marker-end="url(#arrC)"/>
+      <g class="sm-state" data-state="start"><rect class="box" x="10" y="108" width="190" height="84" rx="12" fill="#f4f4f4" stroke="#888" stroke-width="2"/>
+        <text x="105" y="142" text-anchor="middle" font-size="14" font-weight="700">భారత్‌లో జననం</text><text x="105" y="164" text-anchor="middle" font-size="11.5" fill="#555">ఎప్పుడు జన్మించారు?</text></g>
+      <g class="sm-state" data-state="p1"><rect class="box" x="320" y="18" width="430" height="74" rx="12" fill="#f0f9f4" stroke="#00b359" stroke-width="2"/>
+        <text x="535" y="46" text-anchor="middle" font-size="13.5" font-weight="700">26-01-1950 నుండి 01-07-1987 ముందు</text><text x="535" y="70" text-anchor="middle" font-size="12">తల్లిదండ్రుల జాతీయతతో సంబంధం లేకుండా పౌరులే</text></g>
+      <g class="sm-state" data-state="p2"><rect class="box" x="320" y="113" width="430" height="74" rx="12" fill="#e8f1fb" stroke="#0066cc" stroke-width="2"/>
+        <text x="535" y="141" text-anchor="middle" font-size="13.5" font-weight="700">01-07-1987 నుండి 03-12-2004 ముందు</text><text x="535" y="165" text-anchor="middle" font-size="12">తల్లిదండ్రుల్లో కనీసం ఒకరు భారత పౌరులు కావాలి</text></g>
+      <g class="sm-state" data-state="p3"><rect class="box" x="320" y="208" width="430" height="74" rx="12" fill="#fff3ee" stroke="#ff6b35" stroke-width="2"/>
+        <text x="535" y="236" text-anchor="middle" font-size="13.5" font-weight="700">03-12-2004 లేదా ఆ తర్వాత</text><text x="535" y="260" text-anchor="middle" font-size="12">ఇద్దరూ పౌరులు / ఒకరు పౌరులు + మరొకరు అక్రమ వలసదారు కాకూడదు</text></g>
+    </svg>
+    <div class="sm-status" aria-live="polite">ఫలితం: <span id="cLabel"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#555" id="cDesc"></div>
+    <div class="sm-controls" id="cControls">
+      <button data-ev="e1">1950 – 1987</button>
+      <button data-ev="e2">1987 – 2004</button>
+      <button data-ev="e3">2004 తర్వాత</button>
+      <button data-ev="reset">↺ మళ్లీ ప్రయత్నించు</button>
+      <button class="auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 3.1 — జనన ఆధారిత పౌరసత్వ నియమాలు క్రమంగా కఠినమయ్యాయి (1986, 2003 సవరణలు).</figcaption>
+  </figure>
+
+  <h2>3.4 పౌరసత్వం కోల్పోవడం — మూడు మార్గాలు</h2>
+  <ul>
+    <li><b>పరిత్యాగం (Renunciation)</b> — స్వచ్ఛంద ప్రకటన; మైనర్ పిల్లలూ కోల్పోతారు (18 ఏళ్లు నిండాక ఏడాదిలోపు తిరిగి పొందవచ్చు). యుద్ధ సమయంలో కేంద్రం నిలిపివేయవచ్చు.</li>
+    <li><b>రద్దు (Termination)</b> — స్వచ్ఛందంగా మరో దేశ పౌరసత్వం పొందితే <b>స్వయంచాలకంగా</b> (యుద్ధ సమయంలో మినహా).</li>
+    <li><b>తొలగింపు (Deprivation)</b> — కేంద్రం <b>నిర్బంధంగా</b>: మోసంతో పౌరసత్వం పొందడం, రాజ్యాంగం పట్ల అవిధేయత, యుద్ధ సమయంలో శత్రువుతో వ్యాపారం/సమాచారం, రిజిస్ట్రేషన్/సహజీకరణ తర్వాత 5 ఏళ్లలో 2 ఏళ్ల జైలు శిక్ష, 7 ఏళ్లు నిరంతరం విదేశాల్లో నివాసం. (జననం/సంతతి పౌరులకు ఇది వర్తించదు.)</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — పౌరసత్వం">
+<pre># పొందే మార్గాలు (5)
+జననం | సంతతి | రిజిస్ట్రేషన్ | సహజీకరణ | భూభాగ విలీనం
+
+# కోల్పోయే మార్గాలు (3)
+పరిత్యాగం (స్వచ్ఛందం) | రద్దు (విదేశీ పౌరసత్వం) | తొలగింపు (కేంద్రం)
+
+# జనన నియమాలు
+26-01-1950 – 30-06-1987   →  భారత్‌లో జననం చాలు
+01-07-1987 – 02-12-2004   →  + ఒక తల్లి/తండ్రి పౌరులు     # 1986 సవరణ
+03-12-2004 నుండి          →  + ఇద్దరూ పౌరులు / మరొకరు అక్రమ వలసదారు కాకూడదు  # 2003 సవరణ
+
+# సహజీకరణ నివాసం
+సాధారణం  = 12 నెలలు + 14లో 11 ఏళ్లు
+CAA 2019 = 12 నెలలు + 14లో 5 ఏళ్లు      # నిర్దిష్ట వర్గాలకు</pre>
+  </div>
+
+  <details class="collapsible" id="c3-adv">
+    <summary>🔍 లోతుగా: ఏక పౌరసత్వం & పౌరులకు మాత్రమే హక్కులు</summary>
+    <div class="inner">
+      <p><b>ఏక పౌరసత్వం:</b> అమెరికా, స్విట్జర్లాండ్‌లో ద్వంద్వ పౌరసత్వం (దేశం + రాష్ట్రం) ఉంటుంది. భారత్‌లో సమాఖ్య ఉన్నా <b>ఒకే పౌరసత్వం</b> (కెనడా నమూనా) — రాష్ట్రంతో సంబంధం లేకుండా అన్ని పౌరులకు సమాన హక్కులు. అయితే మినహాయింపులు: ఆర్టి. 16(3) కింద పార్లమెంట్ కొన్ని ఉద్యోగాలకు నివాస అర్హత నిర్ణయించవచ్చు; 371D (AP/TS), 5వ/6వ షెడ్యూల్ ప్రాంతాలు, ఇన్నర్ లైన్ పర్మిట్ రాష్ట్రాల్లో ప్రయాణ/భూమి పరిమితులు.</p>
+      <p><b>పౌరులకు మాత్రమే హక్కులు:</b> ఆర్టి. <b>15</b> (వివక్ష నిషేధం), <b>16</b> (ప్రభుత్వ ఉద్యోగాల్లో సమాన అవకాశం), <b>19</b> (ఆరు స్వేచ్ఛలు), <b>29, 30</b> (సాంస్కృతిక, విద్యా హక్కులు); ఓటు హక్కు (326); పార్లమెంట్/శాసనసభ సభ్యత్వం.</p>
+      <p><b>పౌరులకు మాత్రమే పదవులు:</b> రాష్ట్రపతి, ఉపరాష్ట్రపతి, SC & HC న్యాయమూర్తులు, గవర్నర్, అటార్నీ జనరల్, అడ్వకేట్ జనరల్.</p>
+      <p><b>అందరికీ (విదేశీయులకూ) హక్కులు:</b> 14, 20, 21, 21A, 22, 23, 24, 25–28 (శత్రు దేశ పౌరులకు 22 వర్తించదు).</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q3-1">
+      <p><strong>Q1:</strong> 2005లో భారత్‌లో జన్మించిన ఒక బిడ్డ తండ్రి భారత పౌరుడు, తల్లి అక్రమ వలసదారు. ఆ బిడ్డ పుట్టుకతో భారత పౌరుడా?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>కాదు.</b> 3 డిసెంబర్ 2004 తర్వాత జననానికి — ఇద్దరూ పౌరులు కావాలి, లేదా ఒకరు పౌరులై మరొకరు అక్రమ వలసదారు <b>కాకూడదు</b>. ఇక్కడ రెండో షరతు విఫలం.</p>
+    </div>
+    <div class="quiz-question" id="q3-2">
+      <p><strong>Q2:</strong> కింది వాటిలో పౌరసత్వ చట్టం 1955 ప్రకారం పౌరసత్వం పొందే మార్గం కానిది ఏది?</p>
+      <ol type="a"><li>సంతతి</li><li>సహజీకరణ</li><li>ఆస్తి కొనుగోలు</li><li>భూభాగ విలీనం</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) ఆస్తి కొనుగోలు.</b> ఐదు మార్గాలు: జననం, సంతతి, రిజిస్ట్రేషన్, సహజీకరణ, భూభాగ విలీనం.</p>
+    </div>
+    <div class="quiz-question" id="q3-3">
+      <p><strong>Q3:</strong> పౌరసత్వ "రద్దు" (termination), "తొలగింపు" (deprivation) మధ్య తేడా?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>రద్దు</b> — వ్యక్తి స్వచ్ఛందంగా మరో దేశ పౌరసత్వం తీసుకున్నప్పుడు <b>చట్టప్రకారం స్వయంచాలకంగా</b>. <b>తొలగింపు</b> — మోసం, అవిధేయత వంటి కారణాలతో <b>కేంద్ర ప్రభుత్వ ఉత్తర్వు</b> ద్వారా నిర్బంధంగా (రిజిస్ట్రేషన్/సహజీకరణ పౌరులకు మాత్రమే).</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>ఆర్టి. 5–10: 1950 నాటి పౌరులు; ఆర్టి. 11: పార్లమెంట్ అధికారం → పౌరసత్వ చట్టం 1955.</li>
+      <li>పొందే మార్గాలు 5 (జననం, సంతతి, రిజిస్ట్రేషన్, సహజీకరణ, విలీనం); కోల్పోయే మార్గాలు 3.</li>
+      <li>జనన నియమాలు: 1987కి ముందు — జననం చాలు; 1987–2004 — ఒక పౌర తల్లి/తండ్రి; 2004 తర్వాత — మరింత కఠినం.</li>
+      <li>ఏక పౌరసత్వం (కెనడా నమూనా); 15, 16, 19, 29, 30 పౌరులకు మాత్రమే.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 4 ============ -->
+<section id="chapter-4" class="chapter" data-ch="4">
+  <h1>అధ్యాయం 4: CAA, OCI & సమకాలీన అంశాలు</h1>
+  <div class="meta">⏱ ~17 నిమిషాలు</div>
+
+  <h2>4.1 పౌరులు, NRI, OCI, విదేశీయులు — ఇంటరాక్టివ్ పోలిక</h2>
+  <p>ప్రతి కార్డుపై క్లిక్ చేసి ఆ వర్గానికి ఉన్న/లేని హక్కులు చూడండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 330" role="img" aria-label="పౌరులు NRI OCI విదేశీయుల పోలిక">
+      <g id="ocNodes" class="anim"></g>
+      <g class="anim d2">
+        <rect x="10" y="130" width="740" height="190" rx="10" fill="#fafafa" stroke="#ddd"/>
+        <text id="ocTitle" x="26" y="156" font-size="14.5" font-weight="700" fill="#0066cc">ఒక కార్డుపై క్లిక్ చేయండి</text>
+        <foreignObject x="20" y="164" width="720" height="150"><div xmlns="http://www.w3.org/1999/xhtml" id="ocDesc" style="font-size:13.5px;line-height:1.6;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">భారత్ ద్వంద్వ పౌరసత్వాన్ని అనుమతించదు — OCI పౌరసత్వం కాదు, జీవితకాల వీసా లాంటిది.</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 4.1 — నాలుగు వర్గాల హక్కుల పోలిక.</figcaption>
+  </figure>
+
+  <h2>4.2 పౌరసత్వ సవరణ చట్టం 2019 (CAA)</h2>
+  <ul>
+    <li><b>ఎవరికి:</b> <b>అఫ్గానిస్తాన్, బంగ్లాదేశ్, పాకిస్తాన్</b> నుండి వచ్చిన <b>హిందువులు, సిక్కులు, బౌద్ధులు, జైనులు, పార్సీలు, క్రైస్తవులు</b> — <b>31 డిసెంబర్ 2014</b>కి ముందు భారత్‌లో ప్రవేశించినవారు "అక్రమ వలసదారులు"గా పరిగణించబడరు.</li>
+    <li>వీరికి సహజీకరణ నివాస అవసరం <b>11 ఏళ్ల నుండి 5 ఏళ్లకు</b> తగ్గింపు.</li>
+    <li><b>మినహాయింపులు:</b> 6వ షెడ్యూల్ గిరిజన ప్రాంతాలు (అస్సాం, మేఘాలయ, మిజోరం, త్రిపుర), <b>ఇన్నర్ లైన్ పర్మిట్</b> ప్రాంతాలు (అరుణాచల్, మిజోరం, నాగాలాండ్, మణిపూర్).</li>
+    <li>నియమాలు <b>మార్చి 2024</b>లో నోటిఫై; దరఖాస్తులు ఆన్‌లైన్‌లో. చట్టం రాజ్యాంగబద్ధతను సవాలు చేస్తూ సుప్రీంకోర్టులో పిటిషన్లు దాఖలయ్యాయి — తాజా విచారణ స్థితిని పరీక్షకు ముందు తనిఖీ చేయండి.</li>
+  </ul>
+  <div class="table-wrap"><table>
+    <tr><th>ప్రభుత్వ / సమర్థకుల వాదనలు</th><th>విమర్శకుల వాదనలు</th></tr>
+    <tr><td>పొరుగు దేశాల్లో (రాజ్య మతం గల దేశాలు) మతపరమైన హింసకు గురైన మైనారిటీలకు మానవతా ఆశ్రయం; నెహ్రూ–లియాఖత్ ఒప్పందం (1950) వాగ్దానాల నెరవేర్పు; ఎవరి పౌరసత్వాన్నీ తొలగించదు; సహేతుక వర్గీకరణ — ఆర్టి. 14 ఉల్లంఘన కాదు</td><td>మతం ఆధారంగా వర్గీకరణ ఆర్టి. 14, లౌకికత్వ సూత్రానికి విరుద్ధం; ముస్లిం వర్గాలు (అహ్మదీయులు, హజారాలు), ఇతర పొరుగు దేశాలు (శ్రీలంక తమిళులు, మయన్మార్ రోహింగ్యాలు) మినహాయింపు; అస్సాం ఒప్పందం (1971 కటాఫ్)తో ఘర్షణ; NRCతో కలిపి వివక్షా భయాలు</td></tr>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">(మెయిన్స్‌లో రెండు వైపుల రాజ్యాంగ వాదనలు రాసి, సుప్రీంకోర్టు తుది తీర్పు కోసం చూడాలని ముగించండి.)</p>
+
+  <h2>4.3 అస్సాం: సెక్షన్ 6A & NRC</h2>
+  <ul>
+    <li><b>అస్సాం ఒప్పందం (1985)</b> → పౌరసత్వ చట్టంలో <b>సెక్షన్ 6A</b>: 1 జనవరి 1966కి ముందు అస్సాంలో ప్రవేశించిన బంగ్లాదేశ్ వలసదారులు — పౌరులు; 1966 – <b>25 మార్చి 1971</b> మధ్య వచ్చినవారు — 10 ఏళ్ల ఓటు హక్కు నిషేధం తర్వాత పౌరులు; 1971 తర్వాత వచ్చినవారు — అక్రమ వలసదారులు.</li>
+    <li><b>సుప్రీంకోర్టు రాజ్యాంగ ధర్మాసనం (అక్టోబర్ 2024, 4:1):</b> సెక్షన్ 6A రాజ్యాంగబద్ధమే అని తీర్పు.</li>
+    <li><b>NRC (జాతీయ పౌర రిజిస్టర్)</b> — 2003 సవరణ చట్టపరమైన ఆధారం; సుప్రీంకోర్టు పర్యవేక్షణలో అస్సాంలో మాత్రమే నవీకరణ; తుది జాబితా <b>ఆగస్టు 2019</b> — సుమారు 19 లక్షల మంది మినహాయింపు. విదేశీయుల ట్రిబ్యునళ్లలో అప్పీళ్లు.</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — పౌరసత్వ సవరణలు & కటాఫ్ తేదీలు">
+<pre># సవరణ చట్టం     →  ముఖ్యాంశం
+1986          →  జనన పౌరసత్వానికి ఒక పౌర తల్లి/తండ్రి షరతు (01-07-1987 నుండి)
+1992          →  సంతతి — తల్లి పౌరురాలైనా చాలు (అంతకుముందు తండ్రి మాత్రమే)
+2003          →  "అక్రమ వలసదారు" నిర్వచనం; NRC నిబంధన; OCI పునాది
+2005          →  OCI పథకం (ఎల్.ఎం. సింఘ్వీ కమిటీ సిఫార్సు)
+2015          →  PIO కార్డు OCIలో విలీనం
+2019 (CAA)    →  3 దేశాలు, 6 మతాలు, 31-12-2014 కటాఫ్; 11 → 5 ఏళ్లు
+
+# కటాఫ్ తేదీలు
+19-07-1948  →  పాకిస్తాన్ నుండి వలస (ఆర్టి. 6)
+01-03-1947  →  పాకిస్తాన్‌కు వలస (ఆర్టి. 7)
+25-03-1971  →  అస్సాం ఒప్పందం (సెక్షన్ 6A)
+31-12-2014  →  CAA</pre>
+  </div>
+
+  <details class="collapsible" id="c4-adv">
+    <summary>🔍 లోతుగా: ద్వంద్వ పౌరసత్వం భారత్‌కు అవసరమా?</summary>
+    <div class="inner">
+      <p>భారత్‌కు ప్రపంచంలోనే అతిపెద్ద ప్రవాస జనాభా ఉంది. ఆర్టి. 9 వల్ల విదేశీ పౌరసత్వం తీసుకున్న వెంటనే భారత పౌరసత్వం పోతుంది. OCI దీనికి మధ్యేమార్గం — ఓటు, రాజ్యాంగ పదవులు, వ్యవసాయ భూమి మినహా దాదాపు అన్ని హక్కులు.</p>
+      <p><b>ద్వంద్వ పౌరసత్వానికి అనుకూలం:</b> ప్రవాసుల పెట్టుబడులు, నైపుణ్యాల ప్రవాహం; "సాఫ్ట్ పవర్"; ప్రవాసుల భావోద్వేగ బంధం. <b>ప్రతికూలం:</b> జాతీయ భద్రత (ద్వంద్వ విధేయత); ఆర్టి. 9 సవరణ అవసరం; కొన్ని దేశాల పౌరులకే అనుమతిస్తే వివక్ష.</p>
+      <p><b>OCI పై కొత్త నియమాలు:</b> 2021 నోటిఫికేషన్ ప్రకారం OCI కార్డుదారులు పరిశోధన, మిషనరీ, జర్నలిజం, పర్వతారోహణ, రక్షిత ప్రాంతాల సందర్శనకు ప్రత్యేక అనుమతి తీసుకోవాలి; NRIలతో సమానంగా ఆర్థిక, విద్యా సౌకర్యాలు (కొన్ని మినహాయింపులతో).</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q4-1">
+      <p><strong>Q1:</strong> OCI కార్డుదారు కింది వాటిలో ఏది చేయగలరు?</p>
+      <ol type="a"><li>లోక్‌సభ ఎన్నికల్లో ఓటు వేయడం</li><li>వ్యవసాయ భూమి కొనడం</li><li>జీవితకాల బహుళ-ప్రవేశ వీసాతో భారత్‌కు రావడం</li><li>సుప్రీంకోర్టు న్యాయమూర్తి కావడం</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c).</b> OCI పౌరసత్వం కాదు — ఓటు, రాజ్యాంగ పదవులు, ప్రభుత్వ ఉద్యోగాలు, వ్యవసాయ భూమి కొనుగోలు అనుమతి లేదు.</p>
+    </div>
+    <div class="quiz-question" id="q4-2">
+      <p><strong>Q2:</strong> CAA 2019 ఏ మూడు దేశాలు, ఏ కటాఫ్ తేదీకి వర్తిస్తుంది? ఏ ప్రాంతాలకు మినహాయింపు?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>అఫ్గానిస్తాన్, బంగ్లాదేశ్, పాకిస్తాన్</b>; <b>31 డిసెంబర్ 2014</b>కి ముందు ప్రవేశం. మినహాయింపు: <b>6వ షెడ్యూల్ గిరిజన ప్రాంతాలు</b> & <b>ఇన్నర్ లైన్ పర్మిట్</b> ప్రాంతాలు.</p>
+    </div>
+    <div class="quiz-question" id="q4-3">
+      <p><strong>Q3:</strong> అస్సాం ఒప్పందం ప్రకారం అక్రమ వలసదారుల గుర్తింపుకు కటాఫ్ తేదీ ఏది? సెక్షన్ 6Aపై సుప్రీంకోర్టు ఏం చెప్పింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>25 మార్చి 1971</b>. అక్టోబర్ 2024లో ఐదుగురు జడ్జీల ధర్మాసనం 4:1 మెజారిటీతో సెక్షన్ 6A రాజ్యాంగబద్ధమే అని తీర్పు ఇచ్చింది.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>భారత్‌లో ద్వంద్వ పౌరసత్వం లేదు; OCI = జీవితకాల వీసా + పరిమిత హక్కులు (ఓటు, పదవులు, వ్యవసాయ భూమి లేవు).</li>
+      <li>CAA 2019: 3 దేశాలు, 6 మతాలు, 31-12-2014; సహజీకరణ 5 ఏళ్లు; 6వ షెడ్యూల్ & ILP మినహాయింపు; నియమాలు 2024.</li>
+      <li>అస్సాం: సెక్షన్ 6A (25-03-1971) — 2024లో SC సమర్థన; NRC తుది జాబితా 2019.</li>
+      <li>పౌరసత్వ సవరణలు: 1986, 1992, 2003, 2005, 2015, 2019 — ప్రతిదాని ముఖ్యాంశం గుర్తుంచుకోండి.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">సూచికకు తిరిగి ✓</button></div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  const TOTAL = 4, P = 'pm3-';
+  const NS = 'http://www.w3.org/2000/svg';
+  const store = {
+    get(k){ try{ return JSON.parse(sessionStorage.getItem(P+k)); }catch(e){ return null; } },
+    set(k,v){ try{ sessionStorage.setItem(P+k, JSON.stringify(v)); }catch(e){} }
+  };
+  const $ = id => document.getElementById(id);
+  const sections = [...document.querySelectorAll('.chapter')];
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  let visited = new Set(store.get('visited') || []);
+  let current = 0;
+
+  function show(n, push){
+    n = Math.max(0, Math.min(TOTAL, n));
+    current = n;
+    sections.forEach(s => s.classList.toggle('visible', +s.dataset.ch === n));
+    if (n > 0) { visited.add(n); store.set('visited', [...visited]); }
+    tocLinks.forEach(a => { a.classList.toggle('active', +a.dataset.ch === n); a.classList.toggle('done', visited.has(+a.dataset.ch)); });
+    $('progressFill').style.width = (visited.size / TOTAL * 100) + '%';
+    $('chapterCount').textContent = visited.size + '/' + TOTAL + ' అధ్యాయాలు';
+    if (push !== false) history.replaceState(null, '', '#' + sections[n].id);
+    window.scrollTo({top:0, behavior:'smooth'});
+    $('sidebar').classList.remove('open');
+  }
+  window.goToChapter = n => show(n);
+  window.nextChapter = () => current < TOTAL ? show(current + 1) : (location.href = 'index.html');
+  window.previousChapter = () => show(current - 1);
+  document.querySelectorAll('.next-btn').forEach(b => b.addEventListener('click', nextChapter));
+  document.querySelectorAll('.prev-btn').forEach(b => b.addEventListener('click', previousChapter));
+  document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', () => show(+el.dataset.go)));
+  tocLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(+a.dataset.ch); }));
+  $('menuBtn').addEventListener('click', () => $('sidebar').classList.toggle('open'));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' && current < TOTAL) show(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+  });
+
+  // Quiz reveal
+  const revealed = new Set(store.get('quiz') || []);
+  document.querySelectorAll('.quiz-question').forEach(q => {
+    const btn = q.querySelector('.reveal-btn'), ans = q.querySelector('.answer'), label = btn.textContent;
+    const set = on => { ans.classList.toggle('show', on); btn.textContent = on ? 'సమాధానం దాచు' : label; btn.setAttribute('aria-expanded', on); };
+    set(revealed.has(q.id));
+    btn.addEventListener('click', () => { const on = !ans.classList.contains('show'); set(on); on ? revealed.add(q.id) : revealed.delete(q.id); store.set('quiz', [...revealed]); });
+  });
+
+  // Collapsibles
+  const openSet = new Set(store.get('open') || []);
+  document.querySelectorAll('details.collapsible').forEach(d => {
+    if (openSet.has(d.id)) d.open = true;
+    d.addEventListener('toggle', () => { d.open ? openSet.add(d.id) : openSet.delete(d.id); store.set('open', [...openSet]); });
+  });
+
+  // Revision blocks
+  const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  document.querySelectorAll('.code-block').forEach(cb => {
+    const pre = cb.querySelector('pre');
+    const raw = pre.textContent.replace(/^\n+|\s+$/g, '');
+    pre.innerHTML = raw.split('\n').map((line, i) => {
+      let h = esc(line), com = '';
+      const k = h.indexOf('#');
+      if (k >= 0) { com = '<span class="tok-com">' + h.slice(k) + '</span>'; h = h.slice(0, k); }
+      h = h.replace(/(→|=|\|)/g, '<span class="tok-key">$1</span>').replace(/(\d+)/g, '<span class="tok-num">$1</span>');
+      return '<span class="ln" data-n="' + (i + 1) + '">' + h + com + '</span>';
+    }).join('');
+    const head = document.createElement('div'); head.className = 'cb-head';
+    head.innerHTML = '<span>' + esc(cb.dataset.title || 'నోట్స్') + '</span>';
+    const btn = document.createElement('button'); btn.className = 'copy-btn'; btn.textContent = 'కాపీ'; btn.setAttribute('aria-label', 'నోట్స్ కాపీ చేయండి');
+    btn.addEventListener('click', () => {
+      const done = () => { btn.textContent = '✓ కాపీ అయింది'; setTimeout(() => btn.textContent = 'కాపీ', 1500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(raw).then(done, () => {});
+      else { const t = document.createElement('textarea'); t.value = raw; document.body.appendChild(t); t.select(); try{ document.execCommand('copy'); done(); }catch(e){} t.remove(); }
+    });
+    head.appendChild(btn); cb.insertBefore(head, pre);
+  });
+
+  // ---------- helpers ----------
+  function el(tag, attrs, text){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; }
+
+  // Clickable circle nodes with a detail panel
+  function makeNodes(container, items, titleEl, descEl){
+    const groups = [];
+    items.forEach(it => {
+      const g = el('g', {class:'hov', tabindex:'0', role:'button', 'aria-label': it.name, style:'cursor:pointer'});
+      if (it.spoke) g.appendChild(el('line', it.spoke));
+      if (it.w) g.appendChild(el('rect', {class:'box', x:it.x - it.w/2, y:it.y - it.h/2, width:it.w, height:it.h, rx:10, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      else g.appendChild(el('circle', {class:'box', cx:it.x, cy:it.y, r:it.r, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      if (it.num) g.appendChild(el('text', {x:it.x, y:it.y - 10, 'text-anchor':'middle', 'font-size':10.5, fill:'#555'}, it.num));
+      g.appendChild(el('text', {x:it.x, y:it.y + (it.num ? 12 : 5), 'text-anchor':'middle', 'font-size':it.fs || 11.5, 'font-weight':700}, it.short));
+      const pick = () => {
+        groups.forEach(x => x.querySelector('.box').setAttribute('stroke-width', 2));
+        g.querySelector('.box').setAttribute('stroke-width', 4.5);
+        g.classList.remove('pulse'); void g.getBoundingClientRect(); g.classList.add('pulse');
+        titleEl.textContent = it.name; descEl.innerHTML = it.desc;
+        if (it.onPick) it.onPick();
+      };
+      g.addEventListener('click', pick);
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      container.appendChild(g); groups.push(g);
+    });
+    return groups;
+  }
+
+  // Generic state machine (states drawn in HTML as <g class="sm-state" data-state=..>)
+  function stateMachine(o){
+    let st = o.start, timer = null, step = 0;
+    const btns = [...document.querySelectorAll(o.controls + ' [data-ev]')];
+    const auto = document.querySelector(o.controls + ' .auto');
+    function render(edge){
+      document.querySelectorAll(o.scope + ' .sm-state').forEach(g => g.classList.toggle('active', g.dataset.state === st));
+      $(o.label).textContent = o.states[st].label;
+      $(o.desc).innerHTML = o.states[st].desc;
+      btns.forEach(b => { const t = o.T[b.dataset.ev]; b.disabled = b.dataset.ev === 'reset' ? st === o.start : t[0] !== st; });
+      document.querySelectorAll(o.scope + ' .sm-edge').forEach(p => p.classList.remove('run'));
+      if (edge) { const p = $(edge); void p.getBoundingClientRect(); p.classList.add('run'); }
+    }
+    function fire(ev){ const t = o.T[ev]; if (t[0] !== null && t[0] !== st) return; st = t[1]; render(t[2]); }
+    function stopAuto(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    btns.forEach(b => b.addEventListener('click', () => { stopAuto(); fire(b.dataset.ev); }));
+    auto.addEventListener('click', () => {
+      if (timer) return stopAuto();
+      st = o.start; render(); step = 0;
+      auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => { fire(o.order[step % o.order.length]); step++; }, o.interval || 2000);
+    });
+    render();
+  }
+
+  // Timeline stepper: items = [[top, bottom, title, descHTML], ...]
+  function stepper(o){
+    const nodes = $(o.nodes), edges = $(o.edges), y = o.y || 95, x0 = o.x0 || 50, x1 = o.x1 || 710;
+    const X = i => x0 + i * ((x1 - x0) / (o.items.length - 1));
+    const circles = [], segs = [];
+    o.items.forEach((t, i) => {
+      if (i > 0) { const p = el('path', {class:'sm-edge', d:`M${X(i-1)+22},${y} L${X(i)-22},${y}`}); edges.appendChild(p); segs.push(p); }
+      const last = i === o.items.length - 1;
+      const g = el('g', {class:'sm-state hov', tabindex:'0', role:'button', 'aria-label': t[2], style:'cursor:pointer'});
+      g.appendChild(el('circle', {class:'box', cx:X(i), cy:y, r:22, fill: last ? '#f0f9f4' : '#e8f1fb', stroke: last ? '#00b359' : '#0066cc', 'stroke-width':2}));
+      g.appendChild(el('text', {x:X(i), y:y+5, 'text-anchor':'middle', 'font-size':11, 'font-weight':700}, (i+1)+''));
+      g.appendChild(el('text', {x:X(i), y:y-37, 'text-anchor':'middle', 'font-size':o.topFs || 14, 'font-weight':700, fill:'#0066cc'}, t[0]));
+      g.appendChild(el('text', {x:X(i), y:y+42, 'text-anchor':'middle', 'font-size':o.botFs || 11.5}, t[1]));
+      g.addEventListener('click', () => { stop(); go(i); });
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); go(i); } });
+      nodes.appendChild(g); circles.push(g);
+    });
+    let cur = 0, timer = null;
+    const prev = $(o.prev), next = $(o.next), auto = $(o.auto);
+    function go(i){
+      const fwd = i === cur + 1;
+      cur = Math.max(0, Math.min(o.items.length - 1, i));
+      circles.forEach((g, k) => { g.classList.toggle('active', k === cur); g.querySelector('.box').setAttribute('fill-opacity', k <= cur ? 1 : .45); });
+      segs.forEach((p, k) => { p.classList.remove('run'); p.style.stroke = k < cur ? '#0066cc' : ''; p.style.strokeWidth = k < cur ? 3 : ''; });
+      if (fwd && cur > 0) { const p = segs[cur-1]; void p.getBoundingClientRect(); p.classList.add('run'); }
+      $(o.label).textContent = o.items[cur][0] + ' · ' + o.items[cur][2];
+      $(o.desc).innerHTML = o.items[cur][3];
+      prev.disabled = cur === 0; next.disabled = cur === o.items.length - 1;
+    }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    prev.addEventListener('click', () => { stop(); go(cur - 1); });
+    next.addEventListener('click', () => { stop(); go(cur + 1); });
+    $(o.reset).addEventListener('click', () => { stop(); go(0); });
+    auto.addEventListener('click', () => {
+      if (timer) return stop();
+      go(0); auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => go(cur === o.items.length - 1 ? 0 : cur + 1), o.interval || 2200);
+    });
+    go(0);
+  }
+
+  // ---------- lesson-specific ----------
+  // Chapter 1 — Article 3 procedure (Telangana example)
+  stepper({ nodes:'t1Nodes', edges:'t1Edges', y:85, x0:70, x1:690, prev:'t1Prev', next:'t1Next', reset:'t1Reset', auto:'t1Auto', label:'t1Label', desc:'t1Desc', topFs:13, botFs:11, items:[
+    ['దశ 1','డిమాండ్ / నిర్ణయం','కేంద్ర నిర్ణయం & ముసాయిదా బిల్లు','ప్రజా ఉద్యమం, కమిటీ నివేదికలు, రాజకీయ ఏకాభిప్రాయం ఆధారంగా కేంద్ర ప్రభుత్వం నిర్ణయం తీసుకుని ముసాయిదా బిల్లు తయారు చేస్తుంది.<br><i>తెలంగాణ:</i> శ్రీకృష్ణ కమిటీ (2010) → కేంద్ర కేబినెట్ ఆమోదం (అక్టోబర్ 2013) → మంత్రుల బృందం (GoM) ముసాయిదా.'],
+    ['దశ 2','రాష్ట్రపతి సిఫార్సు','రాష్ట్రపతి ముందస్తు సిఫార్సు','ఆర్టి. 3 కింద బిల్లును <b>రాష్ట్రపతి సిఫార్సుతో మాత్రమే</b> పార్లమెంట్‌లో ప్రవేశపెట్టాలి — ఇది తప్పనిసరి షరతు.'],
+    ['దశ 3','రాష్ట్ర అభిప్రాయం','సంబంధిత రాష్ట్ర శాసనసభకు రిఫరెన్స్','సిఫార్సు చేసే ముందు రాష్ట్రపతి బిల్లును ప్రభావిత రాష్ట్ర శాసనసభకు పంపి, <b>నిర్దిష్ట గడువులో</b> అభిప్రాయం కోరతారు. <b>ఈ అభిప్రాయం పార్లమెంట్‌కు కట్టుబాటు కాదు</b>; గడువు ముగిసినా బిల్లు ముందుకు సాగుతుంది. బిల్లులో సవరణలు వచ్చినా మళ్లీ పంపనక్కర్లేదు. (UT అయితే రిఫరెన్స్ అవసరం లేదు.)<br><i>తెలంగాణ:</i> AP శాసనసభ జనవరి 2014లో ముసాయిదాను తిరస్కరించింది.'],
+    ['దశ 4','పార్లమెంట్','పార్లమెంట్‌లో ఆమోదం','ఏ సభలోనైనా ప్రవేశపెట్టవచ్చు; ఉభయ సభల్లో <b>సాధారణ మెజారిటీ</b> చాలు — ఆర్టి. 4 ప్రకారం ఇది ఆర్టి. 368 సవరణ కాదు. బిల్లు 1వ, 4వ షెడ్యూళ్లను (రాష్ట్రాల జాబితా, రాజ్యసభ సీట్లు) కూడా మారుస్తుంది.<br><i>తెలంగాణ:</i> లోక్‌సభ 18 ఫిబ్రవరి, రాజ్యసభ 20 ఫిబ్రవరి 2014.'],
+    ['దశ 5','రాష్ట్రపతి సమ్మతి','రాష్ట్రపతి సమ్మతి & నోటిఫికేషన్','సమ్మతితో చట్టం అవుతుంది; కేంద్రం "అపాయింటెడ్ డే" నోటిఫై చేస్తుంది.<br><i>తెలంగాణ:</i> ఆంధ్రప్రదేశ్ పునర్విభజన చట్టం 2014 — సమ్మతి 1 మార్చి 2014; అపాయింటెడ్ డే 2 జూన్ 2014.'],
+    ['దశ 6','కొత్త రాష్ట్రం','కొత్త రాష్ట్రం ఏర్పాటు','కొత్త రాష్ట్రం, శాసనసభ, హైకోర్టు, ఆస్తులు-అప్పుల విభజన, ఉద్యోగుల కేటాయింపు, నదీ జలాల బోర్డులు — చట్టంలోని నిబంధనల ప్రకారం.<br><i>తెలంగాణ:</i> భారతదేశ <b>29వ రాష్ట్రం</b> (2019లో J&K UTగా మారిన తర్వాత ఇప్పుడు మొత్తం 28 రాష్ట్రాలు).']
+  ]});
+
+  // Chapter 2 — states timeline
+  stepper({ nodes:'t2Nodes', edges:'t2Edges', y:85, x0:45, x1:715, prev:'t2Prev', next:'t2Next', reset:'t2Reset', auto:'t2Auto', label:'t2Label', desc:'t2Desc', topFs:12, botFs:10, interval:2400, items:[
+    ['1953','ఆంధ్ర','ఆంధ్ర రాష్ట్రం','మద్రాస్ రాష్ట్రం నుండి తెలుగు మాట్లాడే ప్రాంతాలు వేరు — <b>భాషా ప్రాతిపదికన తొలి రాష్ట్రం</b> (1 అక్టోబర్ 1953). పొట్టి శ్రీరాములు ఆత్మార్పణ ఫలితం; ఇది ఫజల్ అలీ కమిషన్ ఏర్పాటుకు దారితీసింది.'],
+    ['1956','SRA','రాష్ట్రాల పునర్వ్యవస్థీకరణ చట్టం + 7వ సవరణ','<b>14 రాష్ట్రాలు, 6 UTలు</b>; పార్ట్ A/B/C/D రద్దు. ఆంధ్రప్రదేశ్ (ఆంధ్ర + తెలంగాణ), కేరళ (ట్రావెన్‌కోర్-కొచ్చిన్ + మలబార్), మైసూర్ విస్తరణ మొదలైనవి.'],
+    ['1960','మహా/గుజ','మహారాష్ట్ర & గుజరాత్','ద్విభాషా బొంబాయి రాష్ట్రం నుండి — మరాఠీ మహారాష్ట్ర, గుజరాతీ గుజరాత్ (15వ రాష్ట్రం). సంయుక్త మహారాష్ట్ర ఉద్యమం, మహాగుజరాత్ ఉద్యమాల ఫలితం.'],
+    ['1963','నాగాలాండ్','నాగాలాండ్','అస్సాం నుండి నాగా హిల్స్–ట్వెన్‌సాంగ్ ప్రాంతం — 16వ రాష్ట్రం; నాగా ఉద్యమం నేపథ్యం; ఆర్టి. 371A ప్రత్యేక నిబంధనలు.'],
+    ['1966','హరియాణా','హరియాణా (& చండీగఢ్ UT)','షా కమిషన్ సిఫార్సుతో పంజాబ్ నుండి హిందీ మాట్లాడే ప్రాంతాలు — 17వ రాష్ట్రం; కొండ ప్రాంతాలు హిమాచల్ ప్రదేశ్ (UT)లో విలీనం; చండీగఢ్ UT (రెండు రాష్ట్రాలకు ఉమ్మడి రాజధాని).'],
+    ['1971–72','ఈశాన్యం','హిమాచల్ ప్రదేశ్; మణిపూర్, త్రిపుర, మేఘాలయ','<b>1971</b>: హిమాచల్ ప్రదేశ్ (UT నుండి రాష్ట్రం, 18వ). <b>1972</b>: మణిపూర్, త్రిపుర (UTల నుండి), మేఘాలయ (1969లో అస్సాంలో ఉప-రాష్ట్రం → పూర్తి రాష్ట్రం) — 19, 20, 21వ రాష్ట్రాలు. మిజోరం, అరుణాచల్ UTలు.'],
+    ['1975','సిక్కిం','సిక్కిం','35వ సవరణ (1974) "అనుబంధ రాష్ట్రం" → రిఫరెండం తర్వాత <b>36వ సవరణ (1975)</b>: పూర్తి రాష్ట్రం — 22వ. ఆర్టి. 2 కింద యూనియన్ బయటి భూభాగం చేరిక; ఆర్టి. 371F.'],
+    ['1987','3 రాష్ట్రాలు','మిజోరం, అరుణాచల్ ప్రదేశ్, గోవా','<b>మిజోరం</b> (1986 మిజో శాంతి ఒప్పందం) — 23వ; <b>అరుణాచల్ ప్రదేశ్</b> — 24వ; <b>గోవా</b> (డామన్ & డయ్యూ వేరు UTగా) — 25వ.'],
+    ['2000','3 రాష్ట్రాలు','ఛత్తీస్‌గఢ్, ఉత్తరాఖండ్, జార్ఖండ్','మధ్యప్రదేశ్ నుండి <b>ఛత్తీస్‌గఢ్</b> (1 నవంబర్) — 26వ; ఉత్తరప్రదేశ్ నుండి <b>ఉత్తరాంచల్</b> (9 నవంబర్; 2007లో ఉత్తరాఖండ్‌గా పేరు మార్పు) — 27వ; బిహార్ నుండి <b>జార్ఖండ్</b> (15 నవంబర్) — 28వ. భాష కాదు — గిరిజన/ప్రాంతీయ గుర్తింపు, అభివృద్ధి ఆధారం.'],
+    ['2014','తెలంగాణ','తెలంగాణ','ఆంధ్రప్రదేశ్ నుండి — <b>29వ రాష్ట్రం</b> (2 జూన్ 2014). ఆంధ్రప్రదేశ్ పునర్విభజన చట్టం 2014.'],
+    ['2019–20','J&K UTలు','జమ్మూ & కశ్మీర్ పునర్వ్యవస్థీకరణ; UTల విలీనం','ఆర్టి. 370 కింద ప్రత్యేక హోదా రద్దు; జమ్మూ & కశ్మీర్ రాష్ట్రం → <b>జమ్మూ & కశ్మీర్ UT</b> (శాసనసభతో) + <b>లద్దాఖ్ UT</b> (31 అక్టోబర్ 2019). జనవరి 2020: దాద్రా & నగర్ హవేలీ + డామన్ & డయ్యూ విలీనం. ఫలితం: <b>28 రాష్ట్రాలు, 8 UTలు</b>.']
+  ]});
+
+  // Chapter 3 — citizenship by birth decision
+  stateMachine({
+    scope:'#chapter-3', controls:'#cControls', start:'start', label:'cLabel', desc:'cDesc', interval:2200,
+    states:{
+      start:{label:'జనన కాలాన్ని ఎంచుకోండి', desc:'పౌరసత్వ చట్టం 1955, సెక్షన్ 3 — జననం ద్వారా పౌరసత్వం. (విదేశీ దౌత్యవేత్తలు, శత్రు దేశ పౌరుల పిల్లలకు ఏ కాలంలోనూ వర్తించదు.)'},
+      p1:{label:'✅ పౌరులే — జననమే చాలు', desc:'26 జనవరి 1950 నుండి 1 జూలై 1987కి ముందు భారత్‌లో జన్మిస్తే, తల్లిదండ్రుల జాతీయతతో సంబంధం లేకుండా పుట్టుకతో భారత పౌరులు (<i>jus soli</i> — భూమి ఆధారిత సూత్రం).'},
+      p2:{label:'⚠️ షరతుతో — ఒక పౌర తల్లి/తండ్రి', desc:'1 జూలై 1987 నుండి 3 డిసెంబర్ 2004కి ముందు: జనన సమయంలో తల్లిదండ్రుల్లో <b>కనీసం ఒకరు</b> భారత పౌరులైతేనే. (1986 సవరణ — బంగ్లాదేశ్, శ్రీలంక నుండి వలసల నేపథ్యంలో.)'},
+      p3:{label:'⛔ కఠిన షరతు', desc:'3 డిసెంబర్ 2004 లేదా ఆ తర్వాత: (a) <b>ఇద్దరూ</b> భారత పౌరులు, లేదా (b) ఒకరు పౌరులు + మరొకరు జనన సమయంలో <b>అక్రమ వలసదారు కాకూడదు</b>. (2003 సవరణ — <i>jus sanguinis</i> (రక్త సంబంధ) సూత్రం వైపు మార్పు.)'}
+    },
+    T:{ e1:['start','p1','c-e1'], e2:['start','p2','c-e2'], e3:['start','p3','c-e3'], reset:[null,'start',null] },
+    order:['e1','reset','e2','reset','e3','reset']
+  });
+
+  // Chapter 4 — citizen / NRI / OCI / foreigner cards
+  (function(){
+    const C = [
+      ['భారత పౌరుడు','Citizen','#f0f9f4','#00b359','<b>అన్ని హక్కులు:</b> అన్ని ప్రాథమిక హక్కులు (15, 16, 19, 29, 30 సహా); ఓటు హక్కు (326); పార్లమెంట్/శాసనసభకు పోటీ; రాష్ట్రపతి, ఉపరాష్ట్రపతి, న్యాయమూర్తి, గవర్నర్, AG వంటి రాజ్యాంగ పదవులు; ప్రభుత్వ ఉద్యోగాలు; వ్యవసాయ భూమి కొనుగోలు.<br><b>విధులు:</b> ప్రాథమిక విధులు (51A) పౌరులకే.'],
+      ['NRI','Non-Resident Indian','#e8f1fb','#0066cc','<b>భారత పౌరులే</b> — విదేశాల్లో నివసిస్తున్నవారు (ఆదాయపు పన్ను/ఫెమా నిర్వచనాల ఆధారంగా). పౌరులకు ఉన్న అన్ని హక్కులు ఉంటాయి. <b>ఓటు:</b> 2010 సవరణ (ప్రజాప్రాతినిధ్య చట్టం, సెక్షన్ 20A) ద్వారా "ఓవర్సీస్ ఎలక్టర్"గా నమోదు చేసుకుని, తమ నియోజకవర్గంలో <b>వ్యక్తిగతంగా హాజరై</b> ఓటు వేయవచ్చు.'],
+      ['OCI కార్డుదారు','Overseas Citizen of India','#fff3ee','#ff6b35','<b>పౌరసత్వం కాదు</b> — భారత సంతతి విదేశీ పౌరులకు (పాకిస్తాన్, బంగ్లాదేశ్ పౌరులు మినహా). <b>ఉన్నవి:</b> జీవితకాల బహుళ-ప్రవేశ వీసా; పోలీసు రిజిస్ట్రేషన్ అక్కర్లేదు; ఆర్థిక, విద్యా అంశాల్లో చాలావరకు NRIలతో సమానం. <b>లేనివి:</b> ఓటు హక్కు, రాజ్యాంగ పదవులు, ప్రభుత్వ ఉద్యోగాలు, <b>వ్యవసాయ భూమి</b> కొనుగోలు; పరిశోధన/జర్నలిజం/మిషనరీ పనులకు ప్రత్యేక అనుమతి. 5 ఏళ్ల తర్వాత రిజిస్ట్రేషన్ ద్వారా పౌరసత్వానికి దరఖాస్తు చేయవచ్చు.'],
+      ['విదేశీయుడు','Foreigner','#f4f4f4','#888','<b>అందరికీ వర్తించే హక్కులు మాత్రమే:</b> ఆర్టి. 14 (సమానత్వం), 20, 21 (జీవించే హక్కు), 22 (శత్రు దేశ పౌరులకు కాదు), 23, 24, 25–28. ఆర్టి. 19 స్వేచ్ఛలు, ఓటు, పదవులు లేవు. భారత్‌లో ప్రవేశం, నివాసం విదేశీయుల చట్టాల (ఇప్పుడు ఇమిగ్రేషన్ అండ్ ఫారినర్స్ యాక్ట్ 2025) పరిధిలో.']
+    ];
+    const items = C.map((c, i) => ({ name: c[0] + ' (' + c[1] + ')', short: c[0], num: c[1], x: 100 + i * 187, y: 62, w: 170, h: 78, fs: 14, fill: c[2], stroke: c[3], desc: c[4] }));
+    makeNodes($('ocNodes'), items, $('ocTitle'), $('ocDesc'));
+  })();
+
+
+  const idx = sections.findIndex(s => '#' + s.id === location.hash);
+  show(idx >= 0 ? +sections[idx].dataset.ch : 0, false);
+})();
+</script>
+</body>
+</html>

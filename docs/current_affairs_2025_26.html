@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>కరెంట్ అఫైర్స్ 2025-26: జాతీయ & ఆంధ్రప్రదేశ్</title>
+<style>
+:root{
+  --primary:#0066cc; --primary-dark:#004f9e; --primary-light:#e8f1fb;
+  --secondary:#00b359; --secondary-light:#f0f9f4;
+  --accent:#ff6b35; --accent-light:#fff3ee;
+  --bg:#ffffff; --sidebar:#f8f8f8; --text:#1a1a1a; --muted:#555; --border:#ddd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Nirmala UI','Noto Sans Telugu','Gautami',sans-serif;
+  font-size:16px;line-height:1.75;letter-spacing:.3px}
+.container{display:flex;min-height:100vh}
+/* Sidebar */
+.sidebar{width:280px;flex-shrink:0;background:var(--sidebar);border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 16px}
+.sidebar h2{margin:0 0 4px;font-size:18px;color:var(--primary)}
+.sidebar .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.progress-bar{height:8px;background:#e4e4e4;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--secondary);transition:width .4s ease}
+.chapter-count{font-size:13px;color:var(--muted);margin:6px 0 16px}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{display:block;padding:8px 10px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14.5px;line-height:1.4;
+  border-left:3px solid transparent;transition:background .3s,border-color .3s}
+.toc a:hover{background:var(--accent-light);border-left-color:var(--accent)}
+.toc a.active{background:var(--primary-light);border-left-color:var(--primary);color:var(--primary);font-weight:600}
+.toc a.done::after{content:" ✓";color:var(--secondary);font-weight:700}
+.back-link{display:inline-block;margin-top:18px;font-size:13px;color:var(--primary)}
+.menu-btn{display:none}
+/* Content */
+.content{flex:1;min-width:0;padding:32px 24px 64px}
+.chapter{max-width:900px;margin:0 auto;display:none;animation:fade .5s ease-in}
+.chapter.visible{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:28px;color:var(--primary);margin:0 0 8px;line-height:1.35}
+h2{font-size:22px;color:var(--primary);margin:2rem 0 .6rem;line-height:1.4}
+h3{font-size:18px;color:#333;margin:1.4rem 0 .5rem}
+.meta{color:var(--muted);font-size:14px;margin-bottom:1.5rem}
+p{margin:.6rem 0}
+.hl{background:var(--accent-light);padding:0 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--primary-light);color:var(--primary-dark)}
+tr:nth-child(even) td{background:#fafafa}
+.table-wrap{overflow-x:auto}
+.callout{border-left:4px solid var(--accent);background:var(--accent-light);padding:10px 14px;border-radius:0 6px 6px 0;margin:1rem 0}
+.callout b{color:#c4471a}
+/* Intro */
+.intro-page .subtitle{font-size:18px;color:var(--muted);margin-top:0}
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:1.2rem 0}
+.intro-card{border:1px solid var(--border);border-top:4px solid var(--primary);border-radius:8px;padding:12px 14px;cursor:pointer;transition:box-shadow .3s,transform .3s}
+.intro-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-2px)}
+.intro-card .n{font-size:13px;color:var(--accent);font-weight:700}
+.start-btn,.nav-buttons button,.sm-controls button,.reveal-btn{font:inherit;cursor:pointer;border-radius:6px;transition:background .3s,color .3s,border-color .3s}
+.start-btn{background:var(--primary);color:#fff;border:0;padding:12px 22px;font-size:16px;font-weight:600;margin-top:10px}
+.start-btn:hover{background:var(--primary-dark)}
+/* Diagrams */
+figure.diagram{margin:1.5rem 0;border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff}
+figure.diagram svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);text-align:center;margin-top:8px}
+.chapter.visible svg .anim{opacity:0;animation:fade .7s ease-in forwards}
+.chapter.visible svg .d1{animation-delay:.15s}.chapter.visible svg .d2{animation-delay:.35s}
+.chapter.visible svg .d3{animation-delay:.55s}.chapter.visible svg .d4{animation-delay:.75s}
+.chapter.visible svg .d5{animation-delay:.95s}.chapter.visible svg .d6{animation-delay:1.15s}
+svg .box{transition:stroke .3s,fill .3s}
+svg g.hov:hover .box{stroke:#003d7a;stroke-width:3}
+svg text{font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif;fill:#1a1a1a}
+svg g[tabindex]:focus{outline:none}svg g[tabindex]:focus-visible .box{stroke-dasharray:4 3}
+.pulse{animation:pulse 1s ease-in-out 2}
+@keyframes pulse{50%{filter:drop-shadow(0 0 6px var(--accent))}}
+/* Revision (code-style) block */
+.code-block{position:relative;margin:1.2rem 0;border:1px solid #f3c2ad;border-radius:8px;background:var(--accent-light);overflow:hidden}
+.code-block .cb-head{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:#ffe3d6;font-size:13px;font-weight:600;color:#a33c12}
+.copy-btn{font:inherit;font-size:12px;border:1px solid var(--accent);background:#fff;color:#a33c12;border-radius:4px;padding:2px 10px;cursor:pointer}
+.copy-btn:hover{background:var(--accent);color:#fff}
+.code-block pre{margin:0;padding:10px 0;overflow-x:auto;font-family:'Monaco','Consolas','Courier New','Nirmala UI',monospace;font-size:13.5px;line-height:1.7}
+.code-block .ln{display:block;padding:0 14px 0 0;white-space:pre}
+.code-block .ln::before{content:attr(data-n);display:inline-block;width:2.6em;text-align:right;padding-right:12px;margin-right:10px;color:#b98a78;border-right:1px solid #f3c2ad;user-select:none}
+.tok-num{color:var(--accent);font-weight:600}.tok-com{color:#666;font-style:italic}.tok-key{color:var(--primary);font-weight:600}
+/* Collapsible */
+details.collapsible{border:1px solid var(--border);border-radius:8px;margin:1rem 0;background:#fcfcfc}
+details.collapsible summary{cursor:pointer;padding:10px 14px;font-weight:600;color:var(--primary)}
+details.collapsible[open] summary{border-bottom:1px solid var(--border)}
+details.collapsible .inner{padding:4px 16px 12px}
+/* Quiz */
+.quiz{border:2px solid var(--primary-light);border-radius:10px;padding:6px 18px 14px;margin:2rem 0}
+.quiz h3{color:var(--primary)}
+.quiz-question{margin:1rem 0;padding-bottom:12px;border-bottom:1px dashed var(--border)}
+.quiz-question:last-child{border-bottom:0}
+.quiz-question ol{margin:.3rem 0 .5rem;padding-left:1.6rem}
+.reveal-btn{background:#fff;border:1px solid var(--accent);color:#c4471a;padding:5px 14px;font-size:14px}
+.reveal-btn:hover{background:var(--accent);color:#fff}
+.answer{display:none;margin-top:10px;background:var(--secondary-light);border-left:4px solid var(--secondary);padding:8px 12px;border-radius:0 6px 6px 0;animation:fade .4s ease-in}
+.answer.show{display:block}
+/* Takeaways */
+.key-takeaways{background:var(--secondary-light);border:1px solid #bfe8d1;border-left:5px solid var(--secondary);border-radius:8px;padding:6px 18px 10px;margin:2rem 0}
+.key-takeaways h3{color:#007a3d}
+.key-takeaways li{margin:4px 0}
+/* Nav */
+.nav-buttons{display:flex;justify-content:space-between;gap:10px;margin-top:2rem}
+.nav-buttons button{background:#fff;border:2px solid var(--primary);color:var(--primary);padding:9px 18px;font-weight:600}
+.nav-buttons button:hover:not(:disabled){background:var(--primary);color:#fff}
+.nav-buttons button:disabled{opacity:.35;cursor:default}
+/* State machine */
+.sm-status{text-align:center;font-weight:600;margin:6px 0;font-size:15px}
+.sm-status span{color:var(--primary)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.sm-controls button{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:6px 12px;font-size:14px}
+.sm-controls button:hover:not(:disabled){background:var(--primary);color:#fff}
+.sm-controls button:disabled{opacity:.35;cursor:default}
+.sm-controls .auto{border-color:var(--accent);color:#c4471a}
+.sm-controls .auto:hover{background:var(--accent)!important;color:#fff!important}
+.sm-state .box{transition:stroke-width .4s,filter .4s}
+.sm-state.active .box{stroke-width:4;filter:drop-shadow(0 0 7px rgba(0,102,204,.65))}
+.sm-edge{fill:none;stroke:#9bb8d6;stroke-width:2}
+.sm-edge.run{stroke:var(--accent);stroke-width:3.5;stroke-dasharray:400;stroke-dashoffset:400;animation:draw .8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* Responsive */
+@media (max-width:768px){
+  .container{display:block}
+  .sidebar{position:fixed;left:0;top:0;z-index:20;transform:translateX(-100%);transition:transform .3s;box-shadow:2px 0 12px rgba(0,0,0,.15)}
+  .sidebar.open{transform:none}
+  .menu-btn{display:block;position:fixed;top:10px;left:10px;z-index:30;background:var(--primary);color:#fff;border:0;border-radius:6px;padding:8px 12px;font-size:18px;cursor:pointer}
+  .content{padding:56px 16px 48px}
+  h1{font-size:24px}
+}
+.tracker{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:1rem 0}
+.tracker-sum{font-weight:700;color:#007a3d;margin-bottom:6px}
+.trk{width:18px;height:18px;accent-color:var(--secondary);cursor:pointer}
+code{background:var(--accent-light);padding:1px 5px;border-radius:3px;font-size:14px}
+</style>
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="విషయ సూచిక తెరవండి">☰</button>
+<div class="container">
+<aside class="sidebar" id="sidebar" aria-label="విషయ సూచిక">
+  <h2>📰 కరెంట్ అఫైర్స్</h2>
+  <div class="sub">జాతీయ + ఆంధ్రప్రదేశ్ · అక్టోబర్ 2025 – సెప్టెంబర్ 2026</div>
+  <div class="progress-bar" role="progressbar" aria-label="పురోగతి"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="chapter-count" id="chapterCount">0/4 అధ్యాయాలు</div>
+  <nav class="toc">
+    <ul>
+      <li><a href="#intro" data-ch="0">పరిచయం</a></li>
+      <li><a href="#chapter-1" data-ch="1">1. జాతీయ రాజకీయాలు, పాలన & చట్టాలు</a></li>
+      <li><a href="#chapter-2" data-ch="2">2. ఆర్థికం & అంతర్జాతీయ సంబంధాలు</a></li>
+      <li><a href="#chapter-3" data-ch="3">3. సైన్స్, రక్షణ, క్రీడలు & అవార్డులు</a></li>
+      <li><a href="#chapter-4" data-ch="4">4. ఆంధ్రప్రదేశ్ కరెంట్ అఫైర్స్</a></li>
+    </ul>
+  </nav>
+  <a class="back-link" href="index.html">← సూచిక (Index)</a>
+</aside>
+
+<main class="content" id="content">
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="chapter intro-page" data-ch="0">
+  <h1>📰 కరెంట్ అఫైర్స్: జాతీయ & ఆంధ్రప్రదేశ్</h1>
+  <p class="subtitle">గత ఏడాది (అక్టోబర్ 2025 – సెప్టెంబర్ 2026) · UPSC / APPSC ప్రిలిమ్స్ దృష్టితో</p>
+  <p>పోటీ పరీక్షల్లో కరెంట్ అఫైర్స్ ప్రశ్నలు సాధారణంగా పరీక్షకు ముందు 12–18 నెలల సంఘటనల నుండి వస్తాయి. ఈ పాఠంలో గత ఏడాదిలోని ముఖ్య జాతీయ సంఘటనలు, ఆంధ్రప్రదేశ్ ప్రత్యేక అంశాలను నాలుగు అధ్యాయాలుగా, ప్రతి దానికి "స్టాటిక్ లింక్" (పాలిటీ/చరిత్ర/ఆర్థిక సంబంధం)తో అందిస్తున్నాం.</p>
+  <div class="callout"><b>ముఖ్య గమనిక:</b> ఈ వాస్తవాలు సెప్టెంబర్ 2026 వరకు వెబ్ వనరుల (PIB, AIR న్యూస్, PRS, వికీపీడియా మొదలైనవి) నుండి సేకరించబడ్డాయి. పరీక్షకు ముందు సంఖ్యలు, తేదీలను అధికారిక వనరుల్లో (PIB, ap.gov.in) ఒకసారి సరిచూసుకోండి. కొత్త పరిణామాలు వస్తూనే ఉంటాయి.</div>
+  <div class="intro-grid">
+    <div class="intro-card" data-go="1"><div class="n">అధ్యాయం 1</div>బిహార్ & 2026 ఐదు రాష్ట్రాల ఎన్నికలు (ఇంటరాక్టివ్), కొత్త నియామకాలు, లేబర్ కోడ్‌లు, VB-G RAM G, జనగణన 2027</div>
+    <div class="intro-card" data-go="2"><div class="n">అధ్యాయం 2</div>GST 2.0, కేంద్ర బడ్జెట్ 2026-27, GDP కొత్త బేస్ ఇయర్, RBI, భారత్–EU FTA, AI ఇంపాక్ట్ సమ్మిట్</div>
+    <div class="intro-card" data-go="3"><div class="n">అధ్యాయం 3</div>ISRO ప్రయోగాలు, IFR 2026, రెండు క్రికెట్ ప్రపంచ కప్‌లు, CWG 2030, పద్మ అవార్డులు 2026 — కాలరేఖ</div>
+    <div class="intro-card" data-go="4"><div class="n">అధ్యాయం 4</div>అమరావతి చట్టబద్ధ రాజధాని, 29 జిల్లాలు, AP బడ్జెట్, సూపర్ సిక్స్, గూగుల్ AI హబ్, భోగాపురం విమానాశ్రయం</div>
+  </div>
+  <p><b>మొత్తం సమయం:</b> ~75 నిమిషాలు · ⌨️ ← / → బాణం కీలతో అధ్యాయాల మధ్య కదలండి.</p>
+  <button class="start-btn" data-go="1">ప్రారంభించండి →</button>
+</section>
+
+<!-- ============ CHAPTER 1 ============ -->
+<section id="chapter-1" class="chapter" data-ch="1">
+  <h1>అధ్యాయం 1: జాతీయ రాజకీయాలు, పాలన & చట్టాలు</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>1.1 ఎన్నికలు — బిహార్ 2025 & ఐదు రాష్ట్రాలు 2026</h2>
+  <p><b>బిహార్ (నవంబర్ 2025):</b> 243 స్థానాల్లో NDA <b>202</b> (BJP 89, JD(U) 85). నితీశ్ కుమార్ <b>20 నవంబర్ 2025</b>న <b>10వ సారి</b> ముఖ్యమంత్రిగా ప్రమాణం — రికార్డు. ఉప ముఖ్యమంత్రులు సమ్రాట్ చౌధరి, విజయ్ కుమార్ సిన్హా. తర్వాత నితీశ్ రాజ్యసభకు వెళ్లడంతో <b>ఏప్రిల్ 2026</b>లో <b>సమ్రాట్ చౌధరి</b> బిహార్ ముఖ్యమంత్రి అయ్యారు.</p>
+  <p><b>2026 అసెంబ్లీ ఎన్నికలు (ఏప్రిల్ 2026):</b> ప్రతి రాష్ట్రంపై క్లిక్ చేయండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 330" role="img" aria-label="2026 ఐదు రాష్ట్రాల ఎన్నికల ఫలితాలు">
+      <g id="elNodes" class="anim"></g>
+      <g class="anim d2">
+        <rect x="10" y="130" width="740" height="190" rx="10" fill="#fafafa" stroke="#ddd"/>
+        <text id="elTitle" x="26" y="156" font-size="14.5" font-weight="700" fill="#0066cc">ఒక రాష్ట్రంపై క్లిక్ చేయండి</text>
+        <foreignObject x="20" y="164" width="720" height="150"><div xmlns="http://www.w3.org/1999/xhtml" id="elDesc" style="font-size:13.5px;line-height:1.6;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">5 రాష్ట్రాల్లో 4 చోట్ల అధికార మార్పు/కొనసాగింపు — ఏ పార్టీ, ఏ ముఖ్యమంత్రి అనేది ప్రిలిమ్స్‌లో నేరుగా అడగవచ్చు.</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 1.1 — 2026 అసెంబ్లీ ఎన్నికల ఫలితాలు (రంగు = ప్రభుత్వ మార్పు: నారింజ, కొనసాగింపు: ఆకుపచ్చ).</figcaption>
+  </figure>
+
+  <h2>1.2 కీలక నియామకాలు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>పదవి</th><th>వ్యక్తి</th><th>తేదీ / గమనిక</th></tr>
+    <tr><td><b>ఉపరాష్ట్రపతి (15వ)</b></td><td>సి.పి. రాధాకృష్ణన్</td><td>ఎన్నిక 9 సెప్టెంబర్ 2025 (ప్రత్యర్థి: జస్టిస్ బి. సుదర్శన్ రెడ్డి — తెలుగు వ్యక్తి); ప్రమాణం 12 సెప్టెంబర్ 2025. జగదీప్ ధన్‌ఖడ్ రాజీనామా తర్వాత</td></tr>
+    <tr><td><b>భారత ప్రధాన న్యాయమూర్తి (53వ)</b></td><td>జస్టిస్ సూర్యకాంత్</td><td>ప్రమాణం 24 నవంబర్ 2025 (జస్టిస్ బి.ఆర్. గవాయ్ తర్వాత); హరియాణా నుండి తొలి CJI</td></tr>
+    <tr><td><b>చీఫ్ ఆఫ్ డిఫెన్స్ స్టాఫ్</b></td><td>జనరల్ ఎన్.ఎస్. రాజా సుబ్రమణి</td><td>నియామకం 9 మే 2026; బాధ్యతలు 30 మే 2026 (జనరల్ అనిల్ చౌహాన్ తర్వాత); DMA కార్యదర్శిగా కూడా</td></tr>
+    <tr><td><b>BJP జాతీయ అధ్యక్షుడు</b></td><td>నితిన్ నబిన్</td><td>జనవరి 2026</td></tr>
+    <tr><td><b>కేంద్ర విద్యా మంత్రి</b></td><td>ప్రహ్లాద్ జోషి</td><td>జూలై 2026 — NEET-UG 2026 పేపర్ లీక్ వివాదంతో ధర్మేంద్ర ప్రధాన్ రాజీనామా</td></tr>
+    <tr><td><b>ముఖ్యమంత్రుల మార్పులు</b></td><td>మణిపూర్ — యుమ్నం ఖేమ్‌చంద్ సింగ్ (ఫిబ్ర 2026); బిహార్ — సమ్రాట్ చౌధరి (ఏప్రి 2026); కర్ణాటక — డి.కె. శివకుమార్ (మే 2026)</td><td>ఐదు రాష్ట్రాల కొత్త CMలు పై చిత్రంలో</td></tr>
+  </table></div>
+
+  <h2>1.3 ముఖ్య చట్టాలు & విధానాలు</h2>
+  <ul>
+    <li><b>నాలుగు లేబర్ కోడ్‌లు అమలు — 21 నవంబర్ 2025:</b> వేతనాల కోడ్ 2019, పారిశ్రామిక సంబంధాల కోడ్ 2020, సామాజిక భద్రత కోడ్ 2020, వృత్తి భద్రత-ఆరోగ్యం-పని పరిస్థితుల (OSH) కోడ్ 2020 → <b>29 కార్మిక చట్టాల</b> విలీనం. నియామక పత్రం తప్పనిసరి, జాతీయ ఫ్లోర్ వేజ్, గిగ్/ప్లాట్‌ఫామ్ కార్మికులకు సామాజిక భద్రత, మహిళలకు రాత్రి షిఫ్ట్‌లు (సమ్మతితో). <i>స్టాటిక్ లింక్: ఉమ్మడి జాబితా అంశం "కార్మికులు"; DPSP ఆర్టి. 39, 41–43.</i></li>
+    <li><b>VB-G RAM G చట్టం 2025</b> (వికసిత్ భారత్ – రోజ్‌గార్ & ఆజీవిక గ్యారంటీ మిషన్ (గ్రామీణ్)): <b>MGNREGA (2005) స్థానంలో</b>; <b>125 రోజుల</b> ఉపాధి హామీ (100 నుండి); కేంద్ర-రాష్ట్ర నిధుల నిష్పత్తి <b>60:40</b> (ప్రత్యేక కేటగిరీ రాష్ట్రాలకు 90:10); వ్యవసాయ సీజన్‌లో విరామం; <b>1 జూలై 2026</b> నుండి అమలు.</li>
+    <li><b>131వ రాజ్యాంగ సవరణ బిల్లు 2026</b> (2011 జనగణన ఆధారంగా పునర్విభజన, లోక్‌సభ గరిష్ఠ సీట్లు 850, మహిళా రిజర్వేషన్ త్వరిత అమలు) — <b>17 ఏప్రిల్ 2026</b>న లోక్‌సభలో 2/3 మెజారిటీ లేక <b>వీగిపోయింది</b>. 129వ (ఒకే దేశం–ఒకే ఎన్నిక), 130వ (నిర్బంధంలో ఉన్న PM/CM తొలగింపు) బిల్లులు JPC వద్ద.</li>
+    <li><b>SIR (ఓటరు జాబితా ప్రత్యేక సమగ్ర సవరణ)</b> — బిహార్‌తో మొదలై దేశవ్యాప్తం; సుప్రీంకోర్టు <b>27 మే 2026</b>న రాజ్యాంగబద్ధతను సమర్థించింది. <i>లింక్: ఆర్టి. 324, 326; ప్రజాప్రాతినిధ్య చట్టం 1950.</i></li>
+    <li><b>పేపర్ లీక్ నిరోధక బిల్లు 2026</b> — పార్లమెంట్ ఆమోదం 30 జూలై 2026 (NEET-UG 2026 రద్దు — 12 మే 2026 — నేపథ్యం).</li>
+    <li><b>నక్సలిజం అంతం ప్రకటన</b> — 30 మార్చి 2026 (కేంద్ర హోం మంత్రి; గడువు మార్చి 2026).</li>
+  </ul>
+
+  <h2>1.4 జనగణన 2027</h2>
+  <ul>
+    <li>భారతదేశ <b>16వ జనగణన</b> (స్వాతంత్ర్యం తర్వాత 8వ); <b>తొలి డిజిటల్ జనగణన</b> — మొబైల్ యాప్, <b>స్వీయ గణన (self-enumeration)</b> పోర్టల్.</li>
+    <li><b>1931 తర్వాత తొలిసారి కుల గణన</b>.</li>
+    <li>దశ 1 — గృహాల జాబితా: <b>1 ఏప్రిల్ – 30 సెప్టెంబర్ 2026</b>; దశ 2 — జనాభా గణన: <b>ఫిబ్రవరి 2027</b>; రిఫరెన్స్ తేదీ <b>1 మార్చి 2027</b> (మంచు ప్రాంతాలకు ముందుగానే, అక్టోబర్ 2026 రిఫరెన్స్).</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — జాతీయ పాలన">
+<pre>ఉపరాష్ట్రపతి (15వ)   →  సి.పి. రాధాకృష్ణన్       # 12-09-2025
+CJI (53వ)           →  సూర్యకాంత్               # 24-11-2025
+CDS               →  ఎన్.ఎస్. రాజా సుబ్రమణి     # 30-05-2026
+బిహార్             →  NDA 202/243; నితీశ్ 10వ సారి (20-11-2025) → సమ్రాట్ చౌధరి (ఏప్రి 2026)
+లేబర్ కోడ్‌లు        →  4 కోడ్‌లు = 29 చట్టాలు     # 21-11-2025
+VB-G RAM G         →  MGNREGA స్థానంలో; 125 రోజులు; 60:40   # 01-07-2026
+131వ సవరణ బిల్లు     →  వీగింది                   # 17-04-2026
+SIR               →  SC సమర్థన                 # 27-05-2026
+జనగణన 2027        →  16వ; డిజిటల్; కుల గణన; రిఫరెన్స్ 01-03-2027</pre>
+  </div>
+
+  <details class="collapsible" id="c1-adv">
+    <summary>🔍 లోతుగా: మెయిన్స్ కోణం — లేబర్ కోడ్‌లు & ఉపాధి హామీ మార్పు</summary>
+    <div class="inner">
+      <p><b>లేబర్ కోడ్‌లు — అనుకూలం:</b> సరళీకృత నిబంధనలు (ఒకే రిజిస్ట్రేషన్, లైసెన్స్, రిటర్న్), అసంఘటిత/గిగ్ కార్మికులకు తొలిసారి చట్టబద్ధ సామాజిక భద్రత, సార్వత్రిక కనీస వేతనం, మహిళల భాగస్వామ్యం పెంపు. <b>విమర్శలు:</b> లే-ఆఫ్/మూసివేతకు ప్రభుత్వ అనుమతి పరిమితి 100 నుండి 300 మంది కార్మికులకు పెంపు; సమ్మెలపై నోటీసు నిబంధనలు; కార్మిక సంఘాల అభ్యంతరాలు; రాష్ట్రాల నియమాల అమలులో అసమానతలు.</p>
+      <p><b>VB-G RAM G — అనుకూలం:</b> ఎక్కువ రోజుల హామీ, ఆస్తుల సృష్టిని వికసిత్ భారత్ లక్ష్యాలతో అనుసంధానం, సాంకేతిక పర్యవేక్షణ. <b>విమర్శలు:</b> రాష్ట్రాలపై ఆర్థిక భారం (MGNREGAలో వేతనాలు పూర్తిగా కేంద్రమే భరించేది), డిమాండ్ ఆధారిత హక్కు నుండి బడ్జెట్ పరిమితి గల పథకంగా మారే ప్రమాదం, సీజనల్ విరామం పేదలపై ప్రభావం. <i>లింక్: ఆర్టి. 21 (జీవనోపాధి), DPSP ఆర్టి. 41 (పని హక్కు), సహకార సమాఖ్య.</i></p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q1-1">
+      <p><strong>Q1:</strong> 2026 తమిళనాడు అసెంబ్లీ ఎన్నికల్లో అతిపెద్ద పార్టీగా నిలిచి ప్రభుత్వం ఏర్పాటు చేసిన పార్టీ ఏది?</p>
+      <ol type="a"><li>DMK</li><li>AIADMK</li><li>తమిళగ వెట్రి కళగం (TVK)</li><li>BJP</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) TVK</b> — నటుడు విజయ్ (సి. జోసెఫ్ విజయ్) 10 మే 2026న ముఖ్యమంత్రిగా ప్రమాణం.</p>
+    </div>
+    <div class="quiz-question" id="q1-2">
+      <p><strong>Q2:</strong> నాలుగు లేబర్ కోడ్‌లు ఎప్పటి నుండి అమల్లోకి వచ్చాయి? అవి ఎన్ని చట్టాలను విలీనం చేశాయి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>21 నవంబర్ 2025</b>; <b>29</b> కేంద్ర కార్మిక చట్టాలు.</p>
+    </div>
+    <div class="quiz-question" id="q1-3">
+      <p><strong>Q3:</strong> VB-G RAM G చట్టం ప్రకారం ఏటా ఎన్ని రోజుల ఉపాధి హామీ? ఏ చట్టం స్థానంలో వచ్చింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>125 రోజులు</b>; <b>MGNREGA 2005</b> (100 రోజులు) స్థానంలో, 1 జూలై 2026 నుండి.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>2026 ఎన్నికలు: WB — BJP (సువేందు అధికారి); TN — TVK (విజయ్); కేరళ — UDF (వి.డి. సతీశన్); అస్సాం — BJP (హిమంత); పుదుచ్చేరి — AINRC (రంగస్వామి).</li>
+      <li>VP సి.పి. రాధాకృష్ణన్ (15వ); CJI సూర్యకాంత్ (53వ); CDS రాజా సుబ్రమణి.</li>
+      <li>లేబర్ కోడ్‌లు (21-11-2025), VB-G RAM G (01-07-2026), SIR సమర్థన, 131వ సవరణ వీగిపోవడం.</li>
+      <li>జనగణన 2027: 16వ, డిజిటల్, స్వీయ గణన, 1931 తర్వాత తొలి కుల గణన.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 2 ============ -->
+<section id="chapter-2" class="chapter" data-ch="2">
+  <h1>అధ్యాయం 2: ఆర్థికం & అంతర్జాతీయ సంబంధాలు</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>2.1 GST 2.0 — 22 సెప్టెంబర్ 2025</h2>
+  <ul>
+    <li><b>56వ GST కౌన్సిల్</b> నిర్ణయం: 5%, 12%, 18%, 28% నాలుగు శ్లాబుల స్థానంలో ప్రధానంగా <b>రెండు శ్లాబులు — 5% & 18%</b>.</li>
+    <li>చాలా 12% వస్తువులు → 5%; చాలా 28% వస్తువులు → 18%.</li>
+    <li>ప్రత్యేక <b>40% శ్లాబ్</b> — పాన్ మసాలా, సిగరెట్లు, గుట్కా వంటి "సిన్ గూడ్స్", లగ్జరీ కార్లు.</li>
+    <li>వ్యక్తిగత <b>ఆరోగ్య, జీవిత బీమా ప్రీమియంలపై GST రద్దు</b>; 36 ప్రాణరక్షక ఔషధాలపై మినహాయింపు.</li>
+    <li><i>స్టాటిక్ లింక్: 101వ సవరణ (2016), ఆర్టి. 279A — GST కౌన్సిల్ (అధ్యక్షుడు: కేంద్ర ఆర్థిక మంత్రి).</i></li>
+  </ul>
+
+  <h2>2.2 కేంద్ర బడ్జెట్ 2026-27 (1 ఫిబ్రవరి 2026)</h2>
+  <div class="table-wrap"><table>
+    <tr><th>అంశం</th><th>విలువ</th></tr>
+    <tr><td>మొత్తం వ్యయం</td><td>₹53.5 లక్షల కోట్లు</td></tr>
+    <tr><td>మూలధన వ్యయం (Capex)</td><td>₹12.2 లక్షల కోట్లు</td></tr>
+    <tr><td>ద్రవ్య లోటు</td><td>FY27 (BE) <b>4.3%</b> of GDP · FY26 (RE) 4.4%</td></tr>
+    <tr><td>రుణం–GDP నిష్పత్తి</td><td>FY27 55.6% (FY26 RE 56.1%)</td></tr>
+    <tr><td>మూడు "కర్తవ్యాలు"</td><td>(1) ఉత్పాదకత, పోటీతత్వంతో వృద్ధి వేగం (2) పౌరుల ఆకాంక్షలు, సామర్థ్య నిర్మాణం (3) సమ్మిళిత అభివృద్ధి</td></tr>
+    <tr><td>ముఖ్య ప్రకటనలు</td><td><b>బయోఫార్మా శక్తి</b> (₹10,000 కోట్లు, 5 ఏళ్లు); <b>ఇండియా సెమీకండక్టర్ మిషన్ 2.0</b>; ₹10,000 కోట్ల SME గ్రోత్ ఫండ్; 7 హై-స్పీడ్ రైల్ కారిడార్లు; CCUS కోసం ₹20,000 కోట్లు; క్లౌడ్ సర్వీసులకు 2047 వరకు ట్యాక్స్ హాలిడే; MAT 15% → 14%</td></tr>
+    <tr><td>కొత్త ఆదాయపు పన్ను చట్టం</td><td><b>ఆదాయపు పన్ను చట్టం 2025</b> — 1 ఏప్రిల్ 2026 నుండి అమలు (1961 చట్టం స్థానంలో)</td></tr>
+  </table></div>
+
+  <h2>2.3 వృద్ధి, ద్రవ్య విధానం</h2>
+  <ul>
+    <li><b>GDP కొత్త సిరీస్</b> — బేస్ ఇయర్ <b>2011-12 నుండి 2022-23</b>కి మార్పు (ఫిబ్రవరి 2026).</li>
+    <li>FY 2025-26 వాస్తవ GDP వృద్ధి (తాత్కాలిక అంచనా, 5 జూన్ 2026): <b>7.7%</b>; నామమాత్ర వృద్ధి 8.9%.</li>
+    <li><b>RBI రెపో రేటు: 5.25%</b> (ఆగస్టు 2026 MPCలో మార్పు లేదు; తటస్థ వైఖరి). గవర్నర్: <b>సంజయ్ మల్హోత్రా</b>.</li>
+  </ul>
+
+  <h2>2.4 వాణిజ్య ఒప్పందాలు — ఇంటరాక్టివ్</h2>
+  <p>ప్రతి ఒప్పందంపై క్లిక్ చేయండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 330" role="img" aria-label="భారత వాణిజ్య ఒప్పందాలు 2025-26">
+      <g id="ftNodes" class="anim"></g>
+      <g class="anim d2">
+        <rect x="10" y="130" width="740" height="190" rx="10" fill="#fafafa" stroke="#ddd"/>
+        <text id="ftTitle" x="26" y="156" font-size="14.5" font-weight="700" fill="#0066cc">ఒక ఒప్పందంపై క్లిక్ చేయండి</text>
+        <foreignObject x="20" y="164" width="720" height="150"><div xmlns="http://www.w3.org/1999/xhtml" id="ftDesc" style="font-size:13.5px;line-height:1.6;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">ప్రిలిమ్స్‌లో "ఏ దేశంతో, ఎప్పుడు, ఏ రకం ఒప్పందం" అనేది తరచుగా వస్తుంది.</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 2.1 — గత ఏడాది భారత ప్రధాన వాణిజ్య పరిణామాలు.</figcaption>
+  </figure>
+
+  <h2>2.5 అంతర్జాతీయ సదస్సులు</h2>
+  <ul>
+    <li><b>ఇండియా AI ఇంపాక్ట్ సమ్మిట్</b> — 16–20 ఫిబ్రవరి 2026, <b>భారత్ మండపం, న్యూఢిల్లీ</b>; గ్లోబల్ సౌత్‌లో తొలి AI శిఖరాగ్ర సదస్సు (బ్లెచ్లీ పార్క్ 2023, సియోల్ 2024, పారిస్ 2025 తర్వాత); సుమారు 90 దేశాలు/సంస్థలు డిక్లరేషన్‌ను ఆమోదించాయి; $200 బిలియన్లకు పైగా పెట్టుబడి హామీలు; IndiaAI మిషన్ కింద అదనంగా 20,000 GPUలు.</li>
+    <li><b>BRICS 2026</b> — భారత్ అధ్యక్షత (శిఖరాగ్ర సదస్సు జూలై 2026).</li>
+    <li>చైనా–భారత్ నేరుగా విమాన సర్వీసులు ఐదేళ్ల తర్వాత పునఃప్రారంభం (అక్టోబర్ 2025).</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — ఆర్థికం">
+<pre>GST 2.0          →  22-09-2025; 5% | 18% | 40%; 56వ కౌన్సిల్
+బడ్జెట్ 2026-27   →  01-02-2026; ₹53.5 లక్షల కోట్లు; FD 4.3%; capex ₹12.2 లక్షల కోట్లు
+IT చట్టం 2025     →  01-04-2026 నుండి
+GDP బేస్ ఇయర్     →  2022-23; FY26 వృద్ధి 7.7%
+రెపో రేటు         →  5.25%   # గవర్నర్ సంజయ్ మల్హోత్రా
+భారత్–EU FTA     →  27-01-2026 ముగింపు; 2007 నుండి చర్చలు
+భారత్–NZ FTA     →  28-04-2026 సంతకం
+AI సమ్మిట్        →  16–20 ఫిబ్ర 2026; భారత్ మండపం</pre>
+  </div>
+
+  <details class="collapsible" id="c2-adv">
+    <summary>🔍 లోతుగా: GDP బేస్ ఇయర్ ఎందుకు మార్చారు?</summary>
+    <div class="inner">
+      <p>బేస్ ఇయర్ అనేది స్థిర ధరల (constant prices) లెక్కకు ప్రమాణ సంవత్సరం. ఆర్థిక వ్యవస్థ నిర్మాణం మారుతూ ఉంటుంది — కొత్త రంగాలు (డిజిటల్ సేవలు, గిగ్ ఆర్థికం, పునరుత్పాదక ఇంధనం), కొత్త డేటా వనరులు (GST, UPI, MCA-21). పాత 2011-12 బేస్ వీటిని సరిగా ప్రతిబింబించదు. అంతర్జాతీయ ప్రమాణం ప్రకారం ప్రతి 5 ఏళ్లకు బేస్ మార్చాలి. 2022-23 కోవిడ్ ప్రభావం లేని "సాధారణ" సంవత్సరం కావడంతో ఎంపిక చేశారు. CPI, IIP సూచీల బేస్ కూడా నవీకరించబడుతోంది.</p>
+      <p><b>ప్రిలిమ్స్ ట్రాప్:</b> బేస్ మార్పుతో GDP పరిమాణం, వృద్ధి రేట్లు గత సంవత్సరాలకూ తిరిగి లెక్కించబడతాయి — పాత సిరీస్ సంఖ్యలతో పోల్చకూడదు.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q2-1">
+      <p><strong>Q1:</strong> GST 2.0 తర్వాత ప్రధాన రేటు శ్లాబులు ఏవి?</p>
+      <ol type="a"><li>5%, 12%, 18%</li><li>5%, 18% + ప్రత్యేక 40%</li><li>12%, 18%, 28%</li><li>0%, 5%, 28%</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b)</b> — 22 సెప్టెంబర్ 2025 నుండి.</p>
+    </div>
+    <div class="quiz-question" id="q2-2">
+      <p><strong>Q2:</strong> కేంద్ర బడ్జెట్ 2026-27లో FY27కి ద్రవ్య లోటు లక్ష్యం ఎంత?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>GDPలో 4.3%</b> (FY26 సవరించిన అంచనా 4.4%). ప్రభుత్వం ఇప్పుడు రుణం–GDP నిష్పత్తిని ప్రధాన లక్ష్యంగా (anchor) చూస్తోంది — FY27 55.6%.</p>
+    </div>
+    <div class="quiz-question" id="q2-3">
+      <p><strong>Q3:</strong> భారత్–EU FTA చర్చలు ఏ సంవత్సరంలో మొదలయ్యాయి, ఎప్పుడు ముగిశాయి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>2007</b>లో మొదలై, <b>27 జనవరి 2026</b>న న్యూఢిల్లీ భారత్–EU శిఖరాగ్ర సదస్సులో ముగింపు ప్రకటన ("mother of all deals"). అధికారిక సంతకం, ఆమోదాలు తర్వాత.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>GST 2.0: 5% & 18% + 40%; బీమా ప్రీమియంలపై GST లేదు.</li>
+      <li>బడ్జెట్ 2026-27: FD 4.3%, capex ₹12.2 లక్షల కోట్లు, కొత్త IT చట్టం 2025 అమలు.</li>
+      <li>GDP బేస్ 2022-23; FY26 వృద్ధి 7.7%; రెపో 5.25%.</li>
+      <li>FTAలు: EU (జన 2026), న్యూజిలాండ్ (ఏప్రి 2026); అమెరికాతో టారిఫ్ ఒప్పందం (ఫిబ్ర 2026); AI సమ్మిట్ ఢిల్లీలో.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 3 ============ -->
+<section id="chapter-3" class="chapter" data-ch="3">
+  <h1>అధ్యాయం 3: సైన్స్, రక్షణ, క్రీడలు & అవార్డులు</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>3.1 సంవత్సర కాలరేఖ — ఇంటరాక్టివ్</h2>
+  <p>సైన్స్, రక్షణ, క్రీడల ముఖ్య సంఘటనలు కాలక్రమంలో. "తదుపరి" నొక్కండి లేదా ఆటో డెమో.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 170" role="img" aria-label="సైన్స్ రక్షణ క్రీడల కాలరేఖ">
+      <line x1="40" y1="85" x2="720" y2="85" stroke="#ddd" stroke-width="6" stroke-linecap="round"/>
+      <g id="t3Edges"></g><g id="t3Nodes"></g>
+    </svg>
+    <div class="sm-status" aria-live="polite"><span id="t3Label"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#333;max-width:780px;margin:0 auto;text-align:left" id="t3Desc"></div>
+    <div class="sm-controls">
+      <button id="t3Prev">◀ మునుపటి</button><button id="t3Next">తదుపరి ▶</button><button id="t3Reset">↺ రీసెట్</button>
+      <button class="auto" id="t3Auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 3.1 — నవంబర్ 2025 నుండి జూలై 2026 వరకు ముఖ్య సంఘటనలు.</figcaption>
+  </figure>
+
+  <h2>3.2 అంతరిక్షం — ISRO</h2>
+  <div class="table-wrap"><table>
+    <tr><th>మిషన్</th><th>తేదీ</th><th>ముఖ్యాంశం</th></tr>
+    <tr><td><b>LVM3-M5 / CMS-03</b> (GSAT-7R)</td><td>2 నవంబర్ 2025</td><td>~4,410 కిలోల నౌకాదళ సమాచార ఉపగ్రహం — భారత గడ్డ నుండి GTOకి పంపిన అత్యంత బరువైన ఉపగ్రహం</td></tr>
+    <tr><td><b>LVM3-M6 / బ్లూబర్డ్ బ్లాక్-2</b></td><td>24 డిసెంబర్ 2025</td><td>అమెరికా AST SpaceMobile కంపెనీ ~6,100 కిలోల ఉపగ్రహం — LVM3 మోసిన అత్యంత బరువైన పేలోడ్ (వాణిజ్య ప్రయోగం, NSIL ద్వారా)</td></tr>
+    <tr><td><b>PSLV-C62 / EOS-N1</b></td><td>12 జనవరి 2026</td><td><b>విఫలం</b> — మూడో దశ (PS3) చివర్లో రోల్-రేట్ విచలనం; DRDO వ్యూహాత్మక ఉపగ్రహం కోల్పోయింది</td></tr>
+    <tr><td><b>గగన్‌యాన్ G1</b> (మానవరహిత)</td><td>ప్రణాళిక</td><td>వ్యోమమిత్ర రోబోట్‌తో తొలి మానవరహిత కక్ష్య పరీక్ష — 2026 చివరికి అంచనా</td></tr>
+  </table></div>
+
+  <h2>3.3 రక్షణ</h2>
+  <ul>
+    <li><b>ఇంటర్నేషనల్ ఫ్లీట్ రివ్యూ (IFR) 2026</b> — <b>విశాఖపట్నం</b>, ఫిబ్రవరి 2026; రాష్ట్రపతి ద్రౌపది ముర్ము <b>18 ఫిబ్రవరి</b>న సమీక్ష (INS సుమేధపై); థీమ్ <b>"United Through Oceans"</b>; భారత్ నిర్వహించిన <b>3వ IFR</b> (2001 ముంబై, 2016 విశాఖపట్నం); సమాంతరంగా <b>MILAN 2026</b> (9వ ఎడిషన్) బహుపాక్షిక నౌకా విన్యాసం.</li>
+    <li><b>DRDO</b> — దీర్ఘశ్రేణి భూ దాడి క్రూయిజ్ మిసైల్ (LRLACM) పరీక్ష విజయవంతం (15 జూన్ 2026).</li>
+    <li>కొత్త CDS — జనరల్ ఎన్.ఎస్. రాజా సుబ్రమణి (30 మే 2026).</li>
+  </ul>
+
+  <h2>3.4 క్రీడలు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>ఈవెంట్</th><th>ఫలితం</th></tr>
+    <tr><td><b>ICC మహిళల ODI ప్రపంచ కప్ 2025</b> — ఫైనల్ 2 నవంబర్ 2025, DY పాటిల్ స్టేడియం, నవీ ముంబై</td><td>భారత్ దక్షిణాఫ్రికాపై గెలిచి <b>తొలి మహిళల ప్రపంచ కప్</b>; కెప్టెన్ <b>హర్మన్‌ప్రీత్ కౌర్</b>; ఫైనల్ PoM <b>షఫాలీ వర్మ</b>; టోర్నీ PoT <b>దీప్తి శర్మ</b></td></tr>
+    <tr><td><b>ICC పురుషుల T20 ప్రపంచ కప్ 2026</b> (భారత్ & శ్రీలంక ఆతిథ్యం) — ఫైనల్ 8 మార్చి 2026, అహ్మదాబాద్</td><td>భారత్ న్యూజిలాండ్‌పై <b>96 పరుగుల</b> తేడాతో విజయం (255/5 — T20 WC ఫైనల్‌లో అత్యధిక స్కోరు); ఫైనల్ PoM <b>జస్ప్రీత్ బుమ్రా</b> (4/15); PoT <b>వరుణ్ చక్రవర్తి</b> (14 వికెట్లు); భారత్‌కు <b>3వ</b> T20 WC (2007, 2024, 2026) — టైటిల్ నిలబెట్టుకున్న తొలి జట్టు</td></tr>
+    <tr><td><b>కామన్వెల్త్ గేమ్స్ 2030</b></td><td><b>అహ్మదాబాద్ (అమ్దావాద్)</b> ఆతిథ్యం ఖరారు — 26 నవంబర్ 2025, గ్లాస్గో జనరల్ అసెంబ్లీ; "సెంటినరీ గేమ్స్" (1930 హామిల్టన్ తర్వాత 100 ఏళ్లు); భారత్ రెండోసారి (2010 ఢిల్లీ)</td></tr>
+  </table></div>
+
+  <h2>3.5 అవార్డులు & గుర్తింపులు</h2>
+  <ul>
+    <li><b>పద్మ అవార్డులు 2026</b> (ప్రకటన 25 జనవరి 2026): మొత్తం <b>131</b> — పద్మ విభూషణ్ 5, పద్మ భూషణ్ 13, పద్మశ్రీ 113.
+      <br>పద్మ విభూషణ్: <b>ధర్మేంద్ర</b> (మరణానంతరం, కళ), <b>వి.ఎస్. అచ్యుతానందన్</b> (మరణానంతరం, ప్రజా వ్యవహారాలు), <b>జస్టిస్ కె.టి. థామస్</b>, <b>ఎన్. రాజం</b> (వయోలిన్), <b>పి. నారాయణన్</b> (సాహిత్యం-విద్య).
+      <br>పద్మ భూషణ్: మమ్ముట్టి, అల్కా యాగ్నిక్, ఉదయ్ కోటక్ మొదలైనవారు.</li>
+    <li><b>సారనాథ్</b> — UNESCO ప్రపంచ వారసత్వ ప్రదేశం (జూలై 2026) — బౌద్ధమత పాఠంతో లింక్: బుద్ధుని మొదటి ప్రవచనం!</li>
+    <li><b>కేరళ</b> — "తీవ్ర పేదరికం నిర్మూలించిన తొలి రాష్ట్రం" ప్రకటన (1 నవంబర్ 2025).</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — సైన్స్ & క్రీడలు">
+<pre>CMS-03 (LVM3-M5)     →  02-11-2025; ~4,410 kg; భారత్ నుండి GTOకి అత్యంత బరువైనది
+BlueBird Blk-2 (M6)  →  24-12-2025; ~6,100 kg; AST SpaceMobile (USA)
+PSLV-C62             →  12-01-2026; విఫలం (PS3)
+IFR 2026             →  విశాఖపట్నం; 18-02-2026; "United Through Oceans"; 3వ IFR
+మహిళల WC 2025        →  భారత్ (vs SA); హర్మన్‌ప్రీత్; PoM షఫాలీ; PoT దీప్తి
+T20 WC 2026          →  భారత్ (vs NZ, 96 పరుగులు); అహ్మదాబాద్; PoM బుమ్రా; PoT వరుణ్
+CWG 2030             →  అహ్మదాబాద్; సెంటినరీ
+పద్మ 2026            →  131 = 5 + 13 + 113</pre>
+  </div>
+
+  <details class="collapsible" id="c3-adv">
+    <summary>🔍 లోతుగా: అంతరిక్ష రంగ ప్రైవేటీకరణ దిశ</summary>
+    <div class="inner">
+      <p>2020 అంతరిక్ష సంస్కరణలతో <b>IN-SPACe</b> (నియంత్రణ-ప్రోత్సాహక సంస్థ), <b>NSIL</b> (ISRO వాణిజ్య విభాగం) ఏర్పడ్డాయి. భారత అంతరిక్ష విధానం 2023 ప్రైవేట్ సంస్థలకు ఉపగ్రహాలు, రాకెట్ల తయారీలో పూర్తి భాగస్వామ్యం ఇచ్చింది. ఆగస్టు 2026లో IN-SPACe అధిపతి పవన్ గోయెంకా — లాంచ్ వెహికల్ ఉత్పత్తిని క్రమంగా ప్రైవేట్ రంగానికి అప్పగించి, ISRO పరిశోధన-అభివృద్ధి, గగన్‌యాన్, అంతరిక్ష కేంద్రం (భారతీయ అంతరిక్ష స్టేషన్ — 2035 లక్ష్యం) వంటి అధునాతన మిషన్లపై దృష్టి పెడుతుందని ప్రకటించారు. PSLV సాంకేతిక బదిలీ (HAL–L&T), SSLV సాంకేతిక బదిలీ ఈ దిశలో చర్యలు.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q3-1">
+      <p><strong>Q1:</strong> 2026 ఇంటర్నేషనల్ ఫ్లీట్ రివ్యూ ఎక్కడ జరిగింది? భారత్ ఇంతకుముందు ఏ సంవత్సరాల్లో IFR నిర్వహించింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>విశాఖపట్నం</b> (ఫిబ్రవరి 2026). ఇంతకుముందు <b>2001 (ముంబై)</b>, <b>2016 (విశాఖపట్నం)</b>. విశాఖపట్నం రెండుసార్లు ఆతిథ్యం ఇచ్చిన ఏకైక నగరం.</p>
+    </div>
+    <div class="quiz-question" id="q3-2">
+      <p><strong>Q2:</strong> 2026 T20 ప్రపంచ కప్ ఫైనల్‌లో భారత్ ఏ జట్టును ఓడించింది? ఇది భారత్‌కు ఎన్నో T20 టైటిల్?</p>
+      <ol type="a"><li>ఆస్ట్రేలియా — 2వ</li><li>దక్షిణాఫ్రికా — 3వ</li><li>న్యూజిలాండ్ — 3వ</li><li>ఇంగ్లాండ్ — 2వ</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) న్యూజిలాండ్ — 3వ</b> (2007, 2024, 2026).</p>
+    </div>
+    <div class="quiz-question" id="q3-3">
+      <p><strong>Q3:</strong> 2030 కామన్వెల్త్ గేమ్స్‌ను "సెంటినరీ గేమ్స్" అని ఎందుకు అంటారు?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">తొలి కామన్వెల్త్ (అప్పుడు బ్రిటిష్ ఎంపైర్) గేమ్స్ <b>1930లో హామిల్టన్ (కెనడా)</b>లో జరిగాయి — 2030కి 100 ఏళ్లు. ఆతిథ్యం: అహ్మదాబాద్.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>ISRO: CMS-03 & బ్లూబర్డ్ (LVM3) విజయం; PSLV-C62 విఫలం; గగన్‌యాన్ G1 ఎదురుచూపు.</li>
+      <li>IFR 2026 + MILAN — విశాఖపట్నం; కొత్త CDS రాజా సుబ్రమణి.</li>
+      <li>క్రికెట్: మహిళల ODI WC 2025 & పురుషుల T20 WC 2026 — రెండూ భారత్‌వే; CWG 2030 అహ్మదాబాద్.</li>
+      <li>పద్మ 2026: 131 (5 విభూషణ్); సారనాథ్ UNESCO వారసత్వ ప్రదేశం.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 4 ============ -->
+<section id="chapter-4" class="chapter" data-ch="4">
+  <h1>అధ్యాయం 4: ఆంధ్రప్రదేశ్ కరెంట్ అఫైర్స్</h1>
+  <div class="meta">⏱ ~20 నిమిషాలు</div>
+
+  <h2>4.1 AP సంవత్సర కాలరేఖ — ఇంటరాక్టివ్</h2>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 170" role="img" aria-label="ఆంధ్రప్రదేశ్ సంవత్సర కాలరేఖ">
+      <line x1="40" y1="85" x2="720" y2="85" stroke="#ddd" stroke-width="6" stroke-linecap="round"/>
+      <g id="t4Edges"></g><g id="t4Nodes"></g>
+    </svg>
+    <div class="sm-status" aria-live="polite"><span id="t4Label"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#333;max-width:780px;margin:0 auto;text-align:left" id="t4Desc"></div>
+    <div class="sm-controls">
+      <button id="t4Prev">◀ మునుపటి</button><button id="t4Next">తదుపరి ▶</button><button id="t4Reset">↺ రీసెట్</button>
+      <button class="auto" id="t4Auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 4.1 — అక్టోబర్ 2025 నుండి సెప్టెంబర్ 2026 వరకు ఆంధ్రప్రదేశ్ ముఖ్య సంఘటనలు.</figcaption>
+  </figure>
+
+  <h2>4.2 అమరావతి — చట్టబద్ధ ఏకైక రాజధాని</h2>
+  <ul>
+    <li><b>ఆంధ్రప్రదేశ్ పునర్విభజన (సవరణ) బిల్లు 2026</b> — AP పునర్విభజన చట్టం 2014లోని <b>సెక్షన్ 5(2)</b> సవరణ; అమరావతికి <b>ఏకైక రాజధానిగా చట్టబద్ధ హోదా</b>.</li>
+    <li>AP శాసనసభ తీర్మానం <b>28 మార్చి 2026</b> → లోక్‌సభ (1 ఏప్రిల్) → రాజ్యసభ <b>2 ఏప్రిల్ 2026</b> → రాష్ట్రపతి ఆమోదం (ఏప్రిల్ 2026, మొదటి వారం).</li>
+    <li>2014 చట్టంలో హైదరాబాద్ 10 ఏళ్ల ఉమ్మడి రాజధాని గడువు <b>2 జూన్ 2024</b>తో ముగిసింది; మూడు రాజధానుల ప్రతిపాదన (2019–24) తర్వాత ఉన్న అనిశ్చితికి ముగింపు.</li>
+    <li><b>అమరావతి క్వాంటం వ్యాలీ</b> — శంకుస్థాపన <b>7 ఫిబ్రవరి 2026</b>; IBM (156-క్యూబిట్ "హెరాన్" ప్రాసెసర్ గల క్వాంటం సిస్టమ్ టూ), TCS, L&T భాగస్వాములు; నేషనల్ క్వాంటం మిషన్‌తో అనుసంధానం.</li>
+    <li>సెప్టెంబర్ 2026 కేబినెట్: రాజధాని ప్రాంత గ్రామాల మౌలిక సదుపాయాలకు ₹1,548 కోట్లు; శాసనసభ భవనానికి ₹661 కోట్లు.</li>
+  </ul>
+
+  <h2>4.3 కొత్త జిల్లాలు — 26 నుండి 29</h2>
+  <div class="table-wrap"><table>
+    <tr><th>కొత్త జిల్లా</th><th>ప్రధాన కేంద్రం</th><th>గమనిక</th></tr>
+    <tr><td><b>పోలవరం</b></td><td>రంపచోడవరం</td><td>గోదావరి ఏజెన్సీ (గిరిజన) ప్రాంతం</td></tr>
+    <tr><td><b>మార్కాపురం</b></td><td>మార్కాపురం</td><td>ప్రకాశం పశ్చిమ ప్రాంతం</td></tr>
+    <tr><td><b>మదనపల్లె</b></td><td>మదనపల్లె</td><td>అన్నమయ్య/చిత్తూరు పశ్చిమ ప్రాంతం</td></tr>
+  </table></div>
+  <p>ముఖ్యమంత్రి ఆమోదం <b>25 నవంబర్ 2025</b>; మొత్తం జిల్లాలు <b>29</b>. కొత్త రెవెన్యూ డివిజన్లు: నక్కపల్లి, అద్దంకి, పీలేరు, బనగానపల్లె, మడకశిర; కొత్త మండలం: పెద్దహరివనం (కర్నూలు). <i>(2022లో 13 → 26 జిల్లాలు.)</i> సెప్టెంబర్ 2026 కేబినెట్ — <b>రాజమహేంద్రవరం, గుంటూరు, తిరుపతి, కర్నూలు</b>లో కొత్త పోలీస్ కమిషనరేట్లు.</p>
+
+  <h2>4.4 AP బడ్జెట్ 2026-27 & సంక్షేమం</h2>
+  <div class="table-wrap"><table>
+    <tr><th>అంశం</th><th>విలువ</th></tr>
+    <tr><td>సమర్పణ</td><td><b>14 ఫిబ్రవరి 2026</b>, ఆర్థిక మంత్రి <b>పయ్యావుల కేశవ్</b></td></tr>
+    <tr><td>మొత్తం వ్యయం</td><td><b>₹3,32,205 కోట్లు</b> (2025-26: ₹3.22 లక్షల కోట్లు)</td></tr>
+    <tr><td>ద్రవ్య లోటు / రెవెన్యూ లోటు</td><td>₹75,868 కోట్లు (GSDPలో 3.84%) / ₹22,002 కోట్లు (1.11%)</td></tr>
+    <tr><td>అంచనా GSDP</td><td>₹19.75 లక్షల కోట్లు</td></tr>
+    <tr><td>ముఖ్య కేటాయింపులు</td><td>BC సంక్షేమం ₹34,350 కోట్లు; పాఠశాల విద్య ₹32,308 కోట్లు; ఆరోగ్యం ₹19,306 కోట్లు; వ్యవసాయం ₹11,536 కోట్లు; VB-G RAM G ₹4,605 కోట్లు</td></tr>
+    <tr><td>కొత్త ఆలోచనలు</td><td>రాయలసీమ — "గ్లోబల్ హార్టికల్చర్ హబ్"; విశాఖ ఆర్థిక ప్రాంత అభివృద్ధి; నార్వే నమూనాలో <b>AP వెల్త్ ఫండ్</b></td></tr>
+  </table></div>
+
+  <h3>సూపర్ సిక్స్ పథకాలు — ఇంటరాక్టివ్</h3>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 330" role="img" aria-label="సూపర్ సిక్స్ పథకాలు">
+      <g id="ssNodes" class="anim"></g>
+      <g class="anim d2">
+        <rect x="10" y="175" width="740" height="145" rx="10" fill="#fafafa" stroke="#ddd"/>
+        <text id="ssTitle" x="26" y="201" font-size="14.5" font-weight="700" fill="#0066cc">ఒక పథకంపై క్లిక్ చేయండి</text>
+        <foreignObject x="20" y="209" width="720" height="106"><div xmlns="http://www.w3.org/1999/xhtml" id="ssDesc" style="font-size:13.5px;line-height:1.6;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">2024 ఎన్నికల్లో కూటమి (TDP–JSP–BJP) ఇచ్చిన ఆరు హామీల అమలు స్థితి.</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 4.2 — సూపర్ సిక్స్ పథకాలు (2025–26 అమలు స్థితి).</figcaption>
+  </figure>
+
+  <h2>4.5 పెట్టుబడులు & మౌలిక సదుపాయాలు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>ప్రాజెక్టు</th><th>వివరాలు</th></tr>
+    <tr><td><b>గూగుల్ AI హబ్, విశాఖపట్నం</b></td><td>ప్రకటన 14 అక్టోబర్ 2025; <b>$15 బిలియన్లు</b> (2026–2030); గిగావాట్ స్థాయి డేటా సెంటర్ + అంతర్జాతీయ సబ్‌సీ కేబుల్ గేట్‌వే; భాగస్వాములు AdaniConneX, Airtel — భారత్‌లో గూగుల్ తొలి AI హబ్</td></tr>
+    <tr><td><b>CII పార్టనర్‌షిప్ సమ్మిట్ 2025</b></td><td>30వ ఎడిషన్, నవంబర్ 2025, విశాఖపట్నం; ఉపరాష్ట్రపతి సి.పి. రాధాకృష్ణన్ ప్రారంభం; ₹11 లక్షల కోట్లకు పైగా పెట్టుబడుల MoUలు; ~13 లక్షల ఉద్యోగాల అంచనా</td></tr>
+    <tr><td><b>AM/NS ఇండియా స్టీల్ ప్లాంట్, అనకాపల్లి</b></td><td>శంకుస్థాపన <b>23 మార్చి 2026</b>; ₹1.36 లక్షల కోట్లు; 17.8 MTPA (రెండు దశలు); ఆర్సెలార్ మిట్టల్–నిప్పాన్ స్టీల్ JV; క్యాప్టివ్ పోర్టుతో</td></tr>
+    <tr><td><b>అల్లూరి సీతారామరాజు అంతర్జాతీయ విమానాశ్రయం, భోగాపురం</b> (విజయనగరం జిల్లా)</td><td>ప్రధాని మోదీ ప్రారంభం <b>1 ఆగస్టు 2026</b>; వాణిజ్య విమానాలు 17 ఆగస్టు 2026 నుండి (పాత విశాఖ విమానాశ్రయం నుండి మార్పు); GMR నిర్మాణం; మొదటి దశ సామర్థ్యం ఏటా 63 లక్షల ప్రయాణికులు</td></tr>
+    <tr><td><b>పోలవరం–బనకచర్ల లింక్ ప్రాజెక్టు</b></td><td>గోదావరి వరద నీరు ~200 TMCని కృష్ణా–పెన్నా బేసిన్లకు (రాయలసీమ) మళ్లించే ప్రతిపాదన; పోలవరం → ప్రకాశం బ్యారేజ్ → బొల్లపల్లి → నల్లమల సొరంగం → బనకచర్ల; <b>తెలంగాణ అభ్యంతరం</b> (అపెక్స్ కౌన్సిల్, KRMB, CWC అనుమతులు లేవని); కేంద్రం ఉన్నత స్థాయి కమిటీ</td></tr>
+  </table></div>
+
+  <h2>4.6 విపత్తులు & ప్రమాదాలు (ప్రిలిమ్స్ కోసం సంక్షిప్తంగా)</h2>
+  <ul>
+    <li><b>మొంథా తుఫాను</b> — 28 అక్టోబర్ 2025 రాత్రి <b>కాకినాడ</b> సమీపంలో తీరం దాటింది; కోస్తా జిల్లాల్లో భారీ నష్టం. <i>(పేరు సూచించిన దేశం: థాయ్‌లాండ్.)</i></li>
+    <li><b>కర్నూలు బస్సు అగ్నిప్రమాదం</b> — 24 అక్టోబర్ 2025, హైదరాబాద్–బెంగళూరు జాతీయ రహదారి; ~20 మంది మృతి.</li>
+    <li><b>కాశీబుగ్గ (శ్రీకాకుళం) వేంకటేశ్వర ఆలయ తొక్కిసలాట</b> — 1 నవంబర్ 2025 (కార్తీక ఏకాదశి); 9 మంది మృతి.</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — ఆంధ్రప్రదేశ్">
+<pre>అమరావతి రాజధాని చట్టం  →  AP పునర్విభజన (సవరణ) 2026; సెక్షన్ 5(2); RS 02-04-2026
+జిల్లాలు               →  29; కొత్తవి: పోలవరం (HQ రంపచోడవరం), మార్కాపురం, మదనపల్లె
+AP బడ్జెట్ 2026-27      →  14-02-2026; ₹3,32,205 కోట్లు; FM పయ్యావుల కేశవ్; FD 3.84%
+గూగుల్ AI హబ్          →  విశాఖ; $15 బిలియన్లు; 14-10-2025
+CII సమ్మిట్            →  విశాఖ; నవంబర్ 2025 (30వ); ₹11 లక్షల కోట్లు+
+AM/NS స్టీల్            →  అనకాపల్లి; ₹1.36 లక్షల కోట్లు; 23-03-2026
+క్వాంటం వ్యాలీ          →  అమరావతి; శంకుస్థాపన 07-02-2026; IBM
+భోగాపురం విమానాశ్రయం    →  అల్లూరి సీతారామరాజు; 01-08-2026 ప్రారంభం
+IFR 2026              →  విశాఖ; 18-02-2026
+మొంథా తుఫాను           →  కాకినాడ; 28-10-2025
+పద్మశ్రీ 2026 (AP)      →  రాజేంద్ర ప్రసాద్, మురళీమోహన్, గరిమెళ్ల బాలకృష్ణ ప్రసాద్ (మరణానంతరం), వేంపటి కుటుంబ శాస్త్రి</pre>
+  </div>
+
+  <details class="collapsible" id="c4-adv">
+    <summary>🔍 లోతుగా: APPSC మెయిన్స్ కోణం — "స్వర్ణాంధ్ర 2047" & అభివృద్ధి నమూనా</summary>
+    <div class="inner">
+      <p><b>స్వర్ణాంధ్ర @2047 విజన్:</b> 2047 నాటికి $2.4 ట్రిలియన్ ఆర్థిక వ్యవస్థ, పది సూత్రాలు (పేదరిక నిర్మూలన, జనాభా నిర్వహణ, నైపుణ్యాభివృద్ధి, నీటి భద్రత, వ్యవసాయ సాంకేతికత, లాజిస్టిక్స్, ఇంధనం, ఉత్పత్తుల పరిపూర్ణత, పరిశుభ్ర ఆంధ్ర, డీప్ టెక్). <b>P4 (పబ్లిక్–ప్రైవేట్–పీపుల్ పార్టనర్‌షిప్)</b> — సంపన్న 10% మంది పేద 20% కుటుంబాలను "దత్తత" తీసుకునే విధానం.</p>
+      <p><b>విశ్లేషణ అంశాలు:</b> (1) పెట్టుబడుల ఆకర్షణ vs MoUల వాస్తవ అమలు రేటు; (2) సంక్షేమ పథకాల ఆర్థిక భారం (సూపర్ సిక్స్) vs ద్రవ్య లోటు 3.84%; (3) ప్రాంతీయ సమతుల్యత — అమరావతి (కేంద్రం), విశాఖ (IT/AI/పరిశ్రమలు), రాయలసీమ (హార్టికల్చర్, నీటి ప్రాజెక్టులు); (4) అంతర్-రాష్ట్ర నదీ జలాల వివాదాలు (బనకచర్ల) — సహకార సమాఖ్య, ఆర్టి. 262.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q4-1">
+      <p><strong>Q1:</strong> అమరావతికి చట్టబద్ధ రాజధాని హోదా ఇచ్చేందుకు AP పునర్విభజన చట్టం 2014లోని ఏ సెక్షన్ సవరించబడింది?</p>
+      <ol type="a"><li>సెక్షన్ 3</li><li>సెక్షన్ 5(2)</li><li>సెక్షన్ 94</li><li>సెక్షన్ 90</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) సెక్షన్ 5(2)</b> — ఇది ఉమ్మడి రాజధాని తర్వాత AP కొత్త రాజధాని గురించిన నిబంధన. <i>(సెక్షన్ 90 — పోలవరం జాతీయ ప్రాజెక్టు; 94 — ప్రత్యేక ఆర్థిక చర్యలు.)</i></p>
+    </div>
+    <div class="quiz-question" id="q4-2">
+      <p><strong>Q2:</strong> కొత్తగా ఏర్పడిన పోలవరం జిల్లా ప్రధాన కేంద్రం ఏది? ఇప్పుడు AP జిల్లాల సంఖ్య ఎంత?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>రంపచోడవరం</b>; మొత్తం <b>29</b> జిల్లాలు (పోలవరం, మార్కాపురం, మదనపల్లె కొత్తవి).</p>
+    </div>
+    <div class="quiz-question" id="q4-3">
+      <p><strong>Q3:</strong> భోగాపురం విమానాశ్రయానికి ఎవరి పేరు పెట్టారు, అది ఏ జిల్లాలో ఉంది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>అల్లూరి సీతారామరాజు</b> (రంప తిరుగుబాటు 1922–24 నాయకుడు); <b>విజయనగరం</b> జిల్లా. 1 ఆగస్టు 2026న ప్రధాని ప్రారంభించారు.</p>
+    </div>
+    <div class="quiz-question" id="q4-4">
+      <p><strong>Q4:</strong> అన్నదాత సుఖీభవ కింద రైతు కుటుంబానికి ఏటా మొత్తం ఎంత సహాయం అందుతుంది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>₹20,000</b> = రాష్ట్రం ₹14,000 + PM-KISAN ₹6,000 (కేంద్రం).</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>అమరావతి — చట్టబద్ధ ఏకైక రాజధాని (ఏప్రిల్ 2026); క్వాంటం వ్యాలీ శంకుస్థాపన (ఫిబ్ర 2026).</li>
+      <li>29 జిల్లాలు; AP బడ్జెట్ ₹3.32 లక్షల కోట్లు; సూపర్ సిక్స్ పథకాల అమలు.</li>
+      <li>విశాఖ: గూగుల్ AI హబ్ ($15 bn), CII సమ్మిట్, IFR 2026, భోగాపురం విమానాశ్రయం; అనకాపల్లి AM/NS స్టీల్.</li>
+      <li>మొంథా తుఫాను (కాకినాడ), బనకచర్ల వివాదం, కొత్త పోలీస్ కమిషనరేట్లు.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">సూచికకు తిరిగి ✓</button></div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  const TOTAL = 4, P = 'ca26-';
+  const NS = 'http://www.w3.org/2000/svg';
+  const store = {
+    get(k){ try{ return JSON.parse(sessionStorage.getItem(P+k)); }catch(e){ return null; } },
+    set(k,v){ try{ sessionStorage.setItem(P+k, JSON.stringify(v)); }catch(e){} }
+  };
+  const $ = id => document.getElementById(id);
+  const sections = [...document.querySelectorAll('.chapter')];
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  let visited = new Set(store.get('visited') || []);
+  let current = 0;
+
+  function show(n, push){
+    n = Math.max(0, Math.min(TOTAL, n));
+    current = n;
+    sections.forEach(s => s.classList.toggle('visible', +s.dataset.ch === n));
+    if (n > 0) { visited.add(n); store.set('visited', [...visited]); }
+    tocLinks.forEach(a => { a.classList.toggle('active', +a.dataset.ch === n); a.classList.toggle('done', visited.has(+a.dataset.ch)); });
+    $('progressFill').style.width = (visited.size / TOTAL * 100) + '%';
+    $('chapterCount').textContent = visited.size + '/' + TOTAL + ' అధ్యాయాలు';
+    if (push !== false) history.replaceState(null, '', '#' + sections[n].id);
+    window.scrollTo({top:0, behavior:'smooth'});
+    $('sidebar').classList.remove('open');
+  }
+  window.goToChapter = n => show(n);
+  window.nextChapter = () => current < TOTAL ? show(current + 1) : (location.href = 'index.html');
+  window.previousChapter = () => show(current - 1);
+  document.querySelectorAll('.next-btn').forEach(b => b.addEventListener('click', nextChapter));
+  document.querySelectorAll('.prev-btn').forEach(b => b.addEventListener('click', previousChapter));
+  document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', () => show(+el.dataset.go)));
+  tocLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(+a.dataset.ch); }));
+  $('menuBtn').addEventListener('click', () => $('sidebar').classList.toggle('open'));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' && current < TOTAL) show(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+  });
+
+  // Quiz reveal
+  const revealed = new Set(store.get('quiz') || []);
+  document.querySelectorAll('.quiz-question').forEach(q => {
+    const btn = q.querySelector('.reveal-btn'), ans = q.querySelector('.answer'), label = btn.textContent;
+    const set = on => { ans.classList.toggle('show', on); btn.textContent = on ? 'సమాధానం దాచు' : label; btn.setAttribute('aria-expanded', on); };
+    set(revealed.has(q.id));
+    btn.addEventListener('click', () => { const on = !ans.classList.contains('show'); set(on); on ? revealed.add(q.id) : revealed.delete(q.id); store.set('quiz', [...revealed]); });
+  });
+
+  // Collapsibles
+  const openSet = new Set(store.get('open') || []);
+  document.querySelectorAll('details.collapsible').forEach(d => {
+    if (openSet.has(d.id)) d.open = true;
+    d.addEventListener('toggle', () => { d.open ? openSet.add(d.id) : openSet.delete(d.id); store.set('open', [...openSet]); });
+  });
+
+  // Revision blocks
+  const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  document.querySelectorAll('.code-block').forEach(cb => {
+    const pre = cb.querySelector('pre');
+    const raw = pre.textContent.replace(/^\n+|\s+$/g, '');
+    pre.innerHTML = raw.split('\n').map((line, i) => {
+      let h = esc(line), com = '';
+      const k = h.indexOf('#');
+      if (k >= 0) { com = '<span class="tok-com">' + h.slice(k) + '</span>'; h = h.slice(0, k); }
+      h = h.replace(/(→|=|\|)/g, '<span class="tok-key">$1</span>').replace(/(\d+)/g, '<span class="tok-num">$1</span>');
+      return '<span class="ln" data-n="' + (i + 1) + '">' + h + com + '</span>';
+    }).join('');
+    const head = document.createElement('div'); head.className = 'cb-head';
+    head.innerHTML = '<span>' + esc(cb.dataset.title || 'నోట్స్') + '</span>';
+    const btn = document.createElement('button'); btn.className = 'copy-btn'; btn.textContent = 'కాపీ'; btn.setAttribute('aria-label', 'నోట్స్ కాపీ చేయండి');
+    btn.addEventListener('click', () => {
+      const done = () => { btn.textContent = '✓ కాపీ అయింది'; setTimeout(() => btn.textContent = 'కాపీ', 1500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(raw).then(done, () => {});
+      else { const t = document.createElement('textarea'); t.value = raw; document.body.appendChild(t); t.select(); try{ document.execCommand('copy'); done(); }catch(e){} t.remove(); }
+    });
+    head.appendChild(btn); cb.insertBefore(head, pre);
+  });
+
+  // ---------- helpers ----------
+  function el(tag, attrs, text){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; }
+
+  // Clickable circle nodes with a detail panel
+  function makeNodes(container, items, titleEl, descEl){
+    const groups = [];
+    items.forEach(it => {
+      const g = el('g', {class:'hov', tabindex:'0', role:'button', 'aria-label': it.name, style:'cursor:pointer'});
+      if (it.spoke) g.appendChild(el('line', it.spoke));
+      if (it.w) g.appendChild(el('rect', {class:'box', x:it.x - it.w/2, y:it.y - it.h/2, width:it.w, height:it.h, rx:10, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      else g.appendChild(el('circle', {class:'box', cx:it.x, cy:it.y, r:it.r, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      if (it.num) g.appendChild(el('text', {x:it.x, y:it.y - 10, 'text-anchor':'middle', 'font-size':10.5, fill:'#555'}, it.num));
+      g.appendChild(el('text', {x:it.x, y:it.y + (it.num ? 12 : 5), 'text-anchor':'middle', 'font-size':it.fs || 11.5, 'font-weight':700}, it.short));
+      const pick = () => {
+        groups.forEach(x => x.querySelector('.box').setAttribute('stroke-width', 2));
+        g.querySelector('.box').setAttribute('stroke-width', 4.5);
+        g.classList.remove('pulse'); void g.getBoundingClientRect(); g.classList.add('pulse');
+        titleEl.textContent = it.name; descEl.innerHTML = it.desc;
+        if (it.onPick) it.onPick();
+      };
+      g.addEventListener('click', pick);
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      container.appendChild(g); groups.push(g);
+    });
+    return groups;
+  }
+
+  // Generic state machine (states drawn in HTML as <g class="sm-state" data-state=..>)
+  function stateMachine(o){
+    let st = o.start, timer = null, step = 0;
+    const btns = [...document.querySelectorAll(o.controls + ' [data-ev]')];
+    const auto = document.querySelector(o.controls + ' .auto');
+    function render(edge){
+      document.querySelectorAll(o.scope + ' .sm-state').forEach(g => g.classList.toggle('active', g.dataset.state === st));
+      $(o.label).textContent = o.states[st].label;
+      $(o.desc).innerHTML = o.states[st].desc;
+      btns.forEach(b => { const t = o.T[b.dataset.ev]; b.disabled = b.dataset.ev === 'reset' ? st === o.start : t[0] !== st; });
+      document.querySelectorAll(o.scope + ' .sm-edge').forEach(p => p.classList.remove('run'));
+      if (edge) { const p = $(edge); void p.getBoundingClientRect(); p.classList.add('run'); }
+    }
+    function fire(ev){ const t = o.T[ev]; if (t[0] !== null && t[0] !== st) return; st = t[1]; render(t[2]); }
+    function stopAuto(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    btns.forEach(b => b.addEventListener('click', () => { stopAuto(); fire(b.dataset.ev); }));
+    auto.addEventListener('click', () => {
+      if (timer) return stopAuto();
+      st = o.start; render(); step = 0;
+      auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => { fire(o.order[step % o.order.length]); step++; }, o.interval || 2000);
+    });
+    render();
+  }
+
+  // Timeline stepper: items = [[top, bottom, title, descHTML], ...]
+  function stepper(o){
+    const nodes = $(o.nodes), edges = $(o.edges), y = o.y || 95, x0 = o.x0 || 50, x1 = o.x1 || 710;
+    const X = i => x0 + i * ((x1 - x0) / (o.items.length - 1));
+    const circles = [], segs = [];
+    o.items.forEach((t, i) => {
+      if (i > 0) { const p = el('path', {class:'sm-edge', d:`M${X(i-1)+22},${y} L${X(i)-22},${y}`}); edges.appendChild(p); segs.push(p); }
+      const last = i === o.items.length - 1;
+      const g = el('g', {class:'sm-state hov', tabindex:'0', role:'button', 'aria-label': t[2], style:'cursor:pointer'});
+      g.appendChild(el('circle', {class:'box', cx:X(i), cy:y, r:22, fill: last ? '#f0f9f4' : '#e8f1fb', stroke: last ? '#00b359' : '#0066cc', 'stroke-width':2}));
+      g.appendChild(el('text', {x:X(i), y:y+5, 'text-anchor':'middle', 'font-size':11, 'font-weight':700}, (i+1)+''));
+      g.appendChild(el('text', {x:X(i), y:y-37, 'text-anchor':'middle', 'font-size':o.topFs || 14, 'font-weight':700, fill:'#0066cc'}, t[0]));
+      g.appendChild(el('text', {x:X(i), y:y+42, 'text-anchor':'middle', 'font-size':o.botFs || 11.5}, t[1]));
+      g.addEventListener('click', () => { stop(); go(i); });
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); go(i); } });
+      nodes.appendChild(g); circles.push(g);
+    });
+    let cur = 0, timer = null;
+    const prev = $(o.prev), next = $(o.next), auto = $(o.auto);
+    function go(i){
+      const fwd = i === cur + 1;
+      cur = Math.max(0, Math.min(o.items.length - 1, i));
+      circles.forEach((g, k) => { g.classList.toggle('active', k === cur); g.querySelector('.box').setAttribute('fill-opacity', k <= cur ? 1 : .45); });
+      segs.forEach((p, k) => { p.classList.remove('run'); p.style.stroke = k < cur ? '#0066cc' : ''; p.style.strokeWidth = k < cur ? 3 : ''; });
+      if (fwd && cur > 0) { const p = segs[cur-1]; void p.getBoundingClientRect(); p.classList.add('run'); }
+      $(o.label).textContent = o.items[cur][0] + ' · ' + o.items[cur][2];
+      $(o.desc).innerHTML = o.items[cur][3];
+      prev.disabled = cur === 0; next.disabled = cur === o.items.length - 1;
+    }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    prev.addEventListener('click', () => { stop(); go(cur - 1); });
+    next.addEventListener('click', () => { stop(); go(cur + 1); });
+    $(o.reset).addEventListener('click', () => { stop(); go(0); });
+    auto.addEventListener('click', () => {
+      if (timer) return stop();
+      go(0); auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => go(cur === o.items.length - 1 ? 0 : cur + 1), o.interval || 2200);
+    });
+    go(0);
+  }
+
+  // ---------- lesson-specific ----------
+  // Card helper: row of clickable rectangles
+  function cards(containerId, titleId, descId, list, y, h){
+    const n = list.length, gap = 740 / n, w = gap - 14;
+    makeNodes($(containerId), list.map((c, i) => ({ name: c.name, short: c.short, num: c.num, x: 10 + gap * i + gap / 2, y: y || 62, w: w, h: h || 80,
+      fs: c.short.length > 10 ? 12 : 14, fill: c.fill, stroke: c.stroke, desc: c.desc })), $(titleId), $(descId));
+  }
+  const CHG = ['#fff3ee','#ff6b35'], KEEP = ['#f0f9f4','#00b359'];
+
+  // Chapter 1 — 2026 elections
+  cards('elNodes','elTitle','elDesc', [
+    { short:'పశ్చిమ బెంగాల్', num:'BJP · మార్పు', name:'పశ్చిమ బెంగాల్ — BJP విజయం', fill:CHG[0], stroke:CHG[1], desc:'పోలింగ్ 23 & 29 ఏప్రిల్ 2026. <b>BJP</b> ఘన విజయం — రాష్ట్రంలో తొలిసారి BJP ప్రభుత్వం; TMC (మమతా బెనర్జీ) 15 ఏళ్ల పాలన అంతం. ముఖ్యమంత్రి <b>సువేందు అధికారి</b> — ప్రమాణం <b>9 మే 2026</b>.' },
+    { short:'తమిళనాడు', num:'TVK · మార్పు', name:'తమిళనాడు — TVK', fill:CHG[0], stroke:CHG[1], desc:'పోలింగ్ 23 ఏప్రిల్ 2026. నటుడు విజయ్ స్థాపించిన <b>తమిళగ వెట్రి కళగం (TVK)</b> అతిపెద్ద పార్టీ; DMK (ఎం.కె. స్టాలిన్) ప్రభుత్వం అంతం. ముఖ్యమంత్రి <b>సి. జోసెఫ్ విజయ్</b> — ప్రమాణం <b>10 మే 2026</b>. 1967 తర్వాత DMK/AIADMK కాని ప్రభుత్వం.' },
+    { short:'కేరళ', num:'UDF · మార్పు', name:'కేరళ — కాంగ్రెస్ నేతృత్వ UDF', fill:CHG[0], stroke:CHG[1], desc:'పోలింగ్ 9 ఏప్రిల్ 2026. <b>UDF</b> (కాంగ్రెస్ నేతృత్వం) మెజారిటీ; LDF (పినరయి విజయన్) రెండు వరుస పదవీకాలాల తర్వాత ఓటమి. ముఖ్యమంత్రి <b>వి.డి. సతీశన్</b> (మే 2026).' },
+    { short:'అస్సాం', num:'BJP · కొనసాగింపు', name:'అస్సాం — BJP హ్యాట్రిక్', fill:KEEP[0], stroke:KEEP[1], desc:'పోలింగ్ 9 ఏప్రిల్ 2026. <b>BJP</b> వరుసగా మూడోసారి (2016, 2021, 2026). ముఖ్యమంత్రి <b>హిమంత బిశ్వ శర్మ</b> కొనసాగింపు.' },
+    { short:'పుదుచ్చేరి', num:'AINRC · కొనసాగింపు', name:'పుదుచ్చేరి — AINRC (NDA)', fill:KEEP[0], stroke:KEEP[1], desc:'పోలింగ్ 9 ఏప్రిల్ 2026. <b>ఆల్ ఇండియా ఎన్.ఆర్. కాంగ్రెస్</b> (NDA భాగస్వామి). ముఖ్యమంత్రి <b>ఎన్. రంగస్వామి</b> కొనసాగింపు. <i>(పుదుచ్చేరి శాసనసభ గల UT — ఆర్టి. 239A.)</i>' }
+  ]);
+
+  // Chapter 2 — trade deals
+  cards('ftNodes','ftTitle','ftDesc', [
+    { short:'భారత్–EU', num:'FTA · జన 2026', name:'భారత్–యూరోపియన్ యూనియన్ FTA', fill:'#e8f1fb', stroke:'#0066cc', desc:'చర్చలు 2007లో ప్రారంభం → 2013లో నిలిపివేత → 2022లో పునఃప్రారంభం → <b>27 జనవరి 2026</b>న న్యూఢిల్లీ శిఖరాగ్ర సదస్సులో ముగింపు ప్రకటన (ఉర్సులా వాన్ డెర్ లేయెన్, ఆంటోనియో కోస్టా). ~90%+ వస్తువులపై సుంకాల తగ్గింపు/రద్దు; కార్లపై భారత సుంకం 110% నుండి క్రమంగా తగ్గింపు; భద్రత-రక్షణ భాగస్వామ్యం, మొబిలిటీ ఒప్పందం కూడా. సంతకం, EU పార్లమెంట్ ఆమోదం తర్వాత అమలు.' },
+    { short:'భారత్–అమెరికా', num:'టారిఫ్ · ఫిబ్ర 2026', name:'భారత్–అమెరికా టారిఫ్ ఒప్పందం', fill:'#fff3ee', stroke:'#ff6b35', desc:'2025లో అమెరికా భారత ఎగుమతులపై భారీ సుంకాలు (రష్యా చమురు కొనుగోళ్లపై అదనపు పెనాల్టీతో కలిపి) విధించింది. <b>ఫిబ్రవరి 2026</b> మధ్యంతర ఒప్పందంతో సుంకం <b>18%</b>కి తగ్గింపు. ద్వైపాక్షిక వాణిజ్య ఒప్పందం (BTA) చర్చలు కొనసాగుతున్నాయి.' },
+    { short:'భారత్–న్యూజిలాండ్', num:'FTA · ఏప్రి 2026', name:'భారత్–న్యూజిలాండ్ FTA', fill:'#f0f9f4', stroke:'#00b359', desc:'<b>28 ఏప్రిల్ 2026</b>న న్యూఢిల్లీలో సంతకం. పాడి ఉత్పత్తుల వంటి సున్నిత రంగాలపై భారత్ రక్షణలు కొనసాగించింది.' },
+    { short:'భారత్–కెనడా', num:'భాగస్వామ్యం · మార్చి 2026', name:'భారత్–కెనడా ఆర్థిక భాగస్వామ్యం', fill:'#f1ecfb', stroke:'#7a5cc8', desc:'2023–24 దౌత్య ఉద్రిక్తతల తర్వాత సంబంధాల పునరుద్ధరణ; ప్రధాని మార్క్ కార్నీతో <b>2 మార్చి 2026</b>న ఆర్థిక భాగస్వామ్య ఒప్పందం ప్రకటన.' }
+  ]);
+
+  // Chapter 3 — science/defence/sports timeline
+  stepper({ nodes:'t3Nodes', edges:'t3Edges', y:85, x0:50, x1:710, prev:'t3Prev', next:'t3Next', reset:'t3Reset', auto:'t3Auto', label:'t3Label', desc:'t3Desc', topFs:12, botFs:10.5, interval:2400, items:[
+    ['నవం 25','CMS-03/WC','ISRO CMS-03 & మహిళల ప్రపంచ కప్ · 2 నవంబర్ 2025','అదే రోజు రెండు విజయాలు: <b>LVM3-M5</b> ద్వారా నౌకాదళ సమాచార ఉపగ్రహం <b>CMS-03 (GSAT-7R)</b> (~4,410 kg) ప్రయోగం; నవీ ముంబైలో <b>భారత మహిళల జట్టు తొలి ODI ప్రపంచ కప్</b> (vs దక్షిణాఫ్రికా).'],
+    ['నవం 25','CWG 2030','కామన్వెల్త్ గేమ్స్ 2030 — అహ్మదాబాద్ · 26 నవంబర్ 2025','గ్లాస్గోలో కామన్వెల్త్ స్పోర్ట్ జనరల్ అసెంబ్లీ <b>అహ్మదాబాద్ (అమ్దావాద్)</b>ను 2030 "సెంటినరీ గేమ్స్" ఆతిథ్య నగరంగా ఖరారు చేసింది.'],
+    ['డిసెం 25','బ్లూబర్డ్','LVM3-M6 / బ్లూబర్డ్ బ్లాక్-2 · 24 డిసెంబర్ 2025','అమెరికా AST SpaceMobile కోసం ~6,100 kg ఉపగ్రహం — LVM3 మోసిన అత్యంత బరువైన పేలోడ్; NSIL వాణిజ్య ఒప్పందం; ఫోన్లకు నేరుగా అంతరిక్ష బ్రాడ్‌బ్యాండ్.'],
+    ['జన 26','PSLV-C62','PSLV-C62 వైఫల్యం · 12 జనవరి 2026','EOS-N1 (DRDO) సహా పేలోడ్లు కక్ష్యకు చేరలేదు — మూడో దశ చివర్లో రోల్-రేట్ విచలనం. PSLV అరుదైన వైఫల్యాల్లో ఒకటి (1993 PSLV-D1, 2017 C39, 2025 C61 తర్వాత).'],
+    ['ఫిబ్ర 26','AI సమ్మిట్','ఇండియా AI ఇంపాక్ట్ సమ్మిట్ · 16–20 ఫిబ్రవరి 2026','భారత్ మండపం, న్యూఢిల్లీ — గ్లోబల్ సౌత్‌లో తొలి AI శిఖరాగ్ర సదస్సు; డిక్లరేషన్ ఆమోదం; భారీ పెట్టుబడి హామీలు.'],
+    ['ఫిబ్ర 26','IFR','ఇంటర్నేషనల్ ఫ్లీట్ రివ్యూ — విశాఖపట్నం · 18 ఫిబ్రవరి 2026','రాష్ట్రపతి ద్రౌపది ముర్ము సమీక్ష; థీమ్ "United Through Oceans"; భారత్ 3వ IFR; MILAN 2026 (9వ) సమాంతరంగా; INS విక్రాంత్ పాల్గొంది.'],
+    ['మార్చి 26','T20 WC','పురుషుల T20 ప్రపంచ కప్ — భారత్ విజేత · 8 మార్చి 2026','అహ్మదాబాద్ ఫైనల్‌లో న్యూజిలాండ్‌పై 96 పరుగుల విజయం; 255/5 — ఫైనల్ రికార్డు స్కోరు; సంజు శాంసన్ 89 (46); బుమ్రా 4/15; టైటిల్ నిలబెట్టుకున్న తొలి జట్టు.'],
+    ['మే 26','CDS','కొత్త చీఫ్ ఆఫ్ డిఫెన్స్ స్టాఫ్ · 30 మే 2026','జనరల్ ఎన్.ఎస్. రాజా సుబ్రమణి బాధ్యతలు — జనరల్ అనిల్ చౌహాన్ తర్వాత; DMA కార్యదర్శి కూడా.'],
+    ['జూన్ 26','LRLACM','DRDO — దీర్ఘశ్రేణి భూ దాడి క్రూయిజ్ మిసైల్ · 15 జూన్ 2026','LRLACM పరీక్ష విజయవంతం — నిర్భయ్ ప్రాజెక్టు ఆధారంగా అభివృద్ధి చేసిన సబ్‌సోనిక్ క్రూయిజ్ మిసైల్.'],
+    ['జూలై 26','సారనాథ్','సారనాథ్ — UNESCO ప్రపంచ వారసత్వ ప్రదేశం','బుద్ధుని మొదటి ప్రవచనం (ధర్మచక్ర ప్రవర్తనం) జరిగిన ప్రదేశం; అశోక సింహ స్తంభ శీర్షం (జాతీయ చిహ్నం) ఇక్కడిదే.']
+  ]});
+
+  // Chapter 4 — AP timeline
+  stepper({ nodes:'t4Nodes', edges:'t4Edges', y:85, x0:50, x1:710, prev:'t4Prev', next:'t4Next', reset:'t4Reset', auto:'t4Auto', label:'t4Label', desc:'t4Desc', topFs:12, botFs:10.5, interval:2400, items:[
+    ['అక్టో 25','గూగుల్','గూగుల్ AI హబ్ — విశాఖపట్నం · 14 అక్టోబర్ 2025','$15 బిలియన్లు (2026–30), గిగావాట్ డేటా సెంటర్, సబ్‌సీ కేబుల్ ల్యాండింగ్; AdaniConneX, Airtel భాగస్వాములు; ఢిల్లీలో ఒప్పందం.'],
+    ['అక్టో 25','మొంథా','మొంథా తుఫాను · 28 అక్టోబర్ 2025','తీవ్ర తుఫాను కాకినాడ సమీపంలో తీరం దాటింది; కోస్తా జిల్లాల్లో పంట, ఆస్తి నష్టం.'],
+    ['నవం 25','CII','CII పార్టనర్‌షిప్ సమ్మిట్ (30వ) — విశాఖపట్నం','₹11 లక్షల కోట్లకు పైగా పెట్టుబడుల MoUలు; ~13 లక్షల ఉద్యోగాలు; ఉపరాష్ట్రపతి ప్రారంభం.'],
+    ['నవం 25','29 జిల్లాలు','మూడు కొత్త జిల్లాలు · 25 నవంబర్ 2025','పోలవరం (HQ రంపచోడవరం), మార్కాపురం, మదనపల్లె — మొత్తం 29 జిల్లాలు; 5 కొత్త రెవెన్యూ డివిజన్లు.'],
+    ['ఫిబ్ర 26','క్వాంటం','అమరావతి క్వాంటం వ్యాలీ శంకుస్థాపన · 7 ఫిబ్రవరి 2026','కేంద్ర మంత్రి జితేంద్ర సింగ్, CM చంద్రబాబు నాయుడు; IBM క్వాంటం సిస్టమ్ టూ (156 క్యూబిట్ హెరాన్) — TCS, L&T భాగస్వాములు.'],
+    ['ఫిబ్ర 26','బడ్జెట్','AP బడ్జెట్ 2026-27 · 14 ఫిబ్రవరి 2026','₹3,32,205 కోట్లు; ఆర్థిక మంత్రి పయ్యావుల కేశవ్; FD 3.84% GSDP; AP వెల్త్ ఫండ్ ప్రతిపాదన.'],
+    ['ఫిబ్ర 26','IFR','ఇంటర్నేషనల్ ఫ్లీట్ రివ్యూ — విశాఖపట్నం · 18 ఫిబ్రవరి 2026','విశాఖ రెండోసారి IFR ఆతిథ్యం (2016, 2026) — తూర్పు నౌకాదళ కమాండ్ కేంద్రం.'],
+    ['మార్చి 26','AM/NS','AM/NS స్టీల్ ప్లాంట్ శంకుస్థాపన — అనకాపల్లి · 23 మార్చి 2026','₹1.36 లక్షల కోట్లు; 17.8 MTPA; రాష్ట్ర చరిత్రలో అతిపెద్ద పారిశ్రామిక పెట్టుబడుల్లో ఒకటి.'],
+    ['ఏప్రి 26','అమరావతి','అమరావతి — చట్టబద్ధ ఏకైక రాజధాని · 2 ఏప్రిల్ 2026','AP పునర్విభజన (సవరణ) బిల్లు 2026 — రాజ్యసభ ఆమోదం 2 ఏప్రిల్; సెక్షన్ 5(2) సవరణ; రాష్ట్రపతి ఆమోదంతో చట్టం.'],
+    ['ఆగ 26','భోగాపురం','అల్లూరి సీతారామరాజు అంతర్జాతీయ విమానాశ్రయం · 1 ఆగస్టు 2026','ప్రధాని మోదీ ప్రారంభం; 17 ఆగస్టు నుండి విశాఖ విమాన సర్వీసులు ఇక్కడికి మార్పు; GMR.'],
+    ['సెప్టెం 26','కేబినెట్','AP కేబినెట్ నిర్ణయాలు','రాజమహేంద్రవరం, గుంటూరు, తిరుపతి, కర్నూలులో కొత్త పోలీస్ కమిషనరేట్లు; అమరావతి మౌలిక సదుపాయాలకు నిధులు; హంద్రీ-నీవా (HNSS) ఫేజ్-2కు ₹1,323.75 కోట్లు; స్థానిక సంస్థల ఎన్నికలు మూడు దశల్లో.']
+  ]});
+
+  // Chapter 4 — Super Six
+  (function(){
+    const S = [
+      ['తల్లికి వందనం','విద్య','బడికి వెళ్లే ప్రతి బిడ్డకు ఏటా <b>₹15,000</b> (తల్లి ఖాతాకు ₹13,000 + పాఠశాల నిర్వహణ నిధికి ₹2,000) — కుటుంబంలో ఎంతమంది పిల్లలున్నా. 2026-27 లక్ష్యం ~68 లక్షల విద్యార్థులు; ఇప్పటికే ~64.8 లక్షల మందికి ₹9,700 కోట్లకు పైగా విడుదల.'],
+      ['అన్నదాత సుఖీభవ','వ్యవసాయం','రైతు కుటుంబానికి ఏటా <b>₹20,000</b> = రాష్ట్రం ₹14,000 + PM-KISAN ₹6,000 (విడతల వారీగా). ~46.9 లక్షల రైతు కుటుంబాలు.'],
+      ['స్త్రీ శక్తి','రవాణా','<b>15 ఆగస్టు 2025</b> నుండి మహిళలకు APSRTC బస్సుల్లో (పల్లెవెలుగు, అల్ట్రా పల్లెవెలుగు, సిటీ, ఎక్స్‌ప్రెస్ మొదలైనవి) <b>ఉచిత ప్రయాణం</b>; రోజుకు ~24 లక్షల మంది; ఏటా ~₹3,267 కోట్ల వ్యయం.'],
+      ['దీపం-2','LPG','అర్హ కుటుంబాలకు ఏటా <b>మూడు ఉచిత LPG సిలిండర్లు</b> (1 నవంబర్ 2024 నుండి); ~1.1 కోట్ల కుటుంబాలు.'],
+      ['NTR భరోసా','పెన్షన్లు','సామాజిక భద్రతా పెన్షన్లు <b>₹4,000</b>కి (వికలాంగులకు ₹6,000; పూర్తి వైకల్యం గలవారికి ₹15,000) పెంపు — ప్రతి నెల 1వ తేదీన ఇంటి వద్దే పంపిణీ.'],
+      ['ఉద్యోగాలు','యువత','20 లక్షల ఉద్యోగాల హామీ — మెగా DSC (16,000+ ఉపాధ్యాయ పోస్టులు), పెట్టుబడుల ద్వారా ప్రైవేట్ ఉద్యోగాలు; నిరుద్యోగ భృతి హామీ అమలుపై చర్చ కొనసాగుతోంది.']
+    ];
+    const cols = ['#e8f1fb','#f0f9f4','#fff3ee','#fff8e1','#f1ecfb','#e8f1fb'], strokes = ['#0066cc','#00b359','#ff6b35','#d4a017','#7a5cc8','#0066cc'];
+    makeNodes($('ssNodes'), S.map((s, i) => ({ name: s[0] + ' (' + s[1] + ')', short: s[0], num: s[1],
+      x: 130 + (i % 3) * 250, y: i < 3 ? 45 : 120, w: 220, h: 60, fs: 13.5, fill: cols[i], stroke: strokes[i], desc: s[2] })), $('ssTitle'), $('ssDesc'));
+  })();
+
+
+  const idx = sections.findIndex(s => '#' + s.id === location.hash);
+  show(idx >= 0 ? +sections[idx].dataset.ch : 0, false);
+})();
+</script>
+</body>
+</html>

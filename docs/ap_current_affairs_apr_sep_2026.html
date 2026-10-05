@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP కరెంట్ అఫైర్స్: ఏప్రిల్–సెప్టెంబర్ 2026</title>
+<style>
+:root{
+  --primary:#0066cc; --primary-dark:#004f9e; --primary-light:#e8f1fb;
+  --secondary:#00b359; --secondary-light:#f0f9f4;
+  --accent:#ff6b35; --accent-light:#fff3ee;
+  --bg:#ffffff; --sidebar:#f8f8f8; --text:#1a1a1a; --muted:#555; --border:#ddd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Nirmala UI','Noto Sans Telugu','Gautami',sans-serif;
+  font-size:16px;line-height:1.75;letter-spacing:.3px}
+.container{display:flex;min-height:100vh}
+/* Sidebar */
+.sidebar{width:280px;flex-shrink:0;background:var(--sidebar);border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 16px}
+.sidebar h2{margin:0 0 4px;font-size:18px;color:var(--primary)}
+.sidebar .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.progress-bar{height:8px;background:#e4e4e4;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--secondary);transition:width .4s ease}
+.chapter-count{font-size:13px;color:var(--muted);margin:6px 0 16px}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{display:block;padding:8px 10px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14.5px;line-height:1.4;
+  border-left:3px solid transparent;transition:background .3s,border-color .3s}
+.toc a:hover{background:var(--accent-light);border-left-color:var(--accent)}
+.toc a.active{background:var(--primary-light);border-left-color:var(--primary);color:var(--primary);font-weight:600}
+.toc a.done::after{content:" ✓";color:var(--secondary);font-weight:700}
+.back-link{display:inline-block;margin-top:18px;font-size:13px;color:var(--primary)}
+.menu-btn{display:none}
+/* Content */
+.content{flex:1;min-width:0;padding:32px 24px 64px}
+.chapter{max-width:900px;margin:0 auto;display:none;animation:fade .5s ease-in}
+.chapter.visible{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:28px;color:var(--primary);margin:0 0 8px;line-height:1.35}
+h2{font-size:22px;color:var(--primary);margin:2rem 0 .6rem;line-height:1.4}
+h3{font-size:18px;color:#333;margin:1.4rem 0 .5rem}
+.meta{color:var(--muted);font-size:14px;margin-bottom:1.5rem}
+p{margin:.6rem 0}
+.hl{background:var(--accent-light);padding:0 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--primary-light);color:var(--primary-dark)}
+tr:nth-child(even) td{background:#fafafa}
+.table-wrap{overflow-x:auto}
+.callout{border-left:4px solid var(--accent);background:var(--accent-light);padding:10px 14px;border-radius:0 6px 6px 0;margin:1rem 0}
+.callout b{color:#c4471a}
+/* Intro */
+.intro-page .subtitle{font-size:18px;color:var(--muted);margin-top:0}
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:1.2rem 0}
+.intro-card{border:1px solid var(--border);border-top:4px solid var(--primary);border-radius:8px;padding:12px 14px;cursor:pointer;transition:box-shadow .3s,transform .3s}
+.intro-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-2px)}
+.intro-card .n{font-size:13px;color:var(--accent);font-weight:700}
+.start-btn,.nav-buttons button,.sm-controls button,.reveal-btn{font:inherit;cursor:pointer;border-radius:6px;transition:background .3s,color .3s,border-color .3s}
+.start-btn{background:var(--primary);color:#fff;border:0;padding:12px 22px;font-size:16px;font-weight:600;margin-top:10px}
+.start-btn:hover{background:var(--primary-dark)}
+/* Diagrams */
+figure.diagram{margin:1.5rem 0;border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff}
+figure.diagram svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);text-align:center;margin-top:8px}
+.chapter.visible svg .anim{opacity:0;animation:fade .7s ease-in forwards}
+.chapter.visible svg .d1{animation-delay:.15s}.chapter.visible svg .d2{animation-delay:.35s}
+.chapter.visible svg .d3{animation-delay:.55s}.chapter.visible svg .d4{animation-delay:.75s}
+.chapter.visible svg .d5{animation-delay:.95s}.chapter.visible svg .d6{animation-delay:1.15s}
+svg .box{transition:stroke .3s,fill .3s}
+svg g.hov:hover .box{stroke:#003d7a;stroke-width:3}
+svg text{font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif;fill:#1a1a1a}
+svg g[tabindex]:focus{outline:none}svg g[tabindex]:focus-visible .box{stroke-dasharray:4 3}
+.pulse{animation:pulse 1s ease-in-out 2}
+@keyframes pulse{50%{filter:drop-shadow(0 0 6px var(--accent))}}
+/* Revision (code-style) block */
+.code-block{position:relative;margin:1.2rem 0;border:1px solid #f3c2ad;border-radius:8px;background:var(--accent-light);overflow:hidden}
+.code-block .cb-head{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:#ffe3d6;font-size:13px;font-weight:600;color:#a33c12}
+.copy-btn{font:inherit;font-size:12px;border:1px solid var(--accent);background:#fff;color:#a33c12;border-radius:4px;padding:2px 10px;cursor:pointer}
+.copy-btn:hover{background:var(--accent);color:#fff}
+.code-block pre{margin:0;padding:10px 0;overflow-x:auto;font-family:'Monaco','Consolas','Courier New','Nirmala UI',monospace;font-size:13.5px;line-height:1.7}
+.code-block .ln{display:block;padding:0 14px 0 0;white-space:pre}
+.code-block .ln::before{content:attr(data-n);display:inline-block;width:2.6em;text-align:right;padding-right:12px;margin-right:10px;color:#b98a78;border-right:1px solid #f3c2ad;user-select:none}
+.tok-num{color:var(--accent);font-weight:600}.tok-com{color:#666;font-style:italic}.tok-key{color:var(--primary);font-weight:600}
+/* Collapsible */
+details.collapsible{border:1px solid var(--border);border-radius:8px;margin:1rem 0;background:#fcfcfc}
+details.collapsible summary{cursor:pointer;padding:10px 14px;font-weight:600;color:var(--primary)}
+details.collapsible[open] summary{border-bottom:1px solid var(--border)}
+details.collapsible .inner{padding:4px 16px 12px}
+/* Quiz */
+.quiz{border:2px solid var(--primary-light);border-radius:10px;padding:6px 18px 14px;margin:2rem 0}
+.quiz h3{color:var(--primary)}
+.quiz-question{margin:1rem 0;padding-bottom:12px;border-bottom:1px dashed var(--border)}
+.quiz-question:last-child{border-bottom:0}
+.quiz-question ol{margin:.3rem 0 .5rem;padding-left:1.6rem}
+.reveal-btn{background:#fff;border:1px solid var(--accent);color:#c4471a;padding:5px 14px;font-size:14px}
+.reveal-btn:hover{background:var(--accent);color:#fff}
+.answer{display:none;margin-top:10px;background:var(--secondary-light);border-left:4px solid var(--secondary);padding:8px 12px;border-radius:0 6px 6px 0;animation:fade .4s ease-in}
+.answer.show{display:block}
+/* Takeaways */
+.key-takeaways{background:var(--secondary-light);border:1px solid #bfe8d1;border-left:5px solid var(--secondary);border-radius:8px;padding:6px 18px 10px;margin:2rem 0}
+.key-takeaways h3{color:#007a3d}
+.key-takeaways li{margin:4px 0}
+/* Nav */
+.nav-buttons{display:flex;justify-content:space-between;gap:10px;margin-top:2rem}
+.nav-buttons button{background:#fff;border:2px solid var(--primary);color:var(--primary);padding:9px 18px;font-weight:600}
+.nav-buttons button:hover:not(:disabled){background:var(--primary);color:#fff}
+.nav-buttons button:disabled{opacity:.35;cursor:default}
+/* State machine */
+.sm-status{text-align:center;font-weight:600;margin:6px 0;font-size:15px}
+.sm-status span{color:var(--primary)}
+.sm-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.sm-controls button{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:6px 12px;font-size:14px}
+.sm-controls button:hover:not(:disabled){background:var(--primary);color:#fff}
+.sm-controls button:disabled{opacity:.35;cursor:default}
+.sm-controls .auto{border-color:var(--accent);color:#c4471a}
+.sm-controls .auto:hover{background:var(--accent)!important;color:#fff!important}
+.sm-state .box{transition:stroke-width .4s,filter .4s}
+.sm-state.active .box{stroke-width:4;filter:drop-shadow(0 0 7px rgba(0,102,204,.65))}
+.sm-edge{fill:none;stroke:#9bb8d6;stroke-width:2}
+.sm-edge.run{stroke:var(--accent);stroke-width:3.5;stroke-dasharray:400;stroke-dashoffset:400;animation:draw .8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* Responsive */
+@media (max-width:768px){
+  .container{display:block}
+  .sidebar{position:fixed;left:0;top:0;z-index:20;transform:translateX(-100%);transition:transform .3s;box-shadow:2px 0 12px rgba(0,0,0,.15)}
+  .sidebar.open{transform:none}
+  .menu-btn{display:block;position:fixed;top:10px;left:10px;z-index:30;background:var(--primary);color:#fff;border:0;border-radius:6px;padding:8px 12px;font-size:18px;cursor:pointer}
+  .content{padding:56px 16px 48px}
+  h1{font-size:24px}
+}
+.tracker{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:1rem 0}
+.tracker-sum{font-weight:700;color:#007a3d;margin-bottom:6px}
+.trk{width:18px;height:18px;accent-color:var(--secondary);cursor:pointer}
+code{background:var(--accent-light);padding:1px 5px;border-radius:3px;font-size:14px}
+</style>
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="విషయ సూచిక తెరవండి">☰</button>
+<div class="container">
+<aside class="sidebar" id="sidebar" aria-label="విషయ సూచిక">
+  <h2>🏛️ AP కరెంట్ అఫైర్స్</h2>
+  <div class="sub">ఆంధ్రప్రదేశ్ · ఏప్రిల్ – సెప్టెంబర్ 2026 (6 నెలలు)</div>
+  <div class="progress-bar" role="progressbar" aria-label="పురోగతి"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="chapter-count" id="chapterCount">0/4 అధ్యాయాలు</div>
+  <nav class="toc">
+    <ul>
+      <li><a href="#intro" data-ch="0">పరిచయం</a></li>
+      <li><a href="#chapter-1" data-ch="1">1. పాలన, చట్టాలు & అంతర్-రాష్ట్ర అంశాలు</a></li>
+      <li><a href="#chapter-2" data-ch="2">2. ఆర్థికం, పెట్టుబడులు & పరిశ్రమలు</a></li>
+      <li><a href="#chapter-3" data-ch="3">3. మౌలిక సదుపాయాలు, సాంకేతికత & పర్యావరణం</a></li>
+      <li><a href="#chapter-4" data-ch="4">4. సంక్షేమం, ఆరోగ్యం, సమాజం & సంస్కృతి</a></li>
+    </ul>
+  </nav>
+  <a class="back-link" href="current_affairs_2025_26.html">← వార్షిక కరెంట్ అఫైర్స్</a><br>
+  <a class="back-link" style="margin-top:6px" href="index.html">← సూచిక (Index)</a>
+</aside>
+
+<main class="content" id="content">
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="chapter intro-page" data-ch="0">
+  <h1>🏛️ ఆంధ్రప్రదేశ్ కరెంట్ అఫైర్స్ — గత 6 నెలలు</h1>
+  <p class="subtitle">ఏప్రిల్ 2026 – సెప్టెంబర్ 2026 · APPSC గ్రూప్ 1 / గ్రూప్ 2 దృష్టితో</p>
+  <p>APPSC పరీక్షల్లో రాష్ట్ర-ప్రత్యేక కరెంట్ అఫైర్స్ నుండి గణనీయమైన ప్రశ్నలు వస్తాయి — పథకాల పేర్లు, ప్రాజెక్టుల స్థలాలు, పెట్టుబడుల విలువలు, అంతర్-రాష్ట్ర జల వివాదాలు. ఈ పాఠం గత ఆరు నెలల ముఖ్య AP సంఘటనలను నాలుగు అంశాలుగా, ప్రతి దానికి "స్టాటిక్ లింక్"తో అందిస్తుంది. (అక్టోబర్ 2025 – మార్చి 2026 అంశాలు <a href="current_affairs_2025_26.html">వార్షిక కరెంట్ అఫైర్స్ పాఠం</a>లో ఉన్నాయి.)</p>
+  <div class="callout"><b>గమనిక:</b> వాస్తవాలు సెప్టెంబర్ 2026 చివరి వరకు AIR న్యూస్, PIB, APPSC కోచింగ్ సంస్థల రోజువారీ సంకలనాలు, వార్తాపత్రికల నుండి సేకరించబడ్డాయి. పరీక్షకు ముందు సంఖ్యలను అధికారిక వనరుల్లో (ap.gov.in, AP సామాజిక-ఆర్థిక సర్వే) సరిచూసుకోండి.</div>
+  <div class="intro-grid">
+    <div class="intro-card" data-go="1"><div class="n">అధ్యాయం 1</div>అమరావతి రాజధాని చట్టం (ఇంటరాక్టివ్), కొత్త కమిషనరేట్లు, జనాభా విధానం, కృష్ణా–తుంగభద్ర జల వివాదాలు</div>
+    <div class="intro-card" data-go="2"><div class="n">అధ్యాయం 2</div>MSME గ్రోత్ సమ్మిట్, NITI IFI ర్యాంక్, కొరియా–UAE పెట్టుబడులు, భారత్ ఫోర్జ్, APSRTC ఈ-బస్సులు (ఇంటరాక్టివ్ కార్డులు)</div>
+    <div class="intro-card" data-go="3"><div class="n">అధ్యాయం 3</div>భోగాపురం విమానాశ్రయం, వెలిగొండ, పోలవరం, క్వాంటం వ్యాలీ, వాతావరణ కార్యాచరణ ప్రణాళిక — కాలరేఖ</div>
+    <div class="intro-card" data-go="4"><div class="n">అధ్యాయం 4</div>సంజీవని (గిరిజన ఆరోగ్యం), పిల్లలే సంపద, యోగాంధ్ర 2026, మత్స్యకారుల సంక్షేమం, AYUSH</div>
+  </div>
+  <p><b>మొత్తం సమయం:</b> ~70 నిమిషాలు · ⌨️ ← / → బాణం కీలతో అధ్యాయాల మధ్య కదలండి.</p>
+  <button class="start-btn" data-go="1">ప్రారంభించండి →</button>
+</section>
+
+<!-- ============ CHAPTER 1 ============ -->
+<section id="chapter-1" class="chapter" data-ch="1">
+  <h1>అధ్యాయం 1: పాలన, చట్టాలు & అంతర్-రాష్ట్ర అంశాలు</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>1.1 అమరావతి — చట్టబద్ధ రాజధాని (ఏప్రిల్ 2026) — ఇంటరాక్టివ్</h2>
+  <p>12 ఏళ్ల అనిశ్చితికి ముగింపు. దశలవారీగా చూడండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 170" role="img" aria-label="అమరావతి రాజధాని చట్ట ప్రక్రియ కాలరేఖ">
+      <line x1="60" y1="85" x2="700" y2="85" stroke="#ddd" stroke-width="6" stroke-linecap="round"/>
+      <g id="t1Edges"></g><g id="t1Nodes"></g>
+    </svg>
+    <div class="sm-status" aria-live="polite"><span id="t1Label"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#333;max-width:780px;margin:0 auto;text-align:left" id="t1Desc"></div>
+    <div class="sm-controls">
+      <button id="t1Prev">◀ మునుపటి</button><button id="t1Next">తదుపరి ▶</button><button id="t1Reset">↺ రీసెట్</button>
+      <button class="auto" id="t1Auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 1.1 — 2014 చట్టం నుండి 2026 సవరణ వరకు అమరావతి ప్రయాణం.</figcaption>
+  </figure>
+  <div class="callout"><b>ప్రిలిమ్స్ పాయింట్లు:</b> సవరణ AP పునర్విభజన చట్టం 2014లోని <b>సెక్షన్ 5(2)</b>లో "there shall be a new capital" స్థానంలో <b>"Amaravati shall be the new capital"</b> అని చేర్చింది; <b>2 జూన్ 2024 నుండి పూర్వప్రభావం (retrospective)</b>; అమరావతి అంటే <b>AP CRDA చట్టం 2014</b> కింద నోటిఫై అయిన ప్రాంతం. <i>స్టాటిక్ లింక్: ఆర్టి. 3, 4 — పునర్వ్యవస్థీకరణ చట్టాల సవరణకు సాధారణ మెజారిటీ చాలు.</i></div>
+
+  <h2>1.2 పరిపాలనా మార్పులు</h2>
+  <ul>
+    <li><b>కొత్త పోలీస్ కమిషనరేట్లు</b> (సెప్టెంబర్ 2026 కేబినెట్): <b>రాజమహేంద్రవరం, గుంటూరు, తిరుపతి, కర్నూలు</b>. (ఇప్పటికే విశాఖపట్నం, విజయవాడ (NTR) కమిషనరేట్లు ఉన్నాయి.)</li>
+    <li><b>స్థానిక సంస్థల ఎన్నికలు</b> — మూడు దశల్లో నిర్వహించాలని నిర్ణయం: మొదట మున్సిపాలిటీలు, తర్వాత MPTC/ZPTC, చివరగా గ్రామ పంచాయతీలు. <i>లింక్: ఆర్టి. 243K (రాష్ట్ర ఎన్నికల సంఘం), 73వ & 74వ సవరణలు.</i></li>
+    <li>జిల్లాలు <b>29</b> (నవంబర్ 2025లో పోలవరం, మార్కాపురం, మదనపల్లె కొత్తవి).</li>
+    <li>కేబినెట్ ముఖ్యులు: CM <b>ఎన్. చంద్రబాబు నాయుడు</b>; డిప్యూటీ CM <b>పవన్ కల్యాణ్</b> (పంచాయతీ రాజ్, అటవీ, పర్యావరణం); <b>నారా లోకేశ్</b> (మానవ వనరుల అభివృద్ధి, IT & ఎలక్ట్రానిక్స్); ఆర్థికం <b>పయ్యావుల కేశవ్</b>; హోం <b>వంగలపూడి అనిత</b>; జలవనరులు <b>నిమ్మల రామానాయుడు</b>. గవర్నర్ <b>ఎస్. అబ్దుల్ నజీర్</b>.</li>
+  </ul>
+
+  <h2>1.3 జనాభా నిర్వహణ విధానం & "పిల్లలే సంపద"</h2>
+  <ul>
+    <li><b>AP జనాభా నిర్వహణ విధానం 2026</b> (ముసాయిదా మార్చి 2026) — దేశంలోనే తొలి "జనాభా పెంపు" దిశ విధానం. AP సంతానోత్పత్తి రేటు (TFR) ~<b>1.5</b> (1993లో 3.0) → లక్ష్యం <b>2.1</b> (రీప్లేస్‌మెంట్ స్థాయి).</li>
+    <li>ప్రోత్సాహకాలు: రెండో/మూడో బిడ్డ జననానికి <b>₹25,000</b> ఏకకాల సహాయం; మూడో బిడ్డకు 5 ఏళ్లు నెలకు ₹1,000; 12 నెలల మాతృత్వ సెలవు, 2 నెలల పితృత్వ సెలవు; "ఇద్దరికి మించి పిల్లలుంటే స్థానిక ఎన్నికల్లో అనర్హత" నిబంధన తొలగింపు.</li>
+    <li><b>"పిల్లలే సంపద"</b> (Pillale Sampada) — <b>11 జూలై 2026</b> (ప్రపంచ జనాభా దినోత్సవం), విజయవాడ: జనాభా నియంత్రణ నుండి <b>జనాభా పరిరక్షణ</b> వైపు మార్పు; పని ప్రదేశాల్లో చైల్డ్‌కేర్, అంగన్‌వాడీ పోషకాహారం, అనవసర సిజేరియన్ల తగ్గింపు.</li>
+    <li>కారణం: 2047 నాటికి జనాభాలో ~23% మంది 60 ఏళ్లు పైబడతారనే అంచనా — వృద్ధాప్య జనాభా, శ్రామిక శక్తి తగ్గుదల. <i>లింక్: 84వ సవరణ (2001) — 2026 వరకు సీట్ల పునర్విభజన స్తంభన; దక్షిణాది రాష్ట్రాల డీలిమిటేషన్ ఆందోళనలు.</i></li>
+  </ul>
+
+  <h2>1.4 అంతర్-రాష్ట్ర జల వివాదాలు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>అంశం</th><th>వివరం</th></tr>
+    <tr><td><b>కృష్ణా జలాలు (AP vs తెలంగాణ)</b></td><td>బచావత్ ట్రిబ్యునల్ (KWDT-I, 1976) ఉమ్మడి APకి <b>811 TMC</b> కేటాయించింది. విభజన తర్వాత తాత్కాలిక ఏర్పాటు: AP <b>512</b>, తెలంగాణ <b>299</b> TMC = <b>66:34</b>. AP ఈ నిష్పత్తిని జూలై 2027 వరకు కొనసాగించాలని; తెలంగాణ <b>50:50</b> కోరుతోంది (సెప్టెంబర్ 2026). ఎల్ నినో ప్రభావంతో ఈ సీజన్‌లో ప్రవాహాలు తక్కువ. <b>KRMB</b> — AP పునర్విభజన చట్టం 2014 కింద ఏర్పాటు.</td></tr>
+    <tr><td><b>తుంగభద్ర</b></td><td>డ్యామ్ — హోసపేట (కర్ణాటక, విజయనగర జిల్లా); కృష్ణాలో సంగమం — <b>సంగమేశ్వరం</b> (AP). AP వాటా ~35%; తుంగభద్ర బోర్డు నిర్వహణ; కర్ణాటక <b>అప్పర్ భద్ర</b> ప్రాజెక్టుపై AP సుప్రీంకోర్టులో సవాలు. ప్రభావిత జిల్లాలు: అనంతపురం, కర్నూలు, కడప.</td></tr>
+    <tr><td><b>పోలవరం–బనకచర్ల</b></td><td>గోదావరి వరద జలాలు ~200 TMC రాయలసీమకు — తెలంగాణ అభ్యంతరం; కేంద్ర ఉన్నత స్థాయి కమిటీ పరిశీలన.</td></tr>
+  </table></div>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — పాలన">
+<pre>అమరావతి చట్టం     →  AP పునర్విభజన (సవరణ) 2026; సెక్షన్ 5(2); పూర్వప్రభావం 02-06-2024
+శాసనసభ తీర్మానం    →  28-03-2026
+రాజ్యసభ ఆమోదం     →  02-04-2026
+కొత్త కమిషనరేట్లు   →  రాజమహేంద్రవరం | గుంటూరు | తిరుపతి | కర్నూలు
+జనాభా విధానం       →  TFR 1.5 → 2.1; ₹25,000 ప్రోత్సాహం
+పిల్లలే సంపద       →  11-07-2026; విజయవాడ
+కృష్ణా వాటా        →  811 TMC = AP 512 + TG 299 (66:34); TG డిమాండ్ 50:50
+తుంగభద్ర సంగమం     →  సంగమేశ్వరం (నంద్యాల జిల్లా)</pre>
+  </div>
+
+  <details class="collapsible" id="c1-adv">
+    <summary>🔍 లోతుగా: అంతర్-రాష్ట్ర జల వివాదాల రాజ్యాంగ చట్రం</summary>
+    <div class="inner">
+      <ul>
+        <li><b>ఆర్టి. 262</b> — అంతర్-రాష్ట్ర నదీ జలాల వివాదాల పరిష్కారానికి పార్లమెంట్ చట్టం చేయవచ్చు; ఆ వివాదాలపై సుప్రీంకోర్టు సహా ఏ కోర్టు పరిధినైనా మినహాయించవచ్చు.</li>
+        <li><b>అంతర్-రాష్ట్ర నదీ జల వివాదాల చట్టం 1956</b> — ట్రిబ్యునళ్ల ఏర్పాటు; <b>నదీ బోర్డుల చట్టం 1956</b>.</li>
+        <li><b>కృష్ణా ట్రిబ్యునళ్లు:</b> KWDT-I (బచావత్, నివేదిక 1973, తుది 1976); KWDT-II (బ్రిజేష్ కుమార్, 2010/2013 — ఇంకా నోటిఫై కాలేదు; విభజన తర్వాత AP-తెలంగాణ మధ్య పునఃపంపకం పరిశీలన).</li>
+        <li><b>AP పునర్విభజన చట్టం 2014:</b> సెక్షన్ 84 — <b>అపెక్స్ కౌన్సిల్</b> (కేంద్ర జలశక్తి మంత్రి + ఇద్దరు CMలు); సెక్షన్ 85 — KRMB, GRMB; సెక్షన్ 89 — KWDT-II పదవీకాలం పొడిగింపు; సెక్షన్ 90 — పోలవరం జాతీయ ప్రాజెక్టు.</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q1-1">
+      <p><strong>Q1:</strong> అమరావతిని రాజధానిగా ప్రకటించిన 2026 సవరణ ఏ తేదీ నుండి పూర్వప్రభావంతో అమలవుతుంది?</p>
+      <ol type="a"><li>2 జూన్ 2014</li><li>23 ఏప్రిల్ 2016</li><li>2 జూన్ 2024</li><li>2 ఏప్రిల్ 2026</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(c) 2 జూన్ 2024</b> — హైదరాబాద్ ఉమ్మడి రాజధాని 10 ఏళ్ల గడువు ముగిసిన రోజు. (23 ఏప్రిల్ 2016 — రాష్ట్ర ప్రభుత్వం అమరావతిని రాజధాని ప్రాంతంగా నోటిఫై చేసిన తేదీ.)</p>
+    </div>
+    <div class="quiz-question" id="q1-2">
+      <p><strong>Q2:</strong> కృష్ణా జలాల విభజనలో AP–తెలంగాణ తాత్కాలిక నిష్పత్తి ఏది? ఉమ్మడి APకి బచావత్ ట్రిబ్యునల్ ఎన్ని TMC కేటాయించింది?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>66:34</b> (AP 512 : తెలంగాణ 299 TMC); మొత్తం <b>811 TMC</b>.</p>
+    </div>
+    <div class="quiz-question" id="q1-3">
+      <p><strong>Q3:</strong> "పిల్లలే సంపద" కార్యక్రమం ఏ సందర్భంలో ప్రారంభమైంది, దాని ప్రధాన సందేశం?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>ప్రపంచ జనాభా దినోత్సవం — 11 జూలై 2026</b>, విజయవాడ. జనాభా నియంత్రణ నుండి <b>జనాభా పరిరక్షణ</b>కు మార్పు — తగ్గుతున్న TFR (~1.5)ను 2.1కి పెంచడం.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>అమరావతి చట్టబద్ధ రాజధాని — సెక్షన్ 5(2) సవరణ, 2 జూన్ 2024 నుండి పూర్వప్రభావం.</li>
+      <li>4 కొత్త పోలీస్ కమిషనరేట్లు; స్థానిక ఎన్నికలు మూడు దశల్లో.</li>
+      <li>జనాభా విధానం: TFR 1.5 → 2.1; పిల్లలే సంపద (11-07-2026).</li>
+      <li>కృష్ణా (66:34 vs 50:50), తుంగభద్ర (అప్పర్ భద్ర), బనకచర్ల — మూడు జల వివాదాలు.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 2 ============ -->
+<section id="chapter-2" class="chapter" data-ch="2">
+  <h1>అధ్యాయం 2: ఆర్థికం, పెట్టుబడులు & పరిశ్రమలు</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>2.1 ఆర్థిక సూచికలు</h2>
+  <ul>
+    <li><b>తలసరి ఆదాయం (2025-26):</b> ₹2,94,507 (రాష్ట్ర అంచనా).</li>
+    <li><b>GSDP వృద్ధి:</b> 2024–26 కాలంలో ~11.3% (నామమాత్ర, రాష్ట్ర అంచనాలు); AP బడ్జెట్ 2026-27 అంచనా GSDP ₹19.75 లక్షల కోట్లు.</li>
+    <li><b>NITI ఆయోగ్ ఇన్వెస్ట్‌మెంట్ ఫ్రెండ్లీనెస్ ఇండెక్స్ (IFI) 2026</b> (17 జూలై 2026): AP — పెద్ద రాష్ట్రాల్లో <b>6వ</b> స్థానం (స్కోర్ 48.7), <b>"ఫ్రంట్‌రన్నర్"</b> వర్గం; మొదటి స్థానం గుజరాత్ (56.6). 8 పరామితులు, 84 సూచికలు.</li>
+    <li>మహిళా స్వయం సహాయక సంఘాలకు బ్యాంకు రుణాలు ₹43,219 కోట్లు; 2026-27లో <b>5 లక్షల మహిళా పారిశ్రామికవేత్తల</b> లక్ష్యం (₹2,246 కోట్లు).</li>
+  </ul>
+
+  <h2>2.2 పెట్టుబడులు & ఒప్పందాలు — ఇంటరాక్టివ్</h2>
+  <p>ప్రతి కార్డుపై క్లిక్ చేయండి.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 360" role="img" aria-label="AP పెట్టుబడులు ఏప్రిల్–సెప్టెంబర్ 2026">
+      <g id="invNodes" class="anim"></g>
+      <g class="anim d2">
+        <rect x="10" y="190" width="740" height="160" rx="10" fill="#fafafa" stroke="#ddd"/>
+        <text id="invTitle" x="26" y="216" font-size="14.5" font-weight="700" fill="#0066cc">ఒక కార్డుపై క్లిక్ చేయండి</text>
+        <foreignObject x="20" y="224" width="720" height="120"><div xmlns="http://www.w3.org/1999/xhtml" id="invDesc" style="font-size:13.5px;line-height:1.6;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">ప్రిలిమ్స్‌లో "ఏ కంపెనీ – ఏ స్థలం – ఏ రంగం" జతలు తరచుగా అడుగుతారు.</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 2.1 — ఆరు నెలల ముఖ్య పెట్టుబడులు, ఒప్పందాలు.</figcaption>
+  </figure>
+
+  <h2>2.3 MSME & పారిశ్రామిక పార్కులు</h2>
+  <ul>
+    <li><b>"ఒకే కుటుంబం – ఒక పారిశ్రామికవేత్త" MSME గ్రోత్ సమ్మిట్ 2026</b> — <b>25 మే 2026, విజయవాడ</b>: CM <b>38 MSME పార్కులకు</b> వర్చువల్ శంకుస్థాపన; Meta, Amazon, Zoho లతో ఒప్పందాలు; 45 క్లస్టర్లలో కామన్ ఫెసిలిటీ సెంటర్లకు ₹200 కోట్లు; "కోటి మంది పారిశ్రామికవేత్తలు" లక్ష్యం. లక్ష్యం — <b>ప్రతి అసెంబ్లీ నియోజకవర్గానికి (175) ఒక MSME పార్కు</b>. ఉదా: యల్లూరు (గోస్పాడు మండలం, నంద్యాల జిల్లా) — APIIC, 9 ఎకరాలు.</li>
+    <li><b>EESL–AP MSME సుస్థిరత కార్యక్రమం</b> (జూన్ 2026) — RAMP పథకం, AP MSME & ఎంటర్‌ప్రెన్యూర్ డెవలప్‌మెంట్ పాలసీ 4.0 కింద 15 క్లస్టర్లు; 452 MSMEలకు ఇంధన ఆడిట్, 300కు నీటి ఆడిట్.</li>
+    <li><b>కోసలనగరం పారిశ్రామిక పార్కు</b> (చిత్తూరు జిల్లా, తమిళనాడు సరిహద్దు) — APIIC 2,042 ఎకరాలు; శ్రీ సిటీ నమూనా; ఆటోమొబైల్, టెక్స్‌టైల్, ఫుడ్ ప్రాసెసింగ్; నీటి వనరు — గాలేరు-నగరి సుజల స్రవంతి.</li>
+    <li><b>భారత్ టెక్స్ 2026</b> (జూలై, భారత్ మండపం) — AP పెవిలియన్; ₹4,100 కోట్ల MoUలు (విశాఖలో టెక్స్‌టైల్ రీసైక్లింగ్ యూనిట్). AP — పట్టు ఉత్పత్తిలో దేశంలో <b>2వ</b> స్థానం.</li>
+    <li><b>APSRTC ఆధునికీకరణ</b> (ఏప్రిల్ 2026) — ఐదేళ్లలో <b>5,746 ఎలక్ట్రిక్</b> + 500 CNG బస్సులు; స్త్రీ శక్తి పథకానికి 1,445 బస్సులు; ప్రస్తుత ఫ్లీట్ 10,951.</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — పెట్టుబడులు">
+<pre>MSME గ్రోత్ సమ్మిట్   →  25-05-2026; విజయవాడ; 38 పార్కులు; "ఒకే కుటుంబం–ఒక పారిశ్రామికవేత్త"
+భారత్ ఫోర్జ్          →  విశాఖ; మెరైన్ గ్యాస్ టర్బైన్ MRO; ~80 ఎకరాలు; డిఫెన్స్ కారిడార్
+APEX కొరియా        →  బుసాన్; తొలి విదేశీ పెట్టుబడి కేంద్రం; నారా లోకేశ్ (జూలై)
+హ్వాసంగ్ గ్రూప్       →  కుప్పం; ₹900 కోట్లు; నాన్-లెదర్ ఫుట్‌వేర్
+దుగరాజపట్నం         →  షిప్‌బిల్డింగ్ క్లస్టర్; ₹30,000 కోట్ల ప్రతిపాదన
+UAE ఫుడ్ క్లస్టర్      →  MoU; గంగాధర నెల్లూరు (చిత్తూరు) ₹100 కోట్ల యూనిట్
+NITI IFI 2026        →  AP 6వ (పెద్ద రాష్ట్రాలు); ఫ్రంట్‌రన్నర్; 1వ గుజరాత్
+తలసరి ఆదాయం        →  ₹2,94,507 (2025-26)</pre>
+  </div>
+
+  <details class="collapsible" id="c2-adv">
+    <summary>🔍 లోతుగా: విశాఖపట్నం ఆర్థిక ప్రాంతం (VER) — ఎందుకు కేంద్రబిందువు?</summary>
+    <div class="inner">
+      <p>గత ఏడాదిలో అతిపెద్ద పెట్టుబడులన్నీ విశాఖ చుట్టూ కేంద్రీకృతమయ్యాయి: గూగుల్ AI హబ్ ($15 bn), AM/NS స్టీల్ (అనకాపల్లి, ₹1.36 లక్షల కోట్లు), భారత్ ఫోర్జ్ మెరైన్ టర్బైన్లు, టెక్స్‌టైల్ రీసైక్లింగ్, భోగాపురం విమానాశ్రయం, IFR 2026. కారణాలు: లోతైన ఓడరేవులు (విశాఖ, గంగవరం), తూర్పు నౌకాదళ కమాండ్ (రక్షణ పరిశ్రమలు), సబ్‌సీ కేబుల్ ల్యాండింగ్, విశాఖ–చెన్నై పారిశ్రామిక కారిడార్. NITI ఆయోగ్ "గ్రోత్ హబ్స్" కార్యక్రమంలో ఎంపికైన నాలుగు నగర ప్రాంతాల్లో విశాఖ ఒకటి.</p>
+      <p><b>YouthPOWER ర్యాంకింగ్ (సెప్టెంబర్ 2026):</b> AP జిల్లాల్లో విశాఖపట్నం <b>1వ</b> (స్కోర్ 55) — 60% కార్మికులకు సాధారణ వేతన ఉద్యోగాలు. రాష్ట్ర స్థాయిలో యువ నిరుద్యోగం 16.2%, యువతుల శ్రామిక భాగస్వామ్యం 29.7% — మెయిన్స్‌లో "పెట్టుబడులు vs నాణ్యమైన ఉద్యోగాలు" చర్చకు ఉపయోగం.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q2-1">
+      <p><strong>Q1:</strong> ఆంధ్రప్రదేశ్ తొలి విదేశీ పెట్టుబడి సహాయ కేంద్రం "APEX కొరియా" ఏ నగరంలో ప్రారంభమైంది?</p>
+      <ol type="a"><li>సియోల్</li><li>బుసాన్</li><li>ఇంచియాన్</li><li>దేగు</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) బుసాన్</b> — మంత్రి నారా లోకేశ్ ప్రారంభం (జూలై 2026); AP ఆర్థికాభివృద్ధి బోర్డు (APEDB) ఏర్పాటు.</p>
+    </div>
+    <div class="quiz-question" id="q2-2">
+      <p><strong>Q2:</strong> NITI ఆయోగ్ ఇన్వెస్ట్‌మెంట్ ఫ్రెండ్లీనెస్ ఇండెక్స్ 2026లో AP స్థానం, వర్గం?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">పెద్ద రాష్ట్రాల్లో <b>6వ</b> స్థానం (స్కోర్ 48.7) — <b>"ఫ్రంట్‌రన్నర్"</b> వర్గం. మొదటి స్థానం గుజరాత్.</p>
+    </div>
+    <div class="quiz-question" id="q2-3">
+      <p><strong>Q3:</strong> MSME గ్రోత్ సమ్మిట్ 2026 నినాదం, ఎన్ని MSME పార్కులకు శంకుస్థాపన?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>"ఒకే కుటుంబం – ఒక పారిశ్రామికవేత్త"</b> (One Family – One Entrepreneur); <b>38</b> పార్కులు (25 మే 2026, విజయవాడ).</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>NITI IFI 2026 — AP 6వ (ఫ్రంట్‌రన్నర్); తలసరి ఆదాయం ₹2.94 లక్షలు.</li>
+      <li>MSME సమ్మిట్ (38 పార్కులు, 175 నియోజకవర్గాల లక్ష్యం), కోసలనగరం పార్కు, EESL ఆడిట్లు.</li>
+      <li>విదేశీ పెట్టుబడులు: APEX కొరియా (బుసాన్), హ్వాసంగ్ (కుప్పం), UAE ఫుడ్ క్లస్టర్.</li>
+      <li>విశాఖ: భారత్ ఫోర్జ్ మెరైన్ టర్బైన్లు, టెక్స్‌టైల్ రీసైక్లింగ్; APSRTC 5,746 ఈ-బస్సులు.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 3 ============ -->
+<section id="chapter-3" class="chapter" data-ch="3">
+  <h1>అధ్యాయం 3: మౌలిక సదుపాయాలు, సాంకేతికత & పర్యావరణం</h1>
+  <div class="meta">⏱ ~18 నిమిషాలు</div>
+
+  <h2>3.1 ఆరు నెలల కాలరేఖ — ఇంటరాక్టివ్</h2>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 170" role="img" aria-label="AP మౌలిక సదుపాయాల కాలరేఖ ఏప్రిల్–సెప్టెంబర్ 2026">
+      <line x1="40" y1="85" x2="720" y2="85" stroke="#ddd" stroke-width="6" stroke-linecap="round"/>
+      <g id="t3Edges"></g><g id="t3Nodes"></g>
+    </svg>
+    <div class="sm-status" aria-live="polite"><span id="t3Label"></span></div>
+    <div class="sm-status" style="font-weight:400;font-size:14px;color:#333;max-width:780px;margin:0 auto;text-align:left" id="t3Desc"></div>
+    <div class="sm-controls">
+      <button id="t3Prev">◀ మునుపటి</button><button id="t3Next">తదుపరి ▶</button><button id="t3Reset">↺ రీసెట్</button>
+      <button class="auto" id="t3Auto">▶️ ఆటో డెమో ప్రారంభించు</button>
+    </div>
+    <figcaption>చిత్రం 3.1 — ఏప్రిల్ నుండి సెప్టెంబర్ 2026 వరకు మౌలిక సదుపాయాలు, సాంకేతిక మైలురాళ్లు.</figcaption>
+  </figure>
+
+  <h2>3.2 ముఖ్య ప్రాజెక్టులు</h2>
+  <div class="table-wrap"><table>
+    <tr><th>ప్రాజెక్టు</th><th>వివరాలు</th></tr>
+    <tr><td><b>అల్లూరి సీతారామరాజు అంతర్జాతీయ విమానాశ్రయం, భోగాపురం</b></td><td>విజయనగరం జిల్లా; ప్రధాని మోదీ ప్రారంభం <b>1 ఆగస్టు 2026</b>; వాణిజ్య సర్వీసులు 17 ఆగస్టు నుండి (పాత విశాఖ విమానాశ్రయం — నౌకాదళ INS డేగా ఎయిర్‌బేస్ — నుండి మార్పు); GMR; మొదటి దశ ఏటా 63 లక్షల ప్రయాణికులు; మొదటి దశ వ్యయం ~₹4,592 కోట్లు</td></tr>
+    <tr><td><b>వెలిగొండ ప్రాజెక్టు (ఫేజ్-1)</b></td><td>ప్రారంభం <b>31 ఆగస్టు 2026</b> (మార్కాపురం); శంకుస్థాపన 1996 — <b>30 ఏళ్ల కల</b>; శ్రీశైలం జలాశయం ముందు తీరం నుండి కృష్ణా వరద జలాలు → <b>నల్లమల సాగర్</b>; <b>18.8 కి.మీ. జంట సొరంగాలు</b>; మొత్తం వ్యయం ₹10,200 కోట్లు; లబ్ధి — ప్రకాశం, నెల్లూరు, కడప (ఫ్లోరైడ్ ప్రభావిత ప్రాంతాలకు తాగునీరు)</td></tr>
+    <tr><td><b>పోలవరం</b></td><td>గోదావరిపై బహుళార్థ సాధక జాతీయ ప్రాజెక్టు (AP పునర్విభజన చట్టం సెక్షన్ 90); డయాఫ్రమ్ వాల్ పూర్తి (2026); పూర్తి లక్ష్యం 2027 (గోదావరి పుష్కరాలు); రాష్ట్ర బడ్జెట్ కేటాయింపు ₹8,300 కోట్లు (2026-27)</td></tr>
+    <tr><td><b>అమరావతి నిర్మాణం</b></td><td>2026-27 కేటాయింపు ₹10,000 కోట్లు; సెప్టెంబర్ కేబినెట్ — రాజధాని గ్రామాలకు ₹1,548 కోట్లు, శాసనసభ భవనానికి ₹661 కోట్లు</td></tr>
+    <tr><td><b>హంద్రీ-నీవా సుజల స్రవంతి (HNSS) ఫేజ్-2</b></td><td>₹1,323.75 కోట్లు మంజూరు (సెప్టెంబర్ 2026); 2027 పూర్తి లక్ష్యం — రాయలసీమ</td></tr>
+  </table></div>
+
+  <h2>3.3 అమరావతి క్వాంటం వ్యాలీ</h2>
+  <ul>
+    <li>శంకుస్థాపన 7 ఫిబ్రవరి 2026 → <b>క్వాంటం కంప్యూటింగ్ రిఫరెన్స్ ఫెసిలిటీలు</b> 14 ఏప్రిల్ 2026 → <b>SRM యూనివర్సిటీ-AP + C-DOT + DoT క్వాంటం-సెక్యూర్ కమ్యూనికేషన్స్ టెస్ట్ బెడ్</b> ప్రకటన (17 మే, ప్రపంచ టెలికమ్యూనికేషన్ దినోత్సవం) → <b>బ్రిటన్ ప్రభుత్వంతో MoU</b> (25 ఆగస్టు 2026 — మౌలిక సదుపాయాలు, పట్టణ ప్రణాళిక).</li>
+    <li>IBM క్వాంటం సిస్టమ్ టూ (156-క్యూబిట్ <b>హెరాన్</b> ప్రాసెసర్) — TCS, L&T భాగస్వాములు; కమిషనింగ్ లక్ష్యం <b>జనవరి 2027</b>. <i>లింక్: నేషనల్ క్వాంటం మిషన్ (2023, ₹6,003 కోట్లు, 2023-24 నుండి 2030-31).</i></li>
+  </ul>
+
+  <h2>3.4 పర్యావరణం & వాతావరణం</h2>
+  <ul>
+    <li><b>AP వాతావరణ మార్పుల కార్యాచరణ ప్రణాళిక 2025–30</b> — AP స్టేట్ క్లైమేట్ చేంజ్ సెల్ (APSCCC) సూచనలు (ఆగస్టు 2026): ఉత్తర, మధ్య AP అత్యంత దుర్బల ప్రాంతాలు; <b>40% పునరుత్పాదక ఇంధన</b> వాటా లక్ష్యం; 120 GW పునరుత్పాదక ప్రాజెక్టులు; రెండు గ్రీన్ హైడ్రోజన్ హబ్‌లు; <b>1 లక్ష EV చార్జింగ్ స్టేషన్లు</b>.</li>
+    <li><b>బోయపాడు చేపల మరణాలు</b> (నక్కపల్లి మండలం, అనకాపల్లి) — <b>20 జూన్ 2026</b>, ~11 టన్నులు (94% పోనీ ఫిష్); ICAR–CMFRI ప్రాథమిక అధ్యయనం: <b>ట్రైకోడెస్మియం</b> శైవల వికాసం → <b>హైపాక్సియా</b> (ఆక్సిజన్ క్షీణత); సమీప బల్క్-డ్రగ్ పరిశ్రమల వ్యర్థజలాలపై అనుమానం.</li>
+    <li><b>అరుదైన భూమి మూలకాలు (REE)</b> — AP, కర్ణాటక, ఒడిశా, కేరళలో నిల్వలు; AP లో ప్రతిపాదిత <b>రేర్ ఎర్త్ కారిడార్</b> (నేషనల్ క్రిటికల్ మినరల్ మిషన్).</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — మౌలిక సదుపాయాలు">
+<pre>భోగాపురం విమానాశ్రయం  →  01-08-2026 ప్రారంభం; 17-08 నుండి సర్వీసులు; విజయనగరం; GMR
+వెలిగొండ ఫేజ్-1       →  31-08-2026; మార్కాపురం; నల్లమల సాగర్; 18.8 km జంట సొరంగాలు
+పోలవరం              →  సెక్షన్ 90; 2027 లక్ష్యం; ₹8,300 కోట్లు (2026-27)
+HNSS ఫేజ్-2          →  ₹1,323.75 కోట్లు
+క్వాంటం వ్యాలీ         →  రిఫరెన్స్ ఫెసిలిటీ 14-04; UK MoU 25-08; కమిషనింగ్ జన 2027
+క్లైమేట్ ప్లాన్         →  2025–30; 40% RE; 1 లక్ష EV స్టేషన్లు
+బోయపాడు ఫిష్ కిల్      →  20-06-2026; ట్రైకోడెస్మియం → హైపాక్సియా</pre>
+  </div>
+
+  <details class="collapsible" id="c3-adv">
+    <summary>🔍 లోతుగా: వెలిగొండ — ఎందుకు 30 ఏళ్లు పట్టింది?</summary>
+    <div class="inner">
+      <p><b>పూల సుబ్బయ్య వెలిగొండ ప్రాజెక్టు</b> (మాజీ మంత్రి పేరు) — ప్రకాశం జిల్లా పశ్చిమ మెట్ట ప్రాంతాలు (మార్కాపురం, గిద్దలూరు, కనిగిరి, యర్రగొండపాలెం) తీవ్ర కరవు, ఫ్లోరైడ్ సమస్యలకు పరిష్కారంగా 1996లో శంకుస్థాపన. సవాళ్లు: <b>నల్లమల అడవి</b> (నాగార్జునసాగర్–శ్రీశైలం పులుల అభయారణ్యం) కింద పొడవైన సొరంగాల తవ్వకం — కఠిన శిలలు, సొరంగ తవ్వకం యంత్రాల (TBM) సమస్యలు; అటవీ, వన్యప్రాణి అనుమతులు; నిర్వాసితుల పునరావాసం (ఫేజ్-1లో 6,206 కుటుంబాలకు ₹768 కోట్ల పరిహారం); నిధుల కొరత; బచావత్ ట్రిబ్యునల్ కేటాయింపు లేని "వరద జలాల" ప్రాజెక్టు కావడంతో తెలంగాణ అభ్యంతరాలు.</p>
+      <p><b>పరీక్ష దృష్టి:</b> వెలిగొండ, హంద్రీ-నీవా, గాలేరు-నగరి, తెలుగు గంగ — అన్నీ శ్రీశైలం నుండి వరద జలాలపై ఆధారపడిన రాయలసీమ/ప్రకాశం ప్రాజెక్టులు.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q3-1">
+      <p><strong>Q1:</strong> వెలిగొండ ప్రాజెక్టు ఏ జలాశయం నుండి నీటిని ఏ జలాశయానికి తరలిస్తుంది?</p>
+      <ol type="a"><li>నాగార్జునసాగర్ → సోమశిల</li><li>శ్రీశైలం → నల్లమల సాగర్</li><li>పోలవరం → బనకచర్ల</li><li>ప్రకాశం బ్యారేజ్ → కండలేరు</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) శ్రీశైలం (ముందు తీరం) → నల్లమల సాగర్</b> — 18.8 కి.మీ. జంట సొరంగాల ద్వారా.</p>
+    </div>
+    <div class="quiz-question" id="q3-2">
+      <p><strong>Q2:</strong> బోయపాడు తీరంలో చేపలు భారీగా మరణించడానికి ప్రాథమిక కారణం ఏమిటి?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>ట్రైకోడెస్మియం</b> (సయనోబాక్టీరియా) శైవల వికాసం వల్ల నీటిలో ఆక్సిజన్ క్షీణత — <b>హైపాక్సియా</b> (ICAR–CMFRI). పారిశ్రామిక వ్యర్థజలాలపై అనుమానం ధృవీకరించబడలేదు.</p>
+    </div>
+    <div class="quiz-question" id="q3-3">
+      <p><strong>Q3:</strong> అమరావతి క్వాంటం వ్యాలీలో అమర్చబోయే IBM ప్రాసెసర్ పేరు, క్యూబిట్‌లు?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>హెరాన్ (Heron)</b> — <b>156 క్యూబిట్‌లు</b> (IBM క్వాంటం సిస్టమ్ టూ); భాగస్వాములు TCS, L&T.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>భోగాపురం విమానాశ్రయం (01-08-2026) & వెలిగొండ ఫేజ్-1 (31-08-2026) — ఈ కాలపు రెండు పెద్ద ప్రారంభోత్సవాలు.</li>
+      <li>పోలవరం 2027 లక్ష్యం; HNSS ఫేజ్-2; అమరావతికి ₹10,000 కోట్లు.</li>
+      <li>క్వాంటం వ్యాలీ: రిఫరెన్స్ ఫెసిలిటీ, క్వాంటం-సెక్యూర్ టెస్ట్ బెడ్, UK MoU.</li>
+      <li>క్లైమేట్ ప్లాన్ 2025–30 (40% RE); బోయపాడు ఫిష్ కిల్ (హైపాక్సియా).</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">తదుపరి →</button></div>
+</section>
+
+<!-- ============ CHAPTER 4 ============ -->
+<section id="chapter-4" class="chapter" data-ch="4">
+  <h1>అధ్యాయం 4: సంక్షేమం, ఆరోగ్యం, సమాజం & సంస్కృతి</h1>
+  <div class="meta">⏱ ~16 నిమిషాలు</div>
+
+  <h2>4.1 సంక్షేమ కార్యక్రమాలు — ఇంటరాక్టివ్</h2>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 360" role="img" aria-label="AP సంక్షేమ కార్యక్రమాలు 2026">
+      <g id="welNodes" class="anim"></g>
+      <g class="anim d2">
+        <rect x="10" y="190" width="740" height="160" rx="10" fill="#fafafa" stroke="#ddd"/>
+        <text id="welTitle" x="26" y="216" font-size="14.5" font-weight="700" fill="#0066cc">ఒక కార్యక్రమంపై క్లిక్ చేయండి</text>
+        <foreignObject x="20" y="224" width="720" height="120"><div xmlns="http://www.w3.org/1999/xhtml" id="welDesc" style="font-size:13.5px;line-height:1.6;color:#1a1a1a;font-family:'Segoe UI','Nirmala UI','Noto Sans Telugu',sans-serif">పథకం పేరు → లబ్ధిదారులు → ప్రయోజనం — ఈ మూడూ గుర్తుంచుకోండి.</div></foreignObject>
+      </g>
+    </svg>
+    <figcaption>చిత్రం 4.1 — ఏప్రిల్–సెప్టెంబర్ 2026 సంక్షేమ, ఆరోగ్య కార్యక్రమాలు.</figcaption>
+  </figure>
+
+  <h2>4.2 సంజీవని — గిరిజన ఆరోగ్య కార్యక్రమం (సెప్టెంబర్ 2026)</h2>
+  <ul>
+    <li>ప్రారంభం: CM చంద్రబాబు నాయుడు, <b>గన్నెల, అరకు లోయ</b> (అల్లూరి సీతారామరాజు జిల్లా).</li>
+    <li>150 అత్యవసర వాహనాలు; 104 మొబైల్ వైద్య వాహనాలు (42 పరీక్షలు); సికిల్ సెల్, తలసీమియా రోగులకు నెలకు <b>₹10,000 పెన్షన్</b>; <b>తల్లీబిడ్డ ఎక్స్‌ప్రెస్</b>; రక్త నమూనాల రవాణాకు <b>డ్రోన్లు</b>; గిరిజన ఆరోగ్య మౌలిక సదుపాయాల మిషన్‌కు ₹250 కోట్లు.</li>
+    <li>అనుబంధంగా: <b>అడవితల్లి బాట</b> — ₹1,000 కోట్లతో 900 కి.మీ. గిరిజన రోడ్లు; IIT మద్రాస్ భాగస్వామ్యంతో గిరిజన విద్య; లక్ష ఎకరాల్లో కాఫీ సాగు విస్తరణ; అరకులో హోమ్‌స్టేలు.</li>
+  </ul>
+
+  <h2>4.3 సంస్కృతి & కార్యక్రమాలు</h2>
+  <ul>
+    <li><b>యోగాంధ్ర 2026</b> — 7–20 జూన్ ప్రచారం; లక్ష్యం <b>కోటి మంది</b>; 12వ అంతర్జాతీయ యోగా దినోత్సవం (21 జూన్) ప్రధాన కార్యక్రమం — <b>కృష్ణా నది వెస్ట్ బైపాస్ బ్రిడ్జి, అమరావతి</b>; ₹10 కోట్ల కేటాయింపు. <i>(గుర్తుంచుకోండి: 2025 IYD — విశాఖపట్నం RK బీచ్, ప్రధాని నేతృత్వం, గిన్నిస్ రికార్డు.)</i></li>
+    <li><b>పొన్న కాలువ ఉత్సవం</b> — తిరుపతి శ్రీ గోవిందరాజ స్వామి (శ్రీదేవి, భూదేవి సమేతంగా) — చైత్ర పౌర్ణమి (ఏప్రిల్–మే).</li>
+    <li><b>AYUSH వార్షిక ప్రణాళిక 2026-27</b> — రికార్డు కేటాయింపు ₹185.75 కోట్లు (NAM 2014 ప్రారంభం నుండి అత్యధికం); 9 ITDA ప్రాంతాల్లో 19 మొబైల్ యూనిట్లు; కడపలో స్పోర్ట్స్ మెడిసిన్ సెంటర్; 6 సమీకృత AYUSH ఆసుపత్రులు (50 పడకలు).</li>
+    <li><b>మత్స్యకారుల సంక్షేమం</b> (ఆగస్టు 2026, సింగరాయకొండ, ప్రకాశం) — PM మత్స్య సంపద యోజన కింద <b>శాటిలైట్ ట్రాన్స్‌పాండర్ల</b> పంపిణీ; చేపల వేట నిషేధ కాలంలో <b>₹20,000</b> సహాయం; 50 ఏళ్ల నుండి పెన్షన్; విశాఖ, భీమవరంలో ఫిషరీస్ డెవలప్‌మెంట్ బోర్డులు; యానాది కుటుంబాలకు శాశ్వత గృహాలు.</li>
+  </ul>
+
+  <div class="code-block" data-title="📋 త్వరిత పునరీక్షణ — సంక్షేమం & సంస్కృతి (నెలవారీ)">
+<pre># ఏప్రిల్
+APSRTC 5,746 ఈ-బస్సులు | క్వాంటం రిఫరెన్స్ ఫెసిలిటీ (14-04) | అమరావతి చట్టం (02-04 RS)
+# మే
+భారత్ ఫోర్జ్ (విశాఖ) | క్వాంటం-సెక్యూర్ టెస్ట్ బెడ్ (SRM-AP) | MSME సమ్మిట్ (25-05) | పొన్న కాలువ ఉత్సవం
+# జూన్
+EESL MSME ఆడిట్లు | యోగాంధ్ర 2026 (7–20, అమరావతి IYD) | బోయపాడు ఫిష్ కిల్ (20-06)
+# జూలై
+APEX కొరియా (బుసాన్) | పిల్లలే సంపద (11-07) | NITI IFI (17-07; AP 6వ) | UAE ఫుడ్ క్లస్టర్ | భారత్ టెక్స్
+# ఆగస్టు
+భోగాపురం విమానాశ్రయం (01-08) | మత్స్యకార సంక్షేమం | క్లైమేట్ ప్లాన్ | UK MoU (25-08) | వెలిగొండ (31-08)
+# సెప్టెంబర్
+సంజీవని (అరకు) | కృష్ణా జలాల వివాదం | YouthPOWER (విశాఖ 1వ) | కొత్త కమిషనరేట్లు</pre>
+  </div>
+
+  <details class="collapsible" id="c4-adv">
+    <summary>🔍 లోతుగా: సికిల్ సెల్ వ్యాధి — జాతీయ మిషన్‌తో అనుసంధానం</summary>
+    <div class="inner">
+      <p>సికిల్ సెల్ వ్యాధి (SCD) — ఎర్ర రక్తకణాలు కొడవలి ఆకారంలోకి మారే జన్యు రక్త వ్యాధి; గిరిజన జనాభాలో ఎక్కువ. <b>జాతీయ సికిల్ సెల్ అనీమియా నిర్మూలన మిషన్</b> (జూలై 2023, మధ్యప్రదేశ్ షహడోల్ నుండి ప్రారంభం) — 2047 నాటికి నిర్మూలన లక్ష్యం; 17 రాష్ట్రాల్లో 0–40 ఏళ్ల వయసు వారికి స్క్రీనింగ్, జెనెటిక్ కౌన్సెలింగ్ కార్డులు. AP సంజీవని కార్యక్రమంలోని ₹10,000 నెలవారీ పెన్షన్ రాష్ట్ర స్థాయి అదనపు మద్దతు. తలసీమియా — మరో వంశపారంపర్య రక్తహీనత వ్యాధి.</p>
+    </div>
+  </details>
+
+  <div class="quiz">
+    <h3>✅ స్వీయ పరీక్ష</h3>
+    <div class="quiz-question" id="q4-1">
+      <p><strong>Q1:</strong> "సంజీవని" గిరిజన ఆరోగ్య కార్యక్రమం ఎక్కడ ప్రారంభమైంది?</p>
+      <ol type="a"><li>పాడేరు</li><li>గన్నెల, అరకు లోయ</li><li>రంపచోడవరం</li><li>పార్వతీపురం</li></ol>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>(b) గన్నెల, అరకు లోయ</b> (అల్లూరి సీతారామరాజు జిల్లా) — సెప్టెంబర్ 2026.</p>
+    </div>
+    <div class="quiz-question" id="q4-2">
+      <p><strong>Q2:</strong> యోగాంధ్ర 2026 ప్రధాన IYD కార్యక్రమం ఎక్కడ జరిగింది? 2025లో ఎక్కడ?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer">2026 — <b>కృష్ణా నది వెస్ట్ బైపాస్ బ్రిడ్జి, అమరావతి</b>; 2025 — <b>విశాఖపట్నం RK బీచ్</b> (ప్రధాని మోదీ, 11వ IYD, గిన్నిస్ రికార్డు).</p>
+    </div>
+    <div class="quiz-question" id="q4-3">
+      <p><strong>Q3:</strong> సంజీవని కింద సికిల్ సెల్, తలసీమియా రోగులకు నెలవారీ పెన్షన్ ఎంత?</p>
+      <button class="reveal-btn">సమాధానం చూపించు</button>
+      <p class="answer"><b>₹10,000</b>.</p>
+    </div>
+  </div>
+
+  <section class="key-takeaways">
+    <h3>🎯 ముఖ్యాంశాలు</h3>
+    <ul>
+      <li>సంజీవని (అరకు) — గిరిజన ఆరోగ్యం; అడవితల్లి బాట రోడ్లు; SCD/తలసీమియా పెన్షన్ ₹10,000.</li>
+      <li>పిల్లలే సంపద, జనాభా విధానం — జనాభా పెంపు దిశ.</li>
+      <li>యోగాంధ్ర 2026 (అమరావతి), AYUSH రికార్డు కేటాయింపు, మత్స్యకారుల సంక్షేమం.</li>
+      <li>నెలవారీ పునరీక్షణ బ్లాక్‌ను పరీక్షకు ముందు ఒకసారి చదవండి.</li>
+    </ul>
+  </section>
+  <div class="nav-buttons"><button class="prev-btn">← మునుపటి</button><button class="next-btn">సూచికకు తిరిగి ✓</button></div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  const TOTAL = 4, P = 'apca-';
+  const NS = 'http://www.w3.org/2000/svg';
+  const store = {
+    get(k){ try{ return JSON.parse(sessionStorage.getItem(P+k)); }catch(e){ return null; } },
+    set(k,v){ try{ sessionStorage.setItem(P+k, JSON.stringify(v)); }catch(e){} }
+  };
+  const $ = id => document.getElementById(id);
+  const sections = [...document.querySelectorAll('.chapter')];
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  let visited = new Set(store.get('visited') || []);
+  let current = 0;
+
+  function show(n, push){
+    n = Math.max(0, Math.min(TOTAL, n));
+    current = n;
+    sections.forEach(s => s.classList.toggle('visible', +s.dataset.ch === n));
+    if (n > 0) { visited.add(n); store.set('visited', [...visited]); }
+    tocLinks.forEach(a => { a.classList.toggle('active', +a.dataset.ch === n); a.classList.toggle('done', visited.has(+a.dataset.ch)); });
+    $('progressFill').style.width = (visited.size / TOTAL * 100) + '%';
+    $('chapterCount').textContent = visited.size + '/' + TOTAL + ' అధ్యాయాలు';
+    if (push !== false) history.replaceState(null, '', '#' + sections[n].id);
+    window.scrollTo({top:0, behavior:'smooth'});
+    $('sidebar').classList.remove('open');
+  }
+  window.goToChapter = n => show(n);
+  window.nextChapter = () => current < TOTAL ? show(current + 1) : (location.href = 'index.html');
+  window.previousChapter = () => show(current - 1);
+  document.querySelectorAll('.next-btn').forEach(b => b.addEventListener('click', nextChapter));
+  document.querySelectorAll('.prev-btn').forEach(b => b.addEventListener('click', previousChapter));
+  document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', () => show(+el.dataset.go)));
+  tocLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(+a.dataset.ch); }));
+  $('menuBtn').addEventListener('click', () => $('sidebar').classList.toggle('open'));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' && current < TOTAL) show(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+  });
+
+  // Quiz reveal
+  const revealed = new Set(store.get('quiz') || []);
+  document.querySelectorAll('.quiz-question').forEach(q => {
+    const btn = q.querySelector('.reveal-btn'), ans = q.querySelector('.answer'), label = btn.textContent;
+    const set = on => { ans.classList.toggle('show', on); btn.textContent = on ? 'సమాధానం దాచు' : label; btn.setAttribute('aria-expanded', on); };
+    set(revealed.has(q.id));
+    btn.addEventListener('click', () => { const on = !ans.classList.contains('show'); set(on); on ? revealed.add(q.id) : revealed.delete(q.id); store.set('quiz', [...revealed]); });
+  });
+
+  // Collapsibles
+  const openSet = new Set(store.get('open') || []);
+  document.querySelectorAll('details.collapsible').forEach(d => {
+    if (openSet.has(d.id)) d.open = true;
+    d.addEventListener('toggle', () => { d.open ? openSet.add(d.id) : openSet.delete(d.id); store.set('open', [...openSet]); });
+  });
+
+  // Revision blocks
+  const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  document.querySelectorAll('.code-block').forEach(cb => {
+    const pre = cb.querySelector('pre');
+    const raw = pre.textContent.replace(/^\n+|\s+$/g, '');
+    pre.innerHTML = raw.split('\n').map((line, i) => {
+      let h = esc(line), com = '';
+      const k = h.indexOf('#');
+      if (k >= 0) { com = '<span class="tok-com">' + h.slice(k) + '</span>'; h = h.slice(0, k); }
+      h = h.replace(/(→|=|\|)/g, '<span class="tok-key">$1</span>').replace(/(\d+)/g, '<span class="tok-num">$1</span>');
+      return '<span class="ln" data-n="' + (i + 1) + '">' + h + com + '</span>';
+    }).join('');
+    const head = document.createElement('div'); head.className = 'cb-head';
+    head.innerHTML = '<span>' + esc(cb.dataset.title || 'నోట్స్') + '</span>';
+    const btn = document.createElement('button'); btn.className = 'copy-btn'; btn.textContent = 'కాపీ'; btn.setAttribute('aria-label', 'నోట్స్ కాపీ చేయండి');
+    btn.addEventListener('click', () => {
+      const done = () => { btn.textContent = '✓ కాపీ అయింది'; setTimeout(() => btn.textContent = 'కాపీ', 1500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(raw).then(done, () => {});
+      else { const t = document.createElement('textarea'); t.value = raw; document.body.appendChild(t); t.select(); try{ document.execCommand('copy'); done(); }catch(e){} t.remove(); }
+    });
+    head.appendChild(btn); cb.insertBefore(head, pre);
+  });
+
+  // ---------- helpers ----------
+  function el(tag, attrs, text){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; }
+
+  // Clickable circle nodes with a detail panel
+  function makeNodes(container, items, titleEl, descEl){
+    const groups = [];
+    items.forEach(it => {
+      const g = el('g', {class:'hov', tabindex:'0', role:'button', 'aria-label': it.name, style:'cursor:pointer'});
+      if (it.spoke) g.appendChild(el('line', it.spoke));
+      if (it.w) g.appendChild(el('rect', {class:'box', x:it.x - it.w/2, y:it.y - it.h/2, width:it.w, height:it.h, rx:10, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      else g.appendChild(el('circle', {class:'box', cx:it.x, cy:it.y, r:it.r, fill:it.fill, stroke:it.stroke, 'stroke-width':2}));
+      if (it.num) g.appendChild(el('text', {x:it.x, y:it.y - 10, 'text-anchor':'middle', 'font-size':10.5, fill:'#555'}, it.num));
+      g.appendChild(el('text', {x:it.x, y:it.y + (it.num ? 12 : 5), 'text-anchor':'middle', 'font-size':it.fs || 11.5, 'font-weight':700}, it.short));
+      const pick = () => {
+        groups.forEach(x => x.querySelector('.box').setAttribute('stroke-width', 2));
+        g.querySelector('.box').setAttribute('stroke-width', 4.5);
+        g.classList.remove('pulse'); void g.getBoundingClientRect(); g.classList.add('pulse');
+        titleEl.textContent = it.name; descEl.innerHTML = it.desc;
+        if (it.onPick) it.onPick();
+      };
+      g.addEventListener('click', pick);
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      container.appendChild(g); groups.push(g);
+    });
+    return groups;
+  }
+
+  // Generic state machine (states drawn in HTML as <g class="sm-state" data-state=..>)
+  function stateMachine(o){
+    let st = o.start, timer = null, step = 0;
+    const btns = [...document.querySelectorAll(o.controls + ' [data-ev]')];
+    const auto = document.querySelector(o.controls + ' .auto');
+    function render(edge){
+      document.querySelectorAll(o.scope + ' .sm-state').forEach(g => g.classList.toggle('active', g.dataset.state === st));
+      $(o.label).textContent = o.states[st].label;
+      $(o.desc).innerHTML = o.states[st].desc;
+      btns.forEach(b => { const t = o.T[b.dataset.ev]; b.disabled = b.dataset.ev === 'reset' ? st === o.start : t[0] !== st; });
+      document.querySelectorAll(o.scope + ' .sm-edge').forEach(p => p.classList.remove('run'));
+      if (edge) { const p = $(edge); void p.getBoundingClientRect(); p.classList.add('run'); }
+    }
+    function fire(ev){ const t = o.T[ev]; if (t[0] !== null && t[0] !== st) return; st = t[1]; render(t[2]); }
+    function stopAuto(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    btns.forEach(b => b.addEventListener('click', () => { stopAuto(); fire(b.dataset.ev); }));
+    auto.addEventListener('click', () => {
+      if (timer) return stopAuto();
+      st = o.start; render(); step = 0;
+      auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => { fire(o.order[step % o.order.length]); step++; }, o.interval || 2000);
+    });
+    render();
+  }
+
+  // Timeline stepper: items = [[top, bottom, title, descHTML], ...]
+  function stepper(o){
+    const nodes = $(o.nodes), edges = $(o.edges), y = o.y || 95, x0 = o.x0 || 50, x1 = o.x1 || 710;
+    const X = i => x0 + i * ((x1 - x0) / (o.items.length - 1));
+    const circles = [], segs = [];
+    o.items.forEach((t, i) => {
+      if (i > 0) { const p = el('path', {class:'sm-edge', d:`M${X(i-1)+22},${y} L${X(i)-22},${y}`}); edges.appendChild(p); segs.push(p); }
+      const last = i === o.items.length - 1;
+      const g = el('g', {class:'sm-state hov', tabindex:'0', role:'button', 'aria-label': t[2], style:'cursor:pointer'});
+      g.appendChild(el('circle', {class:'box', cx:X(i), cy:y, r:22, fill: last ? '#f0f9f4' : '#e8f1fb', stroke: last ? '#00b359' : '#0066cc', 'stroke-width':2}));
+      g.appendChild(el('text', {x:X(i), y:y+5, 'text-anchor':'middle', 'font-size':11, 'font-weight':700}, (i+1)+''));
+      g.appendChild(el('text', {x:X(i), y:y-37, 'text-anchor':'middle', 'font-size':o.topFs || 14, 'font-weight':700, fill:'#0066cc'}, t[0]));
+      g.appendChild(el('text', {x:X(i), y:y+42, 'text-anchor':'middle', 'font-size':o.botFs || 11.5}, t[1]));
+      g.addEventListener('click', () => { stop(); go(i); });
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); go(i); } });
+      nodes.appendChild(g); circles.push(g);
+    });
+    let cur = 0, timer = null;
+    const prev = $(o.prev), next = $(o.next), auto = $(o.auto);
+    function go(i){
+      const fwd = i === cur + 1;
+      cur = Math.max(0, Math.min(o.items.length - 1, i));
+      circles.forEach((g, k) => { g.classList.toggle('active', k === cur); g.querySelector('.box').setAttribute('fill-opacity', k <= cur ? 1 : .45); });
+      segs.forEach((p, k) => { p.classList.remove('run'); p.style.stroke = k < cur ? '#0066cc' : ''; p.style.strokeWidth = k < cur ? 3 : ''; });
+      if (fwd && cur > 0) { const p = segs[cur-1]; void p.getBoundingClientRect(); p.classList.add('run'); }
+      $(o.label).textContent = o.items[cur][0] + ' · ' + o.items[cur][2];
+      $(o.desc).innerHTML = o.items[cur][3];
+      prev.disabled = cur === 0; next.disabled = cur === o.items.length - 1;
+    }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; auto.textContent = '▶️ ఆటో డెమో ప్రారంభించు'; } }
+    prev.addEventListener('click', () => { stop(); go(cur - 1); });
+    next.addEventListener('click', () => { stop(); go(cur + 1); });
+    $(o.reset).addEventListener('click', () => { stop(); go(0); });
+    auto.addEventListener('click', () => {
+      if (timer) return stop();
+      go(0); auto.textContent = '⏸️ ఆటో డెమో ఆపు';
+      timer = setInterval(() => go(cur === o.items.length - 1 ? 0 : cur + 1), o.interval || 2200);
+    });
+    go(0);
+  }
+
+  // ---------- lesson-specific ----------
+  // Grid of clickable cards: cols per row, rows auto
+  function grid(containerId, titleId, descId, list, cols, y0, h){
+    const gap = 740 / cols, w = gap - 14, rowH = h + 12;
+    const PAL = [['#e8f1fb','#0066cc'],['#f0f9f4','#00b359'],['#fff3ee','#ff6b35'],['#fff8e1','#d4a017'],['#f1ecfb','#7a5cc8'],['#e8f1fb','#0066cc'],['#f0f9f4','#00b359'],['#fff3ee','#ff6b35']];
+    makeNodes($(containerId), list.map((c, i) => ({ name: c[0] + ' (' + c[1] + ')', short: c[0], num: c[1],
+      x: 10 + gap * (i % cols) + gap / 2, y: y0 + Math.floor(i / cols) * rowH + h / 2, w: w, h: h,
+      fs: c[0].length > 11 ? 12 : 13.5, fill: PAL[i % PAL.length][0], stroke: PAL[i % PAL.length][1], desc: c[2] })), $(titleId), $(descId));
+  }
+
+  // Chapter 1 — Amaravati capital journey
+  stepper({ nodes:'t1Nodes', edges:'t1Edges', y:85, x0:70, x1:690, prev:'t1Prev', next:'t1Next', reset:'t1Reset', auto:'t1Auto', label:'t1Label', desc:'t1Desc', topFs:12, botFs:10.5, items:[
+    ['2014','విభజన చట్టం','AP పునర్విభజన చట్టం 2014','ఆర్టి. 3 కింద; తెలంగాణ ఏర్పాటు (2 జూన్ 2014). సెక్షన్ 5(1): హైదరాబాద్ 10 ఏళ్లకు మించకుండా ఉమ్మడి రాజధాని; సెక్షన్ 5(2): ఆ తర్వాత AP కి "కొత్త రాజధాని ఉంటుంది" — పేరు లేదు. సెక్షన్ 6: రాజధాని ఎంపికకు నిపుణుల కమిటీ (శివరామకృష్ణన్ కమిటీ).'],
+    ['2015–16','శంకుస్థాపన','అమరావతి శంకుస్థాపన & నోటిఫికేషన్','22 అక్టోబర్ 2015 — ఉద్దండరాయునిపాలెంలో ప్రధాని మోదీ శంకుస్థాపన; ల్యాండ్ పూలింగ్ (~34,000 ఎకరాలు, 29 గ్రామాలు); 23 ఏప్రిల్ 2016 — రాష్ట్ర ప్రభుత్వం అమరావతిని రాజధానిగా నోటిఫై చేసింది (CRDA చట్టం 2014).'],
+    ['2019–24','3 రాజధానులు','మూడు రాజధానుల ప్రతిపాదన','వికేంద్రీకరణ చట్టం 2020 — విశాఖ (కార్యనిర్వాహక), అమరావతి (శాసన), కర్నూలు (న్యాయ); రైతుల ఉద్యమం; హైకోర్టు తీర్పు (మార్చి 2022) అమరావతి అభివృద్ధికి ఆదేశం; చట్టం ఉపసంహరణ. అనిశ్చితి కొనసాగింది.'],
+    ['02-06-2024','గడువు ముగింపు','ఉమ్మడి రాజధాని గడువు ముగింపు','హైదరాబాద్ ఉమ్మడి రాజధాని 10 ఏళ్ల గడువు ముగిసింది — AP కి చట్టబద్ధంగా పేర్కొన్న రాజధాని లేదు. జూన్ 2024 కొత్త ప్రభుత్వం అమరావతి నిర్మాణ పునఃప్రారంభం (మే 2025లో ప్రధాని చేతుల మీదుగా).'],
+    ['28-03-2026','శాసనసభ','AP శాసనసభ తీర్మానం','సెక్షన్ 5(2) సవరించి అమరావతిని రాజధానిగా పేర్కొనాలని కేంద్రాన్ని కోరుతూ శాసనసభ తీర్మానం.'],
+    ['ఏప్రిల్ 2026','చట్టం','AP పునర్విభజన (సవరణ) చట్టం 2026','లోక్‌సభ (1 ఏప్రిల్), రాజ్యసభ (2 ఏప్రిల్) ఆమోదం; రాష్ట్రపతి సమ్మతి. "Amaravati shall be the new capital" — <b>2 జూన్ 2024 నుండి పూర్వప్రభావం</b>; అమరావతి = CRDA చట్టం కింద నోటిఫై అయిన ప్రాంతం. సాధారణ మెజారిటీ (ఆర్టి. 4).']
+  ]});
+
+  // Chapter 2 — investments grid
+  grid('invNodes','invTitle','invDesc', [
+    ['భారత్ ఫోర్జ్','విశాఖ · మే','మెరైన్ గ్యాస్ టర్బైన్ రిపేర్–ఓవర్‌హాల్ (MRO) & స్వదేశీ అభివృద్ధి కేంద్రం; ~80 ఎకరాలు; ~750 ఉద్యోగాలు; AP డిఫెన్స్ మాన్యుఫ్యాక్చరింగ్ కారిడార్; INS ఏక్సిలా, తూర్పు నౌకాదళ కమాండ్ సమీపంలో. ఫేజ్-2లో "హాట్ టెస్ట్ సెల్".'],
+    ['MSME పార్కులు','విజయవాడ · 25 మే','"ఒకే కుటుంబం–ఒక పారిశ్రామికవేత్త" MSME గ్రోత్ సమ్మిట్ — 38 పార్కులకు శంకుస్థాపన; Meta, Amazon, Zoho ఒప్పందాలు; 45 క్లస్టర్లకు ₹200 కోట్లు; 175 నియోజకవర్గాల్లో ఒక్కో పార్కు లక్ష్యం.'],
+    ['APEX కొరియా','బుసాన్ · జూలై','AP తొలి విదేశీ పెట్టుబడి సహాయ కేంద్రం — APEDB; మంత్రి నారా లోకేశ్ ప్రారంభం. హ్వాసంగ్ గ్రూప్ — కుప్పంలో ₹900 కోట్ల నాన్-లెదర్ ఫుట్‌వేర్ (ఏటా 2 కోట్ల జతలు); దుగరాజపట్నం షిప్‌బిల్డింగ్ క్లస్టర్ ₹30,000 కోట్ల ప్రతిపాదన; AP మారిటైమ్ బోర్డు–విశాఖ పోర్టు సహకారం.'],
+    ['UAE ఫుడ్ క్లస్టర్','అమరావతి · జూలై','APEDB–UAE ఫుడ్ క్లస్టర్ MoU (దావోస్ 2026 హామీ ఫలితం); తొలి పెట్టుబడి — ఫ్లోర్ మాస్టర్స్ ఇంటర్నేషనల్ ₹100 కోట్ల ఫుడ్ ప్రాసెసింగ్ యూనిట్, గంగాధర నెల్లూరు (చిత్తూరు) — 25 దేశాలకు ఎగుమతి; మామిడి, అరటి, కోకో, సముద్ర ఉత్పత్తులు; కృష్ణపట్నం, కాకినాడ ఓడరేవులు.'],
+    ['భారత్ టెక్స్','న్యూఢిల్లీ · జూలై','AP పెవిలియన్ — ₹4,100 కోట్ల MoUలు (విశాఖలో ₹4,000 కోట్ల వరకు టెక్స్‌టైల్ రీసైక్లింగ్ యూనిట్ + ₹100 కోట్ల గార్మెంట్ యూనిట్); ~3,000 ఉద్యోగాలు. AP — పట్టు ఉత్పత్తిలో 2వ, పత్తిలో 6వ స్థానం.'],
+    ['కోసలనగరం','చిత్తూరు · జూలై','APIIC పారిశ్రామిక పార్కు — 2,042 ఎకరాలు (+5,000 ఎకరాల లక్ష్యం); శ్రీ సిటీ నమూనా; ఆటో, టెక్స్‌టైల్, ఫుడ్ ప్రాసెసింగ్; గాలేరు-నగరి సుజల స్రవంతి నీరు (డిసెంబర్ 2028); చెన్నై, తిరుపతి విమానాశ్రయాలు, కృష్ణపట్నం, కాట్టుపల్లి ఓడరేవుల సమీపం.'],
+    ['EESL ఆడిట్లు','MSME · జూన్','EESL–AP ఒప్పందం: RAMP పథకం & MSME పాలసీ 4.0 కింద 15 క్లస్టర్లు; 452 MSMEలకు ఇంధన ఆడిట్, 300కు నీటి ఆడిట్ — దేశంలో అతిపెద్ద MSME సామర్థ్య కార్యక్రమాల్లో ఒకటి.'],
+    ['APSRTC ఈ-బస్సులు','రవాణా · ఏప్రిల్','ఐదేళ్లలో 5,746 ఎలక్ట్రిక్ + 500 CNG బస్సులు; స్త్రీ శక్తికి 1,445 బస్సులు; 903 డీజిల్ బస్సులు తక్షణ అవసరానికి; ప్రస్తుత ఫ్లీట్ 10,951 (RTC 8,199 + అద్దె 2,752).']
+  ], 4, 12, 76);
+
+  // Chapter 3 — infra timeline
+  stepper({ nodes:'t3Nodes', edges:'t3Edges', y:85, x0:50, x1:710, prev:'t3Prev', next:'t3Next', reset:'t3Reset', auto:'t3Auto', label:'t3Label', desc:'t3Desc', topFs:12, botFs:10.5, interval:2400, items:[
+    ['ఏప్రి 26','అమరావతి','అమరావతి చట్టబద్ధ రాజధాని · 2 ఏప్రిల్ 2026','రాజ్యసభ ఆమోదం; 2026-27లో అమరావతికి ₹10,000 కోట్ల కేటాయింపు.'],
+    ['ఏప్రి 26','క్వాంటం','క్వాంటం కంప్యూటింగ్ రిఫరెన్స్ ఫెసిలిటీలు · 14 ఏప్రిల్ 2026','అమరావతి క్వాంటం వ్యాలీలో ప్రారంభం — IBM సిస్టమ్ రాక ముందు పరిశోధనా సదుపాయాలు.'],
+    ['మే 26','టెస్ట్ బెడ్','క్వాంటం-సెక్యూర్ కమ్యూనికేషన్స్ టెస్ట్ బెడ్ · 17 మే 2026','SRM యూనివర్సిటీ-AP + C-DOT + టెలికమ్యూనికేషన్ల శాఖ; ప్రపంచ టెలికమ్యూనికేషన్ & సమాచార సమాజ దినోత్సవం నాడు ప్రకటన.'],
+    ['జూన్ 26','బోయపాడు','బోయపాడు చేపల మరణాలు · 20 జూన్ 2026','నక్కపల్లి మండలం (అనకాపల్లి) — ~11 టన్నులు; ట్రైకోడెస్మియం వికాసం → హైపాక్సియా (ICAR–CMFRI).'],
+    ['ఆగ 26','భోగాపురం','అల్లూరి సీతారామరాజు అంతర్జాతీయ విమానాశ్రయం · 1 ఆగస్టు 2026','ప్రధాని మోదీ ప్రారంభం; 17 ఆగస్టు నుండి విశాఖ విమానాలు ఇక్కడికి; GMR; ఉత్తరాంధ్ర అభివృద్ధికి ఊతం.'],
+    ['ఆగ 26','క్లైమేట్','AP వాతావరణ కార్యాచరణ ప్రణాళిక సూచనలు · ఆగస్టు 2026','APSCCC — 40% RE వాటా, 120 GW RE, 2 గ్రీన్ హైడ్రోజన్ హబ్‌లు, 1 లక్ష EV చార్జింగ్ స్టేషన్లు; ఉత్తర-మధ్య AP దుర్బలం.'],
+    ['ఆగ 26','UK MoU','క్వాంటం వ్యాలీ — బ్రిటన్ ప్రభుత్వంతో MoU · 25 ఆగస్టు 2026','మౌలిక సదుపాయాలు, పట్టణ ప్రణాళిక సహకారం; 2029 నాటికి $1 బిలియన్ పెట్టుబడుల లక్ష్యం.'],
+    ['ఆగ 26','వెలిగొండ','వెలిగొండ ప్రాజెక్టు ఫేజ్-1 · 31 ఆగస్టు 2026','మార్కాపురంలో CM ప్రారంభం; శ్రీశైలం → నల్లమల సాగర్; 18.8 km జంట సొరంగాలు; ఫేజ్-1 వ్యయం ₹7,983 కోట్లు; ఫేజ్-2 లక్ష్యం 2028.'],
+    ['సెప్టెం 26','కేబినెట్','AP కేబినెట్ నిర్ణయాలు · సెప్టెంబర్ 2026','4 కొత్త పోలీస్ కమిషనరేట్లు; అమరావతి గ్రామాలకు ₹1,548 కోట్లు, శాసనసభ భవనానికి ₹661 కోట్లు; HNSS ఫేజ్-2 ₹1,323.75 కోట్లు; స్థానిక ఎన్నికలు 3 దశల్లో.'],
+    ['సెప్టెం 26','సంజీవని','సంజీవని గిరిజన ఆరోగ్య కార్యక్రమం · సెప్టెంబర్ 2026','గన్నెల, అరకు లోయ — 150 అత్యవసర వాహనాలు, డ్రోన్ సేవలు, SCD/తలసీమియా పెన్షన్ ₹10,000.']
+  ]});
+
+  // Chapter 4 — welfare grid
+  grid('welNodes','welTitle','welDesc', [
+    ['సంజీవని','గిరిజన ఆరోగ్యం','అరకు లోయ (ASR జిల్లా) నుండి ప్రారంభం — 150 అత్యవసర వాహనాలు; 104 మొబైల్ వాహనాల్లో 42 పరీక్షలు; సికిల్ సెల్/తలసీమియా రోగులకు నెలకు ₹10,000; తల్లీబిడ్డ ఎక్స్‌ప్రెస్; డ్రోన్‌లతో రక్త నమూనాల రవాణా; అన్ని మండలాల్లో జన ఔషధి కేంద్రాలు.'],
+    ['పిల్లలే సంపద','జనాభా','11 జూలై 2026, విజయవాడ — జనాభా పరిరక్షణ; పని ప్రదేశాల్లో చైల్డ్‌కేర్; తల్లికి వందనం (₹15,000/బిడ్డ)తో అనుసంధానం; 2047 నాటికి తలసరి ఆదాయ లక్ష్యం.'],
+    ['జనాభా విధానం','TFR 2.1','రెండో/మూడో బిడ్డకు ₹25,000; మూడో బిడ్డకు 5 ఏళ్లు నెలకు ₹1,000; 18 ఏళ్ల వరకు ఉచిత విద్య; 12 నెలల మాతృత్వ, 2 నెలల పితృత్వ సెలవు; స్థానిక ఎన్నికల "ఇద్దరు పిల్లల" నిబంధన తొలగింపు.'],
+    ['యోగాంధ్ర 2026','జూన్ 7–20','కోటి మంది లక్ష్యం; ₹10 కోట్లు; యోగాంధ్ర పోర్టల్; 12వ IYD ప్రధాన కార్యక్రమం — కృష్ణా నది వెస్ట్ బైపాస్ బ్రిడ్జి, అమరావతి (~25,000 మంది).'],
+    ['మత్స్యకార సంక్షేమం','సింగరాయకొండ','PMMSY కింద శాటిలైట్ ట్రాన్స్‌పాండర్లు; వేట నిషేధ కాలంలో ₹20,000; 50 ఏళ్ల నుండి పెన్షన్; ఆధునిక చేపల మార్కెట్; విశాఖ, భీమవరంలో ఫిషరీస్ డెవలప్‌మెంట్ బోర్డులు; యానాది కుటుంబాలకు గృహాలు.'],
+    ['AYUSH ప్రణాళిక','₹185.75 కోట్లు','2026-27 — జాతీయ AYUSH మిషన్ (2014) ప్రారంభం నుండి అత్యధిక కేటాయింపు; 9 ITDA ప్రాంతాల్లో 19 మొబైల్ యూనిట్లు; 64 డిస్పెన్సరీల ఆధునీకరణ; కడపలో స్పోర్ట్స్ మెడిసిన్ సెంటర్; 6 సమీకృత ఆసుపత్రులు.'],
+    ['మహిళా పారిశ్రామికవేత్తలు','5 లక్షలు','2026-27 లక్ష్యం 5 లక్షల మహిళా పారిశ్రామికవేత్తలు (₹2,246 కోట్లు); SHGలకు బ్యాంకు రుణాలు ₹43,219 కోట్లు.'],
+    ['అడవితల్లి బాట','గిరిజన రోడ్లు','₹1,000 కోట్లతో 900 కి.మీ. గిరిజన ప్రాంత రోడ్లు; 1.6 లక్షల ఇళ్లకు నీరు, సౌర విద్యుత్; సెల్ టవర్లు; IIT మద్రాస్‌తో గిరిజన విద్య; లక్ష ఎకరాల కాఫీ సాగు.']
+  ], 4, 12, 76);
+
+
+  const idx = sections.findIndex(s => '#' + s.id === location.hash);
+  show(idx >= 0 ? +sections[idx].dataset.ch : 0, false);
+})();
+</script>
+</body>
+</html>
